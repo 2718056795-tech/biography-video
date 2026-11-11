@@ -1,0 +1,1571 @@
+{
+  "status": "automatic_analysis_only_not_listening_reviewed",
+  "fps": 30,
+  "source_relative_path": "配乐/固定BGM_用户指定_原音轨.m4a",
+  "source_sha256": "9339186658cf252dd118c282c4803d4e70efe743010197cac51da792e38afb80",
+  "locked_audio_sha256": "9339186658cf252dd118c282c4803d4e70efe743010197cac51da792e38afb80",
+  "source_hash_matches_lock": true,
+  "source_unchanged_after_analysis": true,
+  "full_decode_success": true,
+  "codec": "aac",
+  "sample_rate_hz": 44100,
+  "channels": 2,
+  "channel_layout": "stereo",
+  "stream_start_sec": 0.0,
+  "stream_duration_sec": 119.999002,
+  "stream_end_sec": 119.999002,
+  "container_duration_sec": 119.999002,
+  "decoded_native_sample_frames": 5292032,
+  "decoded_native_duration_sec": 120.000725624,
+  "duration_note": "AAC封装/编码边界会使时长标记与解码样本时长有毫秒级差别；未裁切或补音",
+  "decoded_minus_stream_duration_ms": 1.723624,
+  "decoded_pcm_s16le_sha256": "ec89ed8d3614338a38c7179bf49b25af271847b9631ccbffb608e601599e2663",
+  "decoded_pcm_s16le_bytes": 21168128,
+  "decoded_pcm_matches_locked_reference": true,
+  "channel_measurements": [
+    {
+      "channel": 1,
+      "sample_peak_linear": 0.98872364,
+      "sample_peak_dbfs": -0.0985,
+      "integrated_rms_dbfs": -10.3858,
+      "samples_at_or_above_0dbfs": 0,
+      "nonzero_samples": 5292032
+    },
+    {
+      "channel": 2,
+      "sample_peak_linear": 1.00362766,
+      "sample_peak_dbfs": 0.0315,
+      "integrated_rms_dbfs": -9.472,
+      "samples_at_or_above_0dbfs": 2,
+      "nonzero_samples": 5292032
+    }
+  ],
+  "stereo_channel_correlation": 0.94477,
+  "stereo_note": "相关系数仅描述通道相似程度，不代表空间听感；两个通道均须分别有信号",
+  "overall_sample_peak_dbfs": 0.0315,
+  "overall_rms_dbfs": -9.9049,
+  "sample_peak_note": "采样峰值不是过采样真峰值；不能单凭此项断言无重建过载或听感失真",
+  "significant_silence_definition": "临时单声道50ms窗RMS低于-60dBFS，持续至少0.3秒",
+  "significant_silence_intervals": [],
+  "analysis_method": {
+    "mono_sample_rate_hz": 22050,
+    "stft_window_samples": 1024,
+    "hop_samples": 220,
+    "hop_sec": 0.009977324,
+    "score": "0.8×正向频谱通量95分位归一值 + 0.2×50ms RMS正向增量95分位归一值",
+    "peak_min_spacing_sec": 0.18,
+    "cut_search_radius_sec": 0.6,
+    "precision_note": "候选是约10ms步长/46ms窗的能量瞬态估计；30fps取整误差另列，不等于物理拍点误差"
+  },
+  "bpm": null,
+  "bpm_note": "不将自由速度或复合节奏硬拟合为已确认BPM；未做人工听审",
+  "music_edited": false,
+  "cuts_automatically_changed": false,
+  "cut_candidates": [
+    {
+      "original_cut_sec": 0,
+      "original_cut_frame": 0,
+      "search_window_sec": [
+        0,
+        0.6
+      ],
+      "suggested_candidate": null,
+      "alternatives": [],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 7,
+      "original_cut_frame": 210,
+      "search_window_sec": [
+        6.4,
+        7.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 6.84771,
+        "nearest_frame": 205,
+        "aligned_time_sec": 6.833333,
+        "alignment_error_ms": -14.3764,
+        "strength": 2.7455,
+        "spectral_flux": 0.23522079,
+        "window_rms_dbfs": -5.7477,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 6.588299,
+          "nearest_frame": 198,
+          "aligned_time_sec": 6.6,
+          "alignment_error_ms": 11.7007,
+          "strength": 2.30966,
+          "spectral_flux": 0.20604968,
+          "window_rms_dbfs": -5.0308,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 7.366531,
+          "nearest_frame": 221,
+          "aligned_time_sec": 7.366667,
+          "alignment_error_ms": 0.1361,
+          "strength": 1.50631,
+          "spectral_flux": 0.1303398,
+          "window_rms_dbfs": -8.8267,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 16,
+      "original_cut_frame": 480,
+      "search_window_sec": [
+        15.4,
+        16.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 15.867211,
+        "nearest_frame": 476,
+        "aligned_time_sec": 15.866667,
+        "alignment_error_ms": -0.5442,
+        "strength": 0.85597,
+        "spectral_flux": 0.08783034,
+        "window_rms_dbfs": -13.0097,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 15.617778,
+          "nearest_frame": 469,
+          "aligned_time_sec": 15.633333,
+          "alignment_error_ms": 15.5556,
+          "strength": 0.83479,
+          "spectral_flux": 0.08876365,
+          "window_rms_dbfs": -11.734,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 16.086712,
+          "nearest_frame": 483,
+          "aligned_time_sec": 16.1,
+          "alignment_error_ms": 13.288,
+          "strength": 0.47202,
+          "spectral_flux": 0.05136155,
+          "window_rms_dbfs": -15.5537,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 26,
+      "original_cut_frame": 780,
+      "search_window_sec": [
+        25.4,
+        26.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 26.223673,
+        "nearest_frame": 787,
+        "aligned_time_sec": 26.233333,
+        "alignment_error_ms": 9.6599,
+        "strength": 1.97416,
+        "spectral_flux": 0.19746861,
+        "window_rms_dbfs": -6.1108,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 25.45542,
+          "nearest_frame": 764,
+          "aligned_time_sec": 25.466667,
+          "alignment_error_ms": 11.2472,
+          "strength": 2.0585,
+          "spectral_flux": 0.18407302,
+          "window_rms_dbfs": -5.5206,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 25.954286,
+          "nearest_frame": 779,
+          "aligned_time_sec": 25.966667,
+          "alignment_error_ms": 12.381,
+          "strength": 0.65611,
+          "spectral_flux": 0.0605328,
+          "window_rms_dbfs": -8.908,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 36,
+      "original_cut_frame": 1080,
+      "search_window_sec": [
+        35.4,
+        36.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 36.360635,
+        "nearest_frame": 1091,
+        "aligned_time_sec": 36.366667,
+        "alignment_error_ms": 6.0317,
+        "strength": 2.18687,
+        "spectral_flux": 0.21775144,
+        "window_rms_dbfs": -4.7336,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 36.071293,
+          "nearest_frame": 1082,
+          "aligned_time_sec": 36.066667,
+          "alignment_error_ms": -4.6259,
+          "strength": 0.5375,
+          "spectral_flux": 0.0597731,
+          "window_rms_dbfs": -7.1206,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 35.472653,
+          "nearest_frame": 1064,
+          "aligned_time_sec": 35.466667,
+          "alignment_error_ms": -5.9864,
+          "strength": 0.68042,
+          "spectral_flux": 0.05428315,
+          "window_rms_dbfs": -6.7029,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 47,
+      "original_cut_frame": 1410,
+      "search_window_sec": [
+        46.4,
+        47.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 46.70712,
+        "nearest_frame": 1401,
+        "aligned_time_sec": 46.7,
+        "alignment_error_ms": -7.1202,
+        "strength": 2.08777,
+        "spectral_flux": 0.21077533,
+        "window_rms_dbfs": -6.3266,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 47.525261,
+          "nearest_frame": 1426,
+          "aligned_time_sec": 47.533333,
+          "alignment_error_ms": 8.0726,
+          "strength": 1.19033,
+          "spectral_flux": 0.11872628,
+          "window_rms_dbfs": -8.8675,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 47.096236,
+          "nearest_frame": 1413,
+          "aligned_time_sec": 47.1,
+          "alignment_error_ms": 3.7642,
+          "strength": 0.69805,
+          "spectral_flux": 0.07848367,
+          "window_rms_dbfs": -8.1011,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 56,
+      "original_cut_frame": 1680,
+      "search_window_sec": [
+        55.4,
+        56.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 55.996009,
+        "nearest_frame": 1680,
+        "aligned_time_sec": 56.0,
+        "alignment_error_ms": 3.9909,
+        "strength": 1.02334,
+        "spectral_flux": 0.11505607,
+        "window_rms_dbfs": -10.2535,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 55.596916,
+          "nearest_frame": 1668,
+          "aligned_time_sec": 55.6,
+          "alignment_error_ms": 3.0839,
+          "strength": 0.65561,
+          "spectral_flux": 0.07371186,
+          "window_rms_dbfs": -8.7122,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 56.245442,
+          "nearest_frame": 1687,
+          "aligned_time_sec": 56.233333,
+          "alignment_error_ms": -12.1088,
+          "strength": 0.5651,
+          "spectral_flux": 0.06353577,
+          "window_rms_dbfs": -12.4596,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 66,
+      "original_cut_frame": 1980,
+      "search_window_sec": [
+        65.4,
+        66.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 66.122993,
+        "nearest_frame": 1984,
+        "aligned_time_sec": 66.133333,
+        "alignment_error_ms": 10.3401,
+        "strength": 1.58277,
+        "spectral_flux": 0.173344,
+        "window_rms_dbfs": -7.7171,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 66.362449,
+          "nearest_frame": 1991,
+          "aligned_time_sec": 66.366667,
+          "alignment_error_ms": 4.2177,
+          "strength": 1.23423,
+          "spectral_flux": 0.13876764,
+          "window_rms_dbfs": -9.0098,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 65.813696,
+          "nearest_frame": 1974,
+          "aligned_time_sec": 65.8,
+          "alignment_error_ms": -13.6961,
+          "strength": 0.5572,
+          "spectral_flux": 0.06264682,
+          "window_rms_dbfs": -9.1928,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 75,
+      "original_cut_frame": 2250,
+      "search_window_sec": [
+        74.4,
+        75.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 74.843175,
+        "nearest_frame": 2245,
+        "aligned_time_sec": 74.833333,
+        "alignment_error_ms": -9.8413,
+        "strength": 1.11198,
+        "spectral_flux": 0.11247323,
+        "window_rms_dbfs": -12.4598,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 74.583764,
+          "nearest_frame": 2238,
+          "aligned_time_sec": 74.6,
+          "alignment_error_ms": 16.2358,
+          "strength": 0.95136,
+          "spectral_flux": 0.10696367,
+          "window_rms_dbfs": -8.4135,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 75.12254,
+          "nearest_frame": 2254,
+          "aligned_time_sec": 75.133333,
+          "alignment_error_ms": 10.7937,
+          "strength": 0.71685,
+          "spectral_flux": 0.07231217,
+          "window_rms_dbfs": -11.4639,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 89,
+      "original_cut_frame": 2670,
+      "search_window_sec": [
+        88.4,
+        89.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 89.210522,
+        "nearest_frame": 2676,
+        "aligned_time_sec": 89.2,
+        "alignment_error_ms": -10.5215,
+        "strength": 1.13276,
+        "spectral_flux": 0.09331127,
+        "window_rms_dbfs": -11.1372,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 89.479909,
+          "nearest_frame": 2684,
+          "aligned_time_sec": 89.466667,
+          "alignment_error_ms": -13.2426,
+          "strength": 1.15164,
+          "spectral_flux": 0.11827677,
+          "window_rms_dbfs": -10.6914,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 88.671746,
+          "nearest_frame": 2660,
+          "aligned_time_sec": 88.666667,
+          "alignment_error_ms": -5.0794,
+          "strength": 0.7758,
+          "spectral_flux": 0.06912805,
+          "window_rms_dbfs": -12.7756,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 100,
+      "original_cut_frame": 3000,
+      "search_window_sec": [
+        99.4,
+        100.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 100.355193,
+        "nearest_frame": 3011,
+        "aligned_time_sec": 100.366667,
+        "alignment_error_ms": 11.4739,
+        "strength": 1.17493,
+        "spectral_flux": 0.13210004,
+        "window_rms_dbfs": -9.8537,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 100.015964,
+          "nearest_frame": 3000,
+          "aligned_time_sec": 100.0,
+          "alignment_error_ms": -15.9637,
+          "strength": 0.7072,
+          "spectral_flux": 0.0515785,
+          "window_rms_dbfs": -9.7433,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 99.816417,
+          "nearest_frame": 2994,
+          "aligned_time_sec": 99.8,
+          "alignment_error_ms": -16.4172,
+          "strength": 0.69895,
+          "spectral_flux": 0.06931051,
+          "window_rms_dbfs": -9.2858,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 111,
+      "original_cut_frame": 3330,
+      "search_window_sec": [
+        110.4,
+        111.6
+      ],
+      "suggested_candidate": {
+        "analysis_time_sec": 111.260408,
+        "nearest_frame": 3338,
+        "aligned_time_sec": 111.266667,
+        "alignment_error_ms": 6.2585,
+        "strength": 1.22449,
+        "spectral_flux": 0.12150938,
+        "window_rms_dbfs": -9.0363,
+        "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+      },
+      "alternatives": [
+        {
+          "analysis_time_sec": 110.502132,
+          "nearest_frame": 3315,
+          "aligned_time_sec": 110.5,
+          "alignment_error_ms": -2.1315,
+          "strength": 1.25042,
+          "spectral_flux": 0.13052696,
+          "window_rms_dbfs": -8.8093,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 111.040907,
+          "nearest_frame": 3331,
+          "aligned_time_sec": 111.033333,
+          "alignment_error_ms": -7.5737,
+          "strength": 0.59741,
+          "spectral_flux": 0.04860741,
+          "window_rms_dbfs": -8.0915,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    },
+    {
+      "original_cut_sec": 120,
+      "original_cut_frame": 3600,
+      "search_window_sec": [
+        119.4,
+        120
+      ],
+      "suggested_candidate": null,
+      "alternatives": [],
+      "adopted": false,
+      "note": "原切点保持；候选仅供导演选择，片头0与片尾120秒固定"
+    }
+  ],
+  "scene_action_candidates": [
+    {
+      "scene_id": "S01",
+      "original_interval_sec": [
+        0,
+        7
+      ],
+      "original_duration_sec": 7,
+      "planned_stable_reading_sec": 5.5,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 6.833333,
+      "remaining_transition_allowance_sec": 1.333333,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 0.711655,
+          "nearest_frame": 21,
+          "aligned_time_sec": 0.7,
+          "alignment_error_ms": -11.6553,
+          "strength": 2.71529,
+          "spectral_flux": 0.24738652,
+          "window_rms_dbfs": -7.5995,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 4.183764,
+          "nearest_frame": 126,
+          "aligned_time_sec": 4.2,
+          "alignment_error_ms": 16.2358,
+          "strength": 2.70861,
+          "spectral_flux": 0.22522917,
+          "window_rms_dbfs": -5.7092,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S02",
+      "original_interval_sec": [
+        7,
+        16
+      ],
+      "original_duration_sec": 9,
+      "planned_stable_reading_sec": 7.5,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 9.033334,
+      "remaining_transition_allowance_sec": 1.533334,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 8.444082,
+          "nearest_frame": 253,
+          "aligned_time_sec": 8.433333,
+          "alignment_error_ms": -10.7483,
+          "strength": 2.21998,
+          "spectral_flux": 0.1789871,
+          "window_rms_dbfs": -6.4429,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 12.684444,
+          "nearest_frame": 381,
+          "aligned_time_sec": 12.7,
+          "alignment_error_ms": 15.5556,
+          "strength": 1.26459,
+          "spectral_flux": 0.10908974,
+          "window_rms_dbfs": -9.8661,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S03",
+      "original_interval_sec": [
+        16,
+        26
+      ],
+      "original_duration_sec": 10,
+      "planned_stable_reading_sec": 8.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 10.366666,
+      "remaining_transition_allowance_sec": 2.366666,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 16.924807,
+          "nearest_frame": 508,
+          "aligned_time_sec": 16.933333,
+          "alignment_error_ms": 8.5261,
+          "strength": 2.7518,
+          "spectral_flux": 0.22302429,
+          "window_rms_dbfs": -6.3214,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 21.983311,
+          "nearest_frame": 659,
+          "aligned_time_sec": 21.966667,
+          "alignment_error_ms": -16.644,
+          "strength": 2.41113,
+          "spectral_flux": 0.22686362,
+          "window_rms_dbfs": -5.8226,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S04",
+      "original_interval_sec": [
+        26,
+        36
+      ],
+      "original_duration_sec": 10,
+      "planned_stable_reading_sec": 8.5,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 10.133334,
+      "remaining_transition_allowance_sec": 1.633334,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 27.830023,
+          "nearest_frame": 835,
+          "aligned_time_sec": 27.833333,
+          "alignment_error_ms": 3.3107,
+          "strength": 2.01497,
+          "spectral_flux": 0.20939837,
+          "window_rms_dbfs": -5.9339,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 31.800998,
+          "nearest_frame": 954,
+          "aligned_time_sec": 31.8,
+          "alignment_error_ms": -0.9977,
+          "strength": 1.12532,
+          "spectral_flux": 0.11990872,
+          "window_rms_dbfs": -8.9572,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S05",
+      "original_interval_sec": [
+        36,
+        47
+      ],
+      "original_duration_sec": 11,
+      "planned_stable_reading_sec": 9.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 10.333333,
+      "remaining_transition_allowance_sec": 1.333333,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 38.20644,
+          "nearest_frame": 1146,
+          "aligned_time_sec": 38.2,
+          "alignment_error_ms": -6.4399,
+          "strength": 2.32168,
+          "spectral_flux": 0.22478197,
+          "window_rms_dbfs": -5.0377,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 42.45678,
+          "nearest_frame": 1274,
+          "aligned_time_sec": 42.466667,
+          "alignment_error_ms": 9.8866,
+          "strength": 2.68234,
+          "spectral_flux": 0.24429695,
+          "window_rms_dbfs": -4.9845,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S06",
+      "original_interval_sec": [
+        47,
+        56
+      ],
+      "original_duration_sec": 9,
+      "planned_stable_reading_sec": 7.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 9.3,
+      "remaining_transition_allowance_sec": 2.3,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 49.371066,
+          "nearest_frame": 1481,
+          "aligned_time_sec": 49.366667,
+          "alignment_error_ms": -4.3991,
+          "strength": 1.37231,
+          "spectral_flux": 0.15429173,
+          "window_rms_dbfs": -9.7888,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 51.795556,
+          "nearest_frame": 1554,
+          "aligned_time_sec": 51.8,
+          "alignment_error_ms": 4.4444,
+          "strength": 1.54935,
+          "spectral_flux": 0.14239827,
+          "window_rms_dbfs": -7.705,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S07",
+      "original_interval_sec": [
+        56,
+        66
+      ],
+      "original_duration_sec": 10,
+      "planned_stable_reading_sec": 8.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 10.133333,
+      "remaining_transition_allowance_sec": 2.133333,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 57.612336,
+          "nearest_frame": 1728,
+          "aligned_time_sec": 57.6,
+          "alignment_error_ms": -12.3356,
+          "strength": 1.67509,
+          "spectral_flux": 0.18833438,
+          "window_rms_dbfs": -8.4885,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 61.812789,
+          "nearest_frame": 1854,
+          "aligned_time_sec": 61.8,
+          "alignment_error_ms": -12.7891,
+          "strength": 0.75519,
+          "spectral_flux": 0.0646578,
+          "window_rms_dbfs": -8.7137,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S08",
+      "original_interval_sec": [
+        66,
+        75
+      ],
+      "original_duration_sec": 9,
+      "planned_stable_reading_sec": 7.2,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 8.7,
+      "remaining_transition_allowance_sec": 1.5,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 67.968798,
+          "nearest_frame": 2039,
+          "aligned_time_sec": 67.966667,
+          "alignment_error_ms": -2.1315,
+          "strength": 1.35682,
+          "spectral_flux": 0.15090093,
+          "window_rms_dbfs": -8.5727,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 72.239093,
+          "nearest_frame": 2167,
+          "aligned_time_sec": 72.233333,
+          "alignment_error_ms": -5.7596,
+          "strength": 1.28079,
+          "spectral_flux": 0.12273299,
+          "window_rms_dbfs": -8.7572,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S09",
+      "original_interval_sec": [
+        75,
+        89
+      ],
+      "original_duration_sec": 14,
+      "planned_stable_reading_sec": 11.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 14.366667,
+      "remaining_transition_allowance_sec": 3.366667,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 76.459501,
+          "nearest_frame": 2294,
+          "aligned_time_sec": 76.466667,
+          "alignment_error_ms": 7.1655,
+          "strength": 1.13863,
+          "spectral_flux": 0.12646499,
+          "window_rms_dbfs": -9.6247,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 83.36381,
+          "nearest_frame": 2501,
+          "aligned_time_sec": 83.366667,
+          "alignment_error_ms": 2.8571,
+          "strength": 2.17425,
+          "spectral_flux": 0.19428009,
+          "window_rms_dbfs": -7.54,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S10",
+      "original_interval_sec": [
+        89,
+        100
+      ],
+      "original_duration_sec": 11,
+      "planned_stable_reading_sec": 9.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 11.166667,
+      "remaining_transition_allowance_sec": 2.166667,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 91.056327,
+          "nearest_frame": 2732,
+          "aligned_time_sec": 91.066667,
+          "alignment_error_ms": 10.3401,
+          "strength": 1.36942,
+          "spectral_flux": 0.13280327,
+          "window_rms_dbfs": -11.4416,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 95.885351,
+          "nearest_frame": 2877,
+          "aligned_time_sec": 95.9,
+          "alignment_error_ms": 14.6485,
+          "strength": 1.29867,
+          "spectral_flux": 0.14601226,
+          "window_rms_dbfs": -9.2084,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S11",
+      "original_interval_sec": [
+        100,
+        111
+      ],
+      "original_duration_sec": 11,
+      "planned_stable_reading_sec": 8.5,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 10.9,
+      "remaining_transition_allowance_sec": 2.4,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 101.991474,
+          "nearest_frame": 3060,
+          "aligned_time_sec": 102.0,
+          "alignment_error_ms": 8.5261,
+          "strength": 1.50222,
+          "spectral_flux": 0.13782786,
+          "window_rms_dbfs": -8.2439,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 106.251791,
+          "nearest_frame": 3188,
+          "aligned_time_sec": 106.266667,
+          "alignment_error_ms": 14.8753,
+          "strength": 1.23039,
+          "spectral_flux": 0.12083023,
+          "window_rms_dbfs": -8.3445,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    },
+    {
+      "scene_id": "S12",
+      "original_interval_sec": [
+        111,
+        120
+      ],
+      "original_duration_sec": 9,
+      "planned_stable_reading_sec": 7.0,
+      "if_both_neighbor_cut_candidates_adopted_duration_sec": 8.733333,
+      "remaining_transition_allowance_sec": 1.733333,
+      "reading_warning": "任何切点调整都须复核文字实际稳定可读时长；候选不自动替换分镜",
+      "action_candidates": [
+        {
+          "analysis_time_sec": 112.886712,
+          "nearest_frame": 3387,
+          "aligned_time_sec": 112.9,
+          "alignment_error_ms": 13.288,
+          "strength": 1.44627,
+          "spectral_flux": 0.16007664,
+          "window_rms_dbfs": -7.8702,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        },
+        {
+          "analysis_time_sec": 115.530703,
+          "nearest_frame": 3466,
+          "aligned_time_sec": 115.533333,
+          "alignment_error_ms": 2.6304,
+          "strength": 1.30075,
+          "spectral_flux": 0.12795072,
+          "window_rms_dbfs": -8.0622,
+          "status": "自动候选，未人工听审；由导演结合画面、阅读预算与成片听看后决定"
+        }
+      ]
+    }
+  ],
+  "detected_transient_candidate_count": 463,
+  "one_second_envelope": [
+    {
+      "start_sec": 0,
+      "rms_dbfs": -11.2574,
+      "sample_peak_dbfs": -1.5069
+    },
+    {
+      "start_sec": 1,
+      "rms_dbfs": -15.0709,
+      "sample_peak_dbfs": -2.5409
+    },
+    {
+      "start_sec": 2,
+      "rms_dbfs": -9.5449,
+      "sample_peak_dbfs": -0.8838
+    },
+    {
+      "start_sec": 3,
+      "rms_dbfs": -11.8189,
+      "sample_peak_dbfs": -1.1202
+    },
+    {
+      "start_sec": 4,
+      "rms_dbfs": -11.1132,
+      "sample_peak_dbfs": -1.0112
+    },
+    {
+      "start_sec": 5,
+      "rms_dbfs": -11.6467,
+      "sample_peak_dbfs": -1.4415
+    },
+    {
+      "start_sec": 6,
+      "rms_dbfs": -9.379,
+      "sample_peak_dbfs": -1.0634
+    },
+    {
+      "start_sec": 7,
+      "rms_dbfs": -10.3211,
+      "sample_peak_dbfs": -0.8559
+    },
+    {
+      "start_sec": 8,
+      "rms_dbfs": -11.3156,
+      "sample_peak_dbfs": -1.139
+    },
+    {
+      "start_sec": 9,
+      "rms_dbfs": -11.4209,
+      "sample_peak_dbfs": -1.0311
+    },
+    {
+      "start_sec": 10,
+      "rms_dbfs": -12.3928,
+      "sample_peak_dbfs": -2.1738
+    },
+    {
+      "start_sec": 11,
+      "rms_dbfs": -13.7969,
+      "sample_peak_dbfs": -2.6676
+    },
+    {
+      "start_sec": 12,
+      "rms_dbfs": -12.5761,
+      "sample_peak_dbfs": -1.7898
+    },
+    {
+      "start_sec": 13,
+      "rms_dbfs": -12.7053,
+      "sample_peak_dbfs": -1.6001
+    },
+    {
+      "start_sec": 14,
+      "rms_dbfs": -13.7209,
+      "sample_peak_dbfs": -2.6701
+    },
+    {
+      "start_sec": 15,
+      "rms_dbfs": -12.3899,
+      "sample_peak_dbfs": -1.7654
+    },
+    {
+      "start_sec": 16,
+      "rms_dbfs": -13.3986,
+      "sample_peak_dbfs": -1.1875
+    },
+    {
+      "start_sec": 17,
+      "rms_dbfs": -8.1384,
+      "sample_peak_dbfs": -0.1546
+    },
+    {
+      "start_sec": 18,
+      "rms_dbfs": -7.785,
+      "sample_peak_dbfs": -1.0646
+    },
+    {
+      "start_sec": 19,
+      "rms_dbfs": -6.9435,
+      "sample_peak_dbfs": -0.4571
+    },
+    {
+      "start_sec": 20,
+      "rms_dbfs": -7.8646,
+      "sample_peak_dbfs": -0.6478
+    },
+    {
+      "start_sec": 21,
+      "rms_dbfs": -8.4314,
+      "sample_peak_dbfs": -0.8223
+    },
+    {
+      "start_sec": 22,
+      "rms_dbfs": -10.1764,
+      "sample_peak_dbfs": -0.9625
+    },
+    {
+      "start_sec": 23,
+      "rms_dbfs": -8.7861,
+      "sample_peak_dbfs": -0.9636
+    },
+    {
+      "start_sec": 24,
+      "rms_dbfs": -10.5676,
+      "sample_peak_dbfs": -1.4525
+    },
+    {
+      "start_sec": 25,
+      "rms_dbfs": -8.2719,
+      "sample_peak_dbfs": -1.1193
+    },
+    {
+      "start_sec": 26,
+      "rms_dbfs": -8.5728,
+      "sample_peak_dbfs": -0.8337
+    },
+    {
+      "start_sec": 27,
+      "rms_dbfs": -7.5297,
+      "sample_peak_dbfs": -0.2621
+    },
+    {
+      "start_sec": 28,
+      "rms_dbfs": -7.779,
+      "sample_peak_dbfs": -0.8858
+    },
+    {
+      "start_sec": 29,
+      "rms_dbfs": -7.6092,
+      "sample_peak_dbfs": -0.6555
+    },
+    {
+      "start_sec": 30,
+      "rms_dbfs": -9.9954,
+      "sample_peak_dbfs": -1.0276
+    },
+    {
+      "start_sec": 31,
+      "rms_dbfs": -9.6721,
+      "sample_peak_dbfs": -0.8066
+    },
+    {
+      "start_sec": 32,
+      "rms_dbfs": -9.657,
+      "sample_peak_dbfs": -0.5422
+    },
+    {
+      "start_sec": 33,
+      "rms_dbfs": -8.5884,
+      "sample_peak_dbfs": -0.6478
+    },
+    {
+      "start_sec": 34,
+      "rms_dbfs": -7.9611,
+      "sample_peak_dbfs": -0.6515
+    },
+    {
+      "start_sec": 35,
+      "rms_dbfs": -8.0859,
+      "sample_peak_dbfs": -0.2993
+    },
+    {
+      "start_sec": 36,
+      "rms_dbfs": -6.9225,
+      "sample_peak_dbfs": -0.7628
+    },
+    {
+      "start_sec": 37,
+      "rms_dbfs": -7.8057,
+      "sample_peak_dbfs": -0.446
+    },
+    {
+      "start_sec": 38,
+      "rms_dbfs": -8.6374,
+      "sample_peak_dbfs": -0.6068
+    },
+    {
+      "start_sec": 39,
+      "rms_dbfs": -10.3774,
+      "sample_peak_dbfs": -1.2849
+    },
+    {
+      "start_sec": 40,
+      "rms_dbfs": -9.0482,
+      "sample_peak_dbfs": -1.0983
+    },
+    {
+      "start_sec": 41,
+      "rms_dbfs": -10.3984,
+      "sample_peak_dbfs": -0.5852
+    },
+    {
+      "start_sec": 42,
+      "rms_dbfs": -7.8901,
+      "sample_peak_dbfs": -0.9232
+    },
+    {
+      "start_sec": 43,
+      "rms_dbfs": -8.2666,
+      "sample_peak_dbfs": -0.623
+    },
+    {
+      "start_sec": 44,
+      "rms_dbfs": -7.2508,
+      "sample_peak_dbfs": -0.9131
+    },
+    {
+      "start_sec": 45,
+      "rms_dbfs": -7.468,
+      "sample_peak_dbfs": -0.5716
+    },
+    {
+      "start_sec": 46,
+      "rms_dbfs": -7.2659,
+      "sample_peak_dbfs": -0.7406
+    },
+    {
+      "start_sec": 47,
+      "rms_dbfs": -9.8805,
+      "sample_peak_dbfs": -1.2151
+    },
+    {
+      "start_sec": 48,
+      "rms_dbfs": -9.001,
+      "sample_peak_dbfs": -1.6036
+    },
+    {
+      "start_sec": 49,
+      "rms_dbfs": -9.5881,
+      "sample_peak_dbfs": -1.5753
+    },
+    {
+      "start_sec": 50,
+      "rms_dbfs": -9.3808,
+      "sample_peak_dbfs": -1.5765
+    },
+    {
+      "start_sec": 51,
+      "rms_dbfs": -10.5408,
+      "sample_peak_dbfs": -1.5499
+    },
+    {
+      "start_sec": 52,
+      "rms_dbfs": -10.5747,
+      "sample_peak_dbfs": -2.2851
+    },
+    {
+      "start_sec": 53,
+      "rms_dbfs": -10.5869,
+      "sample_peak_dbfs": -1.4738
+    },
+    {
+      "start_sec": 54,
+      "rms_dbfs": -10.5733,
+      "sample_peak_dbfs": -1.9988
+    },
+    {
+      "start_sec": 55,
+      "rms_dbfs": -9.1905,
+      "sample_peak_dbfs": -1.2837
+    },
+    {
+      "start_sec": 56,
+      "rms_dbfs": -10.6314,
+      "sample_peak_dbfs": -2.1956
+    },
+    {
+      "start_sec": 57,
+      "rms_dbfs": -9.2703,
+      "sample_peak_dbfs": -0.7198
+    },
+    {
+      "start_sec": 58,
+      "rms_dbfs": -10.6071,
+      "sample_peak_dbfs": -1.8159
+    },
+    {
+      "start_sec": 59,
+      "rms_dbfs": -10.3387,
+      "sample_peak_dbfs": -1.6243
+    },
+    {
+      "start_sec": 60,
+      "rms_dbfs": -10.376,
+      "sample_peak_dbfs": -1.9053
+    },
+    {
+      "start_sec": 61,
+      "rms_dbfs": -10.1326,
+      "sample_peak_dbfs": -0.8612
+    },
+    {
+      "start_sec": 62,
+      "rms_dbfs": -10.9383,
+      "sample_peak_dbfs": -1.9569
+    },
+    {
+      "start_sec": 63,
+      "rms_dbfs": -10.0924,
+      "sample_peak_dbfs": -1.797
+    },
+    {
+      "start_sec": 64,
+      "rms_dbfs": -10.1481,
+      "sample_peak_dbfs": -1.4169
+    },
+    {
+      "start_sec": 65,
+      "rms_dbfs": -9.2597,
+      "sample_peak_dbfs": -1.3352
+    },
+    {
+      "start_sec": 66,
+      "rms_dbfs": -9.6433,
+      "sample_peak_dbfs": -1.2976
+    },
+    {
+      "start_sec": 67,
+      "rms_dbfs": -9.2744,
+      "sample_peak_dbfs": -1.4028
+    },
+    {
+      "start_sec": 68,
+      "rms_dbfs": -10.6518,
+      "sample_peak_dbfs": -1.3982
+    },
+    {
+      "start_sec": 69,
+      "rms_dbfs": -12.8955,
+      "sample_peak_dbfs": -2.7917
+    },
+    {
+      "start_sec": 70,
+      "rms_dbfs": -10.2246,
+      "sample_peak_dbfs": -1.4858
+    },
+    {
+      "start_sec": 71,
+      "rms_dbfs": -10.2551,
+      "sample_peak_dbfs": -1.5594
+    },
+    {
+      "start_sec": 72,
+      "rms_dbfs": -9.048,
+      "sample_peak_dbfs": -1.1405
+    },
+    {
+      "start_sec": 73,
+      "rms_dbfs": -10.2798,
+      "sample_peak_dbfs": -2.1796
+    },
+    {
+      "start_sec": 74,
+      "rms_dbfs": -9.3105,
+      "sample_peak_dbfs": -1.8189
+    },
+    {
+      "start_sec": 75,
+      "rms_dbfs": -10.7998,
+      "sample_peak_dbfs": -2.4688
+    },
+    {
+      "start_sec": 76,
+      "rms_dbfs": -10.4394,
+      "sample_peak_dbfs": -2.2521
+    },
+    {
+      "start_sec": 77,
+      "rms_dbfs": -12.8632,
+      "sample_peak_dbfs": -1.9675
+    },
+    {
+      "start_sec": 78,
+      "rms_dbfs": -13.5406,
+      "sample_peak_dbfs": -2.5285
+    },
+    {
+      "start_sec": 79,
+      "rms_dbfs": -14.036,
+      "sample_peak_dbfs": -2.8427
+    },
+    {
+      "start_sec": 80,
+      "rms_dbfs": -11.5743,
+      "sample_peak_dbfs": -2.0413
+    },
+    {
+      "start_sec": 81,
+      "rms_dbfs": -13.6284,
+      "sample_peak_dbfs": -1.9281
+    },
+    {
+      "start_sec": 82,
+      "rms_dbfs": -12.318,
+      "sample_peak_dbfs": -2.6733
+    },
+    {
+      "start_sec": 83,
+      "rms_dbfs": -11.5186,
+      "sample_peak_dbfs": -0.8247
+    },
+    {
+      "start_sec": 84,
+      "rms_dbfs": -11.8331,
+      "sample_peak_dbfs": -1.7557
+    },
+    {
+      "start_sec": 85,
+      "rms_dbfs": -11.3241,
+      "sample_peak_dbfs": -1.9862
+    },
+    {
+      "start_sec": 86,
+      "rms_dbfs": -14.8493,
+      "sample_peak_dbfs": -1.0775
+    },
+    {
+      "start_sec": 87,
+      "rms_dbfs": -13.0297,
+      "sample_peak_dbfs": -2.0032
+    },
+    {
+      "start_sec": 88,
+      "rms_dbfs": -15.1352,
+      "sample_peak_dbfs": -4.4188
+    },
+    {
+      "start_sec": 89,
+      "rms_dbfs": -12.4527,
+      "sample_peak_dbfs": -2.0524
+    },
+    {
+      "start_sec": 90,
+      "rms_dbfs": -14.2684,
+      "sample_peak_dbfs": -3.587
+    },
+    {
+      "start_sec": 91,
+      "rms_dbfs": -12.6556,
+      "sample_peak_dbfs": -1.8424
+    },
+    {
+      "start_sec": 92,
+      "rms_dbfs": -15.1575,
+      "sample_peak_dbfs": -3.8861
+    },
+    {
+      "start_sec": 93,
+      "rms_dbfs": -10.6312,
+      "sample_peak_dbfs": -1.2871
+    },
+    {
+      "start_sec": 94,
+      "rms_dbfs": -10.6279,
+      "sample_peak_dbfs": -1.5854
+    },
+    {
+      "start_sec": 95,
+      "rms_dbfs": -9.4545,
+      "sample_peak_dbfs": -1.4773
+    },
+    {
+      "start_sec": 96,
+      "rms_dbfs": -10.3369,
+      "sample_peak_dbfs": -1.7908
+    },
+    {
+      "start_sec": 97,
+      "rms_dbfs": -9.2646,
+      "sample_peak_dbfs": -1.4094
+    },
+    {
+      "start_sec": 98,
+      "rms_dbfs": -10.8873,
+      "sample_peak_dbfs": -2.0911
+    },
+    {
+      "start_sec": 99,
+      "rms_dbfs": -10.423,
+      "sample_peak_dbfs": -1.5208
+    },
+    {
+      "start_sec": 100,
+      "rms_dbfs": -10.6471,
+      "sample_peak_dbfs": -1.3463
+    },
+    {
+      "start_sec": 101,
+      "rms_dbfs": -10.2767,
+      "sample_peak_dbfs": -1.4569
+    },
+    {
+      "start_sec": 102,
+      "rms_dbfs": -9.2369,
+      "sample_peak_dbfs": -1.2905
+    },
+    {
+      "start_sec": 103,
+      "rms_dbfs": -10.2905,
+      "sample_peak_dbfs": -1.8464
+    },
+    {
+      "start_sec": 104,
+      "rms_dbfs": -9.6606,
+      "sample_peak_dbfs": -1.2555
+    },
+    {
+      "start_sec": 105,
+      "rms_dbfs": -10.1368,
+      "sample_peak_dbfs": -1.5759
+    },
+    {
+      "start_sec": 106,
+      "rms_dbfs": -10.7355,
+      "sample_peak_dbfs": -1.758
+    },
+    {
+      "start_sec": 107,
+      "rms_dbfs": -10.124,
+      "sample_peak_dbfs": -1.3575
+    },
+    {
+      "start_sec": 108,
+      "rms_dbfs": -10.6206,
+      "sample_peak_dbfs": -0.829
+    },
+    {
+      "start_sec": 109,
+      "rms_dbfs": -10.9547,
+      "sample_peak_dbfs": -1.9645
+    },
+    {
+      "start_sec": 110,
+      "rms_dbfs": -9.6297,
+      "sample_peak_dbfs": -1.4016
+    },
+    {
+      "start_sec": 111,
+      "rms_dbfs": -10.5099,
+      "sample_peak_dbfs": -1.3776
+    },
+    {
+      "start_sec": 112,
+      "rms_dbfs": -9.0617,
+      "sample_peak_dbfs": -1.2926
+    },
+    {
+      "start_sec": 113,
+      "rms_dbfs": -10.0441,
+      "sample_peak_dbfs": -1.8372
+    },
+    {
+      "start_sec": 114,
+      "rms_dbfs": -9.6175,
+      "sample_peak_dbfs": -1.1013
+    },
+    {
+      "start_sec": 115,
+      "rms_dbfs": -11.4996,
+      "sample_peak_dbfs": -1.9805
+    },
+    {
+      "start_sec": 116,
+      "rms_dbfs": -11.7976,
+      "sample_peak_dbfs": -2.752
+    },
+    {
+      "start_sec": 117,
+      "rms_dbfs": -10.4052,
+      "sample_peak_dbfs": -1.494
+    },
+    {
+      "start_sec": 118,
+      "rms_dbfs": -9.8882,
+      "sample_peak_dbfs": -1.4723
+    },
+    {
+      "start_sec": 119,
+      "rms_dbfs": -9.4012,
+      "sample_peak_dbfs": -1.1085
+    }
+  ],
+  "manual_checks_pending": [
+    "完整音乐听审与段落情绪判断",
+    "候选是否为可听见的音乐重音或乐句变化",
+    "所有文字实际稳定可读时间",
+    "字幕/路线动作在最终成片中的听感同步"
+  ]
+}

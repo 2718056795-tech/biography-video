@@ -1,0 +1,993 @@
+{
+  "version": "2.0",
+  "status": "historical_director_design_reference; actual implementation is actor/environment code and final video; not listening certificate",
+  "title": "杜甫｜此心在人间",
+  "output_mode": "portrait",
+  "video_spec": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_sec": 120,
+    "total_frames": 3600
+  },
+  "input_files": {
+    "timeline": "最终时间轴.json",
+    "timeline_sha256": "2e16d1c4e5dadbddb26a89d800f141b8457477ed3e54d247507b525993665f16",
+    "music_candidates": "音乐节拍候选.json",
+    "music_source_sha256": "9339186658cf252dd118c282c4803d4e70efe743010197cac51da792e38afb80"
+  },
+  "timeline_rule": "最终切点固定，帧区间左闭右开；旧概念秒点仅留追溯，不用于渲染覆盖",
+  "scope": "只设计12幕角色/道具动作与可见环境机制，不改文字、史料、切点、配乐；不生成横版。",
+  "music_status": "候选来自自动频谱/能量分析，未人工听审；拟用于动作设计，不是已经实现的卡点证明。",
+  "motion_rule": "角色须有关节或手部/纸面相对变化，环境须有局部物体相对固定参照变化；全图平移缩放不能单独满足。",
+  "text_protection": {
+    "rule": "以实际主文字包围盒外扩24px作为运动避让范围；物理运动主要位于y约950以下，具体依资产bbox复核；文字独立固定，不挂在动景相机下。",
+    "scene_s07": "地图节点、标签与示意说明另设避让；路线信息动画不能替代人物步态。",
+    "scene_s12": "明确例外：不增加人物或人手，主要主体是卷轴；纸面题字擦显与上方稳定主文分离。"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "title": "此心在人间",
+      "start_frame": 0,
+      "end_frame_exclusive": 205,
+      "start_sec": 0.0,
+      "end_sec": 6.833333333333333,
+      "original_concept_interval_sec": [
+        0,
+        7
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 0.711655,
+        "nearest_frame": 21,
+        "video_time_sec": 0.7,
+        "alignment_error_ms": -11.6553,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 4.183764,
+        "nearest_frame": 126,
+        "video_time_sec": 4.2,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "protect_paper",
+        "subject_type": "articulated_character",
+        "design": "俯身压住纸页，肘与腕分别转动，把将起的纸角护回桌面",
+        "start_frame": 21,
+        "end_frame_exclusive": 105,
+        "phases": [
+          {
+            "start_frame": 21,
+            "end_frame_exclusive": 33,
+            "start_sec": 0.7,
+            "end_sec": 1.1,
+            "mechanism": "肩肘前送，手接近纸角"
+          },
+          {
+            "start_frame": 33,
+            "end_frame_exclusive": 75,
+            "start_sec": 1.1,
+            "end_sec": 2.5,
+            "mechanism": "前臂下压、腕部转向，纸角受力贴回桌面"
+          },
+          {
+            "start_frame": 75,
+            "end_frame_exclusive": 105,
+            "start_sec": 2.5,
+            "end_sec": 3.5,
+            "mechanism": "手保留接触点，身体回稳并维持护纸姿态"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "屋檐外雨滴持续下落，落点出现小水纹；雨与水纹只在屋外和下半画面",
+        "mechanism": "雨滴沿独立轨迹位移，接触水面后扩散消隐；桌、屋柱与标题均不跟随",
+        "start_frame": 12,
+        "end_frame_exclusive": 199,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定中景；不靠整图放大制造动作",
+      "action_region": "人物和纸页所在下半部；雨避开屋内正文与标题",
+      "stable_main_text_window": {
+        "start_frame": 24,
+        "end_frame_exclusive": 199,
+        "duration_sec": 5.833333,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "手腕相对肩部和纸角的位置改变；雨滴相对屋柱下降",
+      "static_frame_only_failure": "人、纸、雨线只停留在单一形态的屋内插画",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S02",
+      "title": "少年有志",
+      "start_frame": 205,
+      "end_frame_exclusive": 476,
+      "start_sec": 6.833333333333333,
+      "end_sec": 15.866666666666667,
+      "original_concept_interval_sec": [
+        7,
+        16
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 8.444082,
+        "nearest_frame": 253,
+        "video_time_sec": 8.433333,
+        "alignment_error_ms": -10.7483,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 12.684444,
+        "nearest_frame": 381,
+        "video_time_sec": 12.7,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "walk_then_look",
+        "subject_type": "articulated_character",
+        "design": "青年实际迈两步，再停步抬头望山；脚、膝、髋交替摆动，不把整个人形横移当走路",
+        "start_frame": 253,
+        "end_frame_exclusive": 379,
+        "phases": [
+          {
+            "start_frame": 253,
+            "end_frame_exclusive": 265,
+            "start_sec": 8.433333,
+            "end_sec": 8.833333,
+            "mechanism": "重心移向支撑腿，另一脚离地"
+          },
+          {
+            "start_frame": 265,
+            "end_frame_exclusive": 343,
+            "start_sec": 8.833333,
+            "end_sec": 11.433333,
+            "mechanism": "完成两步，膝部屈伸、双臂反摆；脚触地时保持接触"
+          },
+          {
+            "start_frame": 343,
+            "end_frame_exclusive": 379,
+            "start_sec": 11.433333,
+            "end_sec": 12.633333,
+            "mechanism": "两脚停稳，头颈与胸廓抬起望山"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "下方山腰云带从一侧穿入、从另一侧流出，山脊本身固定",
+        "mechanism": "云层独立平移并被山体局部遮挡，形成穿行关系；不是全景同速移动",
+        "start_frame": 217,
+        "end_frame_exclusive": 470,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定远中景，保留青年全身与脚部；收尾不切成仅头部小角度变化",
+      "action_region": "人物脚步与山腰位于主诗块下方；不表现登顶成功",
+      "stable_main_text_window": {
+        "start_frame": 229,
+        "end_frame_exclusive": 470,
+        "duration_sec": 8.033333,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "能看到两只脚先后离地和着地、膝角变化；云相对山脊经过",
+      "static_frame_only_failure": "人物站在山前，只有背景画布缓慢放大",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S03",
+      "title": "长安求仕",
+      "start_frame": 476,
+      "end_frame_exclusive": 787,
+      "start_sec": 15.866666666666667,
+      "end_sec": 26.233333333333334,
+      "original_concept_interval_sec": [
+        16,
+        26
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 16.924807,
+        "nearest_frame": 508,
+        "video_time_sec": 16.933333,
+        "alignment_error_ms": 8.5261,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 21.983311,
+        "nearest_frame": 659,
+        "video_time_sec": 21.966667,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "walk_offer_scroll",
+        "subject_type": "articulated_character",
+        "design": "持卷走到城门，停下后前臂向前递卷；步态完成后才伸手",
+        "start_frame": 508,
+        "end_frame_exclusive": 658,
+        "phases": [
+          {
+            "start_frame": 508,
+            "end_frame_exclusive": 523,
+            "start_sec": 16.933333,
+            "end_sec": 17.433333,
+            "mechanism": "起步，卷轴随手臂而非随整幅画面运动"
+          },
+          {
+            "start_frame": 523,
+            "end_frame_exclusive": 610,
+            "start_sec": 17.433333,
+            "end_sec": 20.333333,
+            "mechanism": "双腿交替行进，城门门框固定，足部走向门前"
+          },
+          {
+            "start_frame": 610,
+            "end_frame_exclusive": 658,
+            "start_sec": 20.333333,
+            "end_sec": 21.933333,
+            "mechanism": "站稳后伸肘递卷，卷轴相对躯干向前并停留"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "门旁小片纸幡受风弯曲后回落",
+        "mechanism": "幡顶连接点固定，下缘及中部控制点改变；不把整张幡当刚体摇摆",
+        "start_frame": 488,
+        "end_frame_exclusive": 781,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定全身中景，门框用作相对运动参照物",
+      "action_region": "门前下半区；卷轴不伸入主诗与书名区域",
+      "stable_main_text_window": {
+        "start_frame": 500,
+        "end_frame_exclusive": 781,
+        "duration_sec": 9.366667,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "腿部关节变化、人与门的距离变化，随后卷轴离开胸前；纸幡下缘相对悬点弯摆",
+      "static_frame_only_failure": "人物持书站门前，门与人物一起平移",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S04",
+      "title": "看见饥寒",
+      "start_frame": 787,
+      "end_frame_exclusive": 1091,
+      "start_sec": 26.233333333333334,
+      "end_sec": 36.36666666666667,
+      "original_concept_interval_sec": [
+        26,
+        36
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 27.830023,
+        "nearest_frame": 835,
+        "video_time_sec": 27.833333,
+        "alignment_error_ms": 3.3107,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 31.800998,
+        "nearest_frame": 954,
+        "video_time_sec": 31.8,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "walk_with_bag",
+        "subject_type": "articulated_character",
+        "design": "负囊沿路行走，腿部完成连续步态，肩膀与行囊有轻微错相回弹",
+        "start_frame": 835,
+        "end_frame_exclusive": 997,
+        "phases": [
+          {
+            "start_frame": 835,
+            "end_frame_exclusive": 847,
+            "start_sec": 27.833333,
+            "end_sec": 28.233333,
+            "mechanism": "提起后脚，身体重心前移"
+          },
+          {
+            "start_frame": 847,
+            "end_frame_exclusive": 967,
+            "start_sec": 28.233333,
+            "end_sec": 32.233333,
+            "mechanism": "完成连续交替迈步；手臂、膝与脚并非一个刚体"
+          },
+          {
+            "start_frame": 967,
+            "end_frame_exclusive": 997,
+            "start_sec": 32.233333,
+            "end_sec": 33.233333,
+            "mechanism": "步幅减小，行囊回弹后停稳"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "寒路旁悬布在风中弯摆，门内暖光保持稳定",
+        "mechanism": "悬布根部固定而自由端偏折，风摆有缓出缓回，不用明暗闪烁代替风",
+        "start_frame": 799,
+        "end_frame_exclusive": 1085,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定中远景，保留门、路与行者的空间对照",
+      "action_region": "门外路面与人物下半区；不新增尸体或丧子现场",
+      "stable_main_text_window": {
+        "start_frame": 811,
+        "end_frame_exclusive": 1085,
+        "duration_sec": 9.133333,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "足部交替触地、囊袋相对肩部有延迟，悬布相对门边弯曲",
+      "static_frame_only_failure": "门外行囊人物保持同姿势，仅整幅向侧边漂移",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S05",
+      "title": "乱中长安",
+      "start_frame": 1091,
+      "end_frame_exclusive": 1401,
+      "start_sec": 36.36666666666667,
+      "end_sec": 46.7,
+      "original_concept_interval_sec": [
+        36,
+        47
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 38.20644,
+        "nearest_frame": 1146,
+        "video_time_sec": 38.2,
+        "alignment_error_ms": -6.4399,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 42.45678,
+        "nearest_frame": 1274,
+        "video_time_sec": 42.466667,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "unfold_letter",
+        "subject_type": "articulated_character",
+        "design": "双手展开纸信，手肘向两侧分开，低头读完后微收纸页",
+        "start_frame": 1146,
+        "end_frame_exclusive": 1242,
+        "phases": [
+          {
+            "start_frame": 1146,
+            "end_frame_exclusive": 1161,
+            "start_sec": 38.2,
+            "end_sec": 38.7,
+            "mechanism": "两手靠近折叠纸信，头稍俯"
+          },
+          {
+            "start_frame": 1161,
+            "end_frame_exclusive": 1212,
+            "start_sec": 38.7,
+            "end_sec": 40.4,
+            "mechanism": "肘腕打开，纸页折线与可见面积随展开改变"
+          },
+          {
+            "start_frame": 1212,
+            "end_frame_exclusive": 1242,
+            "start_sec": 40.4,
+            "end_sec": 41.4,
+            "mechanism": "手停在展开姿态，头部轻收后安静阅读"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "残墙脚春草随风弯向一侧，随后缓慢回正",
+        "mechanism": "草根固定，茎和叶的控制点分别偏折；残墙与远山不移动",
+        "start_frame": 1103,
+        "end_frame_exclusive": 1395,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定中景；先保证手和纸信可见，不用推镜替代展信",
+      "action_region": "手、纸、草均在主引文下方；信纸无可读的虚构家书内容",
+      "stable_main_text_window": {
+        "start_frame": 1115,
+        "end_frame_exclusive": 1395,
+        "duration_sec": 9.333333,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "纸的面积和折边改变，左右手相对胸部距离增加；草尖相对墙脚摆动",
+      "static_frame_only_failure": "手中永远是一张不变的白纸，仅镜头略微靠近",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S06",
+      "title": "诗里的百姓",
+      "start_frame": 1401,
+      "end_frame_exclusive": 1680,
+      "start_sec": 46.7,
+      "end_sec": 56.0,
+      "original_concept_interval_sec": [
+        47,
+        56
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 49.371066,
+        "nearest_frame": 1481,
+        "video_time_sec": 49.366667,
+        "alignment_error_ms": -4.3991,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 51.795556,
+        "nearest_frame": 1554,
+        "video_time_sec": 51.8,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "farewell_wave",
+        "subject_type": "articulated_character",
+        "design": "送别者抬手、完成一次清楚挥手、再缓缓放下；不增演诗人亲见六诗所有场景",
+        "start_frame": 1481,
+        "end_frame_exclusive": 1583,
+        "phases": [
+          {
+            "start_frame": 1481,
+            "end_frame_exclusive": 1499,
+            "start_sec": 49.366667,
+            "end_sec": 49.966667,
+            "mechanism": "肩肘抬起，手从胸侧到肩上方"
+          },
+          {
+            "start_frame": 1499,
+            "end_frame_exclusive": 1553,
+            "start_sec": 49.966667,
+            "end_sec": 51.766667,
+            "mechanism": "前臂与腕完成一轮挥手往返，身体保留稳定支撑"
+          },
+          {
+            "start_frame": 1553,
+            "end_frame_exclusive": 1583,
+            "start_sec": 51.766667,
+            "end_sec": 52.766667,
+            "mechanism": "手臂下降，最后停在尚未完全放下的位置"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "门侧小片纸旗随风改变弧度，送别门框固定",
+        "mechanism": "旗面形变与根部固定形成相对变化，不与手臂做同频同幅同步",
+        "start_frame": 1413,
+        "end_frame_exclusive": 1674,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定双人中景，完整保留挥手手臂与另一人的回应方向",
+      "action_region": "人物关系在下半区；挥手最高点不得触及作品组名与解释",
+      "stable_main_text_window": {
+        "start_frame": 1425,
+        "end_frame_exclusive": 1674,
+        "duration_sec": 8.3,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "腕相对肘、肘相对肩角度明显变化；纸旗弧度变化而门框不变",
+      "static_frame_only_failure": "两个人对站，伸出的胳膊始终同角度",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S07",
+      "title": "山路向蜀",
+      "start_frame": 1680,
+      "end_frame_exclusive": 1984,
+      "start_sec": 56.0,
+      "end_sec": 66.13333333333334,
+      "original_concept_interval_sec": [
+        56,
+        66
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 57.612336,
+        "nearest_frame": 1728,
+        "video_time_sec": 57.6,
+        "alignment_error_ms": -12.3356,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 61.812789,
+        "nearest_frame": 1854,
+        "video_time_sec": 61.8,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "walking_uphill",
+        "subject_type": "articulated_character",
+        "design": "携囊上坡行进，交替抬膝和落足，身体随坡道微前倾；不只是微小人形滑过地图",
+        "start_frame": 1728,
+        "end_frame_exclusive": 1908,
+        "phases": [
+          {
+            "start_frame": 1728,
+            "end_frame_exclusive": 1740,
+            "start_sec": 57.6,
+            "end_sec": 58.0,
+            "mechanism": "重心转移、抬脚上坡"
+          },
+          {
+            "start_frame": 1740,
+            "end_frame_exclusive": 1878,
+            "start_sec": 58.0,
+            "end_sec": 62.6,
+            "mechanism": "持续步态，落足贴合坡面高度，行囊与衣摆略滞后"
+          },
+          {
+            "start_frame": 1878,
+            "end_frame_exclusive": 1908,
+            "start_sec": 62.6,
+            "end_sec": 63.6,
+            "mechanism": "转为较小步幅并停稳，留出成都节点收束"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "前景山雾缓缓越过坡道边缘，山路与地图地理节点保持固定",
+        "mechanism": "雾层独立经过地形遮罩；不通过移动地点来表现旅途",
+        "start_frame": 1692,
+        "end_frame_exclusive": 1978,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "地图保持固定视窗；人物全身行走区独立，不做全屏平移缩放",
+      "action_region": "步行区放在地图以下；雾不得遮盖地图标签和“非历史道路”说明",
+      "stable_main_text_window": {
+        "start_frame": 1704,
+        "end_frame_exclusive": 1978,
+        "duration_sec": 9.133333,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "脚步对地形有接触与离地，雾相对山路流过；路线若增长则只沿核实节点变化",
+      "static_frame_only_failure": "人物和地图都不变，只缓缓缩放整幅背景",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S08",
+      "title": "草堂春雨",
+      "start_frame": 1984,
+      "end_frame_exclusive": 2245,
+      "start_sec": 66.13333333333334,
+      "end_sec": 74.83333333333333,
+      "original_concept_interval_sec": [
+        66,
+        75
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 67.968798,
+        "nearest_frame": 2039,
+        "video_time_sec": 67.966667,
+        "alignment_error_ms": -2.1315,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 72.239093,
+        "nearest_frame": 2167,
+        "video_time_sec": 72.233333,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "writing",
+        "subject_type": "articulated_character",
+        "design": "伏案写字，前臂带动腕与笔尖完成数个连贯笔画，短暂停笔再抬笔",
+        "start_frame": 2039,
+        "end_frame_exclusive": 2207,
+        "phases": [
+          {
+            "start_frame": 2039,
+            "end_frame_exclusive": 2051,
+            "start_sec": 67.966667,
+            "end_sec": 68.366667,
+            "mechanism": "笔尖接近纸面，腕与肘分别定位"
+          },
+          {
+            "start_frame": 2051,
+            "end_frame_exclusive": 2177,
+            "start_sec": 68.366667,
+            "end_sec": 72.566667,
+            "mechanism": "连续书写，笔尖局部往返与提按，手臂小幅配合而肩部不左右漂移"
+          },
+          {
+            "start_frame": 2177,
+            "end_frame_exclusive": 2207,
+            "start_sec": 72.566667,
+            "end_sec": 73.566667,
+            "mechanism": "笔尖离纸，手与前臂回收并停稳"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "窗外竹枝弯摆，叶片与枝干有不同幅度和相位",
+        "mechanism": "竹节与叶柄分层变形，根部固定；春雨可作安静辅助但不盖过竹摆",
+        "start_frame": 1996,
+        "end_frame_exclusive": 2239,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定中近景，手、笔尖与纸面同时可见",
+      "action_region": "笔与竹在正文下方；纸上笔迹只作不具具体史料意义的图形痕迹",
+      "stable_main_text_window": {
+        "start_frame": 2008,
+        "end_frame_exclusive": 2239,
+        "duration_sec": 7.7,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "笔尖相对纸面走过路径并有离纸；竹叶相对竹节转动",
+      "static_frame_only_failure": "笔悬在纸前，只有一张静态图上的雨纹淡入淡出",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S09",
+      "title": "天下的屋檐",
+      "start_frame": 2245,
+      "end_frame_exclusive": 2676,
+      "start_sec": 74.83333333333333,
+      "end_sec": 89.2,
+      "original_concept_interval_sec": [
+        75,
+        89
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 76.459501,
+        "nearest_frame": 2294,
+        "video_time_sec": 76.466667,
+        "alignment_error_ms": 7.1655,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 83.36381,
+        "nearest_frame": 2501,
+        "video_time_sec": 83.366667,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "protect_paper_in_wind",
+        "subject_type": "articulated_character",
+        "design": "风来时伸手压纸，纸角受风抬起时手位作补偿，再把纸压稳",
+        "start_frame": 2294,
+        "end_frame_exclusive": 2564,
+        "phases": [
+          {
+            "start_frame": 2294,
+            "end_frame_exclusive": 2306,
+            "start_sec": 76.466667,
+            "end_sec": 76.866667,
+            "mechanism": "察觉风动，身体前倾、肘腕前送"
+          },
+          {
+            "start_frame": 2306,
+            "end_frame_exclusive": 2348,
+            "start_sec": 76.866667,
+            "end_sec": 78.266667,
+            "mechanism": "双手分别压住纸面，手掌接触点清楚"
+          },
+          {
+            "start_frame": 2348,
+            "end_frame_exclusive": 2522,
+            "start_sec": 78.266667,
+            "end_sec": 84.066667,
+            "mechanism": "保持护纸并随纸角偏折调手位，第二候选附近做一次较明显补压"
+          },
+          {
+            "start_frame": 2522,
+            "end_frame_exclusive": 2564,
+            "start_sec": 84.066667,
+            "end_sec": 85.466667,
+            "mechanism": "纸角回落，手臂保留压纸姿态、身体回稳"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "屋檐茅草在阵风中局部掀起、弯折、回落",
+        "mechanism": "茅草根部固定、自由端形变，纸角与风同向响应；不画随机飘散装饰粒子",
+        "start_frame": 2257,
+        "end_frame_exclusive": 2670,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定中近景强调手与纸、茅檐关系；不将慢推当成高潮动作",
+      "action_region": "全部物理运动在诗句下方；两句诗位置和字形固定，保留完整稳定阅读",
+      "stable_main_text_window": {
+        "start_frame": 2269,
+        "end_frame_exclusive": 2670,
+        "duration_sec": 13.366667,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "手腕、纸角、茅草自由端彼此产生相对变化；屋柱始终固定",
+      "static_frame_only_failure": "杜甫一直保持护纸剪影，所谓高潮只有镜头拉近",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S10",
+      "title": "万里作客",
+      "start_frame": 2676,
+      "end_frame_exclusive": 3011,
+      "start_sec": 89.2,
+      "end_sec": 100.36666666666666,
+      "original_concept_interval_sec": [
+        89,
+        100
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 91.056327,
+        "nearest_frame": 2732,
+        "video_time_sec": 91.066667,
+        "alignment_error_ms": 10.3401,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 95.885351,
+        "nearest_frame": 2877,
+        "video_time_sec": 95.9,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "cane_step",
+        "subject_type": "articulated_character",
+        "design": "拄杖换重心，缓踏一步，落足后停稳望江；手、杖、髋、膝协同",
+        "start_frame": 2732,
+        "end_frame_exclusive": 2897,
+        "phases": [
+          {
+            "start_frame": 2732,
+            "end_frame_exclusive": 2753,
+            "start_sec": 91.066667,
+            "end_sec": 91.766667,
+            "mechanism": "杖尖先触地，支撑臂定位"
+          },
+          {
+            "start_frame": 2753,
+            "end_frame_exclusive": 2846,
+            "start_sec": 91.766667,
+            "end_sec": 94.866667,
+            "mechanism": "身体重心移向杖与支撑脚，另一膝抬起向前落足"
+          },
+          {
+            "start_frame": 2846,
+            "end_frame_exclusive": 2897,
+            "start_sec": 94.866667,
+            "end_sec": 96.566667,
+            "mechanism": "重心移至新落脚处，头颈抬向江面，杖保持支撑"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "江面波纹沿水道向下游推进并逐渐消散",
+        "mechanism": "多条低对比水纹分别位移和衰减，河岸及山体固定，不能整条河刚体滑动",
+        "start_frame": 2688,
+        "end_frame_exclusive": 3005,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定全身中景，必须看清杖尖和脚底；远江另层运动",
+      "action_region": "身体和江水在主诗下方；不借动作暗示诗人已百岁或精确复原某座登台",
+      "stable_main_text_window": {
+        "start_frame": 2700,
+        "end_frame_exclusive": 3005,
+        "duration_sec": 10.166667,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "脚、膝、杖尖之间关系改变而非全人同速平移；水纹经过固定岸线",
+      "static_frame_only_failure": "持杖老人固定站立，仅人物和山川一起缩放",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S11",
+      "title": "湖湘晚岁",
+      "start_frame": 3011,
+      "end_frame_exclusive": 3338,
+      "start_sec": 100.36666666666666,
+      "end_sec": 111.26666666666667,
+      "original_concept_interval_sec": [
+        100,
+        111
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 101.991474,
+        "nearest_frame": 3060,
+        "video_time_sec": 102.0,
+        "alignment_error_ms": 8.5261,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 106.251791,
+        "nearest_frame": 3188,
+        "video_time_sec": 106.266667,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "turn_page",
+        "subject_type": "articulated_character",
+        "design": "舟中抬手捏住纸角、翻过一页、将新页按平",
+        "start_frame": 3060,
+        "end_frame_exclusive": 3180,
+        "phases": [
+          {
+            "start_frame": 3060,
+            "end_frame_exclusive": 3078,
+            "start_sec": 102.0,
+            "end_sec": 102.6,
+            "mechanism": "腕指接近页角，另一手保持书卷"
+          },
+          {
+            "start_frame": 3078,
+            "end_frame_exclusive": 3147,
+            "start_sec": 102.6,
+            "end_sec": 104.9,
+            "mechanism": "前臂带动页角走弧线，页片翻折、可见面积改变"
+          },
+          {
+            "start_frame": 3147,
+            "end_frame_exclusive": 3180,
+            "start_sec": 104.9,
+            "end_sec": 106.0,
+            "mechanism": "翻页落下，手掌轻压新页后停留"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "小舟在划桨后推进，桨相对舟体摆动，入水处生出尾迹与水纹",
+        "mechanism": "船体相对固定江岸前移并小幅摇摆；桨以桨架为支点扫过水面，水纹从接触点向外扩散",
+        "start_frame": 3023,
+        "end_frame_exclusive": 3332,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定舟中景，保留舟体、江岸和桨的参照关系；不让相机跟船造成船与岸同速不动",
+      "action_region": "舟、桨、页片在字幕下方；划桨是风格化舟行机制，不指称病中的杜甫本人执桨",
+      "stable_main_text_window": {
+        "start_frame": 3035,
+        "end_frame_exclusive": 3332,
+        "duration_sec": 9.9,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "纸页相对手翻转，桨相对船壳转动、船相对岸推进、尾迹相对船后移",
+      "static_frame_only_failure": "船只是完整贴图在江面横移，人物和桨永远同姿态",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    },
+    {
+      "scene_id": "S12",
+      "title": "留在人间",
+      "start_frame": 3338,
+      "end_frame_exclusive": 3600,
+      "start_sec": 111.26666666666667,
+      "end_sec": 120.0,
+      "original_concept_interval_sec": [
+        111,
+        120
+      ],
+      "cut_policy": "仅采用最终时间轴，不回改旧概念切点",
+      "music_action_anchor": {
+        "source_analysis_time_sec": 112.886712,
+        "nearest_frame": 3387,
+        "video_time_sec": 112.9,
+        "alignment_error_ms": 13.288,
+        "role": "拟用于主要动作启动",
+        "evidence_status": "仅自动瞬态候选，未做人工听审，不宣称已精准卡点"
+      },
+      "environment_phase_anchor": {
+        "source_analysis_time_sec": 115.530703,
+        "nearest_frame": 3466,
+        "video_time_sec": 115.533333,
+        "role": "拟作局部环境变化的相位参照；S12为题字擦显启动，其余不必在此帧硬切",
+        "evidence_status": "自动候选；不把每拍转为动画触发"
+      },
+      "primary_subject_action": {
+        "type": "scroll_unroll",
+        "subject_type": "prop_scroll",
+        "design": "本幕不增加人手或人形；以卷轴为叙事主体：左右轴分离、纸面随之真实展开",
+        "start_frame": 3387,
+        "end_frame_exclusive": 3453,
+        "phases": [
+          {
+            "start_frame": 3387,
+            "end_frame_exclusive": 3399,
+            "start_sec": 112.9,
+            "end_sec": 113.3,
+            "mechanism": "左右轴开始向相反方向分离，中央纸带显露"
+          },
+          {
+            "start_frame": 3399,
+            "end_frame_exclusive": 3438,
+            "start_sec": 113.3,
+            "end_sec": 114.6,
+            "mechanism": "轴身与纸面边界独立运动，露出面积持续增加"
+          },
+          {
+            "start_frame": 3438,
+            "end_frame_exclusive": 3453,
+            "start_sec": 114.6,
+            "end_sec": 115.1,
+            "mechanism": "轴体停稳，纸面轻缓回平"
+          }
+        ],
+        "after_action": "动作完成后保持自然收势；不为填满余时重新跳回第一姿态"
+      },
+      "environment_action": {
+        "design": "卷轴展开后，纸面“此心在人间”按字形遮罩逐字擦显",
+        "mechanism": "从固定墨字掩模逐步显露；不是整张图淡入，也不是移动主标题；显露完成后稳定停留",
+        "start_frame": 3466,
+        "end_frame_exclusive": 3508,
+        "phase_policy": "连续自然运动；相位参照仅作平滑加重或峰值附近取舍，禁止到候选帧突然跳位",
+        "density": "1个主要机制，低干扰；不再叠加无关闪线与粒子"
+      },
+      "camera": "固定卷轴近景；上方片名与结语稳定，纸面题字仅作为道具上的收束动作",
+      "action_region": "卷轴在下半部；题字掩模不触及主标题、结语和小字说明",
+      "stable_main_text_window": {
+        "start_frame": 3362,
+        "end_frame_exclusive": 3594,
+        "duration_sec": 7.733333,
+        "design_rule": "这是保读字的设计窗口，实际成片另检；主文字层完整显示后固定，不随相机、关节或环境移动"
+      },
+      "observable_motion_evidence": "两轴的间距与纸面宽度增加，纸上墨字依次显露；上方文字和远处人家保持固定",
+      "static_frame_only_failure": "一卷完整摊开的纸一直不变，只有结尾整幅淡出",
+      "implementation_status": "design_decided_implementation_not_verified",
+      "historical_scope": "风格化动作设计，不宣称某时某地的具体行为现场复原；不改史料结论、古诗或固定音轨"
+    }
+  ],
+  "animation_acceptance_checks": [
+    "逐幕挑动作准备、动作中、收势三帧，以固定背景参照验证关节夹角/手与纸/足与地的关系改变；只有整幅位移、缩放或轻微明暗差不得算角色动画。",
+    "行走幕看脚底交替离地与接触、膝髋屈伸和重心；书写/翻页/护纸幕看腕肘与笔尖/纸角的相对路径，不能只旋转整个人形或整张纸。",
+    "环境单独核对固定参照：竹叶对竹节、茅草自由端对屋檐、云对山脊、桨对舟壳、舟对江岸、波纹对水岸；仅船贴图平移不能替代划桨与翻页。",
+    "主标题和诗句稳定窗口内逐帧位置与字形不跳动，动作不穿过正文/地图标签；七处引文不丢字、不改字，读字时间不被强行动效吞掉。",
+    "在实际MP4中观看完整动作过程与切幕边界，检查无关节闪断、纸片瞬移、循环回跳、无因粒子及音轨改动；设计时点对照源秒数复核，听审前不写“精准卡点通过”。"
+  ],
+  "delivery_note": "导演表说明已决定如何做。各机制是否实现、是否足够明显、是否与音乐合拍，必须查看实际渲染结果后另记，不以本表作为完成证据。"
+}

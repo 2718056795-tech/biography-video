@@ -1,0 +1,15 @@
+{
+  "valid_1200x1500_png_passed": true,
+  "swapped_1500x1200_rejected": true,
+  "truncated_png_rejected": true,
+  "missing_cover_rejected": true,
+  "actual_existing_video_report_binding_and_synthetic_cover_passed": true,
+  "delivery_missing_cover_rejected": true,
+  "changed_video_report_hash_mismatch_rejected": true,
+  "scaffold_has_mandatory_correct_portrait_cover_config": true,
+  "cover_report_cannot_overwrite_cover": true,
+  "delivery_report_cannot_overwrite_media_report": true,
+  "python_syntax": "passed",
+  "verify_media_sha256_unchanged": "b231f659d29c48569e0b1f51a37eaef258313f7eb87250e305eddd7e57f79f26",
+  "scope": "Synthetic flat-color PNGs test only actual file/dimensions/validity and gate mechanics. The gate used a real existing V2 video and its matching passed report. No title/OCR/style/thumbnail readability or final-cover review certified."
+}

@@ -1,0 +1,7 @@
+{
+  "current_S09_layout_passed": true,
+  "positive_report": "assets/series/examples/dufu-series-layout-report.json",
+  "unsupported_U10FFFF_rejected": true,
+  "font_substitution_not_allowed": true,
+  "scope": "Font-manifest codepoint coverage and layout records only; no historical truth or visual/aesthetic certification."
+}

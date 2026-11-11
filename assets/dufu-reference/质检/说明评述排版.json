@@ -1,0 +1,382 @@
+{
+  "status": "prerender_caption_data_and_bounds_passed",
+  "chapter_titles_unchanged": 12,
+  "original_poem_excerpts_unchanged": 7,
+  "narrative_lines": 24,
+  "all_assessments_original": true,
+  "font_and_bounds": [
+    {
+      "id": "S01",
+      "narrative_roles": [
+        {
+          "text": "杜甫一生辗转长安、成都与湖湘，亲历盛衰。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            800,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.13,
+          "fade_out_begins_sec": 6.383333333333333
+        },
+        {
+          "text": "他把个人的困顿，写成对世间饥寒的关切。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            690,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 1.73,
+          "fade_out_begins_sec": 6.383333333333333
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "narrative_roles": [
+        {
+          "text": "青年漫游吴越与齐鲁，在《望岳》中写下抱负。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            834,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 8.583333333333334
+        },
+        {
+          "text": "后来的沉郁之外，这份少年锐气也是杜甫。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            690,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 8.583333333333334
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "narrative_roles": [
+        {
+          "text": "他在长安求仕近十年，临乱前才得到小官。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            766,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 9.916666666666668
+        },
+        {
+          "text": "他想让书中的道理，成为改变世道的办法。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            690,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 9.916666666666668
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "narrative_roles": [
+        {
+          "text": "赴奉先探家，他在诗中记下幼子夭折之痛。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            766,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 9.683333333333334
+        },
+        {
+          "text": "个人的不幸，让贫富悬殊有了切肤的重量。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            690,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 9.683333333333334
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "narrative_roles": [
+        {
+          "text": "他被俘至沦陷的长安，与妻儿分隔在战乱中。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            800,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 9.883333333333335
+        },
+        {
+          "text": "战乱的重量，落在一城春草与一家离散上。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            690,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 9.883333333333335
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "narrative_roles": [
+        {
+          "text": "洛阳回华州的战乱见闻，写入“三吏”“三别”六篇。",
+          "size_px": 32,
+          "bounds": [
+            120,
+            1400,
+            888,
+            1434
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 8.850000000000001
+        },
+        {
+          "text": "他让被征发与被留下的人，都有自己的声音。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            720,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 8.850000000000001
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "narrative_roles": [
+        {
+          "text": "他携家离开华州，经秦州同谷，于岁末到成都。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            834,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 9.683333333333334
+        },
+        {
+          "text": "诗人的行程背后，是一家人的生计和安身之难。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            750,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 9.683333333333334
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "narrative_roles": [
+        {
+          "text": "他在成都营建草堂，随后写下咏春雨的诗篇。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            800,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 8.25
+        },
+        {
+          "text": "安稳的片刻，让我们看见他对日常生活的珍惜。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            750,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 8.25
+        }
+      ]
+    },
+    {
+      "id": "S09",
+      "narrative_roles": [
+        {
+          "text": "秋风损坏草堂后，他写下为天下寒士求屋的愿望。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            868,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 13.916666666666668
+        },
+        {
+          "text": "困顿没有缩小他的关怀，反而使它越过自家门槛。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            780,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 13.916666666666668
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "narrative_roles": [
+        {
+          "text": "在夔州客居期间，他以《登高》写暮年的病与愁。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            868,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 10.716666666666667
+        },
+        {
+          "text": "暮年的病痛与客愁，被他写成开阔而严整的诗。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            750,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 10.716666666666667
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "narrative_roles": [
+        {
+          "text": "出峡后，他经江陵、岳阳等地，继续漂泊湖湘。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            834,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 10.450000000000001
+        },
+        {
+          "text": "漂泊是舟上的日常，故乡与时局仍在他的诗中。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            750,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 10.450000000000001
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "narrative_roles": [
+        {
+          "text": "770年，生命止于漂泊，诗篇留在人间。",
+          "size_px": 34,
+          "bounds": [
+            120,
+            1400,
+            725,
+            1436
+          ],
+          "role": "event",
+          "full_opacity_after_sec": 1.43,
+          "fade_out_begins_sec": 8.283333333333333
+        },
+        {
+          "text": "这些诗，让乱世里的普通人至今仍能被看见。",
+          "size_px": 30,
+          "bounds": [
+            120,
+            1450,
+            720,
+            1481
+          ],
+          "role": "assessment",
+          "full_opacity_after_sec": 2.13,
+          "fade_out_begins_sec": 8.283333333333333
+        }
+      ]
+    }
+  ],
+  "scope": "计划与实际renderer字卡包围盒检查；成片是否显示另由实际视频抽帧核对"
+}

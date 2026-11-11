@@ -1,0 +1,17 @@
+{
+  "blank_scaffold_rejected": true,
+  "synthetic_structural_fixture_passed": true,
+  "reordered_route_rejected": true,
+  "future_visit_rejected": true,
+  "all_same_chapter_titles_rejected": true,
+  "report_over_input_rejected": true,
+  "report_over_hardlinked_audio_rejected": true,
+  "invalid_json_containers_rejected_without_traceback": true,
+  "overwrite_rejected": true,
+  "changed_audio_rejected": true,
+  "python_syntax": "passed",
+  "scope": "Synthetic structural tests only. Commentary presence/duplication checks do not certify factual truth, interpretation quality, on-screen rendering, animation, listening or device preview.",
+  "synthetic_event_summary_and_assessment_fixture_passed": true,
+  "blank_commentary_rejected_even_with_quote": true,
+  "duplicated_event_and_assessment_rejected": true
+}

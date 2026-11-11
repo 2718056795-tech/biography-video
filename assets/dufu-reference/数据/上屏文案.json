@@ -1,0 +1,504 @@
+{
+  "version": "4.0",
+  "status": "screen_copy_for_production",
+  "title": "杜甫｜此心在人间",
+  "output_mode": "portrait",
+  "video_spec": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_sec": 120
+  },
+  "scope_note": "仅竖屏120秒；保留七处原诗和原配乐；每幕新增事件说明与原创评述，评价不冒充杜甫原话。",
+  "review_basis": [
+    "概念分镜JSON",
+    "史料/生平核查.md",
+    "史料/诗句核查.md"
+  ],
+  "layout_policy": {
+    "main_information": "标题与年代地点、完整原诗或串联、事件说明和原创评述分别排版；全部12幕均有说明和评述。",
+    "quote_integrity": "七首拟用联句按已核对文字完整保留；quote_lines拼接必须等于quote_full；source_label保留完整作品名。",
+    "reading": "主诗稳定阅读；每幕event_summary和assessment独立成行分时出现，人物舞台为解读留出空间；字段不能因quote_lines非空而跳过。",
+    "nature_labels": "text_nature、claim_ids、internal_note仅供制作追溯，不是屏幕文案；S01原创解读不加古诗引号，S12可用一行小字说明。"
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "start_sec": 0.0,
+      "end_sec": 6.833333333333333,
+      "title": "此心在人间",
+      "meta": "杜甫｜712—770",
+      "quote_lines": [],
+      "quote_full": "",
+      "source_label": "",
+      "explanation": "自家屋顶漏雨，却盼天下人安居。",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "无引文",
+        "source_label": "无作品题名",
+        "explanation": "原创解读，不是杜甫原话",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "Q07",
+        "B03",
+        "B08",
+        "B10"
+      ],
+      "internal_note": "序章借诗意预告，不表示杜甫一出生就在成都；文字为原创，不加古诗引号。 本幕为诗意预告，“天下人”是原创解读，不替换S09引文中的“天下寒士”；不要加古诗引号或大号“原创文案”标签。",
+      "start_frame": 0,
+      "end_frame_exclusive": 205,
+      "event_summary": "杜甫一生辗转长安、成都与湖湘，亲历盛衰。",
+      "assessment": "他把个人的困顿，写成对世间饥寒的关切。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B03/B08/B10支持长安、成都及湖湘阶段；Q07为推己及人的评述依据，不声称精确行程或死亡点。",
+      "event_claim_ids": [
+        "B03",
+        "B08",
+        "B10",
+        "Q07"
+      ]
+    },
+    {
+      "id": "S02",
+      "start_sec": 6.833333333333333,
+      "end_sec": 15.866666666666667,
+      "title": "少年有志",
+      "meta": "青年时期｜吴越、齐鲁漫游",
+      "quote_lines": [
+        "会当凌绝顶，",
+        "一览众山小。"
+      ],
+      "quote_full": "会当凌绝顶，一览众山小。",
+      "source_label": "《望岳》节选 · 约736年",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B01",
+        "B02",
+        "Q01"
+      ],
+      "internal_note": "不写“登顶泰山后作诗”；作年采用通行约年，不定位具体山头。",
+      "start_frame": 205,
+      "end_frame_exclusive": 476,
+      "event_summary": "青年漫游吴越与齐鲁，在《望岳》中写下抱负。",
+      "assessment": "后来的沉郁之外，这份少年锐气也是杜甫。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B02支持早年吴越、齐赵漫游；Q01支持《望岳》志向与通行系年，不能据此说他已登顶泰山。",
+      "event_claim_ids": [
+        "B02",
+        "Q01"
+      ]
+    },
+    {
+      "id": "S03",
+      "start_sec": 15.866666666666667,
+      "end_sec": 26.233333333333334,
+      "title": "长安求仕",
+      "meta": "746—755年｜长安",
+      "quote_lines": [
+        "致君尧舜上，",
+        "再使风俗淳。"
+      ],
+      "quote_full": "致君尧舜上，再使风俗淳。",
+      "source_label": "《奉赠韦左丞丈二十二韵》节选",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B03",
+        "Q02"
+      ],
+      "internal_note": "十年是阶段概括，不写十年从未任官；引用用“致君”，不用网页误字“至君”。",
+      "start_frame": 476,
+      "end_frame_exclusive": 787,
+      "event_summary": "他在长安求仕近十年，临乱前才得到小官。",
+      "assessment": "他想让书中的道理，成为改变世道的办法。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B03记录746—755求仕与755任官；Q02支持其济世理想，不写十年从未离城或终身未任官。",
+      "event_claim_ids": [
+        "B03",
+        "Q02"
+      ]
+    },
+    {
+      "id": "S04",
+      "start_sec": 26.233333333333334,
+      "end_sec": 36.36666666666667,
+      "title": "看见饥寒",
+      "meta": "755年｜长安赴奉先途中",
+      "quote_lines": [
+        "朱门酒肉臭，",
+        "路有冻死骨。"
+      ],
+      "quote_full": "朱门酒肉臭，路有冻死骨。",
+      "source_label": "《自京赴奉先县咏怀五百字》节选",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B04",
+        "Q03"
+      ],
+      "internal_note": "奉先不是今上海奉贤；本幕不编造得知安史乱消息的具体时刻。",
+      "start_frame": 787,
+      "end_frame_exclusive": 1091,
+      "event_summary": "赴奉先探家，他在诗中记下幼子夭折之痛。",
+      "assessment": "个人的不幸，让贫富悬殊有了切肤的重量。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B04支持755探家及诗中丧子记录，Q03支持贫富对照；不呈现没有依据的临终目击或具体死亡现场。",
+      "event_claim_ids": [
+        "B04",
+        "Q03"
+      ]
+    },
+    {
+      "id": "S05",
+      "start_sec": 36.36666666666667,
+      "end_sec": 46.7,
+      "title": "乱中长安",
+      "meta": "757年春｜长安",
+      "quote_lines": [
+        "国破山河在，",
+        "城春草木深。"
+      ],
+      "quote_full": "国破山河在，城春草木深。",
+      "source_label": "《春望》节选",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B05",
+        "Q04"
+      ],
+      "internal_note": "“国破”不解释为唐朝灭亡；不画戴枷酷刑，不虚构具体家书文字。",
+      "start_frame": 1091,
+      "end_frame_exclusive": 1401,
+      "event_summary": "他被俘至沦陷的长安，与妻儿分隔在战乱中。",
+      "assessment": "战乱的重量，落在一城春草与一家离散上。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B05支持被俘至长安，Q04支持757春城破与思亲；分隔不等于家属全亡，不虚构具体家书内容。",
+      "event_claim_ids": [
+        "B05",
+        "Q04"
+      ]
+    },
+    {
+      "id": "S06",
+      "start_sec": 46.7,
+      "end_sec": 56.0,
+      "title": "诗里的百姓",
+      "meta": "757—759年｜凤翔·华州·洛阳",
+      "quote_lines": [],
+      "quote_full": "",
+      "source_label": "“三吏”“三别” · 759年",
+      "explanation": "征役与离别，被他写进了诗。",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "无引文",
+        "source_label": "作品组名，不是单首诗题",
+        "explanation": "史实基础上的原创串联文案",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B06",
+        "Q05"
+      ],
+      "internal_note": "不把六首当作一首《三吏三别》，不声称所有细节均为现场实录；具体引文暂不采用。 作品组名可置于较小来源行，不在主画面展开六篇全名；B06只提供757—758背景，759与作品组关系以Q05为据。",
+      "start_frame": 1401,
+      "end_frame_exclusive": 1680,
+      "event_summary": "洛阳回华州的战乱见闻，写入“三吏”“三别”六篇。",
+      "assessment": "他让被征发与被留下的人，都有自己的声音。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "Q05支持759洛阳回华州背景及两组共六篇；B06为此前任职背景，不把每个诗中人物或细节当作者亲历实录。",
+      "event_claim_ids": [
+        "B06",
+        "Q05"
+      ]
+    },
+    {
+      "id": "S07",
+      "start_sec": 56.0,
+      "end_sec": 66.13333333333334,
+      "title": "山路向蜀",
+      "meta": "759年｜秦州—同谷—成都",
+      "quote_lines": [],
+      "quote_full": "",
+      "source_label": "",
+      "explanation": "携家远行，寻找一处安身之所。",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "无引文",
+        "source_label": "无作品题名",
+        "explanation": "史实基础上的原创串联文案",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B07"
+      ],
+      "internal_note": "主要节点和现代约位已见史料/一生足迹说明.md与数据/一生足迹.json；城市连线为叙事示意，不宣称古道复原。",
+      "start_frame": 1680,
+      "end_frame_exclusive": 1984,
+      "event_summary": "他携家离开华州，经秦州同谷，于岁末到成都。",
+      "assessment": "诗人的行程背后，是一家人的生计和安身之难。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B07支持759携家、华州—秦州—同谷—成都及年底抵达；不据此确认每段古道、具体投宿或拾橡栗细节。",
+      "event_claim_ids": [
+        "B07"
+      ]
+    },
+    {
+      "id": "S08",
+      "start_sec": 66.13333333333334,
+      "end_sec": 74.83333333333333,
+      "title": "草堂春雨",
+      "meta": "761年春（通行说）｜成都",
+      "quote_lines": [
+        "随风潜入夜，",
+        "润物细无声。"
+      ],
+      "quote_full": "随风潜入夜，润物细无声。",
+      "source_label": "《春夜喜雨》节选",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B08",
+        "Q06"
+      ],
+      "internal_note": "短暂安稳不等于760—765一直未离成都；草堂不按现代纪念建筑外观复原。",
+      "start_frame": 1984,
+      "end_frame_exclusive": 2245,
+      "event_summary": "他在成都营建草堂，随后写下咏春雨的诗篇。",
+      "assessment": "安稳的片刻，让我们看见他对日常生活的珍惜。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B08支持760营建草堂，Q06支持761春《春夜喜雨》的通行说；片刻安稳不等于760—765一直未离成都。",
+      "event_claim_ids": [
+        "B08",
+        "Q06"
+      ]
+    },
+    {
+      "id": "S09",
+      "start_sec": 74.83333333333333,
+      "end_sec": 89.2,
+      "title": "天下的屋檐",
+      "meta": "约761年秋｜成都草堂",
+      "quote_lines": [
+        "安得广厦千万间，",
+        "大庇天下寒士俱欢颜。"
+      ],
+      "quote_full": "安得广厦千万间，大庇天下寒士俱欢颜。",
+      "source_label": "《茅屋为秋风所破歌》节选",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B08",
+        "Q07"
+      ],
+      "internal_note": "高潮位置是叙事建议，不是已测音乐高潮；不将“寒士”直接改写成引文中的“所有人”。 两句均完整保留；不得改“俱”为“尽”，来源行明确“节选”；引文画面不表达已建成住宅。",
+      "start_frame": 2245,
+      "end_frame_exclusive": 2676,
+      "event_summary": "秋风损坏草堂后，他写下为天下寒士求屋的愿望。",
+      "assessment": "困顿没有缩小他的关怀，反而使它越过自家门槛。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "Q07支持约761秋风破屋背景与为寒士求庇护；这是愿望，不是已经建成住房的功绩，原引文“俱欢颜”保持。",
+      "event_claim_ids": [
+        "B08",
+        "Q07"
+      ]
+    },
+    {
+      "id": "S10",
+      "start_sec": 89.2,
+      "end_sec": 100.36666666666666,
+      "title": "万里作客",
+      "meta": "767年秋（通行说）｜夔州",
+      "quote_lines": [
+        "万里悲秋常作客，",
+        "百年多病独登台。"
+      ],
+      "quote_full": "万里悲秋常作客，百年多病独登台。",
+      "source_label": "《登高》节选",
+      "explanation": "",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "杜甫原文节选",
+        "source_label": "诗作完整题名与节选标识",
+        "explanation": "无附加解释",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B08",
+        "B09",
+        "Q08"
+      ],
+      "internal_note": "“百年”不指百岁；不定位某一现代登台建筑为写作现场，采用“独登台”。 元信息可只写夔州，现代对应奉节及765离成都/766到夔州留在分镜说明，不在本幕堆年表。",
+      "start_frame": 2676,
+      "end_frame_exclusive": 3011,
+      "event_summary": "在夔州客居期间，他以《登高》写暮年的病与愁。",
+      "assessment": "暮年的病痛与客愁，被他写成开阔而严整的诗。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B08/B09支持765离成都、766到夔州；Q08支持767秋通行作年与老病客愁，不定精确登台建筑或百岁年龄。",
+      "event_claim_ids": [
+        "B08",
+        "B09",
+        "Q08"
+      ]
+    },
+    {
+      "id": "S11",
+      "start_sec": 100.36666666666666,
+      "end_sec": 111.26666666666667,
+      "title": "湖湘晚岁",
+      "meta": "768—770年｜湖湘",
+      "quote_lines": [],
+      "quote_full": "",
+      "source_label": "",
+      "explanation": "漂泊，仍在继续。",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "无引文",
+        "source_label": "无作品题名",
+        "explanation": "史实基础上的原创串联文案",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B10",
+        "Q09",
+        "B09"
+      ],
+      "internal_note": "《登岳阳楼》为可替换引文候选，不增加到八首主引文；未采用牛肉白酒、洪水等死亡传说。 Q09仅为备用资料，本幕实际不上《登岳阳楼》诗句，主引文仍为七首。",
+      "start_frame": 3011,
+      "end_frame_exclusive": 3338,
+      "event_summary": "出峡后，他经江陵、岳阳等地，继续漂泊湖湘。",
+      "assessment": "漂泊是舟上的日常，故乡与时局仍在他的诗中。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B09/B10支持768出峡、江陵及湖湘阶段；Q09仅为晚年诗意背景依据，本幕不上其诗句，不新增第八首主引文。",
+      "event_claim_ids": [
+        "B09",
+        "B10",
+        "Q09"
+      ]
+    },
+    {
+      "id": "S12",
+      "start_sec": 111.26666666666667,
+      "end_sec": 120.0,
+      "title": "留在人间",
+      "meta": "770年｜湖南",
+      "quote_lines": [],
+      "quote_full": "",
+      "source_label": "",
+      "explanation": "一生风雨，落笔总有人间。",
+      "text_nature": {
+        "title": "原创章节题，不作为诗句引用",
+        "meta": "基于核查记录的年代、阶段或地点概述；保留约年或通行说",
+        "quote_lines": "无引文",
+        "source_label": "无作品题名",
+        "explanation": "原创解读，不是杜甫原话",
+        "event_summary": "基于既有核查记录的原创事实/语境概述",
+        "assessment": "本片原创评述，不是历史人物原话"
+      },
+      "claim_ids": [
+        "B01",
+        "B10",
+        "Q07",
+        "Q05"
+      ],
+      "internal_note": "标题与终章句均为本片原创文案；不写未经核定的具体死因、死亡坐标或年龄口径。",
+      "footer_note": "片名、串联文案为原创",
+      "footer_note_role": "可读的小字说明，非主信息，不做大字免责声明",
+      "start_frame": 3338,
+      "end_frame_exclusive": 3600,
+      "event_summary": "770年，生命止于漂泊，诗篇留在人间。",
+      "assessment": "这些诗，让乱世里的普通人至今仍能被看见。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "supported_claim_note": "B01/B10支持770终年及湖湘范围；Q05/Q07支持诗中百姓处境与推己及人，传世意义为本片原创评价，不添加死因或死亡坐标。",
+      "event_claim_ids": [
+        "B01",
+        "B10",
+        "Q05",
+        "Q07"
+      ]
+    }
+  ]
+}

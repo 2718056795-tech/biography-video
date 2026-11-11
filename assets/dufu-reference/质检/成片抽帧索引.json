@@ -1,0 +1,154 @@
+{
+  "source_video": "/workspace/dufu_production_v4/输出/杜甫_此心在人间_生平解读动画版_v4_1080p_120秒.mp4",
+  "source_sha256": "a0ef74494a6d47ac4940c196d913e150e14ca7202a1bb92c15b175d33e69a45d",
+  "frames": [
+    {
+      "frame_index": 105,
+      "time_sec": 3.5,
+      "file": "成片实际抽帧/frame_01.png"
+    },
+    {
+      "frame_index": 274,
+      "time_sec": 9.133333333333333,
+      "file": "成片实际抽帧/frame_02.png"
+    },
+    {
+      "frame_index": 285,
+      "time_sec": 9.5,
+      "file": "成片实际抽帧/frame_03.png"
+    },
+    {
+      "frame_index": 300,
+      "time_sec": 10.0,
+      "file": "成片实际抽帧/frame_04.png"
+    },
+    {
+      "frame_index": 310,
+      "time_sec": 10.333333333333334,
+      "file": "成片实际抽帧/frame_05.png"
+    },
+    {
+      "frame_index": 581,
+      "time_sec": 19.366666666666667,
+      "file": "成片实际抽帧/frame_06.png"
+    },
+    {
+      "frame_index": 892,
+      "time_sec": 29.733333333333334,
+      "file": "成片实际抽帧/frame_07.png"
+    },
+    {
+      "frame_index": 1196,
+      "time_sec": 39.86666666666667,
+      "file": "成片实际抽帧/frame_08.png"
+    },
+    {
+      "frame_index": 1506,
+      "time_sec": 50.2,
+      "file": "成片实际抽帧/frame_09.png"
+    },
+    {
+      "frame_index": 1785,
+      "time_sec": 59.5,
+      "file": "成片实际抽帧/frame_10.png"
+    },
+    {
+      "frame_index": 2089,
+      "time_sec": 69.63333333333334,
+      "file": "成片实际抽帧/frame_11.png"
+    },
+    {
+      "frame_index": 2365,
+      "time_sec": 78.83333333333333,
+      "file": "成片实际抽帧/frame_12.png"
+    },
+    {
+      "frame_index": 2382,
+      "time_sec": 79.4,
+      "file": "成片实际抽帧/frame_13.png"
+    },
+    {
+      "frame_index": 2402,
+      "time_sec": 80.06666666666666,
+      "file": "成片实际抽帧/frame_14.png"
+    },
+    {
+      "frame_index": 2452,
+      "time_sec": 81.73333333333333,
+      "file": "成片实际抽帧/frame_15.png"
+    },
+    {
+      "frame_index": 2781,
+      "time_sec": 92.7,
+      "file": "成片实际抽帧/frame_16.png"
+    },
+    {
+      "frame_index": 3101,
+      "time_sec": 103.36666666666666,
+      "file": "成片实际抽帧/frame_17.png"
+    },
+    {
+      "frame_index": 3118,
+      "time_sec": 103.93333333333334,
+      "file": "成片实际抽帧/frame_18.png"
+    },
+    {
+      "frame_index": 3140,
+      "time_sec": 104.66666666666667,
+      "file": "成片实际抽帧/frame_19.png"
+    },
+    {
+      "frame_index": 3221,
+      "time_sec": 107.36666666666666,
+      "file": "成片实际抽帧/frame_20.png"
+    },
+    {
+      "frame_index": 3377,
+      "time_sec": 112.56666666666666,
+      "file": "成片实际抽帧/frame_21.png"
+    },
+    {
+      "frame_index": 3450,
+      "time_sec": 115.0,
+      "file": "成片实际抽帧/frame_22.png"
+    },
+    {
+      "frame_index": 3538,
+      "time_sec": 117.93333333333334,
+      "file": "成片实际抽帧/frame_23.png"
+    },
+    {
+      "frame_index": 3558,
+      "time_sec": 118.6,
+      "file": "成片实际抽帧/frame_24.png"
+    }
+  ],
+  "scene_frames": [
+    105,
+    310,
+    581,
+    892,
+    1196,
+    1506,
+    1785,
+    2089,
+    2452,
+    2781,
+    3221,
+    3558
+  ],
+  "motion_frames": [
+    274,
+    285,
+    300,
+    2365,
+    2382,
+    2402,
+    3101,
+    3118,
+    3140,
+    3377,
+    3450,
+    3538
+  ]
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "S01",
+    "actor_start_global_sec": 0.7,
+    "actor_start_local_sec": 0.7,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S02",
+    "actor_start_global_sec": 8.433333333333334,
+    "actor_start_local_sec": 1.6000000000000005,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S03",
+    "actor_start_global_sec": 16.933333333333334,
+    "actor_start_local_sec": 1.0666666666666664,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S04",
+    "actor_start_global_sec": 27.833333333333332,
+    "actor_start_local_sec": 1.5999999999999979,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S05",
+    "actor_start_global_sec": 38.2,
+    "actor_start_local_sec": 1.8333333333333357,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S06",
+    "actor_start_global_sec": 49.36666666666667,
+    "actor_start_local_sec": 2.6666666666666643,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S07",
+    "actor_start_global_sec": 57.6,
+    "actor_start_local_sec": 1.6000000000000014,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S08",
+    "actor_start_global_sec": 67.96666666666667,
+    "actor_start_local_sec": 1.8333333333333286,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S09",
+    "actor_start_global_sec": 76.46666666666667,
+    "actor_start_local_sec": 1.63333333333334,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S10",
+    "actor_start_global_sec": 91.06666666666666,
+    "actor_start_local_sec": 1.86666666666666,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S11",
+    "actor_start_global_sec": 102.0,
+    "actor_start_local_sec": 1.63333333333334,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  },
+  {
+    "id": "S12",
+    "actor_start_global_sec": 112.9,
+    "actor_start_local_sec": 1.63333333333334,
+    "continuous_environment_clock": "scene-local time; S11 shares delayed boat clock with actor",
+    "note": "S12无角色，卷轴/落字按环境时间相位执行；自动瞬态不冒充人工听审"
+  }
+]

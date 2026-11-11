@@ -1,0 +1,543 @@
+{
+  "panel": {
+    "x": 96,
+    "y": 150,
+    "width": 880,
+    "height": 430,
+    "supersampling": 2,
+    "plot_box": [
+      20,
+      8,
+      860,
+      415
+    ],
+    "heading": false,
+    "side_caption": false,
+    "legend": false
+  },
+  "styles": {
+    "x": 96,
+    "y": 150,
+    "width": 880,
+    "height": 430,
+    "supersampling": 2,
+    "plot_box": [
+      20,
+      8,
+      860,
+      415
+    ],
+    "heading": false,
+    "side_caption": false,
+    "legend": false,
+    "label_size": 28,
+    "label_bold": true,
+    "label_stroke_px": 2,
+    "coast_width": 1.1,
+    "coast_alpha": 94,
+    "old_line_width": 1.3,
+    "old_line_alpha_min": 70,
+    "new_line_width": 2.1,
+    "new_line_halo_width": 4.5,
+    "node_radius": 1.9,
+    "current_ring_radius": 8.5,
+    "current_point_radius": 4.2,
+    "growing_tip_radius": 2.7,
+    "current_alpha": 245
+  },
+  "motion": {
+    "map_segment_delay": 0.45,
+    "map_active_window_sec": 5.5
+  },
+  "projection": {
+    "name": "local equirectangular",
+    "bounds": [
+      103.0,
+      123.0,
+      27.0,
+      38.5
+    ],
+    "standard_parallel": 32.75,
+    "central_meridian": 113.0,
+    "single_scale": 35.391304347826086,
+    "scale_units": "pixels per projected degree",
+    "north_up": true,
+    "node_extent_px": [
+      174.19437365137247,
+      89.75391304347833,
+      653.1207485617213,
+      372.5304347826087
+    ]
+  },
+  "nodes": [
+    {
+      "id": "gong",
+      "label": "巩县",
+      "lon": 113.01,
+      "lat": 34.76,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/advanced-search.html?country=CN&q=&startRow=1000",
+      "source_read_status": "search_result_read; listing_opened_but_specific_row_not_returned",
+      "pixel": [
+        440.29765467676236,
+        140.36347826086964
+      ],
+      "frame_pixel": [
+        536.2976546767624,
+        290.36347826086967
+      ]
+    },
+    {
+      "id": "qilu",
+      "label": "齐鲁（区域）",
+      "lon": 117.12,
+      "lat": 36.19,
+      "precision": "region_approx",
+      "source": "https://www.geonames.org/1793724/tai-an.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        562.6337268260186,
+        89.75391304347833
+      ],
+      "frame_pixel": [
+        658.6337268260186,
+        239.75391304347835
+      ]
+    },
+    {
+      "id": "changan",
+      "label": "长安",
+      "lon": 108.93,
+      "lat": 34.26,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1790630/xi-an.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        318.8545465577927,
+        158.05913043478267
+      ],
+      "frame_pixel": [
+        414.8545465577927,
+        308.0591304347827
+      ]
+    },
+    {
+      "id": "fengxian",
+      "label": "奉先",
+      "lon": 109.59,
+      "lat": 34.96,
+      "precision": "city_approx",
+      "source": "https://geokeo.com/database/city/cn/90/",
+      "source_read_status": "search_result_read; page_opened_but_specific_row_not_returned",
+      "pixel": [
+        338.4997552240965,
+        133.28521739130431
+      ],
+      "frame_pixel": [
+        434.4997552240965,
+        283.2852173913043
+      ]
+    },
+    {
+      "id": "luoyang",
+      "label": "洛阳",
+      "lon": 112.44,
+      "lat": 34.67,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1801792/luoyang.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        423.33133810131784,
+        143.54869565217385
+      ],
+      "frame_pixel": [
+        519.3313381013179,
+        293.5486956521738
+      ]
+    },
+    {
+      "id": "huazhou",
+      "label": "华州",
+      "lon": 109.76,
+      "lat": 34.52,
+      "precision": "city_approx",
+      "source": "https://www.mindat.org/feature-1807005.html",
+      "source_read_status": "opened_and_read; GeoNames-derived mirror",
+      "pixel": [
+        343.55988472905364,
+        148.85739130434771
+      ],
+      "frame_pixel": [
+        439.55988472905364,
+        298.85739130434774
+      ]
+    },
+    {
+      "id": "qinzhou",
+      "label": "秦州",
+      "lon": 105.74,
+      "lat": 34.58,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1792892/tianshui.html",
+      "source_read_status": "opened_and_read_previously",
+      "pixel": [
+        223.90270467065668,
+        146.7339130434783
+      ],
+      "frame_pixel": [
+        319.9027046706567,
+        296.7339130434783
+      ]
+    },
+    {
+      "id": "tonggu",
+      "label": "同谷",
+      "lon": 105.73,
+      "lat": 33.75,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/advanced-search.html?country=CN&q=Sheng+Xian&startRow=150",
+      "source_read_status": "search_result_read_previously; individual_page_unavailable",
+      "pixel": [
+        223.6050499938948,
+        176.1086956521739
+      ],
+      "frame_pixel": [
+        319.6050499938948,
+        326.1086956521739
+      ]
+    },
+    {
+      "id": "chengdu",
+      "label": "成都",
+      "lon": 104.07,
+      "lat": 30.67,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1815286/chengdu.html",
+      "source_read_status": "opened_and_read_previously",
+      "pixel": [
+        174.19437365137247,
+        285.1139130434782
+      ],
+      "frame_pixel": [
+        270.1943736513725,
+        435.1139130434782
+      ]
+    },
+    {
+      "id": "kuizhou",
+      "label": "夔州",
+      "lon": 109.46,
+      "lat": 31.02,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/advanced-search.html?country=CN&q=Kitajska&startRow=400",
+      "source_read_status": "search_result_read; listing_opened_but_specific_row_not_returned",
+      "pixel": [
+        334.63024442618786,
+        272.7269565217391
+      ],
+      "frame_pixel": [
+        430.63024442618786,
+        422.7269565217391
+      ]
+    },
+    {
+      "id": "jiangling",
+      "label": "江陵",
+      "lon": 112.19,
+      "lat": 30.35,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1805540/jingzhou.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        415.8899711822633,
+        296.43913043478256
+      ],
+      "frame_pixel": [
+        511.8899711822633,
+        446.43913043478256
+      ]
+    },
+    {
+      "id": "yueyang",
+      "label": "岳阳",
+      "lon": 113.09,
+      "lat": 29.37,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1927639/yueyang.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        442.67889209085973,
+        331.1226086956521
+      ],
+      "frame_pixel": [
+        538.6788920908598,
+        481.1226086956521
+      ]
+    },
+    {
+      "id": "tanzhou",
+      "label": "潭州",
+      "lon": 112.97,
+      "lat": 28.2,
+      "precision": "city_approx",
+      "source": "https://www.geonames.org/1815577/changsha.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        439.1070359697134,
+        372.5304347826087
+      ],
+      "frame_pixel": [
+        535.1070359697135,
+        522.5304347826087
+      ]
+    },
+    {
+      "id": "wuyue",
+      "label": "吴越（区域）",
+      "lon": 120.16,
+      "lat": 30.29,
+      "precision": "region_approx",
+      "source": "https://www.geonames.org/1808926/hangzhou.html",
+      "source_read_status": "opened_and_read",
+      "pixel": [
+        653.1207485617213,
+        298.5626086956522
+      ],
+      "frame_pixel": [
+        749.1207485617213,
+        448.5626086956522
+      ]
+    },
+    {
+      "id": "fengxiang",
+      "label": "凤翔",
+      "lon": 107.39,
+      "lat": 34.52,
+      "precision": "city_approx",
+      "source": "https://database.earth/countries/china/regions/shaanxi/cities/fengxiang",
+      "source_read_status": "search_result_read; direct GeoNames and Mindat page opens failed",
+      "pixel": [
+        273.01572633641666,
+        148.85739130434771
+      ],
+      "frame_pixel": [
+        369.01572633641666,
+        298.85739130434774
+      ]
+    }
+  ],
+  "sequence": [
+    "gong",
+    "wuyue",
+    "qilu",
+    "changan",
+    "fengxian",
+    "changan",
+    "fengxiang",
+    "huazhou",
+    "luoyang",
+    "huazhou",
+    "qinzhou",
+    "tonggu",
+    "chengdu",
+    "kuizhou",
+    "jiangling",
+    "yueyang",
+    "tanzhou"
+  ],
+  "visits": [],
+  "per_scene": {
+    "S01": {
+      "start_index": 0,
+      "end_index": 0,
+      "route_caption": "序章总览",
+      "no_new_movement": true,
+      "overview": true
+    },
+    "S02": {
+      "start_index": 0,
+      "end_index": 2,
+      "route_caption": "吴越—齐鲁漫游",
+      "no_new_movement": false
+    },
+    "S03": {
+      "start_index": 2,
+      "end_index": 3,
+      "route_caption": "齐鲁—长安",
+      "no_new_movement": false
+    },
+    "S04": {
+      "start_index": 3,
+      "end_index": 4,
+      "route_caption": "长安—奉先",
+      "no_new_movement": false
+    },
+    "S05": {
+      "start_index": 4,
+      "end_index": 5,
+      "route_caption": "再至长安",
+      "no_new_movement": false
+    },
+    "S06": {
+      "start_index": 5,
+      "end_index": 9,
+      "route_caption": "凤翔—华州—洛阳",
+      "no_new_movement": false
+    },
+    "S07": {
+      "start_index": 9,
+      "end_index": 12,
+      "route_caption": "秦州—同谷—成都",
+      "no_new_movement": false
+    },
+    "S08": {
+      "start_index": 12,
+      "end_index": 12,
+      "route_caption": "停留成都",
+      "no_new_movement": true
+    },
+    "S09": {
+      "start_index": 12,
+      "end_index": 12,
+      "route_caption": "停留成都",
+      "no_new_movement": true
+    },
+    "S10": {
+      "start_index": 12,
+      "end_index": 13,
+      "route_caption": "成都—夔州",
+      "no_new_movement": false
+    },
+    "S11": {
+      "start_index": 13,
+      "end_index": 16,
+      "route_caption": "江陵—岳阳—潭州",
+      "no_new_movement": false,
+      "region_node_ids": [
+        "yueyang",
+        "tanzhou"
+      ],
+      "region_label": "湖湘（范围）"
+    },
+    "S12": {
+      "start_index": 16,
+      "end_index": 16,
+      "route_caption": "湖湘漂泊",
+      "no_new_movement": true,
+      "region_node_ids": [
+        "yueyang",
+        "tanzhou"
+      ],
+      "region_label": "湖湘（范围）",
+      "region_only": true
+    }
+  },
+  "curve_samples_per_segment": 91,
+  "region_annotations": {
+    "S11": {
+      "center": [
+        440.8929640302866,
+        351.8265217391304
+      ],
+      "radius": 47.88235294117647,
+      "circle_bounds": [
+        393.0106110891101,
+        303.9441687979539,
+        488.77531697146304,
+        399.70887468030685
+      ],
+      "label_position": [
+        497.77531697146304,
+        347.8265217391304
+      ],
+      "label_bounds": [
+        497.77531697146304,
+        347.8265217391304,
+        653.7753169714631,
+        372.8265217391304
+      ],
+      "circle_clipped": false,
+      "font_size": 26
+    },
+    "S12": {
+      "center": [
+        440.8929640302866,
+        351.8265217391304
+      ],
+      "radius": 47.88235294117647,
+      "circle_bounds": [
+        393.0106110891101,
+        303.9441687979539,
+        488.77531697146304,
+        399.70887468030685
+      ],
+      "label_position": [
+        497.77531697146304,
+        347.8265217391304
+      ],
+      "label_bounds": [
+        497.77531697146304,
+        347.8265217391304,
+        653.7753169714631,
+        372.8265217391304
+      ],
+      "circle_clipped": false,
+      "font_size": 26
+    }
+  },
+  "same_place_segments_suppressed": [],
+  "nodes_outside_view": [],
+  "coastline": {
+    "status": "local supplied geographic lines; 1 visible continuous runs; no fabricated substitute",
+    "visible_runs": 1,
+    "source": {
+      "file": "../../../dufu-reference/素材/一生足迹/CHN.geo.json",
+      "filter_bounds": [
+        117.3,
+        123,
+        27,
+        38.5
+      ],
+      "source_kind": "参考记录中经筛选的东部海岸局部；不是古代疆域",
+      "source_url": "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/CHN.geo.json"
+    }
+  },
+  "font_paths": {
+    "False": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+    "True": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
+  },
+  "theme_id": "dufu-series-v2",
+  "theme_colors": {
+    "map_ink": [
+      69,
+      83,
+      71
+    ],
+    "map_accent": [
+      138,
+      89,
+      62
+    ],
+    "map_halo": [
+      197,
+      168,
+      107
+    ],
+    "map_coast": [
+      86,
+      117,
+      102
+    ],
+    "paper": [
+      220,
+      210,
+      188
+    ],
+    "map_label_halo": [
+      220,
+      210,
+      188
+    ]
+  },
+  "precision_claim": "structural coordinates and supplied metadata only; not historical verification"
+}

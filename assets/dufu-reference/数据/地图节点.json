@@ -1,0 +1,48 @@
+{
+  "coordinate_reference_system": "WGS84 geographic coordinates; rounded to 0.01 degree for approximate modern city markers",
+  "historical_note": "现代城市代表点，不是唐代居所、纪念馆、古道或完整行程；曲线只表示叙事节点次序。",
+  "nodes": [
+    {
+      "id": "qinzhou",
+      "label": "秦州",
+      "modern_name": "今甘肃天水城区",
+      "longitude": 105.74,
+      "latitude": 34.58,
+      "source_url": "https://www.geonames.org/1792892/tianshui.html",
+      "source_status": "opened_and_read",
+      "source_coordinates_lat_lon": [34.57952, 105.74238],
+      "precision_note": "采用GeoNames城市代表点，显示坐标四舍五入到0.01度，不宣称历史精准位置。"
+    },
+    {
+      "id": "tonggu",
+      "label": "同谷",
+      "modern_name": "今甘肃成县城区",
+      "longitude": 105.73,
+      "latitude": 33.75,
+      "source_url": "https://www.geonames.org/advanced-search.html?country=CN&q=Sheng+Xian&startRow=150",
+      "source_status": "search_result_read; individual_page_unavailable",
+      "source_coordinates_lat_lon": [33.74775, 105.73294],
+      "precision_note": "GeoNames检索结果列Chengxian Chengguanzhen；已读取检索结果，单点页未成功打开。为城市级近似参考，不是县域几何中心或历史居所。"
+    },
+    {
+      "id": "chengdu",
+      "label": "成都",
+      "modern_name": "今四川成都城区",
+      "longitude": 104.07,
+      "latitude": 30.67,
+      "source_url": "https://www.geonames.org/1815286/chengdu.html",
+      "source_status": "opened_and_read",
+      "source_coordinates_lat_lon": [30.66667, 104.06667],
+      "precision_note": "采用GeoNames城市代表点，非现代草堂博物馆点。"
+    }
+  ],
+  "datum_source": {
+    "url": "https://download.geonames.org/export/dump/readme.txt",
+    "status": "opened_and_read",
+    "supports": "latitude and longitude fields are decimal degrees (WGS84); data licensed CC BY 4.0",
+    "attribution": "City coordinates: GeoNames, CC BY 4.0; rounded and projected for this work."
+  },
+  "route_order": ["qinzhou", "tonggu", "chengdu"],
+  "map_kind": "transparent geographic graticule and approximate modern city relationships; no geographic outlines",
+  "basemap_status": "No river, coastline, terrain or boundary dataset was successfully downloaded. No invented outlines used."
+}

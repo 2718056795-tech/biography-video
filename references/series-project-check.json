@@ -1,0 +1,13 @@
+{
+  "new_series_blank_scaffold_rejected": true,
+  "fixed_12_windows_and_no_invented_facts": true,
+  "complete_synthetic_plan_with_person_theme_passed": true,
+  "repeated_mountain_art_not_automatically_banned": true,
+  "edited_header_coordinate_rejected": true,
+  "edited_series_cut_rejected": true,
+  "report_cannot_overwrite_theme": true,
+  "silent_other_person_theme_rejected": true,
+  "fresh_frame_records_with_current_font_manifest_passed": true,
+  "font_manifest_hash_mismatch_rejected": true,
+  "scope": "Synthetic planning fixtures and fresh real-font compositor records only. No historical truth, aesthetic quality, animation implementation, completed video or listening certification."
+}

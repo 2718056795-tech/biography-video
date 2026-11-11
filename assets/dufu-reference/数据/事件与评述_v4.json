@@ -1,0 +1,282 @@
+{
+  "version": "4.0-commentary-copy",
+  "scope": "同一120秒12幕，仅新增事件概述与原创评价；12标题、原有七处诗句、时间轴和音轨均不在本文件改动。",
+  "source_basis": [
+    "dufu_production_v3/数据/最终时间轴.json",
+    "dufu_production_v3/史料/生平核查.md",
+    "dufu_production_v3/史料/诗句核查.md"
+  ],
+  "review_status": "已依本地核查记录自审；未开展新研究。24句各不超过24个显示字符，开篇/收束各句不超过20个显示字符；S08不写成现场雨中落笔。",
+  "display_rule": "event_summary与assessment为上屏候选正文；性质、来源ID与支持说明留在工程，不逐条叠成大字免责声明，不给原创评述加杜诗引号。",
+  "scenes": [
+    {
+      "id": "S01",
+      "title": "此心在人间",
+      "event_summary": "杜甫一生辗转长安、成都与湖湘，亲历盛衰。",
+      "assessment": "他把个人的困顿，写成对世间饥寒的关切。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B03",
+        "B08",
+        "B10",
+        "Q07"
+      ],
+      "supported_claim_note": "B03/B08/B10支持长安、成都及湖湘阶段；Q07为推己及人的评述依据，不声称精确行程或死亡点。",
+      "han_character_count": {
+        "event_summary": 17,
+        "assessment": 17
+      },
+      "display_character_count": {
+        "event_summary": 20,
+        "assessment": 19
+      }
+    },
+    {
+      "id": "S02",
+      "title": "少年有志",
+      "event_summary": "青年漫游吴越与齐鲁，在《望岳》中写下抱负。",
+      "assessment": "后来的沉郁之外，这份少年锐气也是杜甫。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B02",
+        "Q01"
+      ],
+      "supported_claim_note": "B02支持早年吴越、齐赵漫游；Q01支持《望岳》志向与通行系年，不能据此说他已登顶泰山。",
+      "han_character_count": {
+        "event_summary": 17,
+        "assessment": 17
+      },
+      "display_character_count": {
+        "event_summary": 21,
+        "assessment": 19
+      }
+    },
+    {
+      "id": "S03",
+      "title": "长安求仕",
+      "event_summary": "他在长安求仕近十年，临乱前才得到小官。",
+      "assessment": "他想让书中的道理，成为改变世道的办法。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B03",
+        "Q02"
+      ],
+      "supported_claim_note": "B03记录746—755求仕与755任官；Q02支持其济世理想，不写十年从未离城或终身未任官。",
+      "han_character_count": {
+        "event_summary": 17,
+        "assessment": 17
+      },
+      "display_character_count": {
+        "event_summary": 19,
+        "assessment": 19
+      }
+    },
+    {
+      "id": "S04",
+      "title": "看见饥寒",
+      "event_summary": "赴奉先探家，他在诗中记下幼子夭折之痛。",
+      "assessment": "个人的不幸，让贫富悬殊有了切肤的重量。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B04",
+        "Q03"
+      ],
+      "supported_claim_note": "B04支持755探家及诗中丧子记录，Q03支持贫富对照；不呈现没有依据的临终目击或具体死亡现场。",
+      "han_character_count": {
+        "event_summary": 17,
+        "assessment": 17
+      },
+      "display_character_count": {
+        "event_summary": 19,
+        "assessment": 19
+      }
+    },
+    {
+      "id": "S05",
+      "title": "乱中长安",
+      "event_summary": "他被俘至沦陷的长安，与妻儿分隔在战乱中。",
+      "assessment": "战乱的重量，落在一城春草与一家离散上。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B05",
+        "Q04"
+      ],
+      "supported_claim_note": "B05支持被俘至长安，Q04支持757春城破与思亲；分隔不等于家属全亡，不虚构具体家书内容。",
+      "han_character_count": {
+        "event_summary": 18,
+        "assessment": 17
+      },
+      "display_character_count": {
+        "event_summary": 20,
+        "assessment": 19
+      }
+    },
+    {
+      "id": "S06",
+      "title": "诗里的百姓",
+      "event_summary": "洛阳回华州的战乱见闻，写入“三吏”“三别”六篇。",
+      "assessment": "他让被征发与被留下的人，都有自己的声音。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B06",
+        "Q05"
+      ],
+      "supported_claim_note": "Q05支持759洛阳回华州背景及两组共六篇；B06为此前任职背景，不把每个诗中人物或细节当作者亲历实录。",
+      "han_character_count": {
+        "event_summary": 18,
+        "assessment": 18
+      },
+      "display_character_count": {
+        "event_summary": 24,
+        "assessment": 20
+      }
+    },
+    {
+      "id": "S07",
+      "title": "山路向蜀",
+      "event_summary": "他携家离开华州，经秦州同谷，于岁末到成都。",
+      "assessment": "诗人的行程背后，是一家人的生计和安身之难。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B07"
+      ],
+      "supported_claim_note": "B07支持759携家、华州—秦州—同谷—成都及年底抵达；不据此确认每段古道、具体投宿或拾橡栗细节。",
+      "han_character_count": {
+        "event_summary": 18,
+        "assessment": 19
+      },
+      "display_character_count": {
+        "event_summary": 21,
+        "assessment": 21
+      }
+    },
+    {
+      "id": "S08",
+      "title": "草堂春雨",
+      "event_summary": "他在成都营建草堂，随后写下咏春雨的诗篇。",
+      "assessment": "安稳的片刻，让我们看见他对日常生活的珍惜。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B08",
+        "Q06"
+      ],
+      "supported_claim_note": "B08支持760营建草堂，Q06支持761春《春夜喜雨》的通行说；片刻安稳不等于760—765一直未离成都。",
+      "han_character_count": {
+        "event_summary": 18,
+        "assessment": 19
+      },
+      "display_character_count": {
+        "event_summary": 20,
+        "assessment": 21
+      }
+    },
+    {
+      "id": "S09",
+      "title": "天下的屋檐",
+      "event_summary": "秋风损坏草堂后，他写下为天下寒士求屋的愿望。",
+      "assessment": "困顿没有缩小他的关怀，反而使它越过自家门槛。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B08",
+        "Q07"
+      ],
+      "supported_claim_note": "Q07支持约761秋风破屋背景与为寒士求庇护；这是愿望，不是已经建成住房的功绩，原引文“俱欢颜”保持。",
+      "han_character_count": {
+        "event_summary": 20,
+        "assessment": 20
+      },
+      "display_character_count": {
+        "event_summary": 22,
+        "assessment": 22
+      }
+    },
+    {
+      "id": "S10",
+      "title": "万里作客",
+      "event_summary": "在夔州客居期间，他以《登高》写暮年的病与愁。",
+      "assessment": "暮年的病痛与客愁，被他写成开阔而严整的诗。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B08",
+        "B09",
+        "Q08"
+      ],
+      "supported_claim_note": "B08/B09支持765离成都、766到夔州；Q08支持767秋通行作年与老病客愁，不定精确登台建筑或百岁年龄。",
+      "han_character_count": {
+        "event_summary": 18,
+        "assessment": 19
+      },
+      "display_character_count": {
+        "event_summary": 22,
+        "assessment": 21
+      }
+    },
+    {
+      "id": "S11",
+      "title": "湖湘晚岁",
+      "event_summary": "出峡后，他经江陵、岳阳等地，继续漂泊湖湘。",
+      "assessment": "漂泊是舟上的日常，故乡与时局仍在他的诗中。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B09",
+        "B10",
+        "Q09"
+      ],
+      "supported_claim_note": "B09/B10支持768出峡、江陵及湖湘阶段；Q09仅为晚年诗意背景依据，本幕不上其诗句，不新增第八首主引文。",
+      "han_character_count": {
+        "event_summary": 17,
+        "assessment": 19
+      },
+      "display_character_count": {
+        "event_summary": 21,
+        "assessment": 21
+      }
+    },
+    {
+      "id": "S12",
+      "title": "留在人间",
+      "event_summary": "770年，生命止于漂泊，诗篇留在人间。",
+      "assessment": "这些诗，让乱世里的普通人至今仍能被看见。",
+      "event_summary_kind": "基于既有核查记录的原创事实/语境概述",
+      "assessment_kind": "本片原创评述，不是历史人物原话",
+      "assessment_is_original": true,
+      "claim_ids": [
+        "B01",
+        "B10",
+        "Q05",
+        "Q07"
+      ],
+      "supported_claim_note": "B01/B10支持770终年及湖湘范围；Q05/Q07支持诗中百姓处境与推己及人，传世意义为本片原创评价，不添加死因或死亡坐标。",
+      "han_character_count": {
+        "event_summary": 13,
+        "assessment": 18
+      },
+      "display_character_count": {
+        "event_summary": 19,
+        "assessment": 20
+      }
+    }
+  ]
+}

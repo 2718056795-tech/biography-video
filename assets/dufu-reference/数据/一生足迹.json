@@ -1,0 +1,300 @@
+{
+  "version": "1.0",
+  "meaning": "Du Fu major-life narrative waypoints, not exhaustive travel log or reconstructed ancient roads",
+  "coordinate_system": "Modern city references, primarily GeoNames WGS84; all rounded to 0.01 degree; see per-node source boundaries",
+  "coordinate_datum_reference": "https://download.geonames.org/export/dump/readme.txt",
+  "coordinate_attribution": "City references primarily GeoNames CC BY 4.0; Pucheng/Fengxiang separately cited approximate city sources; all rounded and projected",
+  "nodes": [
+    {
+      "id": "gong",
+      "label": "巩县",
+      "modern_reference": "今河南巩义城区",
+      "longitude": 113.01,
+      "latitude": 34.76,
+      "coordinate_source_url": "https://www.geonames.org/advanced-search.html?country=CN&q=&startRow=1000",
+      "source_read_status": "search_result_read; listing_opened_but_specific_row_not_returned",
+      "precision_note": "故里城市约位；不定位出生村落"
+    },
+    {
+      "id": "qilu",
+      "label": "齐鲁（区域）",
+      "modern_reference": "齐鲁漫游区域，采用泰安城市代表点",
+      "longitude": 117.12,
+      "latitude": 36.19,
+      "coordinate_source_url": "https://www.geonames.org/1793724/tai-an.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "区域参考点，不表示登顶泰山或确定写作地点"
+    },
+    {
+      "id": "changan",
+      "label": "长安",
+      "modern_reference": "今陕西西安城区",
+      "longitude": 108.93,
+      "latitude": 34.26,
+      "coordinate_source_url": "https://www.geonames.org/1790630/xi-an.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "古都采用现代城市代表点"
+    },
+    {
+      "id": "fengxian",
+      "label": "奉先",
+      "modern_reference": "今陕西蒲城城区约位",
+      "longitude": 109.59,
+      "latitude": 34.96,
+      "coordinate_source_url": "https://geokeo.com/database/city/cn/90/",
+      "source_read_status": "search_result_read; page_opened_but_specific_row_not_returned",
+      "precision_note": "所读搜索记录列34.9587406/109.5862048；商业地名表，不宣称已获独立测绘认证"
+    },
+    {
+      "id": "luoyang",
+      "label": "洛阳",
+      "modern_reference": "今河南洛阳城区",
+      "longitude": 112.44,
+      "latitude": 34.67,
+      "coordinate_source_url": "https://www.geonames.org/1801792/luoyang.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "采用页面现列34.67345/112.43684，非旧缓存值"
+    },
+    {
+      "id": "huazhou",
+      "label": "华州",
+      "modern_reference": "今陕西渭南华州城区",
+      "longitude": 109.76,
+      "latitude": 34.52,
+      "coordinate_source_url": "https://www.mindat.org/feature-1807005.html",
+      "source_read_status": "opened_and_read; GeoNames-derived mirror",
+      "precision_note": "页面列34.51523/109.75759，不是广东化州、河南滑县"
+    },
+    {
+      "id": "qinzhou",
+      "label": "秦州",
+      "modern_reference": "今甘肃天水城区",
+      "longitude": 105.74,
+      "latitude": 34.58,
+      "coordinate_source_url": "https://www.geonames.org/1792892/tianshui.html",
+      "source_read_status": "opened_and_read_previously",
+      "precision_note": "现代城市点，不是纪念馆"
+    },
+    {
+      "id": "tonggu",
+      "label": "同谷",
+      "modern_reference": "今甘肃成县城区",
+      "longitude": 105.73,
+      "latitude": 33.75,
+      "coordinate_source_url": "https://www.geonames.org/advanced-search.html?country=CN&q=Sheng+Xian&startRow=150",
+      "source_read_status": "search_result_read_previously; individual_page_unavailable",
+      "precision_note": "Chengxian Chengguanzhen城市点，非县域几何中心"
+    },
+    {
+      "id": "chengdu",
+      "label": "成都",
+      "modern_reference": "今四川成都城区",
+      "longitude": 104.07,
+      "latitude": 30.67,
+      "coordinate_source_url": "https://www.geonames.org/1815286/chengdu.html",
+      "source_read_status": "opened_and_read_previously",
+      "precision_note": "不以草堂博物馆代替整座古城"
+    },
+    {
+      "id": "kuizhou",
+      "label": "夔州",
+      "modern_reference": "今重庆奉节城市约位",
+      "longitude": 109.46,
+      "latitude": 31.02,
+      "coordinate_source_url": "https://www.geonames.org/advanced-search.html?country=CN&q=Kitajska&startRow=400",
+      "source_read_status": "search_result_read; listing_opened_but_specific_row_not_returned",
+      "precision_note": "所读检索记录31.01894/109.45949；不定位某一登台或白帝城建筑"
+    },
+    {
+      "id": "jiangling",
+      "label": "江陵",
+      "modern_reference": "古江陵以今湖北荆州城区作参考",
+      "longitude": 112.19,
+      "latitude": 30.35,
+      "coordinate_source_url": "https://www.geonames.org/1805540/jingzhou.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "不是直接套用今日江陵县城坐标"
+    },
+    {
+      "id": "yueyang",
+      "label": "岳阳",
+      "modern_reference": "今湖南岳阳城区",
+      "longitude": 113.09,
+      "latitude": 29.37,
+      "coordinate_source_url": "https://www.geonames.org/1927639/yueyang.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "城市代表点，不是岳阳楼建筑的精确坐标"
+    },
+    {
+      "id": "tanzhou",
+      "label": "潭州",
+      "modern_reference": "今湖南长沙城区",
+      "longitude": 112.97,
+      "latitude": 28.2,
+      "coordinate_source_url": "https://www.geonames.org/1815577/changsha.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "晚年游历节点；不能用作死亡地点"
+    },
+    {
+      "id": "wuyue",
+      "label": "吴越（区域）",
+      "modern_reference": "采用杭州现代城市点作吴越区域指示锚点",
+      "longitude": 120.16,
+      "latitude": 30.29,
+      "coordinate_source_url": "https://www.geonames.org/1808926/hangzhou.html",
+      "source_read_status": "opened_and_read",
+      "precision_note": "区域示意锚点，不声明杜甫在此城市点投宿、写诗或精确到访；古吴越不等于单一现代城市"
+    },
+    {
+      "id": "fengxiang",
+      "label": "凤翔",
+      "modern_reference": "今陕西宝鸡凤翔城区",
+      "longitude": 107.39,
+      "latitude": 34.52,
+      "coordinate_source_url": "https://database.earth/countries/china/regions/shaanxi/cities/fengxiang",
+      "source_read_status": "search_result_read; direct GeoNames and Mindat page opens failed",
+      "precision_note": "所读搜索结果列34.52301/107.39127，与Geokeo检索值34.5235103/107.390669相近；未独立认证坐标基准，仅用于城市级约位"
+    }
+  ],
+  "sequence": [
+    "gong",
+    "wuyue",
+    "qilu",
+    "changan",
+    "fengxian",
+    "changan",
+    "fengxiang",
+    "huazhou",
+    "luoyang",
+    "huazhou",
+    "qinzhou",
+    "tonggu",
+    "chengdu",
+    "kuizhou",
+    "jiangling",
+    "yueyang",
+    "tanzhou"
+  ],
+  "scenes": {
+    "S01": {
+      "start_index": 0,
+      "end_index": 0,
+      "route_caption": "序章总览",
+      "no_new_movement": true
+    },
+    "S02": {
+      "start_index": 0,
+      "end_index": 2,
+      "route_caption": "吴越—齐鲁漫游",
+      "no_new_movement": false
+    },
+    "S03": {
+      "start_index": 2,
+      "end_index": 3,
+      "route_caption": "齐鲁—长安",
+      "no_new_movement": false
+    },
+    "S04": {
+      "start_index": 3,
+      "end_index": 4,
+      "route_caption": "长安—奉先",
+      "no_new_movement": false
+    },
+    "S05": {
+      "start_index": 4,
+      "end_index": 5,
+      "route_caption": "再至长安",
+      "no_new_movement": false
+    },
+    "S06": {
+      "start_index": 5,
+      "end_index": 9,
+      "route_caption": "凤翔—华州—洛阳",
+      "no_new_movement": false
+    },
+    "S07": {
+      "start_index": 9,
+      "end_index": 12,
+      "route_caption": "秦州—同谷—成都",
+      "no_new_movement": false
+    },
+    "S08": {
+      "start_index": 12,
+      "end_index": 12,
+      "route_caption": "停留成都",
+      "no_new_movement": true
+    },
+    "S09": {
+      "start_index": 12,
+      "end_index": 12,
+      "route_caption": "停留成都",
+      "no_new_movement": true
+    },
+    "S10": {
+      "start_index": 12,
+      "end_index": 13,
+      "route_caption": "成都—夔州",
+      "no_new_movement": false
+    },
+    "S11": {
+      "start_index": 13,
+      "end_index": 16,
+      "route_caption": "江陵—岳阳—潭州",
+      "no_new_movement": false
+    },
+    "S12": {
+      "start_index": 16,
+      "end_index": 16,
+      "route_caption": "湖湘漂泊",
+      "no_new_movement": true
+    }
+  },
+  "history_sources": [
+    {
+      "file": "../史料/生平核查.md",
+      "use": "B01-B10 already opened sources; read local research record, not pretending to newly read full source books"
+    },
+    {
+      "file": "../史料/诗句核查.md",
+      "use": "spring visits and 759 Luoyang-Huazhou passage; poem place names do not automatically become travel markers"
+    }
+  ],
+  "omissions": "Only selected major life stages are displayed, not exhaustive travels; omitted intermediate stays do not imply nonstop direct journeys. 762-764 Chengdu-area departures/returns are omitted and not asserted absent.",
+  "base_geometry": {
+    "file": "../素材/一生足迹/CHN.geo.json",
+    "url": "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/CHN.geo.json",
+    "read_status": "root opened web text and supplied local parsed GeoJSON; this module read local file",
+    "use": "only eastern coastal sequence inside geographic window; no land national borders, province borders or invented rivers"
+  },
+  "projection": {
+    "name": "local equirectangular",
+    "standard_parallel": 32.75,
+    "central_meridian": 113,
+    "single_scale": true,
+    "bounds_west_east_south_north": [
+      103,
+      123,
+      27,
+      38.5
+    ]
+  },
+  "output": {
+    "canvas": [
+      880,
+      430
+    ],
+    "position_in_video": [
+      96,
+      150
+    ],
+    "background": "transparent",
+    "death_marker": false,
+    "sample_only": false,
+    "on_screen_heading": false,
+    "on_screen_legend": false,
+    "show_heading": false,
+    "show_route_caption": false,
+    "show_legend": false,
+    "style_revision": "V4 context-and-assessment edition; same 1.8416289592760182x map footprint, no heading/caption/legend"
+  }
+}

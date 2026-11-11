@@ -1,0 +1,45 @@
+{
+  "person": "杜甫",
+  "rationale": "粗纸、深绿与旧木色，衔接困顿中的民生关切。",
+  "colors": {
+    "paper": "#DCD2BC",
+    "light": "#F3EBDC",
+    "ink": "#1E2A26",
+    "muted": "#62705D",
+    "accent": "#8A593E",
+    "assessment": "#4D5C4B",
+    "green": "#6D7C68",
+    "pale": "#A7AF96",
+    "clay": "#A36B4E",
+    "warm": "#C5A86B",
+    "roof": "#455347",
+    "soft": "#C8C6AD",
+    "bluegreen": "#85958A",
+    "map_ink": "#455347",
+    "map_accent": "#8A593E",
+    "map_halo": "#C5A86B",
+    "map_coast": "#567566",
+    "map_label_halo": "#DCD2BC"
+  },
+  "motifs": [
+    "草堂与破檐",
+    "家书和纸页",
+    "舟中晚岁"
+  ],
+  "background_choices": [
+    "长安城门与残墙",
+    "普通人居处与征役离别",
+    "草堂室内、春雨与秋风",
+    "晚年江舟"
+  ],
+  "paper_variants": [
+    "#DCD2BC",
+    "#CFD0B9",
+    "#D1CDB7",
+    "#D4D0BB",
+    "#D2D1BC"
+  ],
+  "evidence_note": "对应本包杜甫已核查的B/Q资料；每幕以实际来源为准。",
+  "theme_id": "dufu-series-v2",
+  "profile_id": "biography-paper-cut-series-2.0"
+}

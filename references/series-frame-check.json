@@ -1,0 +1,146 @@
+{
+  "technical_status": "passed",
+  "bundled_fonts_used": true,
+  "profile_id": "biography-paper-cut-series-2.0",
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "series_frame_sha256": "daac81d1494205b82dce14c628c36b3e31e9529e0f0f42117de24c65d300a786",
+  "source": "actual Du Fu V4 native renderer plus same raw art/map data",
+  "checks": [
+    {
+      "scene_id": "S01",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S02",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S03",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S04",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S05",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S06",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S07",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S08",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S09",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S10",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S11",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S12",
+      "time_sec": 3.5,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S02",
+      "time_sec": 0.65,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S09",
+      "time_sec": 0.4,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    },
+    {
+      "scene_id": "S12",
+      "time_sec": 8.53,
+      "pixel_identical_to_v4": true,
+      "layout_report_status": "passed",
+      "errors": []
+    }
+  ],
+  "negative_checks": [
+    {
+      "case": "geometry_override",
+      "rejected": true,
+      "message": "Per-scene layout overrides are forbidden: title_x"
+    },
+    {
+      "case": "unknown_stage",
+      "rejected": true,
+      "message": "stage_profile must be one of the five locked profiles"
+    },
+    {
+      "case": "missing_assessment",
+      "rejected": true,
+      "message": "S02: assessment is required"
+    },
+    {
+      "case": "missing_poem_credit",
+      "rejected": true,
+      "message": "A quoted chapter must include the verified work/source label"
+    },
+    {
+      "case": "oversized_title",
+      "rejected": true,
+      "message": "standard.title: text exceeds the locked right boundary; shorten content, do not move text"
+    }
+  ],
+  "scope": "Native pixel equality with packaged SC OpenType fonts and layout/font/theme-record validation. This does not certify new-person historical truth, new artwork animation or device preview.",
+  "one_line_quote_credit_y833": "passed",
+  "real_cli_frame_matches_source_pixel_for_pixel": "passed",
+  "cli_refuses_report_over_input": "passed"
+}

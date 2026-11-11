@@ -1,0 +1,165 @@
+{
+  "status": "Full V3 rendered: 12 chapters, 3600 frames, 120 seconds; technical acceptance passed; independent visual review recorded in QA",
+  "fps": 30,
+  "total_frames": 3600,
+  "source_v2_timeline_sha256": "63f3f2d895b65b618da5b16c1b5f2e97854674ddfbdbd00449857d71747b7b78",
+  "chapters": [
+    {
+      "id": "S01",
+      "title": "此心在人间",
+      "start_frame": 0,
+      "end_frame_exclusive": 205,
+      "period_and_place": "杜甫｜712—770",
+      "event": "自家屋顶漏雨，却盼天下人安居。",
+      "animation": "坐写与屋外雨落，建立心系人间的主题",
+      "claim_ids": [
+        "Q07"
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "少年有志",
+      "start_frame": 205,
+      "end_frame_exclusive": 476,
+      "period_and_place": "青年时期｜吴越、齐鲁漫游",
+      "event": "会当凌绝顶，一览众山小。",
+      "animation": "青年行走并停步望山",
+      "claim_ids": [
+        "B01",
+        "B02",
+        "Q01"
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "长安求仕",
+      "start_frame": 476,
+      "end_frame_exclusive": 787,
+      "period_and_place": "746—755年｜长安",
+      "event": "致君尧舜上，再使风俗淳。",
+      "animation": "携卷走向城门，风旗摆动",
+      "claim_ids": [
+        "B03",
+        "Q02"
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "看见饥寒",
+      "start_frame": 787,
+      "end_frame_exclusive": 1091,
+      "period_and_place": "755年｜长安赴奉先途中",
+      "event": "朱门酒肉臭，路有冻死骨。",
+      "animation": "携包行走，灯笼摆动",
+      "claim_ids": [
+        "B04",
+        "Q03"
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "乱中长安",
+      "start_frame": 1091,
+      "end_frame_exclusive": 1401,
+      "period_and_place": "757年春｜长安",
+      "event": "国破山河在，城春草木深。",
+      "animation": "展开家书后抬头，草叶随风弯动",
+      "claim_ids": [
+        "B05",
+        "Q04"
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "诗里的百姓",
+      "start_frame": 1401,
+      "end_frame_exclusive": 1680,
+      "period_and_place": "757—759年｜凤翔·华州·洛阳",
+      "event": "征役与离别，被他写进了诗。",
+      "animation": "挥别与离去，门帘随风摆动",
+      "claim_ids": [
+        "B06",
+        "Q05"
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "山路向蜀",
+      "start_frame": 1680,
+      "end_frame_exclusive": 1984,
+      "period_and_place": "759年｜秦州—同谷—成都",
+      "event": "携家远行，寻找一处安身之所。",
+      "animation": "携家行走，入蜀路线依次增长",
+      "claim_ids": [
+        "B07"
+      ]
+    },
+    {
+      "id": "S08",
+      "title": "草堂春雨",
+      "start_frame": 1984,
+      "end_frame_exclusive": 2245,
+      "period_and_place": "761年春（通行说）｜成都",
+      "event": "随风潜入夜，润物细无声。",
+      "animation": "落笔蘸墨，竹叶与春雨运动",
+      "claim_ids": [
+        "B08",
+        "Q06"
+      ]
+    },
+    {
+      "id": "S09",
+      "title": "天下的屋檐",
+      "start_frame": 2245,
+      "end_frame_exclusive": 2676,
+      "period_and_place": "约761年秋｜成都草堂",
+      "event": "安得广厦千万间，大庇天下寒士俱欢颜。",
+      "animation": "伸手护纸，纸角和屋檐随风翻动",
+      "claim_ids": [
+        "B08",
+        "Q07"
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "万里作客",
+      "start_frame": 2676,
+      "end_frame_exclusive": 3011,
+      "period_and_place": "767年秋（通行说）｜夔州",
+      "event": "万里悲秋常作客，百年多病独登台。",
+      "animation": "持杖行走后望江，水纹与落叶运动",
+      "claim_ids": [
+        "B08",
+        "B09",
+        "Q08"
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "湖湘晚岁",
+      "start_frame": 3011,
+      "end_frame_exclusive": 3338,
+      "period_and_place": "768—770年｜湖湘",
+      "event": "漂泊，仍在继续。",
+      "animation": "船夫划桨与船体前进，老人翻页",
+      "claim_ids": [
+        "B10",
+        "Q09"
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "留在人间",
+      "start_frame": 3338,
+      "end_frame_exclusive": 3600,
+      "period_and_place": "770年｜湖南",
+      "event": "一生风雨，落笔总有人间。",
+      "animation": "卷轴展开，原创题字逐字出现",
+      "claim_ids": [
+        "B01",
+        "B10",
+        "Q07"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "tool_version": "1.0",
+  "checked_at_utc": "2026-11-11T13:28:06.861557+00:00",
+  "technical_status": "passed",
+  "manual_review_status": "pending",
+  "inputs": {
+    "video": "/workspace/dufu_production_v4/输出/杜甫_此心在人间_生平解读动画版_v4_1080p_120秒.mp4",
+    "source_audio": "/workspace/dufu_production_v4/配乐/固定BGM_用户指定_原音轨.m4a"
+  },
+  "expected": {
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "aspect_ratio": "9:16",
+    "fps": 30,
+    "frame_count": 3600,
+    "duration_sec": 120,
+    "sample_aspect_ratio": "1:1",
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "audio_codec": "aac",
+    "audio_sample_rate": 44100,
+    "audio_channels": 2,
+    "time_tolerance_sec": 0.1,
+    "pts_tolerance_sec": 2e-06,
+    "first_frame_pts_sec": 0,
+    "last_frame_pts_sec": 119.96666666666667
+  },
+  "measurements": {
+    "input_sha256": {
+      "video": "a0ef74494a6d47ac4940c196d913e150e14ca7202a1bb92c15b175d33e69a45d",
+      "source_audio": "9339186658cf252dd118c282c4803d4e70efe743010197cac51da792e38afb80"
+    },
+    "video": {
+      "index": 0,
+      "codec_name": "h264",
+      "width": 1080,
+      "height": 1920,
+      "pix_fmt": "yuv420p",
+      "sample_aspect_ratio": "1:1",
+      "avg_frame_rate": "30/1",
+      "r_frame_rate": "30/1",
+      "duration": "120.000000",
+      "start_time": "0.000000",
+      "nb_frames": "3600"
+    },
+    "output_audio": {
+      "index": 1,
+      "codec_name": "aac",
+      "sample_rate": "44100",
+      "channels": 2,
+      "duration": "119.999002",
+      "start_time": "0.000000"
+    },
+    "source_audio": {
+      "index": 0,
+      "codec_name": "aac",
+      "sample_rate": "44100",
+      "channels": 2,
+      "duration": "119.999002",
+      "start_time": "0.000000"
+    },
+    "timing": {
+      "container_duration_sec": 120.0,
+      "video_duration_sec": 120.0,
+      "audio_duration_sec": 119.999002,
+      "video_start_sec": 0.0,
+      "audio_start_sec": 0.0,
+      "av_duration_difference_sec": 0.0009979999999956135,
+      "av_start_difference_sec": 0.0,
+      "av_end_difference_sec": 0.0009979999999956135
+    },
+    "frame_timestamps": {
+      "observed_frame_count": 3600,
+      "invalid_pts_indices": [],
+      "interval_count": 3599,
+      "expected_interval_sec": 0.03333333333333333,
+      "tolerance_sec": 2e-06,
+      "first_pts_sec": 0.0,
+      "last_pts_sec": 119.966667,
+      "max_interval_error_sec": 6.666666773000318e-07,
+      "max_absolute_pts_error_sec": 3.333333467026023e-07,
+      "bad_interval_indices": [],
+      "bad_absolute_pts_indices": []
+    },
+    "full_decode": {
+      "exit_code": 0,
+      "stderr": ""
+    },
+    "pcm_comparison": {
+      "source": {
+        "sha256": "ec89ed8d3614338a38c7179bf49b25af271847b9631ccbffb608e601599e2663",
+        "byte_count": 21168128,
+        "sample_format": "signed 16-bit little endian",
+        "sample_rate_conversion": false,
+        "channel_conversion": false,
+        "samples_per_channel": 5292032
+      },
+      "output": {
+        "sha256": "ec89ed8d3614338a38c7179bf49b25af271847b9631ccbffb608e601599e2663",
+        "byte_count": 21168128,
+        "sample_format": "signed 16-bit little endian",
+        "sample_rate_conversion": false,
+        "channel_conversion": false,
+        "samples_per_channel": 5292032
+      },
+      "identical": true
+    },
+    "aac_packet_comparison": {
+      "source": {
+        "packet_count": 5169,
+        "packet_payload_sequence_sha256": "e30450cb4acad1c99ba1c184de53e4152858bd58d9f4b6efb4e555ceb1b15863",
+        "first_packet_sha256": "SHA256:9878a2c8849fcf7c5ab264c66f00f6765e1bff08fbee104cad0a544f1ebbfb0a",
+        "last_packet_sha256": "SHA256:d7066e27c04cb9a5a1900a71478190b781ab967be8c72e632f8429014cdfc578"
+      },
+      "output": {
+        "packet_count": 5169,
+        "packet_payload_sequence_sha256": "e30450cb4acad1c99ba1c184de53e4152858bd58d9f4b6efb4e555ceb1b15863",
+        "first_packet_sha256": "SHA256:9878a2c8849fcf7c5ab264c66f00f6765e1bff08fbee104cad0a544f1ebbfb0a",
+        "last_packet_sha256": "SHA256:d7066e27c04cb9a5a1900a71478190b781ab967be8c72e632f8429014cdfc578"
+      },
+      "identical_payload_sequence": true,
+      "first_difference_index": null,
+      "comparison_scope": "依次比较各 AAC 包的字节长度与载荷 SHA256；不把容器时间戳当作音频载荷"
+    }
+  },
+  "checks": [
+    {
+      "name": "唯一实际视频流",
+      "status": "passed",
+      "detail": "实际 1 条"
+    },
+    {
+      "name": "唯一成片音轨",
+      "status": "passed",
+      "detail": "实际 1 条"
+    },
+    {
+      "name": "唯一源音轨",
+      "status": "passed",
+      "detail": "实际 1 条"
+    },
+    {
+      "name": "视频尺寸",
+      "status": "passed",
+      "detail": "实际 1080×1920，目标 1080×1920"
+    },
+    {
+      "name": "H.264 编码",
+      "status": "passed",
+      "detail": "h264"
+    },
+    {
+      "name": "像素格式",
+      "status": "passed",
+      "detail": "yuv420p"
+    },
+    {
+      "name": "SAR 1:1",
+      "status": "passed",
+      "detail": "实际 '1:1'"
+    },
+    {
+      "name": "avg_frame_rate",
+      "status": "passed",
+      "detail": "实际 '30/1'，目标 30/1；另做实际 PTS 检查"
+    },
+    {
+      "name": "r_frame_rate",
+      "status": "passed",
+      "detail": "实际 '30/1'，目标 30/1；另做实际 PTS 检查"
+    },
+    {
+      "name": "成片 AAC 音轨",
+      "status": "passed",
+      "detail": "aac"
+    },
+    {
+      "name": "成片采样率",
+      "status": "passed",
+      "detail": "44100"
+    },
+    {
+      "name": "成片双声道",
+      "status": "passed",
+      "detail": "2"
+    },
+    {
+      "name": "源 AAC 音轨",
+      "status": "passed",
+      "detail": "aac"
+    },
+    {
+      "name": "源采样率",
+      "status": "passed",
+      "detail": "44100"
+    },
+    {
+      "name": "源双声道",
+      "status": "passed",
+      "detail": "2"
+    },
+    {
+      "name": "MP4 容器",
+      "status": "passed",
+      "detail": "mov,mp4,m4a,3gp,3g2,mj2"
+    },
+    {
+      "name": "container_duration_sec",
+      "status": "passed",
+      "detail": "实际 120.0s，目标 120s，容差 0.1s"
+    },
+    {
+      "name": "video_duration_sec",
+      "status": "passed",
+      "detail": "实际 120.0s，目标 120s，容差 0.1s"
+    },
+    {
+      "name": "audio_duration_sec",
+      "status": "passed",
+      "detail": "实际 119.999002s，目标 120s，容差 0.1s"
+    },
+    {
+      "name": "视音轨时长差",
+      "status": "passed",
+      "detail": "实际 0.0009979999999956135s，容差 0.1s"
+    },
+    {
+      "name": "视音轨起点差",
+      "status": "passed",
+      "detail": "实际 0.0s，容差 0.1s"
+    },
+    {
+      "name": "视音轨终点差",
+      "status": "passed",
+      "detail": "实际 0.0009979999999956135s，容差 0.1s"
+    },
+    {
+      "name": "实际解码帧数",
+      "status": "passed",
+      "detail": "实际 3600 帧，目标 3600 帧"
+    },
+    {
+      "name": "逐帧 PTS 完整性",
+      "status": "passed",
+      "detail": "缺失/无效 PTS 的帧位置：[]"
+    },
+    {
+      "name": "首帧 PTS",
+      "status": "passed",
+      "detail": "实际 0.0s，目标 0s"
+    },
+    {
+      "name": "末帧 PTS",
+      "status": "passed",
+      "detail": "实际 119.966667s，目标 119.966666667s"
+    },
+    {
+      "name": "实际相邻帧间隔 CFR",
+      "status": "passed",
+      "detail": "3599 个间隔，最大误差 6.666666773e-07s；异常间隔位置 []"
+    },
+    {
+      "name": "逐帧绝对 PTS",
+      "status": "passed",
+      "detail": "最大误差 3.33333346703e-07s；异常帧位置 []"
+    },
+    {
+      "name": "完整视频/音频解码",
+      "status": "passed",
+      "detail": "退出码 0"
+    },
+    {
+      "name": "锁定音轨 PCM 完全一致",
+      "status": "passed",
+      "detail": "源 21168128 bytes / ec89ed8d3614338a38c7179bf49b25af271847b9631ccbffb608e601599e2663；成片 21168128 bytes / ec89ed8d3614338a38c7179bf49b25af271847b9631ccbffb608e601599e2663"
+    },
+    {
+      "name": "AAC 包载荷保持原样",
+      "status": "passed",
+      "detail": "源 5169 包，成片 5169 包；首个差异位置 None"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "manual_checks": [
+    {
+      "item": "主观听审、音乐情绪与画面事件卡点",
+      "status": "pending"
+    },
+    {
+      "item": "逐幕字幕阅读、历史与引文、地图表达、画面遮挡与风格",
+      "status": "pending"
+    },
+    {
+      "item": "原生竖屏构图、平台 UI 安全区及抖音实际发布预览",
+      "status": "pending"
+    }
+  ]
+}

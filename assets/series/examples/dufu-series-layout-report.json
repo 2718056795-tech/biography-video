@@ -1,0 +1,363 @@
+{
+  "profile_id": "biography-paper-cut-series-2.0",
+  "kind": "frame",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "theme_tokens": {
+    "paper": "#DCD2BC",
+    "light": "#F3EBDC",
+    "ink": "#1E2A26",
+    "muted": "#62705D",
+    "accent": "#8A593E",
+    "assessment": "#4D5C4B",
+    "green": "#6D7C68",
+    "pale": "#A7AF96",
+    "clay": "#A36B4E",
+    "warm": "#C5A86B",
+    "roof": "#455347",
+    "soft": "#C8C6AD",
+    "bluegreen": "#85958A",
+    "map_ink": "#455347",
+    "map_accent": "#8A593E",
+    "map_halo": "#C5A86B",
+    "map_coast": "#567566",
+    "map_label_halo": "#DCD2BC"
+  },
+  "theme_direction": {
+    "person": "杜甫",
+    "rationale": "粗纸、深绿与旧木色，衔接困顿中的民生关切。",
+    "colors": {
+      "paper": "#DCD2BC",
+      "light": "#F3EBDC",
+      "ink": "#1E2A26",
+      "muted": "#62705D",
+      "accent": "#8A593E",
+      "assessment": "#4D5C4B",
+      "green": "#6D7C68",
+      "pale": "#A7AF96",
+      "clay": "#A36B4E",
+      "warm": "#C5A86B",
+      "roof": "#455347",
+      "soft": "#C8C6AD",
+      "bluegreen": "#85958A",
+      "map_ink": "#455347",
+      "map_accent": "#8A593E",
+      "map_halo": "#C5A86B",
+      "map_coast": "#567566",
+      "map_label_halo": "#DCD2BC"
+    },
+    "motifs": [
+      "草堂与破檐",
+      "家书和纸页",
+      "舟中晚岁"
+    ],
+    "background_choices": [
+      "长安城门与残墙",
+      "普通人居处与征役离别",
+      "草堂室内、春雨与秋风",
+      "晚年江舟"
+    ],
+    "paper_variants": [
+      "#DCD2BC",
+      "#CFD0B9",
+      "#D1CDB7",
+      "#D4D0BB",
+      "#D2D1BC"
+    ],
+    "evidence_note": "对应本包杜甫已核查的B/Q资料；每幕以实际来源为准。",
+    "theme_id": "dufu-series-v2",
+    "profile_id": "biography-paper-cut-series-2.0"
+  },
+  "fonts": {
+    "serif_regular": {
+      "path": "fonts/series-serif-regular.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
+      "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121"
+    },
+    "serif_bold": {
+      "path": "fonts/series-serif-bold.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
+      "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
+    },
+    "sans_regular": {
+      "path": "fonts/series-sans-regular.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
+    },
+    "sans_bold": {
+      "path": "fonts/series-sans-bold.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
+    }
+  },
+  "elements": [
+    {
+      "role": "header.series_name",
+      "x": 96,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 27,
+      "color_role": "muted",
+      "color": "#62705D",
+      "anchor": "lt",
+      "text": "杜甫 / 此心在人间",
+      "bbox": [
+        96,
+        100,
+        308,
+        129
+      ]
+    },
+    {
+      "role": "header.page_number",
+      "x": 796,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 25,
+      "color_role": "muted",
+      "color": "#62705D",
+      "anchor": "lt",
+      "text": "09 / 12",
+      "bbox": [
+        796,
+        100,
+        873,
+        125
+      ]
+    },
+    {
+      "role": "standard.title",
+      "x": 96,
+      "y": 595,
+      "font": "serif_bold",
+      "size": 70,
+      "color_role": "ink",
+      "color": "#1E2A26",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        595,
+        446,
+        663
+      ],
+      "text": "天下的屋檐",
+      "line_index": 0,
+      "start_sec": 0.1,
+      "full_opacity_after_sec": 0.38,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.meta",
+      "x": 100,
+      "y": 688,
+      "font": "sans_regular",
+      "size": 30,
+      "color_role": "muted",
+      "color": "#62705D",
+      "anchor": "lt",
+      "bbox": [
+        100,
+        688,
+        390,
+        718
+      ],
+      "text": "约761年秋｜成都草堂",
+      "line_index": 0,
+      "start_sec": 0.3,
+      "full_opacity_after_sec": 0.5800000000000001,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.quote",
+      "x": 96,
+      "y": 752,
+      "font": "serif_regular",
+      "size": 64,
+      "color_role": "ink",
+      "color": "#1E2A26",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        752,
+        608,
+        821
+      ],
+      "text": "安得广厦千万间，",
+      "line_index": 0,
+      "start_sec": 0.5,
+      "full_opacity_after_sec": 0.78,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.quote",
+      "x": 96,
+      "y": 832,
+      "font": "serif_regular",
+      "size": 64,
+      "color_role": "ink",
+      "color": "#1E2A26",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        832,
+        736,
+        896
+      ],
+      "text": "大庇天下寒士俱欢颜。",
+      "line_index": 1,
+      "start_sec": 0.78,
+      "full_opacity_after_sec": 1.06,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.source",
+      "x": 100,
+      "y": 913,
+      "font": "sans_regular",
+      "size": 27,
+      "color_role": "muted",
+      "color": "#62705D",
+      "anchor": "lt",
+      "bbox": [
+        100,
+        913,
+        424,
+        940
+      ],
+      "text": "《茅屋为秋风所破歌》节选",
+      "line_index": 0,
+      "start_sec": 0.9,
+      "full_opacity_after_sec": 1.1800000000000002,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.event",
+      "x": 120,
+      "y": 1400,
+      "font": "sans_bold",
+      "size": 34,
+      "color_role": "ink",
+      "color": "#1E2A26",
+      "anchor": "lt",
+      "bbox": [
+        120,
+        1400,
+        868,
+        1436
+      ],
+      "text": "秋风损坏草堂后，他写下为天下寒士求屋的愿望。",
+      "line_index": 0,
+      "start_sec": 1.15,
+      "full_opacity_after_sec": 1.43,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.assessment",
+      "x": 120,
+      "y": 1450,
+      "font": "sans_regular",
+      "size": 30,
+      "color_role": "assessment",
+      "color": "#4D5C4B",
+      "anchor": "lt",
+      "bbox": [
+        120,
+        1450,
+        780,
+        1481
+      ],
+      "text": "困顿没有缩小他的关怀，反而使它越过自家门槛。",
+      "line_index": 0,
+      "start_sec": 1.85,
+      "full_opacity_after_sec": 2.13,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.accent_line",
+      "x": 96,
+      "y": 1400,
+      "x1": 96,
+      "y1": 1400,
+      "x2": 96,
+      "y2": 1486,
+      "width": 3,
+      "color_role": "accent",
+      "color": "#8A593E"
+    },
+    {
+      "role": "footer.wash",
+      "x": 0,
+      "y": 1360,
+      "height": 560,
+      "alpha": 245,
+      "fade_in_px": 40,
+      "color": "paper",
+      "color_role": "paper",
+      "actual_paper_rgb": [
+        209,
+        205,
+        183
+      ]
+    }
+  ],
+  "map": {
+    "x": 96,
+    "y": 150,
+    "width": 880,
+    "height": 430,
+    "supersampling": 2,
+    "plot_box": [
+      20,
+      8,
+      860,
+      415
+    ],
+    "heading": false,
+    "side_caption": false,
+    "legend": false,
+    "label_size": 28,
+    "label_bold": true,
+    "label_stroke_px": 2,
+    "coast_width": 1.1,
+    "coast_alpha": 94,
+    "old_line_width": 1.3,
+    "old_line_alpha_min": 70,
+    "new_line_width": 2.1,
+    "new_line_halo_width": 4.5,
+    "node_radius": 1.9,
+    "current_ring_radius": 8.5,
+    "current_point_radius": 4.2,
+    "growing_tip_radius": 2.7,
+    "current_alpha": 245
+  },
+  "map_present": true,
+  "stage": {
+    "profile_name": "room_high",
+    "scale": 0.6,
+    "offset_y": 540
+  },
+  "scene_id": "S09",
+  "chapter_index": 9,
+  "chapter_kind": "chapter",
+  "time_sec": 3.5,
+  "duration_sec": 14.366666666666667,
+  "footer_actual_paper_rgb": [
+    209,
+    205,
+    183
+  ],
+  "motion": {
+    "text_fade_sec": 0.28,
+    "text_enter_slide_y": 6,
+    "text_enter_slide_sec": 0.35,
+    "text_out_end_before_scene_end": 0.12,
+    "read_budget_out_before_end": 0.45,
+    "final_picture_fade_sec": 0.48,
+    "map_segment_delay": 0.45,
+    "map_active_window_sec": 5.5
+  },
+  "scope": "Actual compositor geometry, fonts and theme; not historical, animation, audio or device certification"
+}

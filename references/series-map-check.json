@@ -1,0 +1,736 @@
+{
+  "schema_version": "1.0",
+  "checked_at_utc": "2026-11-11T14:20:36.949619+00:00",
+  "test": "SeriesMap current bundled optimized sans OTFs against native DuFu V4 map RGBA",
+  "expected_case_count": 108,
+  "actual_case_count": 108,
+  "matched_case_count": 108,
+  "pixel_equal": true,
+  "mismatch_count": 0,
+  "pixel_comparison": "exact RGBA byte equality before video encoding; no tolerance",
+  "frame_size": [
+    880,
+    430
+  ],
+  "supersampling": 2,
+  "scene_count": 12,
+  "time_samples_per_scene": [
+    0,
+    0.1,
+    0.45,
+    0.78,
+    1.2,
+    2.3,
+    3.4,
+    5.6,
+    "duration - 0.5"
+  ],
+  "fonts": {
+    "sans_regular": {
+      "path": "assets/series/fonts/series-sans-regular.otf",
+      "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f",
+      "bytes": 6074292
+    },
+    "sans_bold": {
+      "path": "assets/series/fonts/series-sans-bold.otf",
+      "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b",
+      "bytes": 6211096
+    }
+  },
+  "system_font_fallback_used": false,
+  "legacy_font_reference": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc and Bold.ttc; index 2",
+  "source_hashes": {
+    "series_map.py": "cfa91ec4c1b889c9d6c26739d6f06d64383c426d863b2ee143170f480b49282e",
+    "series_style.json": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+    "dufu_theme.json": "551071b8274f564a1b8c00c2587a1c3167b661ff40c7d026179320ff04fc5d9c",
+    "legacy_life_map.py": "af9d5ddc9380cef89eae1516683374b550a2bb3dd863df61378a2cfac2ca6d2d"
+  },
+  "structural_tests": {
+    "locked_native_panel_and_dufu_geometry": true,
+    "independent_generic_visits_and_scene_derivation": true,
+    "same_place_hold_has_no_new_route": true,
+    "no_coastline_renders_honestly": true,
+    "theme_changes_color_without_geometry_change": true,
+    "locked_style_override_rejected": true,
+    "edge_region_annotation_stays_inside_panel": true,
+    "edge_region_bounds": {
+      "center": [
+        720.0,
+        211.5
+      ],
+      "radius": 156.0,
+      "circle_bounds": [
+        564.0,
+        55.5,
+        876.0,
+        367.5
+      ],
+      "label_position": [
+        412.453125,
+        207.5
+      ],
+      "label_bounds": [
+        412.453125,
+        207.5,
+        555.0,
+        235.0
+      ],
+      "circle_clipped": false,
+      "font_size": 26
+    }
+  },
+  "structural_tests_passed": true,
+  "passed": true,
+  "cases": [
+    {
+      "scene_id": "S01",
+      "local_sec": 0,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 0.1,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 0.45,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 0.78,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 1.2,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 2.3,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 3.4,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 5.6,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S01",
+      "local_sec": 6.333333333333333,
+      "scene_duration_sec": 6.833333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 0,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 0.1,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 0.45,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 0.78,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 1.2,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 2.3,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 3.4,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 5.6,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S02",
+      "local_sec": 8.533333333333333,
+      "scene_duration_sec": 9.033333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 0,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 0.1,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 0.45,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 0.78,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 1.2,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 2.3,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 3.4,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 5.6,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S03",
+      "local_sec": 9.866666666666667,
+      "scene_duration_sec": 10.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 0,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 0.1,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 0.45,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 0.78,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 1.2,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 2.3,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 3.4,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 5.6,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S04",
+      "local_sec": 9.633333333333333,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 0,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 0.1,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 0.45,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 0.78,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 1.2,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 2.3,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 3.4,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 5.6,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S05",
+      "local_sec": 9.833333333333334,
+      "scene_duration_sec": 10.333333333333334,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 0,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 0.1,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 0.45,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 0.78,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 1.2,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 2.3,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 3.4,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 5.6,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S06",
+      "local_sec": 8.8,
+      "scene_duration_sec": 9.3,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 0,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 0.1,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 0.45,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 0.78,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 1.2,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 2.3,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 3.4,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 5.6,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S07",
+      "local_sec": 9.633333333333333,
+      "scene_duration_sec": 10.133333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 0,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 0.1,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 0.45,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 0.78,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 1.2,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 2.3,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 3.4,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 5.6,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S08",
+      "local_sec": 8.2,
+      "scene_duration_sec": 8.7,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 0,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 0.1,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 0.45,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 0.78,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 1.2,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 2.3,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 3.4,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 5.6,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S09",
+      "local_sec": 13.866666666666667,
+      "scene_duration_sec": 14.366666666666667,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 0,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 0.1,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 0.45,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 0.78,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 1.2,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 2.3,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 3.4,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 5.6,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S10",
+      "local_sec": 10.666666666666666,
+      "scene_duration_sec": 11.166666666666666,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 0,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 0.1,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 0.45,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 0.78,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 1.2,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 2.3,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 3.4,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 5.6,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S11",
+      "local_sec": 10.4,
+      "scene_duration_sec": 10.9,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 0,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 0.1,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 0.45,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 0.78,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 1.2,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 2.3,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 3.4,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 5.6,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    },
+    {
+      "scene_id": "S12",
+      "local_sec": 8.233333333333333,
+      "scene_duration_sec": 8.733333333333333,
+      "pixel_equal": true
+    }
+  ],
+  "mismatches": [],
+  "limits": "This confirms these 108 map frames and structural cases only; it does not verify all CJK glyphs, historical sources, other figure routes, full videos, or audio."
+}

@@ -1,0 +1,313 @@
+{
+  "profile_id": "biography-paper-cut-series-2.0",
+  "kind": "frame",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "theme_tokens": {
+    "paper": "#DFD0C2",
+    "light": "#F4E9DD",
+    "ink": "#40342E",
+    "muted": "#6D5E4E",
+    "accent": "#9F543C",
+    "assessment": "#635347",
+    "green": "#71806B",
+    "pale": "#B5AD98",
+    "clay": "#A87959",
+    "warm": "#BD9B63",
+    "roof": "#566049",
+    "soft": "#C8B9A3",
+    "bluegreen": "#8E9D89",
+    "map_ink": "#665347",
+    "map_accent": "#9F543C",
+    "map_halo": "#BD9B63",
+    "map_coast": "#8D8E7B",
+    "map_label_halo": "#DFD0C2"
+  },
+  "theme_direction": {
+    "person": "苏轼",
+    "rationale": "暖赭纸底、炭褐墨色与竹青，表现日常生活中的开阔与温度。",
+    "colors": {
+      "paper": "#DFD0C2",
+      "light": "#F4E9DD",
+      "ink": "#40342E",
+      "muted": "#6D5E4E",
+      "accent": "#9F543C",
+      "assessment": "#635347",
+      "green": "#71806B",
+      "pale": "#B5AD98",
+      "clay": "#A87959",
+      "warm": "#BD9B63",
+      "roof": "#566049",
+      "soft": "#C8B9A3",
+      "bluegreen": "#8E9D89",
+      "map_ink": "#665347",
+      "map_accent": "#9F543C",
+      "map_halo": "#BD9B63",
+      "map_coast": "#8D8E7B",
+      "map_label_halo": "#DFD0C2"
+    },
+    "motifs": [
+      "书案与笔札",
+      "竹杖与蓑笠",
+      "田畦与日常器物"
+    ],
+    "background_choices": [
+      "书斋与院落",
+      "田间与村居",
+      "按事件选择的舟岸、官署或旅途"
+    ],
+    "evidence_note": "美术候选，未预先核查苏轼全部资料；具体地点、服饰、器物与事件需新建史料记录。",
+    "theme_id": "sushi-series-v2",
+    "profile_id": "biography-paper-cut-series-2.0"
+  },
+  "fonts": {
+    "serif_regular": {
+      "path": "fonts/series-serif-regular.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
+      "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121"
+    },
+    "serif_bold": {
+      "path": "fonts/series-serif-bold.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
+      "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
+    },
+    "sans_regular": {
+      "path": "fonts/series-sans-regular.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
+    },
+    "sans_bold": {
+      "path": "fonts/series-sans-bold.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
+    }
+  },
+  "elements": [
+    {
+      "role": "header.series_name",
+      "x": 96,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 27,
+      "color_role": "muted",
+      "color": "#6D5E4E",
+      "anchor": "lt",
+      "text": "苏轼 / 日常自有天地",
+      "bbox": [
+        96,
+        100,
+        335,
+        129
+      ]
+    },
+    {
+      "role": "header.page_number",
+      "x": 796,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 25,
+      "color_role": "muted",
+      "color": "#6D5E4E",
+      "anchor": "lt",
+      "text": "09 / 12",
+      "bbox": [
+        796,
+        100,
+        873,
+        125
+      ]
+    },
+    {
+      "role": "standard.title",
+      "x": 96,
+      "y": 595,
+      "font": "serif_bold",
+      "size": 70,
+      "color_role": "ink",
+      "color": "#40342E",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        595,
+        446,
+        664
+      ],
+      "text": "书斋与日常",
+      "line_index": 0,
+      "start_sec": 0.1,
+      "full_opacity_after_sec": 0.38,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.meta",
+      "x": 100,
+      "y": 688,
+      "font": "sans_regular",
+      "size": 30,
+      "color_role": "muted",
+      "color": "#6D5E4E",
+      "anchor": "lt",
+      "bbox": [
+        100,
+        688,
+        400,
+        718
+      ],
+      "text": "版式示例｜书案与竹影",
+      "line_index": 0,
+      "start_sec": 0.3,
+      "full_opacity_after_sec": 0.5800000000000001,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.explanation",
+      "x": 96,
+      "y": 760,
+      "font": "serif_regular",
+      "size": 48,
+      "color_role": "ink",
+      "color": "#40342E",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        760,
+        576,
+        806
+      ],
+      "text": "场景随人物经历设计。",
+      "line_index": 0,
+      "start_sec": 0.5,
+      "full_opacity_after_sec": 0.78,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.event",
+      "x": 120,
+      "y": 1400,
+      "font": "sans_bold",
+      "size": 34,
+      "color_role": "ink",
+      "color": "#40342E",
+      "anchor": "lt",
+      "bbox": [
+        120,
+        1400,
+        698,
+        1434
+      ],
+      "text": "事件说明在这里交代人物的具体经历。",
+      "line_index": 0,
+      "start_sec": 1.15,
+      "full_opacity_after_sec": 1.43,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.assessment",
+      "x": 120,
+      "y": 1450,
+      "font": "sans_regular",
+      "size": 30,
+      "color_role": "assessment",
+      "color": "#635347",
+      "anchor": "lt",
+      "bbox": [
+        120,
+        1450,
+        630,
+        1480
+      ],
+      "text": "原创解读在这里说明这一阶段的意义。",
+      "line_index": 0,
+      "start_sec": 1.85,
+      "full_opacity_after_sec": 2.13,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.accent_line",
+      "x": 96,
+      "y": 1400,
+      "x1": 96,
+      "y1": 1400,
+      "x2": 96,
+      "y2": 1486,
+      "width": 3,
+      "color_role": "accent",
+      "color": "#9F543C"
+    },
+    {
+      "role": "footer.wash",
+      "x": 0,
+      "y": 1360,
+      "height": 560,
+      "alpha": 245,
+      "fade_in_px": 40,
+      "color": "paper",
+      "color_role": "paper",
+      "actual_paper_rgb": [
+        223,
+        208,
+        194
+      ]
+    }
+  ],
+  "map": {
+    "x": 96,
+    "y": 150,
+    "width": 880,
+    "height": 430,
+    "supersampling": 2,
+    "plot_box": [
+      20,
+      8,
+      860,
+      415
+    ],
+    "heading": false,
+    "side_caption": false,
+    "legend": false,
+    "label_size": 28,
+    "label_bold": true,
+    "label_stroke_px": 2,
+    "coast_width": 1.1,
+    "coast_alpha": 94,
+    "old_line_width": 1.3,
+    "old_line_alpha_min": 70,
+    "new_line_width": 2.1,
+    "new_line_halo_width": 4.5,
+    "node_radius": 1.9,
+    "current_ring_radius": 8.5,
+    "current_point_radius": 4.2,
+    "growing_tip_radius": 2.7,
+    "current_alpha": 245
+  },
+  "map_present": true,
+  "stage": {
+    "profile_name": "open_air",
+    "scale": 0.83,
+    "offset_y": 275
+  },
+  "scene_id": "S09",
+  "chapter_index": 9,
+  "chapter_kind": "chapter",
+  "time_sec": 3.5,
+  "duration_sec": 14.366666666666667,
+  "footer_actual_paper_rgb": [
+    223,
+    208,
+    194
+  ],
+  "motion": {
+    "text_fade_sec": 0.28,
+    "text_enter_slide_y": 6,
+    "text_enter_slide_sec": 0.35,
+    "text_out_end_before_scene_end": 0.12,
+    "read_budget_out_before_end": 0.45,
+    "final_picture_fade_sec": 0.48,
+    "map_segment_delay": 0.45,
+    "map_active_window_sec": 5.5
+  },
+  "scope": "Actual compositor geometry, fonts and theme; not historical, animation, audio or device certification"
+}

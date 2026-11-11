@@ -1,0 +1,65 @@
+{
+  "width": 1080,
+  "height": 1920,
+  "scene_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "layers": [
+    "bg",
+    "mid",
+    "subject",
+    "fg"
+  ],
+  "upper_text_area": [
+    96,
+    210,
+    880,
+    700
+  ],
+  "lower_text_area": [
+    96,
+    1370,
+    880,
+    1490
+  ],
+  "recommended_text_color": "#1E2A26",
+  "lower_text_color": {
+    "S01": "#1E2A26",
+    "S02": "#F3EBDC",
+    "S03": "#1E2A26",
+    "S04": "#F3EBDC",
+    "S05": "#F3EBDC",
+    "S06": "#1E2A26",
+    "S07": "#F3EBDC",
+    "S08": "#1E2A26",
+    "S09": "#1E2A26",
+    "S10": "#1E2A26",
+    "S11": "#1E2A26",
+    "S12": "#1E2A26"
+  },
+  "paper_color": "#DCD2BC",
+  "palette": {
+    "paper": "#DCD2BC",
+    "light": "#F3EBDC",
+    "ink": "#1E2A26",
+    "green": "#6D7C68",
+    "pale": "#A7AF96",
+    "clay": "#A36B4E",
+    "warm": "#C5A86B",
+    "roof": "#455347",
+    "soft": "#C8C6AD",
+    "bluegreen": "#85958A"
+  },
+  "note": "Original geometric scene artwork without text. Story, quotations, maps and timing are separate. Layer PNGs are full canvas, transparent except bg. S07 leaves map area quiet; secondary travellers below y1280."
+}

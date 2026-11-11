@@ -1,0 +1,57 @@
+{
+  "validation_type": "executed real-media check plus separate parameter/isolated-unit checks",
+  "checked_at_utc": "2026-11-11T12:49:36.456185+00:00",
+  "script": "scripts/verify_media.py",
+  "script_sha256": "b231f659d29c48569e0b1f51a37eaef258313f7eb87250e305eddd7e57f79f26",
+  "real_media_test": {
+    "fixture": "实际杜甫V2完整MP4与锁定AAC源音轨；未使用无声预览",
+    "exit_code": 0,
+    "technical_status": "passed",
+    "error_count": 0,
+    "input_sha256": {
+      "video": "1586cf9a6ce1001adb0b60d8f54f1902c9591cfa29add7d326b2e2cb0a35a580",
+      "source_audio": "9339186658cf252dd118c282c4803d4e70efe743010197cac51da792e38afb80"
+    },
+    "target": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 30.0,
+      "duration_sec": 120.0
+    },
+    "frame_count": 3600,
+    "interval_count": 3599,
+    "max_interval_error_sec": 6.666666773000318e-07,
+    "max_absolute_pts_error_sec": 3.333333467026023e-07,
+    "full_decode_exit_code": 0,
+    "pcm_identical": true,
+    "pcm_sha256": "ec89ed8d3614338a38c7179bf49b25af271847b9631ccbffb608e601599e2663",
+    "aac_payload_sequence_identical": true,
+    "aac_packet_count": 5169
+  },
+  "negative_tests": {
+    "missing_file": {
+      "exit_code": 2,
+      "technical_status": "incomplete"
+    },
+    "invalid_dimensions_fps_duration_and_nonintegral_framecount": "rejected with exit 2",
+    "report_same_path_or_hardlink_to_input": "rejected with exit 2; input bytes unchanged"
+  },
+  "isolated_unit_fixture": {
+    "description": "模拟元数据与执行结果，仅用于验证参数通用化；不是实际横版媒体验收",
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "duration_sec": 2,
+    "frame_count": 48,
+    "audio_sample_rate": 48000,
+    "audio_channels": 1,
+    "result": "passed"
+  },
+  "manual_review_status": "pending",
+  "not_established": [
+    "史实或素材来源真伪",
+    "动作自然度或原生构图",
+    "主观完整听审",
+    "目标平台设备预览"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "technical_status": "passed",
+  "inputs": {
+    "cover": "/workspace/series_skill_v2/historical-biography-video/assets/series/examples/dufu-cover-locked.png"
+  },
+  "expected": {
+    "width": 1200,
+    "height": 1500,
+    "orientation": "portrait",
+    "format": "PNG",
+    "default_user_name": "5:4竖屏",
+    "default_long_short_ratio": "5:4",
+    "default_width_height_ratio": "4:5"
+  },
+  "measurements": {
+    "sha256": "84216a4c227f010d8637b0280b5a528037a843e900a613f4ea06b30b3b11e2f2",
+    "format": "PNG",
+    "width": 1200,
+    "height": 1500,
+    "mode": "RGB",
+    "png_structure_and_pixels": "passed"
+  },
+  "errors": [],
+  "scope": "Actual file, PNG verification and decoded pixels, dimensions and SHA256 only; no OCR, title correctness, composition or style certification.",
+  "manual_checks": {
+    "title_and_person_correct": "pending",
+    "thumbnail_readability_and_style": "pending"
+  }
+}

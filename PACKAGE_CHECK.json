@@ -1,0 +1,35 @@
+{
+  "skill_name": "historical-biography-video",
+  "version": "2.0",
+  "profile_id": "biography-paper-cut-series-2.0",
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "immutable_files_verified": 22,
+  "final_font_frame_regression": {
+    "cases": 15,
+    "exact_rgb_equal": 15
+  },
+  "final_font_map_regression": {
+    "cases": 108,
+    "exact_rgba_equal": 108
+  },
+  "cover_layout_check": "passed",
+  "full_pipeline_test": "real native2-second/60-frame audible preview decoded; no new120-second output claimed",
+  "variable_per_person": [
+    "theme palette",
+    "backgrounds and buildings",
+    "era-appropriate people/props/lights",
+    "research text and travel nodes"
+  ],
+  "fixed_series_elements": [
+    "native canvas",
+    "fonts and pixel text anchors",
+    "map viewport and style",
+    "footer and timing",
+    "cover typography",
+    "stage presets"
+  ],
+  "local_markdown_links": "passed",
+  "python_and_json_syntax": "passed",
+  "archive_fonts": "standard ZIP LZMA entries preserve exact OTF bytes; Python zipfile supports extraction",
+  "no_global_installation_claimed": true
+}

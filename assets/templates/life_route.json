@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "note": "地点node与阶段访问visit分开；回访复用node但新建visit；同地停留不新画迁移段；segments只为相邻异地visit的示意连接。",
+  "nodes": [],
+  "visits": [],
+  "segments": []
+}

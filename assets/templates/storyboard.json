@@ -1,0 +1,5 @@
+{
+  "schema_version": "1.0",
+  "note": "按该人物人生节点分章，逐章填写独立title、period、place、event、event_summary和assessment；event_summary交代事件，assessment为具体原创解读/评价，事实部分关联source_ids。两类说明均须实际上屏，含诗句幕也不能跳过；分时显示以免拥挤。不要只换总标题或机械套用杜甫12幕。",
+  "scenes": []
+}

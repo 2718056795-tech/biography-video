@@ -1,0 +1,1063 @@
+[
+  {
+    "id": "S01",
+    "text_boxes": [
+      {
+        "text": "杜甫",
+        "size_px": 96,
+        "bounds": [
+          96,
+          595,
+          288,
+          687
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.36000000000000004,
+        "fade_out_begins_sec": 6.383333333333333
+      },
+      {
+        "text": "此心在人间",
+        "size_px": 64,
+        "bounds": [
+          98,
+          717,
+          418,
+          778
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.53,
+        "fade_out_begins_sec": 6.383333333333333
+      },
+      {
+        "text": "一生风雨，心系人间",
+        "size_px": 30,
+        "bounds": [
+          100,
+          809,
+          370,
+          840
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.68,
+        "fade_out_begins_sec": 6.383333333333333
+      },
+      {
+        "text": "自家屋顶漏雨，却盼天下人安居。",
+        "size_px": 44,
+        "bounds": [
+          98,
+          870,
+          758,
+          917
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.8300000000000001,
+        "fade_out_begins_sec": 6.383333333333333
+      },
+      {
+        "text": "杜甫一生辗转长安、成都与湖湘，亲历盛衰。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          800,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.13,
+        "fade_out_begins_sec": 6.383333333333333
+      },
+      {
+        "text": "他把个人的困顿，写成对世间饥寒的关切。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          690,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 1.73,
+        "fade_out_begins_sec": 6.383333333333333
+      }
+    ]
+  },
+  {
+    "id": "S02",
+    "text_boxes": [
+      {
+        "text": "少年有志",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          664
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 8.583333333333334
+      },
+      {
+        "text": "青年时期｜吴越、齐鲁漫游",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          460,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 8.583333333333334
+      },
+      {
+        "text": "会当凌绝顶，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          480,
+          821
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 8.583333333333334
+      },
+      {
+        "text": "一览众山小。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          480,
+          892
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 8.583333333333334
+      },
+      {
+        "text": "《望岳》节选 · 约736年",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          401,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 8.583333333333334
+      },
+      {
+        "text": "青年漫游吴越与齐鲁，在《望岳》中写下抱负。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          834,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 8.583333333333334
+      },
+      {
+        "text": "后来的沉郁之外，这份少年锐气也是杜甫。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          690,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 8.583333333333334
+      }
+    ]
+  },
+  {
+    "id": "S03",
+    "text_boxes": [
+      {
+        "text": "长安求仕",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          666
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 9.916666666666668
+      },
+      {
+        "text": "746—755年｜长安",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          347,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 9.916666666666668
+      },
+      {
+        "text": "致君尧舜上，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          480,
+          821
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 9.916666666666668
+      },
+      {
+        "text": "再使风俗淳。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          480,
+          894
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 9.916666666666668
+      },
+      {
+        "text": "《奉赠韦左丞丈二十二韵》节选",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          478,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 9.916666666666668
+      },
+      {
+        "text": "他在长安求仕近十年，临乱前才得到小官。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          766,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 9.916666666666668
+      },
+      {
+        "text": "他想让书中的道理，成为改变世道的办法。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          690,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 9.916666666666668
+      }
+    ]
+  },
+  {
+    "id": "S04",
+    "text_boxes": [
+      {
+        "text": "看见饥寒",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          669
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "755年｜长安赴奉先途中",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          420,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "朱门酒肉臭，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          480,
+          821
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "路有冻死骨。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          480,
+          893
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "《自京赴奉先县咏怀五百字》节选",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          505,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "赴奉先探家，他在诗中记下幼子夭折之痛。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          766,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "个人的不幸，让贫富悬殊有了切肤的重量。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          690,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 9.683333333333334
+      }
+    ]
+  },
+  {
+    "id": "S05",
+    "text_boxes": [
+      {
+        "text": "乱中长安",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          666
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 9.883333333333335
+      },
+      {
+        "text": "757年春｜长安",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          300,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 9.883333333333335
+      },
+      {
+        "text": "国破山河在，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          480,
+          820
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 9.883333333333335
+      },
+      {
+        "text": "城春草木深。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          480,
+          894
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 9.883333333333335
+      },
+      {
+        "text": "《春望》节选",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          262,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 9.883333333333335
+      },
+      {
+        "text": "他被俘至沦陷的长安，与妻儿分隔在战乱中。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          800,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 9.883333333333335
+      },
+      {
+        "text": "战乱的重量，落在一城春草与一家离散上。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          690,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 9.883333333333335
+      }
+    ]
+  },
+  {
+    "id": "S06",
+    "text_boxes": [
+      {
+        "text": "诗里的百姓",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          446,
+          663
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 8.850000000000001
+      },
+      {
+        "text": "757—759年｜凤翔·华州·洛阳",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          527,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 8.850000000000001
+      },
+      {
+        "text": "征役与离别，被他写进了诗。",
+        "size_px": 48,
+        "bounds": [
+          96,
+          760,
+          720,
+          812
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 8.850000000000001
+      },
+      {
+        "text": "“三吏”“三别” · 759年",
+        "size_px": 30,
+        "bounds": [
+          100,
+          913,
+          464,
+          943
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.13,
+        "fade_out_begins_sec": 8.850000000000001
+      },
+      {
+        "text": "洛阳回华州的战乱见闻，写入“三吏”“三别”六篇。",
+        "size_px": 32,
+        "bounds": [
+          120,
+          1400,
+          888,
+          1434
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 8.850000000000001
+      },
+      {
+        "text": "他让被征发与被留下的人，都有自己的声音。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          720,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 8.850000000000001
+      }
+    ]
+  },
+  {
+    "id": "S07",
+    "text_boxes": [
+      {
+        "text": "山路向蜀",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          663
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "759年｜秦州—同谷—成都",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          444,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "携家远行，寻找一处安身之所。",
+        "size_px": 48,
+        "bounds": [
+          96,
+          760,
+          768,
+          812
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "他携家离开华州，经秦州同谷，于岁末到成都。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          834,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 9.683333333333334
+      },
+      {
+        "text": "诗人的行程背后，是一家人的生计和安身之难。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          750,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 9.683333333333334
+      }
+    ]
+  },
+  {
+    "id": "S08",
+    "text_boxes": [
+      {
+        "text": "草堂春雨",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          663
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 8.25
+      },
+      {
+        "text": "761年春（通行说）｜成都",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          450,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 8.25
+      },
+      {
+        "text": "随风潜入夜，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          480,
+          821
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 8.25
+      },
+      {
+        "text": "润物细无声。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          480,
+          892
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 8.25
+      },
+      {
+        "text": "《春夜喜雨》节选",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          316,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 8.25
+      },
+      {
+        "text": "他在成都营建草堂，随后写下咏春雨的诗篇。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          800,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 8.25
+      },
+      {
+        "text": "安稳的片刻，让我们看见他对日常生活的珍惜。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          750,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 8.25
+      }
+    ]
+  },
+  {
+    "id": "S09",
+    "text_boxes": [
+      {
+        "text": "天下的屋檐",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          446,
+          663
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 13.916666666666668
+      },
+      {
+        "text": "约761年秋｜成都草堂",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          390,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 13.916666666666668
+      },
+      {
+        "text": "安得广厦千万间，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          608,
+          821
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 13.916666666666668
+      },
+      {
+        "text": "大庇天下寒士俱欢颜。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          736,
+          896
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 13.916666666666668
+      },
+      {
+        "text": "《茅屋为秋风所破歌》节选",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          424,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 13.916666666666668
+      },
+      {
+        "text": "秋风损坏草堂后，他写下为天下寒士求屋的愿望。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          868,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 13.916666666666668
+      },
+      {
+        "text": "困顿没有缩小他的关怀，反而使它越过自家门槛。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          780,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 13.916666666666668
+      }
+    ]
+  },
+  {
+    "id": "S10",
+    "text_boxes": [
+      {
+        "text": "万里作客",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          663
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 10.716666666666667
+      },
+      {
+        "text": "767年秋（通行说）｜夔州",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          450,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 10.716666666666667
+      },
+      {
+        "text": "万里悲秋常作客，",
+        "size_px": 64,
+        "bounds": [
+          96,
+          752,
+          608,
+          820
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 10.716666666666667
+      },
+      {
+        "text": "百年多病独登台。",
+        "size_px": 64,
+        "bounds": [
+          96,
+          832,
+          608,
+          896
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 1.06,
+        "fade_out_begins_sec": 10.716666666666667
+      },
+      {
+        "text": "《登高》节选",
+        "size_px": 27,
+        "bounds": [
+          100,
+          913,
+          262,
+          940
+        ],
+        "role": "source",
+        "full_opacity_after_sec": 1.1800000000000002,
+        "fade_out_begins_sec": 10.716666666666667
+      },
+      {
+        "text": "在夔州客居期间，他以《登高》写暮年的病与愁。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          868,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 10.716666666666667
+      },
+      {
+        "text": "暮年的病痛与客愁，被他写成开阔而严整的诗。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          750,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 10.716666666666667
+      }
+    ]
+  },
+  {
+    "id": "S11",
+    "text_boxes": [
+      {
+        "text": "湖湘晚岁",
+        "size_px": 70,
+        "bounds": [
+          96,
+          595,
+          376,
+          663
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.38,
+        "fade_out_begins_sec": 10.450000000000001
+      },
+      {
+        "text": "768—770年｜湖湘",
+        "size_px": 30,
+        "bounds": [
+          100,
+          688,
+          347,
+          718
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.5800000000000001,
+        "fade_out_begins_sec": 10.450000000000001
+      },
+      {
+        "text": "漂泊，仍在继续。",
+        "size_px": 48,
+        "bounds": [
+          96,
+          760,
+          480,
+          812
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.78,
+        "fade_out_begins_sec": 10.450000000000001
+      },
+      {
+        "text": "出峡后，他经江陵、岳阳等地，继续漂泊湖湘。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          834,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 10.450000000000001
+      },
+      {
+        "text": "漂泊是舟上的日常，故乡与时局仍在他的诗中。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          750,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 10.450000000000001
+      }
+    ]
+  },
+  {
+    "id": "S12",
+    "text_boxes": [
+      {
+        "text": "杜甫",
+        "size_px": 96,
+        "bounds": [
+          96,
+          595,
+          288,
+          687
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.36000000000000004,
+        "fade_out_begins_sec": 8.283333333333333
+      },
+      {
+        "text": "留在人间",
+        "size_px": 64,
+        "bounds": [
+          98,
+          717,
+          354,
+          778
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.53,
+        "fade_out_begins_sec": 8.283333333333333
+      },
+      {
+        "text": "712—770",
+        "size_px": 30,
+        "bounds": [
+          100,
+          809,
+          227,
+          831
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.68,
+        "fade_out_begins_sec": 8.283333333333333
+      },
+      {
+        "text": "一生风雨，落笔总有人间。",
+        "size_px": 44,
+        "bounds": [
+          98,
+          870,
+          626,
+          917
+        ],
+        "role": "main",
+        "full_opacity_after_sec": 0.8300000000000001,
+        "fade_out_begins_sec": 8.283333333333333
+      },
+      {
+        "text": "770年，生命止于漂泊，诗篇留在人间。",
+        "size_px": 34,
+        "bounds": [
+          120,
+          1400,
+          725,
+          1436
+        ],
+        "role": "event",
+        "full_opacity_after_sec": 1.43,
+        "fade_out_begins_sec": 8.283333333333333
+      },
+      {
+        "text": "这些诗，让乱世里的普通人至今仍能被看见。",
+        "size_px": 30,
+        "bounds": [
+          120,
+          1450,
+          720,
+          1481
+        ],
+        "role": "assessment",
+        "full_opacity_after_sec": 2.13,
+        "fade_out_begins_sec": 8.283333333333333
+      }
+    ]
+  }
+]

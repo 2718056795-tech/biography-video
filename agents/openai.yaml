@@ -1,4 +1,4 @@
 interface:
-  display_name: "人物生平｜足迹与回响"
-  short_description: "把历史人物生平整理成有史料依据的剪影分镜、横版短片与同风格封面"
-  default_prompt: "用 $biography-video 制作一集人物生平视频，沿用极简剪影与时间线叙事。"
+  display_name: "人物生平动画"
+  short_description: "史料解读、角色动画、累计行程与固定配乐的生平视频及必交竖屏封面"
+  default_prompt: "使用 $historical-biography-video 制作历史人物生平动画，继承已确认的画幅、地图与配乐偏好，并交付实际MP4。"

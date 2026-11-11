@@ -1,0 +1,29 @@
+{
+  "technical_status": "passed",
+  "inputs": {
+    "cover": "/workspace/dufu_production_v4/封面/杜甫_此心在人间_封面_竖向长短边5比4_1200x1500.png"
+  },
+  "expected": {
+    "width": 1200,
+    "height": 1500,
+    "orientation": "portrait",
+    "format": "PNG",
+    "default_user_name": "5:4竖屏",
+    "default_long_short_ratio": "5:4",
+    "default_width_height_ratio": "4:5"
+  },
+  "measurements": {
+    "sha256": "7a1957cdc4ea1961d858a988e8f15b6f9e6ac5d9b1112df2440c95c3dbb5b4e2",
+    "format": "PNG",
+    "width": 1200,
+    "height": 1500,
+    "mode": "RGB",
+    "png_structure_and_pixels": "passed"
+  },
+  "errors": [],
+  "scope": "Actual file, PNG verification and decoded pixels, dimensions and SHA256 only; no OCR, title correctness, composition or style certification.",
+  "manual_checks": {
+    "title_and_person_correct": "pending",
+    "thumbnail_readability_and_style": "pending"
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "profile_id": "biography-paper-cut-series-2.0",
+  "kind": "frame",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "theme_tokens": {
+    "paper": "#132A36",
+    "light": "#EAE2C8",
+    "ink": "#F2E9D2",
+    "muted": "#B3C3BE",
+    "accent": "#D0B06D",
+    "assessment": "#C7D2CA",
+    "green": "#1E3E49",
+    "pale": "#658187",
+    "clay": "#6E6C55",
+    "warm": "#D0B06D",
+    "roof": "#0B202B",
+    "soft": "#355461",
+    "bluegreen": "#3D6570",
+    "map_ink": "#A6BAB5",
+    "map_accent": "#D0B06D",
+    "map_halo": "#61716B",
+    "map_coast": "#739292",
+    "map_label_halo": "#132A36"
+  },
+  "theme_direction": {
+    "person": "李白",
+    "rationale": "深靛夜色、月白文字与旧金强调，表现远游与清朗想象。",
+    "colors": {
+      "paper": "#132A36",
+      "light": "#EAE2C8",
+      "ink": "#F2E9D2",
+      "muted": "#B3C3BE",
+      "accent": "#D0B06D",
+      "assessment": "#C7D2CA",
+      "green": "#1E3E49",
+      "pale": "#658187",
+      "clay": "#6E6C55",
+      "warm": "#D0B06D",
+      "roof": "#0B202B",
+      "soft": "#355461",
+      "bluegreen": "#3D6570",
+      "map_ink": "#A6BAB5",
+      "map_accent": "#D0B06D",
+      "map_halo": "#61716B",
+      "map_coast": "#739292",
+      "map_label_halo": "#132A36"
+    },
+    "motifs": [
+      "江舟与远帆",
+      "月色与城楼",
+      "行囊与赠别"
+    ],
+    "background_choices": [
+      "城楼或江岸",
+      "舟行与驿途",
+      "室内书案或送别场景"
+    ],
+    "evidence_note": "美术候选，不是已完成的新李白史料项目；使用某一事件、建筑或器物前须逐幕核查，不强制每幕月亮/山水/酒杯。",
+    "theme_id": "libai-series-v2",
+    "profile_id": "biography-paper-cut-series-2.0"
+  },
+  "fonts": {
+    "serif_regular": {
+      "path": "fonts/series-serif-regular.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
+      "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121"
+    },
+    "serif_bold": {
+      "path": "fonts/series-serif-bold.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
+      "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
+    },
+    "sans_regular": {
+      "path": "fonts/series-sans-regular.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
+    },
+    "sans_bold": {
+      "path": "fonts/series-sans-bold.otf",
+      "resolved_path": "/workspace/series_skill_v2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
+    }
+  },
+  "elements": [
+    {
+      "role": "header.series_name",
+      "x": 96,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 27,
+      "color_role": "muted",
+      "color": "#B3C3BE",
+      "anchor": "lt",
+      "text": "李白 / 山河为卷",
+      "bbox": [
+        96,
+        100,
+        281,
+        129
+      ]
+    },
+    {
+      "role": "header.page_number",
+      "x": 796,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 25,
+      "color_role": "muted",
+      "color": "#B3C3BE",
+      "anchor": "lt",
+      "text": "09 / 12",
+      "bbox": [
+        796,
+        100,
+        873,
+        125
+      ]
+    },
+    {
+      "role": "standard.title",
+      "x": 96,
+      "y": 595,
+      "font": "serif_bold",
+      "size": 70,
+      "color_role": "ink",
+      "color": "#F2E9D2",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        595,
+        446,
+        663
+      ],
+      "text": "远游与赠别",
+      "line_index": 0,
+      "start_sec": 0.1,
+      "full_opacity_after_sec": 0.38,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.meta",
+      "x": 100,
+      "y": 688,
+      "font": "sans_regular",
+      "size": 30,
+      "color_role": "muted",
+      "color": "#B3C3BE",
+      "anchor": "lt",
+      "bbox": [
+        100,
+        688,
+        400,
+        718
+      ],
+      "text": "版式示例｜江舟与城楼",
+      "line_index": 0,
+      "start_sec": 0.3,
+      "full_opacity_after_sec": 0.5800000000000001,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.quote",
+      "x": 96,
+      "y": 752,
+      "font": "serif_regular",
+      "size": 64,
+      "color_role": "ink",
+      "color": "#F2E9D2",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        752,
+        608,
+        821
+      ],
+      "text": "孤帆远影碧空尽，",
+      "line_index": 0,
+      "start_sec": 0.5,
+      "full_opacity_after_sec": 0.78,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.quote",
+      "x": 96,
+      "y": 832,
+      "font": "serif_regular",
+      "size": 64,
+      "color_role": "ink",
+      "color": "#F2E9D2",
+      "anchor": "lt",
+      "bbox": [
+        96,
+        832,
+        608,
+        894
+      ],
+      "text": "唯见长江天际流。",
+      "line_index": 1,
+      "start_sec": 0.78,
+      "full_opacity_after_sec": 1.06,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "standard.source",
+      "x": 100,
+      "y": 913,
+      "font": "sans_regular",
+      "size": 27,
+      "color_role": "muted",
+      "color": "#B3C3BE",
+      "anchor": "lt",
+      "bbox": [
+        100,
+        913,
+        478,
+        940
+      ],
+      "text": "《黄鹤楼送孟浩然之广陵》节选",
+      "line_index": 0,
+      "start_sec": 0.9,
+      "full_opacity_after_sec": 1.1800000000000002,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.event",
+      "x": 120,
+      "y": 1400,
+      "font": "sans_bold",
+      "size": 34,
+      "color_role": "ink",
+      "color": "#F2E9D2",
+      "anchor": "lt",
+      "bbox": [
+        120,
+        1400,
+        698,
+        1434
+      ],
+      "text": "事件说明在这里交代人物的具体经历。",
+      "line_index": 0,
+      "start_sec": 1.15,
+      "full_opacity_after_sec": 1.43,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.assessment",
+      "x": 120,
+      "y": 1450,
+      "font": "sans_regular",
+      "size": 30,
+      "color_role": "assessment",
+      "color": "#C7D2CA",
+      "anchor": "lt",
+      "bbox": [
+        120,
+        1450,
+        630,
+        1480
+      ],
+      "text": "原创解读在这里说明这一阶段的意义。",
+      "line_index": 0,
+      "start_sec": 1.85,
+      "full_opacity_after_sec": 2.13,
+      "conservative_fade_out_begins_sec": 13.916666666666668
+    },
+    {
+      "role": "footer.accent_line",
+      "x": 96,
+      "y": 1400,
+      "x1": 96,
+      "y1": 1400,
+      "x2": 96,
+      "y2": 1486,
+      "width": 3,
+      "color_role": "accent",
+      "color": "#D0B06D"
+    },
+    {
+      "role": "footer.wash",
+      "x": 0,
+      "y": 1360,
+      "height": 560,
+      "alpha": 245,
+      "fade_in_px": 40,
+      "color": "paper",
+      "color_role": "paper",
+      "actual_paper_rgb": [
+        19,
+        42,
+        54
+      ]
+    }
+  ],
+  "map": {
+    "x": 96,
+    "y": 150,
+    "width": 880,
+    "height": 430,
+    "supersampling": 2,
+    "plot_box": [
+      20,
+      8,
+      860,
+      415
+    ],
+    "heading": false,
+    "side_caption": false,
+    "legend": false,
+    "label_size": 28,
+    "label_bold": true,
+    "label_stroke_px": 2,
+    "coast_width": 1.1,
+    "coast_alpha": 94,
+    "old_line_width": 1.3,
+    "old_line_alpha_min": 70,
+    "new_line_width": 2.1,
+    "new_line_halo_width": 4.5,
+    "node_radius": 1.9,
+    "current_ring_radius": 8.5,
+    "current_point_radius": 4.2,
+    "growing_tip_radius": 2.7,
+    "current_alpha": 245
+  },
+  "map_present": true,
+  "stage": {
+    "profile_name": "open_air",
+    "scale": 0.83,
+    "offset_y": 275
+  },
+  "scene_id": "S09",
+  "chapter_index": 9,
+  "chapter_kind": "chapter",
+  "time_sec": 3.5,
+  "duration_sec": 14.366666666666667,
+  "footer_actual_paper_rgb": [
+    19,
+    42,
+    54
+  ],
+  "motion": {
+    "text_fade_sec": 0.28,
+    "text_enter_slide_y": 6,
+    "text_enter_slide_sec": 0.35,
+    "text_out_end_before_scene_end": 0.12,
+    "read_budget_out_before_end": 0.45,
+    "final_picture_fade_sec": 0.48,
+    "map_segment_delay": 0.45,
+    "map_active_window_sec": 5.5
+  },
+  "scope": "Actual compositor geometry, fonts and theme; not historical, animation, audio or device certification"
+}

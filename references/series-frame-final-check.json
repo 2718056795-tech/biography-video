@@ -1,0 +1,450 @@
+{
+  "technical_status": "passed",
+  "checked_at_utc": "2026-11-11T14:22:02.573915+00:00",
+  "independent_rerun": true,
+  "prior_check_inherited": false,
+  "method": "Fresh original V4 Scene.art(t) and original life_map.render_map composed with SeriesFrame; full 1080x1920 RGB ImageChops.difference(...).getbbox() must be None. No encoded-video comparison or tolerance.",
+  "baseline": "/workspace/dufu_production_v4/工程/render_dufu.py using original system Noto CJK TTC index 2; readonly existing animation caches",
+  "series_frame_sha256": "daac81d1494205b82dce14c628c36b3e31e9529e0f0f42117de24c65d300a786",
+  "profile_id": "biography-paper-cut-series-2.0",
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "fonts_manifest_sha256": "043e19e8dc7075eed23c3f179df02f0d93bdd08642816186df50567e7ce3bf20",
+  "theme_file": "assets/series/themes/dufu.json",
+  "theme_sha256": "551071b8274f564a1b8c00c2587a1c3167b661ff40c7d026179320ff04fc5d9c",
+  "current_final_font_files": {
+    "serif_regular": {
+      "file": "fonts/series-serif-regular.otf",
+      "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121",
+      "bytes": 8455860,
+      "manifest_sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121",
+      "manifest_match": true,
+      "source_ttc_index": 2
+    },
+    "serif_bold": {
+      "file": "fonts/series-serif-bold.otf",
+      "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac",
+      "bytes": 8799848,
+      "manifest_sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac",
+      "manifest_match": true,
+      "source_ttc_index": 2
+    },
+    "sans_regular": {
+      "file": "fonts/series-sans-regular.otf",
+      "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f",
+      "bytes": 6074292,
+      "manifest_sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f",
+      "manifest_match": true,
+      "source_ttc_index": 2
+    },
+    "sans_bold": {
+      "file": "fonts/series-sans-bold.otf",
+      "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b",
+      "bytes": 6211096,
+      "manifest_sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b",
+      "manifest_match": true,
+      "source_ttc_index": 2
+    }
+  },
+  "files_changed_during_check": [],
+  "fonts_changed_during_check": [],
+  "case_count": 15,
+  "exact_case_count": 15,
+  "checks": [
+    {
+      "scene_id": "S01",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 6.833333333333333,
+      "stage_profile": "room_high",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "5525229b5d9a9c20acdb5f5e1ab8b8b3e97568917691044c133cc60d0fbad92d",
+      "series_rgb_sha256": "5525229b5d9a9c20acdb5f5e1ab8b8b3e97568917691044c133cc60d0fbad92d"
+    },
+    {
+      "scene_id": "S02",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 9.033333333333333,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "ed8e189bc8df395d14fac74a373cc3a7eb31d75649320a84cd797cbebeceffdf",
+      "series_rgb_sha256": "ed8e189bc8df395d14fac74a373cc3a7eb31d75649320a84cd797cbebeceffdf"
+    },
+    {
+      "scene_id": "S03",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 10.366666666666667,
+      "stage_profile": "gate_high",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "601d7d675af9a52677a7402029e5f0f54b1aa97153132a019d03b029d8c92b52",
+      "series_rgb_sha256": "601d7d675af9a52677a7402029e5f0f54b1aa97153132a019d03b029d8c92b52"
+    },
+    {
+      "scene_id": "S04",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 10.133333333333333,
+      "stage_profile": "gate_high",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "f6e02d93fb6ca159354684665fbbd1c722b5a0173bd3ccdff104680d673cec50",
+      "series_rgb_sha256": "f6e02d93fb6ca159354684665fbbd1c722b5a0173bd3ccdff104680d673cec50"
+    },
+    {
+      "scene_id": "S05",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 10.333333333333334,
+      "stage_profile": "gate_high",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "ee71069a5d9b004c16bf63efaa08384c9f033a3bac00c7d0f4aea542b3b14467",
+      "series_rgb_sha256": "ee71069a5d9b004c16bf63efaa08384c9f033a3bac00c7d0f4aea542b3b14467"
+    },
+    {
+      "scene_id": "S06",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 9.3,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "61c78dff3a55ca243ff86e029a136e402368c442b39a0a3c8f8d8b8d053a9ff7",
+      "series_rgb_sha256": "61c78dff3a55ca243ff86e029a136e402368c442b39a0a3c8f8d8b8d053a9ff7"
+    },
+    {
+      "scene_id": "S07",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 10.133333333333333,
+      "stage_profile": "travel_wide",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "96c1f86943f8db67356c6605eba78723c11c517b58184d6d84a3a28261461dc7",
+      "series_rgb_sha256": "96c1f86943f8db67356c6605eba78723c11c517b58184d6d84a3a28261461dc7"
+    },
+    {
+      "scene_id": "S08",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 8.7,
+      "stage_profile": "cottage_low",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "9a8d24c44c7a391aa4a470cd0d817cc468194f97caf43546df0e95034f1acda3",
+      "series_rgb_sha256": "9a8d24c44c7a391aa4a470cd0d817cc468194f97caf43546df0e95034f1acda3"
+    },
+    {
+      "scene_id": "S09",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 14.366666666666667,
+      "stage_profile": "room_high",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "d1a4bd41d4f4687a3124468e27bbe1f01a6b0a69c8a09682dcbc4a81500777e4",
+      "series_rgb_sha256": "d1a4bd41d4f4687a3124468e27bbe1f01a6b0a69c8a09682dcbc4a81500777e4"
+    },
+    {
+      "scene_id": "S10",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 11.166666666666666,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "af8e24301ed70af0602b626cfb5bd1a15fb7e8de2b61b5b800fe179049341510",
+      "series_rgb_sha256": "af8e24301ed70af0602b626cfb5bd1a15fb7e8de2b61b5b800fe179049341510"
+    },
+    {
+      "scene_id": "S11",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 10.9,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "67989007500b15aaef91d680b71e51525644227681338613d1ae214e4e17c653",
+      "series_rgb_sha256": "67989007500b15aaef91d680b71e51525644227681338613d1ae214e4e17c653"
+    },
+    {
+      "scene_id": "S12",
+      "phase": "steady_chapter",
+      "time_sec": 3.5,
+      "duration_sec": 8.733333333333333,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "89144f260b2129ae7f74bf427a9c260ec6bed8465dc35d0ad46592762491f2d0",
+      "series_rgb_sha256": "89144f260b2129ae7f74bf427a9c260ec6bed8465dc35d0ad46592762491f2d0"
+    },
+    {
+      "scene_id": "S02",
+      "phase": "entry_fade",
+      "time_sec": 0.2,
+      "duration_sec": 9.033333333333333,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "b7ff29a2054bfb7d9c84c58a4bbd9f9f6b561c0ea930785d77a77fe59a876097",
+      "series_rgb_sha256": "b7ff29a2054bfb7d9c84c58a4bbd9f9f6b561c0ea930785d77a77fe59a876097"
+    },
+    {
+      "scene_id": "S01",
+      "phase": "early_opening",
+      "time_sec": 1.2,
+      "duration_sec": 6.833333333333333,
+      "stage_profile": "room_high",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "1cd8f57ac213156519ba20d8b9cc47696e3f4c3234a5bf8c09c65f158ea2c426",
+      "series_rgb_sha256": "1cd8f57ac213156519ba20d8b9cc47696e3f4c3234a5bf8c09c65f158ea2c426"
+    },
+    {
+      "scene_id": "S12",
+      "phase": "final_picture_fade",
+      "time_sec": 8.533333333333333,
+      "duration_sec": 8.733333333333333,
+      "stage_profile": "open_air",
+      "pixel_identical_to_original_v4": true,
+      "difference_bbox": null,
+      "difference_rgb_extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "reference_rgb_sha256": "4d9ecee200673146cc22571e4aaa67b6acda53569652c5e5bf5175d3803acf1e",
+      "series_rgb_sha256": "4d9ecee200673146cc22571e4aaa67b6acda53569652c5e5bf5175d3803acf1e"
+    }
+  ],
+  "coordinate_guides": {
+    "model_visual_status": "reviewed",
+    "files": [
+      {
+        "path": "assets/series/video-layout-guide.png",
+        "sha256": "23f79edd7d2fdcfd42a3252bf16c2852c88528d9c7d438951bc97d7edd8272c6",
+        "bytes": 344602
+      },
+      {
+        "path": "assets/series/cover-layout-guide.png",
+        "sha256": "0b6ceb5dcd40089370466853fed9ea7a167ce6b051a1f4ae28d6149b125cbe60",
+        "bytes": 169727
+      }
+    ],
+    "observations": [
+      "Both guides exist and are readable coordinate diagrams, not finished film/cover artwork.",
+      "Video map, headers, standard/bookend text and event/assessment roles are labeled with fixed coordinates; theme/artwork are explicitly variable.",
+      "Cover guide states 1200x1500, long:short 5:4 / width:height 4:5, text roles and artwork area."
+    ]
+  },
+  "scope": "Verifies current bundled font/frame-compositor equality for these 15 Du Fu native cases using the same art and original map. Does not certify all future glyphs, SeriesMap rendering, new-person facts/art/animation, audio, encoded output or device UI."
+}

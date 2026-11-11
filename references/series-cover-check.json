@@ -1,0 +1,15 @@
+{
+  "locked_cover_compositor_and_style_check_passed": true,
+  "reserved_top_overwritten_and_lower_art_retained": true,
+  "identical_inputs_reproducible_png": true,
+  "shifted_title_rejected": true,
+  "swapped_art_dimensions_rejected": true,
+  "text_overflow_rejected_without_shrinking": true,
+  "different_person_palette_allowed_with_same_geometry": true,
+  "recorded_font_roles": [
+    "sans_regular",
+    "serif_bold"
+  ],
+  "master_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "scope": "Actual bundled-font compositor and layout-record checks on synthetic art. No historical truth, background semantics, title wording, text-free lower art or aesthetic certification."
+}

@@ -1,0 +1,304 @@
+{
+  "profile_id": "biography-paper-cut-series-2.0",
+  "schema_version": "2.0",
+  "coordinate_system": "native pixels; top-left origin; text uses anchor lt, not baseline",
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_sec": 120,
+    "cut_frames": [
+      0,
+      205,
+      476,
+      787,
+      1091,
+      1401,
+      1680,
+      1984,
+      2245,
+      2676,
+      3011,
+      3338,
+      3600
+    ],
+    "right_text_limit": 904,
+    "bottom_text_limit": 1498
+  },
+  "palette_policy": "per-person theme is variable; geometry/font sizes/timing stay fixed",
+  "header": {
+    "series_name": {
+      "x": 96,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 27,
+      "color": "muted"
+    },
+    "page_number": {
+      "x": 796,
+      "y": 100,
+      "font": "sans_regular",
+      "size": 25,
+      "color": "muted",
+      "format": "{index:02d} / {count:02d}"
+    }
+  },
+  "map": {
+    "x": 96,
+    "y": 150,
+    "width": 880,
+    "height": 430,
+    "supersampling": 2,
+    "plot_box": [
+      20,
+      8,
+      860,
+      415
+    ],
+    "heading": false,
+    "side_caption": false,
+    "legend": false,
+    "label_size": 28,
+    "label_bold": true,
+    "label_stroke_px": 2,
+    "coast_width": 1.1,
+    "coast_alpha": 94,
+    "old_line_width": 1.3,
+    "old_line_alpha_min": 70,
+    "new_line_width": 2.1,
+    "new_line_halo_width": 4.5,
+    "node_radius": 1.9,
+    "current_ring_radius": 8.5,
+    "current_point_radius": 4.2,
+    "growing_tip_radius": 2.7,
+    "current_alpha": 245
+  },
+  "standard": {
+    "title": {
+      "x": 96,
+      "y": 595,
+      "font": "serif_bold",
+      "size": 70,
+      "color": "ink",
+      "start": 0.1
+    },
+    "meta": {
+      "x": 100,
+      "y": 688,
+      "font": "sans_regular",
+      "size": 30,
+      "color": "muted",
+      "start": 0.3
+    },
+    "quote": {
+      "x": 96,
+      "y": 752,
+      "font": "serif_regular",
+      "size": 64,
+      "color": "ink",
+      "start": 0.5,
+      "line_height": 80,
+      "line_delay": 0.28,
+      "max_lines": 2,
+      "max_width": 808
+    },
+    "source": {
+      "x": 100,
+      "y": 913,
+      "font": "sans_regular",
+      "size": 27,
+      "color": "muted",
+      "start": 0.9,
+      "line_height": 40,
+      "max_width": 760
+    },
+    "explanation": {
+      "x": 96,
+      "y": 760,
+      "font": "serif_regular",
+      "size": 48,
+      "color": "ink",
+      "start": 0.5,
+      "line_height": 68,
+      "line_delay": 0.14,
+      "max_width": 760
+    },
+    "narrative_source": {
+      "x": 100,
+      "y": 913,
+      "font": "sans_regular",
+      "size": 30,
+      "color": "accent",
+      "start": 0.85
+    }
+  },
+  "bookend": {
+    "person": {
+      "x": 96,
+      "y": 595,
+      "font": "serif_bold",
+      "size": 96,
+      "color": "ink",
+      "start": 0.08
+    },
+    "title": {
+      "x": 98,
+      "y": 717,
+      "font": "serif_regular",
+      "size": 64,
+      "color": "accent",
+      "start": 0.25
+    },
+    "meta": {
+      "x": 100,
+      "y": 809,
+      "font": "sans_regular",
+      "size": 30,
+      "color": "muted",
+      "start": 0.4
+    },
+    "explanation": {
+      "x": 98,
+      "y": 870,
+      "font": "serif_regular",
+      "size": 44,
+      "color": "ink",
+      "start": 0.55,
+      "line_height": 64,
+      "line_delay": 0.12,
+      "max_width": 760
+    }
+  },
+  "footer": {
+    "event": {
+      "x": 120,
+      "y": 1400,
+      "font": "sans_bold",
+      "size": 34,
+      "min_size": 32,
+      "color": "ink",
+      "start": 1.15,
+      "intro_start": 0.85,
+      "max_width": 780
+    },
+    "assessment": {
+      "x": 120,
+      "y": 1450,
+      "font": "sans_regular",
+      "size": 30,
+      "color": "assessment",
+      "start": 1.85,
+      "intro_start": 1.45,
+      "max_width": 780
+    },
+    "wash": {
+      "x": 0,
+      "y": 1360,
+      "height": 560,
+      "alpha": 245,
+      "fade_in_px": 40,
+      "color": "paper"
+    },
+    "accent_line": {
+      "x1": 96,
+      "y1": 1400,
+      "x2": 96,
+      "y2": 1486,
+      "width": 3,
+      "color": "accent"
+    }
+  },
+  "motion": {
+    "text_fade_sec": 0.28,
+    "text_enter_slide_y": 6,
+    "text_enter_slide_sec": 0.35,
+    "text_out_end_before_scene_end": 0.12,
+    "read_budget_out_before_end": 0.45,
+    "final_picture_fade_sec": 0.48,
+    "map_segment_delay": 0.45,
+    "map_active_window_sec": 5.5
+  },
+  "stage_profiles": {
+    "room_high": {
+      "scale": 0.6,
+      "offset_y": 540
+    },
+    "gate_high": {
+      "scale": 0.72,
+      "offset_y": 420
+    },
+    "travel_wide": {
+      "scale": 0.74,
+      "offset_y": 270
+    },
+    "cottage_low": {
+      "scale": 0.78,
+      "offset_y": 270
+    },
+    "open_air": {
+      "scale": 0.83,
+      "offset_y": 275
+    }
+  },
+  "dufu_stage_profiles": [
+    "room_high",
+    "open_air",
+    "gate_high",
+    "gate_high",
+    "gate_high",
+    "open_air",
+    "travel_wide",
+    "cottage_low",
+    "room_high",
+    "open_air",
+    "open_air",
+    "open_air"
+  ],
+  "cover": {
+    "required": true,
+    "width": 1200,
+    "height": 1500,
+    "long_short_ratio": "5:4",
+    "width_height_ratio": "4:5",
+    "safe_margin": 80,
+    "art_reserved_top": 560,
+    "name": {
+      "x": 80,
+      "y": 50,
+      "font": "serif_bold",
+      "size": 240,
+      "color": "ink",
+      "max_width": 1040
+    },
+    "film_title": {
+      "x": 80,
+      "y": 320,
+      "font": "serif_bold",
+      "size": 120,
+      "color": "ink",
+      "max_width": 1040
+    },
+    "hook": {
+      "x": 130,
+      "y": 485,
+      "font": "sans_regular",
+      "size": 42,
+      "color": "muted",
+      "max_width": 990
+    },
+    "accent_line": {
+      "x1": 87,
+      "y1": 472,
+      "x2": 87,
+      "y2": 531,
+      "width": 8,
+      "color": "accent"
+    }
+  },
+  "fonts": {
+    "serif_regular": "fonts/series-serif-regular.otf",
+    "serif_bold": "fonts/series-serif-bold.otf",
+    "sans_regular": "fonts/series-sans-regular.otf",
+    "sans_bold": "fonts/series-sans-bold.otf"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "test_type": "actual2-second normalized reference render plus explicit unimplemented-provider rejection",
+  "actual_preview": {
+    "file": "/tmp/dufu-normalized-2sec.mp4",
+    "sha256": "da80123b2fa978146d105b51cd9235b953b17d3de7e5e9d2c76a4fb91159cb09",
+    "frames": 60,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "video_duration_sec": "2.000000",
+    "audio_duration_sec": "1.998005",
+    "full_decode_exit_code": 0,
+    "source_audio_sha256": "9339186658cf252dd118c282c4803d4e70efe743010197cac51da792e38afb80",
+    "source_audio_unchanged": true,
+    "packaged_example": "assets/series/examples/dufu-project/qa/smoke_preview_2s.mp4"
+  },
+  "unimplemented_art_provider_rejected_without_final_output": true,
+  "normalized_reference_preflight": "passed against actual current check_project.py",
+  "full120_second_new_pipeline_render": "not_run; user requested Skill refinement, existingV4 film remains supplied reference",
+  "render_script_sha256": "24498317ea3da8d07135116cb5b653fbecc914e8593462213733fcbcf94a4df3",
+  "scope": "Real local video encoding and corresponding original AAC excerpt; does not certify a full120-second newly rendered film, new-person historical research, subjective listening or device preview.",
+  "actual_preview_layout_report_checked_against_current_profile": "passed",
+  "art_provider_has_no_system_font_or_cache_rewrite_dependency": true
+}

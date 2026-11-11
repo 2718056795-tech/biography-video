@@ -1,0 +1,122 @@
+{
+  "schema_version": "2.0",
+  "profile_id": "biography-paper-cut-series-2.0",
+  "kind": "cover",
+  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "canvas": {
+    "width": 1200,
+    "height": 1500
+  },
+  "theme_tokens": {
+    "paper": "#DCD2BC",
+    "light": "#F3EBDC",
+    "ink": "#1E2A26",
+    "muted": "#62705D",
+    "accent": "#8A593E",
+    "assessment": "#4D5C4B",
+    "green": "#6D7C68",
+    "pale": "#A7AF96",
+    "clay": "#A36B4E",
+    "warm": "#C5A86B",
+    "roof": "#455347",
+    "soft": "#C8C6AD",
+    "bluegreen": "#85958A",
+    "map_ink": "#455347",
+    "map_accent": "#8A593E",
+    "map_halo": "#C5A86B",
+    "map_coast": "#567566",
+    "map_label_halo": "#DCD2BC"
+  },
+  "theme_sha256": "551071b8274f564a1b8c00c2587a1c3167b661ff40c7d026179320ff04fc5d9c",
+  "fonts": {
+    "serif_bold": {
+      "path": "fonts/series-serif-bold.otf",
+      "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
+    },
+    "sans_regular": {
+      "path": "fonts/series-sans-regular.otf",
+      "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
+    }
+  },
+  "elements": [
+    {
+      "role": "cover.name",
+      "text": "杜甫",
+      "x": 80,
+      "y": 50,
+      "font": "serif_bold",
+      "size": 240,
+      "color_role": "ink",
+      "anchor": "lt",
+      "bbox": [
+        80,
+        50,
+        560,
+        278
+      ]
+    },
+    {
+      "role": "cover.film_title",
+      "text": "此心在人间",
+      "x": 80,
+      "y": 320,
+      "font": "serif_bold",
+      "size": 120,
+      "color_role": "ink",
+      "anchor": "lt",
+      "bbox": [
+        80,
+        320,
+        680,
+        436
+      ]
+    },
+    {
+      "role": "cover.hook",
+      "text": "自家屋漏，心系天下",
+      "x": 130,
+      "y": 485,
+      "font": "sans_regular",
+      "size": 42,
+      "color_role": "muted",
+      "anchor": "lt",
+      "bbox": [
+        130,
+        485,
+        508,
+        527
+      ]
+    },
+    {
+      "role": "cover.accent_line",
+      "x1": 87,
+      "y1": 472,
+      "x2": 87,
+      "y2": 531,
+      "width": 8,
+      "color_role": "accent"
+    }
+  ],
+  "art": {
+    "path": "/workspace/series_skill_v2/historical-biography-video/assets/series/examples/dufu-cover-art.png",
+    "sha256": "b148f1feaf9e52c4434997faf578499b8e9e6b3a76d5a3aaac033275b50d6c75",
+    "source_size": [
+      1200,
+      1500
+    ],
+    "reserved_top": 560,
+    "retained_bounds": [
+      0,
+      560,
+      1200,
+      1500
+    ],
+    "top_overwritten": true,
+    "text_free_input_visual_check": "required; not certified by OCR"
+  },
+  "output": {
+    "path": "/workspace/series_skill_v2/historical-biography-video/assets/series/examples/dufu-cover-locked.png",
+    "sha256": "84216a4c227f010d8637b0280b5a528037a843e900a613f4ea06b30b3b11e2f2"
+  },
+  "scope": "Deterministic geometry and font compositor. Does not certify historical truth, artwork motifs, AI-text absence in lower art, title wording or aesthetic quality."
+}

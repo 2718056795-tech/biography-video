@@ -1,0 +1,21 @@
+{
+  "version": "4.0",
+  "complete_video": "输出/杜甫_此心在人间_生平解读动画版_v4_1080p_120秒.mp4",
+  "sha256": "a0ef74494a6d47ac4940c196d913e150e14ca7202a1bb92c15b175d33e69a45d",
+  "technical_status": "passed",
+  "actual_encoded_model_frame_review": "passed",
+  "chapters": 12,
+  "event_lines": 12,
+  "assessment_lines": 12,
+  "assessments_are_original": true,
+  "original_poem_excerpts": 7,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_sec": 120,
+  "frames": 3600,
+  "source_pcm_identical": true,
+  "source_aac_payload_identical": true,
+  "manual_listening": "not_claimed",
+  "platform_device_preview": "not_claimed"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "name": "",
+  "orientation": "portrait",
+  "width": 1080,
+  "height": 1920,
+  "duration_sec": 120,
+  "fps": 30,
+  "total_frames": 3600,
+  "cover": {
+    "required": true,
+    "user_ratio_name": "5:4竖屏",
+    "long_short_ratio": "5:4",
+    "width_height_ratio": "4:5",
+    "orientation": "portrait",
+    "width": 1200,
+    "height": 1500,
+    "format": "PNG",
+    "path": "output/cover_1200x1500.png"
+  },
+  "map": {
+    "show_title": false,
+    "layout": "large_mobile_readable",
+    "note": "地图使用足够的原生构图面积，地点标签在手机画面可读；不要固定照搬旧版缩小地图。"
+  },
+  "audio": {"path": "", "sha256": "", "policy": "preserve_exact_audio_payload"}
+}

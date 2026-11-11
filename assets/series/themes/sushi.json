@@ -1,0 +1,37 @@
+{
+  "person": "苏轼",
+  "rationale": "暖赭纸底、炭褐墨色与竹青，表现日常生活中的开阔与温度。",
+  "colors": {
+    "paper": "#DFD0C2",
+    "light": "#F4E9DD",
+    "ink": "#40342E",
+    "muted": "#6D5E4E",
+    "accent": "#9F543C",
+    "assessment": "#635347",
+    "green": "#71806B",
+    "pale": "#B5AD98",
+    "clay": "#A87959",
+    "warm": "#BD9B63",
+    "roof": "#566049",
+    "soft": "#C8B9A3",
+    "bluegreen": "#8E9D89",
+    "map_ink": "#665347",
+    "map_accent": "#9F543C",
+    "map_halo": "#BD9B63",
+    "map_coast": "#8D8E7B",
+    "map_label_halo": "#DFD0C2"
+  },
+  "motifs": [
+    "书案与笔札",
+    "竹杖与蓑笠",
+    "田畦与日常器物"
+  ],
+  "background_choices": [
+    "书斋与院落",
+    "田间与村居",
+    "按事件选择的舟岸、官署或旅途"
+  ],
+  "evidence_note": "美术候选，未预先核查苏轼全部资料；具体地点、服饰、器物与事件需新建史料记录。",
+  "theme_id": "sushi-series-v2",
+  "profile_id": "biography-paper-cut-series-2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "person": "李白",
+  "rationale": "深靛夜色、月白文字与旧金强调，表现远游与清朗想象。",
+  "colors": {
+    "paper": "#132A36",
+    "light": "#EAE2C8",
+    "ink": "#F2E9D2",
+    "muted": "#B3C3BE",
+    "accent": "#D0B06D",
+    "assessment": "#C7D2CA",
+    "green": "#1E3E49",
+    "pale": "#658187",
+    "clay": "#6E6C55",
+    "warm": "#D0B06D",
+    "roof": "#0B202B",
+    "soft": "#355461",
+    "bluegreen": "#3D6570",
+    "map_ink": "#A6BAB5",
+    "map_accent": "#D0B06D",
+    "map_halo": "#61716B",
+    "map_coast": "#739292",
+    "map_label_halo": "#132A36"
+  },
+  "motifs": [
+    "江舟与远帆",
+    "月色与城楼",
+    "行囊与赠别"
+  ],
+  "background_choices": [
+    "城楼或江岸",
+    "舟行与驿途",
+    "室内书案或送别场景"
+  ],
+  "evidence_note": "美术候选，不是已完成的新李白史料项目；使用某一事件、建筑或器物前须逐幕核查，不强制每幕月亮/山水/酒杯。",
+  "theme_id": "libai-series-v2",
+  "profile_id": "biography-paper-cut-series-2.0"
+}
