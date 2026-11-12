@@ -1,6 +1,6 @@
 {
   "profile_id": "biography-paper-cut-series-2.0",
-  "version": "2.0",
+  "version": "2.1",
   "style_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
   "locked_files": {
     "assets/series/fonts/series-sans-bold.otf": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b",
@@ -8,23 +8,28 @@
     "assets/series/fonts/series-serif-bold.otf": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac",
     "assets/series/fonts/series-serif-regular.otf": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121",
     "assets/series/fonts_manifest.json": "043e19e8dc7075eed23c3f179df02f0d93bdd08642816186df50567e7ce3bf20",
+    "assets/series/geography/LICENSE.md": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b",
+    "assets/series/geography/natural_earth_basemap.geojson.gz": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093",
+    "assets/series/geography/provenance.json": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9",
+    "assets/series/map_policy.json": "0cedcb811b15addc20dcc9e2d9a20d7bbfb4d35cd20c5a869a67477035f4161f",
     "assets/series/series_style.json": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
     "scripts/check_delivery.py": "fef9d2a90752c7c4960897132138a917377982add3af054289c95f1887e4de5e",
-    "scripts/check_project.py": "d0c8026c08fa23c4eb967be9ca5894af22aed7e8db0d09f53458a9d7cd9e5e29",
-    "scripts/check_series_style.py": "5f1e23a3d33d1a53e70c425b8f2757e32d68531f04485d0f38b33ecd6d180f42",
+    "scripts/check_project.py": "0096ec1614f603af1679da6cdea6dff69c7b98b0273ece92d201ae72e08cd67d",
+    "scripts/check_series_style.py": "0fc51d6eff0f3cf1c19e5714606f5a696b19e3e245a51d4300eeb174338b4793",
     "scripts/dufu_art_provider_example.py": "8c2ade4eb835826bdf464ed123589140300ef991c14bae496d332e4da716b419",
-    "scripts/export_dufu_reference_project.py": "afc8b3edb9b85fd6690aa003e32dec849053beba0e9c4b961350dd5dac88e794",
+    "scripts/export_dufu_reference_project.py": "1c23ff741bf13babefda8f5d7e1e3a376a24175d2620699ca1e07764cd197bf7",
     "scripts/init_project.py": "9a82bcd75a5fa8153921752373213d68b50cafed7c377d2bd12b68b23dda50c2",
-    "scripts/init_series_project.py": "24c2f48e23e28897732b0283dc6d57168244408abb2752ea85922f13072da8b8",
-    "scripts/render_series_comparison.py": "f3708d94fbde96988708a337e782856e82513152f4bd23e37602c361ed85286e",
-    "scripts/render_series_preview.py": "83bd5b6cc790d0a5f3a3d1e0d40dfb6dcff46c57c2b4b673fbce5b949dc79224",
-    "scripts/render_series_video.py": "24498317ea3da8d07135116cb5b653fbecc914e8593462213733fcbcf94a4df3",
+    "scripts/init_series_project.py": "1b220a0b79a0154f939ed311d21d1c5b8d62b14928abe84ff82b4da325fa8f94",
+    "scripts/render_series_comparison.py": "ec6d58beecd57737f37f22d401c8347eaab299e04bf36a508f358e63b481ed6c",
+    "scripts/render_series_preview.py": "5de7a5242f4572ea8ef77e36686f13541ae0ea0da54f75d13e763c08e1f112d6",
+    "scripts/render_series_video.py": "1d6be82766c910b01fcc2e1cdbd6cba94fa462fda340ca7cbb6c5b72c63bf110",
+    "scripts/series_basemap.py": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622",
     "scripts/series_cover.py": "550a8a6c9c9b726f57a83133318119c7b3fdf8f86231cb97ced472ab72f0eddb",
-    "scripts/series_frame.py": "daac81d1494205b82dce14c628c36b3e31e9529e0f0f42117de24c65d300a786",
-    "scripts/series_map.py": "cfa91ec4c1b889c9d6c26739d6f06d64383c426d863b2ee143170f480b49282e",
+    "scripts/series_frame.py": "9468d2042783d84d5e3a092f711963bfb4ea397b0f1acf9240a03308d56b2846",
+    "scripts/series_map.py": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
     "scripts/verify_cover.py": "b64d6971fab41ec9b344a2e357bd9653b2367c7ffd727107066a2e8bde7db41a",
     "scripts/verify_media.py": "b231f659d29c48569e0b1f51a37eaef258313f7eb87250e305eddd7e57f79f26",
-    "scripts/verify_series_bundle.py": "933822b3fc40f0fc1e967f425be82b4066f74393d7413e00cad97668c57ba28f"
+    "scripts/verify_series_bundle.py": "db917da83a004c43fad39435d756d06d4094de0378d49f30c1e0d35df4feb407"
   },
   "variable_project_fields": [
     "person",
@@ -34,5 +39,6 @@
     "research and text",
     "city visits and projection bounds",
     "text-free animated art within declared stage profiles"
-  ]
+  ],
+  "release_note": "Map engine/geographic context upgraded; fixed V2.0 layout coordinates, fonts and timing preserved."
 }

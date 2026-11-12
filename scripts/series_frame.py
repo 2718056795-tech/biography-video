@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deterministic, themeable compositor for the locked biography series.
 
-This module composes already animated, text-free artwork and an optional map.
+This module composes already animated, text-free artwork and a mandatory sourced map.
 It never invents a biography, fabricates animation, or redesigns the layout.
 Requires Pillow. The packaged fonts are mandatory; there is no font fallback.
 """
@@ -16,6 +16,7 @@ import re
 from typing import Any
 
 from PIL import Image, ImageDraw, ImageFont
+from series_map import ensure_map_evidence, validate_map_background
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STYLE = SKILL_ROOT / 'assets/series/series_style.json'
@@ -290,16 +291,23 @@ class SeriesFrame:
         if art_rgba.mode != 'RGBA' or art_rgba.size != (self.width, self.height):
             raise ValueError('art_rgba must be a native 1080x1920 RGBA frame')
         map_spec = self.style['map']
-        if map_rgba is not None and (map_rgba.mode != 'RGBA' or map_rgba.size != (map_spec['width'], map_spec['height'])):
+        if map_rgba is None:
+            raise ValueError('Every series frame requires an official sourced map with evidence')
+        if not isinstance(map_rgba, Image.Image) or map_rgba.mode != 'RGBA' or map_rgba.size != (map_spec['width'], map_spec['height']):
             raise ValueError('map_rgba must be an already projected native 880x430 RGBA layer')
+        map_evidence = ensure_map_evidence(map_rgba, scene_id=scene.get('id'), t=t, duration=duration)
         paper_rgb = art_rgba.getpixel((0, 0))[:3]
         key = json.dumps({'scene': scene, 'duration': duration, 'paper': paper_rgb}, ensure_ascii=False, sort_keys=True)
         if key not in self._prepared:
             self._prepared[key] = self._prepare(scene, duration, paper_rgb)
         prepared = self._prepared[key]
         canvas = self.fit_stage(art_rgba, prepared['stage'])
-        if map_rgba is not None:
-            canvas.alpha_composite(map_rgba, (map_spec['x'], map_spec['y']))
+        background = canvas.crop((map_spec['x'], map_spec['y'], map_spec['x'] + map_spec['width'], map_spec['y'] + map_spec['height']))
+        background_readability = validate_map_background(map_rgba, background)
+        if background_readability.get('passed') is not True:
+            failed = [check.get('purpose') for check in background_readability.get('checks', []) if check.get('passed') is not True]
+            raise ValueError('Map is unreadable over the actual artwork background: ' + ', '.join(failed))
+        canvas.alpha_composite(map_rgba, (map_spec['x'], map_spec['y']))
         wash = self.style['footer']['wash']
         canvas.alpha_composite(prepared['wash'], (wash['x'], wash['y']))
         canvas.alpha_composite(prepared['header'])
@@ -318,6 +326,8 @@ class SeriesFrame:
         if prepared['kind'] == 'ending' and t > duration - final_fade:
             amount = smooth((t - (duration - final_fade)) / final_fade)
             canvas = Image.blend(canvas, Image.new('RGBA', (self.width, self.height), self._color('paper')), amount)
+        picture = canvas.convert('RGB')
+        panel = picture.crop((map_spec['x'], map_spec['y'], map_spec['x'] + map_spec['width'], map_spec['y'] + map_spec['height']))
         self.last_report = {
             'profile_id': self.style['profile_id'], 'kind': 'frame',
             'canvas': {'width': self.width, 'height': self.height},
@@ -325,11 +335,15 @@ class SeriesFrame:
             'theme_direction': deepcopy(self.theme_tokens),
             'fonts': self._font_report(), 'elements': deepcopy(prepared['elements']),
             'map': deepcopy(map_spec),
-            'map_present': map_rgba is not None, 'stage': deepcopy(prepared['stage']),
+            'map_present': True, 'map_evidence': deepcopy(map_evidence),
+            'map_background_readability': background_readability,
+            'frame_mode': 'RGB', 'frame_sha256': hashlib.sha256(picture.tobytes()).hexdigest(),
+            'composited_map_sha256': hashlib.sha256(panel.tobytes()).hexdigest(),
+            'stage': deepcopy(prepared['stage']),
             'scene_id': scene.get('id'), 'chapter_index': prepared['index'],
             'chapter_kind': prepared['kind'], 'time_sec': t, 'duration_sec': duration,
             'footer_actual_paper_rgb': prepared['actual_paper_rgb'],
             'motion': deepcopy(motion),
-            'scope': 'Actual compositor geometry, fonts and theme; not historical, animation, audio or device certification',
+            'scope': 'Actual compositor geometry, fonts, sourced map evidence and RGB pixel hashes; not historical, animation, audio or device certification',
         }
-        return canvas.convert('RGB')
+        return picture

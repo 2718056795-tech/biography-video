@@ -68,18 +68,21 @@ def main():
                        'quote_lines': [], 'source_label': '', 'source_ids': [],
                        'local_action': '', 'environment_action': '', 'action_sample_frames': [], 'visible_visit_ids': []})
         backgrounds.append({'scene_id': sid, 'setting': '', 'buildings': '', 'props': '', 'light': '', 'source_basis': '', 'source_ids': []})
-    template.update({'schema_version': '2.0', 'series_profile_id': style['profile_id'],
+    template.update({'schema_version': '2.1', 'series_profile_id': style['profile_id'],
                      'series_profile_sha256': hashlib.sha256(style_path.read_bytes()).hexdigest(),
                      'name': args.name.strip(), 'orientation': 'portrait',
                      'width': video['width'], 'height': video['height'], 'fps': video['fps'],
                      'duration_sec': video['duration_sec'], 'total_frames': cuts[-1], 'cut_frames': cuts,
                      'person': {'name': args.name.strip(), 'film_title': args.title.strip(), 'birth_death': '', 'opening_meta': ''},
                      'storyboard': 'data/storyboard.json', 'route': 'data/life_route.json', 'theme': 'style/theme.json',
+                     'map': {'show_title': False, 'layout': 'locked_series_panel', 'required': True,
+                             'basemap_policy': 'bundled_default', 'readability_checks': 'required',
+                             'note': '自动采用包内有来源的海岸与河流底图；补齐人物路线即可渲染，无需另选地理文件。'},
                      'art_provider': 'art/scene_provider.py', 'art_dependencies': ['art'],
                      'art_direction': {'rationale': '', 'motifs': [], 'backgrounds': backgrounds},
                      'audio': {'path': audio_target.relative_to(target).as_posix(), 'sha256': hashlib.sha256(audio_target.read_bytes()).hexdigest(), 'policy': 'preserve_exact_audio_payload'}})
     write_json(target/'project.json', template)
-    write_json(target/'data/storyboard.json', {'schema_version': '2.0', 'series_profile_id': style['profile_id'], 'scenes': scenes})
+    write_json(target/'data/storyboard.json', {'schema_version': '2.1', 'series_profile_id': style['profile_id'], 'scenes': scenes})
     shutil.copy2(SKILL_ROOT/'assets/templates/life_route.json', target/'data/life_route.json')
     with (target/'references/source_ledger.csv').open('w', newline='', encoding='utf-8') as handle:
         csv.writer(handle).writerow(['id','status','citation','url_or_path','claim','verification_note'])

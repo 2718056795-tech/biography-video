@@ -4,6 +4,7 @@ from pathlib import Path
 import sys,json
 from PIL import Image,ImageDraw,ImageFont
 from series_frame import SeriesFrame
+from series_map import SeriesMap
 ROOT=Path(__file__).resolve().parents[1]
 BASE=ROOT/'assets/series'
 LEGACY=ROOT/'assets/dufu-reference/工程'
@@ -16,12 +17,24 @@ def f(size,bold=False,sans=False):
 old.font=f
 
 def palette(key):return json.loads((BASE/'themes'/f'{key}.json').read_text())
-def demo_map(theme):
- c=theme['colors'];im=Image.new('RGBA',(880,430));d=ImageDraw.Draw(im)
- pts=[(125,300),(280,180),(470,280),(690,110)]
- d.line(pts,fill=c['map_accent'],width=2)
- for xy in pts:d.ellipse((xy[0]-4,xy[1]-4,xy[0]+4,xy[1]+4),fill=c['map_accent'])
- return im
+def demo_map(theme,key,duration):
+ style=json.loads((BASE/'series_style.json').read_text())
+ if key=='dufu':
+  project=BASE/'examples/dufu-project'
+  route=json.loads((project/'data/life_route.json').read_text())
+  coast=project/route['coastline']['file'] if route.get('coastline',{}).get('file') else None
+ else:
+  # Coordinates demonstrate the map engine and have no researched association
+  # with either subject. These are explicitly labelled examples in the sheet.
+  route={'schema_version':'2.1','geography_scope':'unresearched demonstration coordinates, not this person\'s itinerary',
+         'nodes':[{'id':f'demo{i}','label':label,'lon':lon,'lat':lat,'precision':'region_approx',
+                   'source_read_status':'unresearched demonstration'}
+                  for i,(label,lon,lat) in enumerate([('示例甲',106,30),('示例乙',111,34),('示例丙',115,30),('示例丁',120,35)])],
+         'sequence':['demo0','demo1','demo2','demo3'],
+         'per_scene':{'S09':{'start_index':0,'end_index':3}},
+         'projection':{'bounds':[103,123,27,38.5]}}
+  coast=None
+ return SeriesMap(route,style,theme,coastline_geojson=coast).render('S09',3.5,duration)
 
 def art_libai(c):
  im=Image.new('RGBA',(1080,1920),c['paper']);d=ImageDraw.Draw(im)
@@ -76,7 +89,7 @@ def main():
  frames=[]
  for key,subject,theme,scene,art in zip(['dufu','libai','sushi'],subjects,themes,scenes,arts):
   renderer=SeriesFrame(theme=theme,person=subject,scene_count=12)
-  frame=renderer.compose(scene,3.5,ref.duration,art,demo_map(theme))
+  frame=renderer.compose(scene,3.5,ref.duration,art,demo_map(theme,key,ref.duration))
   frame.save(out/f'{key}-series-layout-example.png')
   (out/f'{key}-series-layout-report.json').write_text(json.dumps(renderer.last_report,ensure_ascii=False,indent=2)+'\n')
   frames.append(frame)
@@ -89,7 +102,7 @@ def main():
   for j,role in enumerate(['paper','ink','muted','accent','assessment']):
    xx=x+j*82;d.rectangle((xx,930,xx+65,975),fill=theme['colors'][role])
    d.text((xx,985),role,font=f(14,False,True),fill='#1E2A26',anchor='lt')
- d.text((30,1050),'系列样式示意；李白/苏轼背景为美术候选，路线为版位占位，不是新人物史实成片。',font=f(22,False,True),fill='#1E2A26',anchor='lt')
+ d.text((30,1050),'系列样式示意；李白/苏轼路线为未研究的示例坐标，背景为美术候选，不是史实成片。',font=f(22,False,True),fill='#1E2A26',anchor='lt')
  sheet.save(BASE/'series-comparison.png')
  print('Three theme/background examples use the same locked compositor; no new biography film claimed.')
 if __name__=='__main__':main()

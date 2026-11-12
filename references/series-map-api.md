@@ -1,21 +1,27 @@
-# SeriesMap：固定版式、独立人物足迹
+# SeriesMap V2.1：真实地理参照与独立人物足迹
 
-`scripts/series_map.py`提供通用累积足迹层。每个人物提供自己的史实节点、访问顺序、分幕关系、地理视窗及主题；代码没有杜甫姓名、特定节点ID或固定中国视窗。它不替代史料、古今地名、坐标基准或海岸数据的核查。
+`scripts/series_map.py`提供通用累积足迹层，默认使用随包、有来源的真实海岸与主要河流。每个人物提供自己的史实节点、访问顺序、分幕关系、地理视窗及主题；代码没有杜甫姓名、特定节点ID或固定中国视窗。底图仅为概化的现代地理参照，不代表唐代河道、古代疆界或已考证古道，也不替代史料、古今地名或坐标基准的核查。
+
+包版本 V2.1 的地图内容与可读性已变；布局 profile 仍为 `biography-paper-cut-series-2.0`，像素坐标、字形、字号和时序保持原值。
 
 ## 调用
 
 ```python
-from series_map import SeriesMap
+from series_map import SeriesMap, save_map_png, load_map_png, ensure_map_evidence
 
-life_map = SeriesMap(route_data, style, theme, coastline_geojson=None)
+life_map = SeriesMap(route_data, style, theme,
+                     coastline_geojson=None, basemap_geojson=None)
 tile = life_map.render(scene_id, t, duration)  # 幕内秒数、当前幕总秒数
 canvas.alpha_composite(tile, life_map.position)
 report = life_map.geometry_report()          # JSON可序列化字典
+evidence = ensure_map_evidence(tile, scene_id=scene_id, t=t, duration=duration)
+save_map_png(tile, "map.png")                # PNG嵌入证据 + map.png.evidence.json
+restored = load_map_png("map.png")           # 校验并恢复证据
 ```
 
-`route_data`、`style`、`theme`可传字典或本地JSON路径。`coastline_geojson`可传字典、本地GeoJSON路径或`None`；本模块不下载数据。返回的是透明RGBA图层，尺寸固定880×430，位置固定`(96,150)`，不跟随人物场景的缩放平移。
+`route_data`、`style`、`theme`可传字典或本地JSON路径。`coastline_geojson`兼容本地海岸输入；`basemap_geojson`指定地理底图，未指定时加载离线打包数据，不联网下载。返回的是透明RGBA图层，尺寸固定880×430，位置固定`(96,150)`，不跟随人物场景的缩放平移。返回值的 `image.info["series_map_evidence"]` 绑定引擎、政策、来源、几何、RGBA像素与当前场景时间；`SeriesFrame.compose()` 必须收到有效的官方地图图层，不能传空图或任意PNG。
 
-样式唯一来源为`assets/series/series_style.json`。面板、2倍超采样、`plot_box=[20,8,860,415]`、线宽、透明度规则、字号与时序保持锁定。传入样式与其冲突会报错；少量字段未提供时继承权威文件。地图标题、侧栏说明、图例始终不画。
+样式唯一来源为`assets/series/series_style.json`。面板、2倍超采样、`plot_box=[20,8,860,415]`、路线线宽/透明度、字号与时序保持锁定。地理底图、视窗与可读性政策另见 `assets/series/map_policy.json`，不改布局profile。传入样式与其冲突会报错；少量字段未提供时继承权威文件。地图标题、侧栏说明、图例始终不画。
 
 ## 节点与访问序列
 
@@ -80,9 +86,11 @@ report = life_map.geometry_report()          # JSON可序列化字典
 
 注记靠近面板边缘时，圈半径会受边距约束、标签可改到左侧，并保持真实节点不动。长到无法在固定字号下一行放入面板的范围标签会报错。报告另列圈与文字边界，供验收检查。
 
-## 投影与真实线稿
+## 投影、视窗与真实地理
 
-默认从本人物的节点范围生成留有边距的视窗，标准纬线和中央经线取视窗中点。可显式指定：
+默认从本人物全部节点范围建立有边距的视窗，最小经度跨度8°、纬度跨度5°，默认边距18%，标准纬线和中央经线取视窗中点。这保留人物周围的可读地理参照；不为拉入海岸而专门扩图。自动视窗在缺少实际可读地理要素时最多扩大两次，每次1.5倍；仍不足则报错。用户显式给出的视窗不静默改写，狭窄且无可用要素时应补充有来源的详细线数据，或重新选择合理的范围。
+
+可显式指定：
 
 ```json
 {
@@ -90,34 +98,37 @@ report = life_map.geometry_report()          # JSON可序列化字典
     "bounds": [103, 123, 27, 38.5],
     "standard_parallel": 32.75,
     "central_meridian": 113
-  },
-  "coastline": {
-    "filter_bounds": [117.3, 123, 27, 38.5],
-    "source_url": "本项目实际读取的本地线稿来源",
-    "source_kind": "已核实为海岸的国家多边形局部"
   }
 }
 ```
 
-边界顺序固定为`[west,east,south,north]`；兼容原工程`bounds_west_east_south_north`及`projection.coast_filter_bounds`。上述视窗用于杜甫参考配置，不是所有人物的默认值。海外人物可设置自己的区域；本实现支持南北纬85°以内、不跨反经线的区域视窗。自动视窗不支持跨180°的全球航线，此类任务应划分区域镜头后显式提供视窗。
+边界顺序固定为`[west,east,south,north]`；兼容原工程`bounds_west_east_south_north`。上述为杜甫参考视窗，不是所有人物的默认范围。海外人物使用相应区域；本实现支持南北纬85°以内、不跨反经线的区域视窗。跨180°的全球航线应划分区域镜头后显式提供视窗。
 
-节点、海岸、曲线始终使用同一个局部等距圆柱近似投影和单一缩放系数。地图自然宽度不足面板时保留透明留白，不横纵分别拉伸。投影是局部制图近似，不宣称无地理畸变。
+节点、海岸、河流和路线始终使用同一个局部等距圆柱近似投影、视窗裁切与单一缩放系数。真实线段裁到面板范围，不连接不相邻的边段。地图自然宽度不足面板时保留透明留白，不横纵分别拉伸；投影是局部制图近似，不宣称无地理畸变。
 
-支持Feature/FeatureCollection中的LineString、MultiLineString、Polygon、MultiPolygon，输入应是与节点一致的WGS84经纬度数据，不混用GCJ-02、BD-09或以米为单位的投影坐标。国家Polygon没有显式海岸筛选框时会跳过，不能自动描出国界冒充海岸。**筛选框本身不能证明框内所有线都是海岸**，制作者仍须核对所选连续边段的真实含义并记录来源。为保持参考图一致，使用按顶点筛选的连续段，不凭空连接框边，也不生成河流、山体或随机轮廓。当前本地中国数据不适合某人物的地理范围时，可以传`None`，报告会明确无海岸线，而不借用不相关轮廓。
+默认数据位于 `assets/series/geography/natural_earth_basemap.geojson.gz`，来源为 Natural Earth v5.1.2 的1:5000万海岸与1:1000万河流/湖中线，包含间歇河流并排除运河。坐标使用WGS84；真实海岸和河流可有当地简化或缺漏，狭窄城市视窗尤其可能需更详细数据。完整上游地址、固定提交、来源哈希、转换方法、派生文件哈希与公有领域条款见 [provenance.json](../assets/series/geography/provenance.json) 和 [LICENSE.md](../assets/series/geography/LICENSE.md)。本包不绘行政边界、随机山纹、假河流或伪造海岸；内陆只要有可读河流等实际地理参照即可，不要求存在海岸。
+
+自备底图可向 Python 的 `basemap_geojson` 传入字典或本地JSON/GeoJSON文件路径；视频/单帧项目通过 `project.json` 的 `basemap_geojson`（或路线 `basemap.file`）指定相对项目目录的路径。输入使用 GeoJSON FeatureCollection：每条 Feature 的 `properties.layer` 为 `coast` 或 `river`（兼容 `kind`），`geometry.type` 为 `LineString` / `MultiLineString`，坐标为WGS84 `[longitude,latitude]`。Collection 的 `provenance.source_url` 必须是实际可追踪的HTTP(S)来源地址，`provenance.license` 为非空许可说明；记录实际阅读与地理含义，不将未知来源写成公有领域。文件输入自动记录文件SHA256，提供的 `sha256` 指纹必须匹配地理集合；可选 `provenance.local_files` 中每项的 `path` / `sha256` 必须匹配本地文件。默认数据的许可不自动适用于自备数据。
+
+自备底图替换默认底图；额外的 `coastline_geojson` 海岸可叠加，但也必须有可追踪来源。可见真实海岸/河流总长至少24个原生地图像素，点线行程本身不能满足地理参照要求。不能为满足阈值人工添加不存在的河流或连接线。
+
+原 `coastline_geojson` / 路线 `coastline.file` 继续用于有来源的海岸线，不应输入国家多边形。Polygon/MultiPolygon 不能作为可靠海岸证明，国家轮廓不能冒充海岸；本版默认数据与自备地理底图采用真实的 LineString/MultiLineString。兼容的 `coastline.filter_bounds` / `projection.coast_filter_bounds` 仅裁取已有线段，不证明线段含义。各地理输入应与人物节点一致使用WGS84经纬度，不能混入GCJ-02、BD-09或以米为单位的投影坐标。
 
 ## 主题与字体
 
-主读`theme["colors"]`，亦兼容`roles`、`palette`或直接角色字典。需要`map_ink`、`map_accent`、`map_halo`、`map_coast`、`paper`。标签描边颜色读`map_label_halo`，兼容`label_halo`，缺省继承本主题`paper`。角色颜色是RGB或十六进制RGB，透明度由系列样式控制。背景、焦点色随人物改变；没有固定杜甫RGB常量。
+主读`theme["colors"]`，亦兼容`roles`、`palette`或直接角色字典。需要`map_ink`、`map_accent`、`map_halo`、`map_coast`、`paper`。标签描边颜色读`map_label_halo`，兼容`label_halo`，缺省继承本主题`paper`。角色颜色是RGB或十六进制RGB，透明度由系列样式控制。背景、焦点色随人物改变；没有固定杜甫RGB常量。V2.1 会按主题纸底合成后的对比度，必要时将地图颜色向本主题 `ink`、再向黑/白适配，保证底图、旧线、新线与标签可读；保留请求色与有效色及测量结果。地图的适配不改其他UI主题色、字体或布局。合成器另用 `validate_map_background(map_image, background_image)` 检查经过舞台变换并合成到不透明纸底上的实际880×430艺术区域：按原生笔画核心像素计算底图、路线和当前标签的对比度，排除抗锯齿边缘。该函数返回 `passed/status` 与背景/地图哈希，失败时合成器拒绝继续；仍需查看手机大小的最终画面，不以自动计算替代视觉检查。
 
 地图常规/粗体字形只从权威样式指定的打包文件读取：`assets/series/fonts/series-sans-regular.otf`与`series-sans-bold.otf`。缺文件直接报错，不静默退回系统字体。若需对比旧版Noto TTC索引2，测试进程可以显式注入旧字库；交付运行必须使用打包字体。同名字体但不同字形索引或版本不能宣称逐像素一致。
 
-## 报告与验收
+## 报告、证据与验收
 
-`geometry_report()`包含固定面板与样式、投影边界与尺度、每个节点的局部/全帧像素、精度说明及来源读取状态、访问序列与分幕索引、范围注记的圈/文字边界、91点曲线采样规则、同地点段抑制记录、视窗外节点、海岸可见段数和来源配置、字体路径、实际主题颜色。
+`geometry_report()`包含固定面板与样式、投影边界与尺度、每个节点的局部/全帧像素、精度说明及来源状态、访问序列与分幕索引、范围注记的圈/文字边界、91点曲线采样规则、同地点段抑制记录、视窗外节点、地理来源与可见海岸/河流要素、字体及主题颜色，并增加 `basemap` 与 `readability`。自备来源和随包来源都须可追踪，不能只写“地图来自网络”。
 
-该报告验证结构与绘图参数，不证明坐标有一手测绘认证、史实已全部核查或曲线代表真实古道。`nodes_outside_view`非空时，制作者须调整视窗或明确局部展示意图；不能只用文件生成成功判定地图合格。
+每次 `render()` 的证据含源文件、引擎/政策/几何/像素哈希、实际场景ID与时间及官方重绘所需配置。`ensure_map_evidence()` 校验图层，`validate_map_evidence()` 校验记录；PNG保存/载入应使用 `save_map_png()` / `load_map_png()`，保留嵌入证据与 `<PNG>.evidence.json` 侧车文件；二者同时存在时必须相符。单帧命令显式使用外部 `--map` 时要求侧车文件存在。缺地图、无来源、无可读地理要素、伪造或过期证据、全透明图以及像素与证据不符均须失败，不能仅以尺寸880×430判合格。失败后应按错误补齐数据、恢复正确输入或重新绘制官方地图，不手写通过记录。
 
-同一杜甫参考配置需显式设置：原投影视窗与标准纬线、原东海岸筛选框、原节点和顺序、序章`overview`、晚年两幕的范围节点与“湖湘（范围）”标签，以及对应杜甫主题。使用同字库时，原旧线透明度、新段生长、光晕、当前点、28px标签、标签描边和Lanczos缩小均保留，便于做原始RGBA逐像素对照。通用人物不继承这份人物数据。
+使用实际地图PNG与合成RGB图运行 `check_series_style.py --frame <PNG> --map <PNG> --require-pixels`；完整参数见 [帧接口](series-renderer-api.md)。只核对记录的检查会明确 `actual_frame_pixels_verified:false` 和 `actual_map_pixels_verified:false`，不认证当前PNG。地图结构和像素检查仍不证明史料、古代地貌、真人听审或手机设备观感；须实际查看路线、当前点、标签和地理底图的手机大小可读性。视窗排除人物节点时构造会报错，须扩大视窗；`nodes_outside_view` 保留为报告核对字段。
+
+旧杜甫配置仍显式设置其节点、顺序、序章 `overview` 及晚年范围注记。**HISTORICAL V2.0 evidence（历史 V2.0 证据）** 中的108时点和15画面逐像素相等报告仅属于旧版；V2.1 地理底图与对比度处理会改变地图像素。当前实际检查见 [map-upgrade-check.json](map-upgrade-check.json)，不能把短样片称为重渲完整120秒。
 
 ## 最小结构自测
 
@@ -148,7 +159,8 @@ assert m.sequence == ["a", "b"]
 assert m.per_scene["stay"] == {"start_index": 1, "end_index": 1}
 assert m.render("stay", 2, 8).tobytes() == m.render("stay", 6, 8).tobytes()
 assert m.render("travel", 2, 8).mode == "RGBA"
-assert m.geometry_report()["coastline"]["visible_runs"] == 0
+assert m.render("travel", 2, 8).info["series_map_evidence"]
+assert m.geometry_report()["basemap"]
 different = deepcopy(theme)
 different["colors"]["map_accent"] = "#2378A5"
 other = SeriesMap(data, style, different)

@@ -21,7 +21,7 @@ import time
 
 from PIL import Image
 from series_frame import DEFAULT_STYLE, SeriesFrame
-from series_map import SeriesMap
+from series_map import SeriesMap, ensure_map_evidence, save_map_png, validate_map_evidence
 
 
 def sha(path):
@@ -33,6 +33,35 @@ def obj(path):
     if not isinstance(value, dict):
         raise ValueError(f'Expected a JSON object: {path}')
     return value
+
+
+def geometry_hash(report):
+    return hashlib.sha256(json.dumps(report, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+
+
+def map_source_paths(value):
+    """Collect all local, hash-bound basemap/manifest inputs from map evidence."""
+    # Upstream provenance can also contain source_files archive members. Read
+    # only the engine's explicit runtime dependency locations, never recurse
+    # through arbitrary upstream metadata or silently discard missing inputs.
+    records = list(value.get('static_files', []))
+    for source in value.get('basemap', {}).get('sources', []):
+        records.extend(source.get('source_files', []))
+        records.extend(source.get('provenance', {}).get('local_files', []))
+    return [Path(record['path']) for record in records
+            if isinstance(record, dict) and isinstance(record.get('path'), str)
+            and isinstance(record.get('sha256'), str)]
+
+
+def map_qa_summary(checks, path):
+    return {'status': checks['status'], 'scene_id': checks['scene_id'],
+            'geometry_sha256': checks['geometry_sha256'], 'report': str(path),
+            'samples': [{'checkpoints': sample['checkpoints'], 'frame_index': sample['frame_index'],
+                         'local_time_sec': sample['local_time_sec'],
+                         'map_image_sha256': sample['map_evidence']['image_sha256'],
+                         'readability_passed': sample['map_evidence']['readability']['passed'],
+                         'background_readability': sample.get('background_readability')}
+                        for sample in checks['samples']]}
 
 
 def probe(path, count=False):
@@ -98,7 +127,10 @@ def load_project(path):
     compositor = SeriesFrame(theme=theme, person=person, scene_count=len(scenes))
     if theme.get('person') not in (None, person['name']):
         raise ValueError('The per-person theme belongs to a different subject')
-    map_renderer = SeriesMap(route, style, theme, coastline_geojson=coast_path)
+    basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
+    basemap_path = base/basemap_value if basemap_value else None
+    map_renderer = SeriesMap(route, style, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
+    map_geometry = map_renderer.geometry_report()
     provider_path = base/project.get('art_provider', 'art/scene_provider.py')
     if not provider_path.is_file():
         raise FileNotFoundError(f'Art provider missing: {provider_path}')
@@ -125,6 +157,8 @@ def load_project(path):
     if 'scenes' not in project:sources.append(board_path)
     if theme_path:sources.append(theme_path)
     if coast_path:sources.append(coast_path)
+    if basemap_path:sources.append(basemap_path)
+    sources.extend(map_source_paths(map_geometry))
     dependencies = [base/'art']+[base/name for name in project.get('art_dependencies', [])]
     for dependency in dependencies:
         if dependency.is_dir():
@@ -133,6 +167,9 @@ def load_project(path):
         elif dependency != base/'art':raise FileNotFoundError(f'Art dependency missing: {dependency}')
     sources = sorted({p.resolve() for p in sources}, key=str)
     fingerprint = {str(p):sha(p) for p in sources}
+    # Geometry binds the route, projection, labels, source selection and readability
+    # policy even when a change is represented by engine-resolved default inputs.
+    fingerprint['series_map_geometry_sha256'] = geometry_hash(map_geometry)
     return project, normalized, theme, compositor, map_renderer, draw_art, audio, sources, fingerprint
 
 
@@ -150,6 +187,20 @@ def render_clip(target, scene, local_start, count, compositor, maps, draw_art, t
     command += ['-movflags','+faststart',str(temp)]
     duration = (scene['end_frame']-scene['start_frame'])/fps
     inspect_index = min(count-1,max(0,round((min(3.5,duration/2)-local_start)*fps)))
+    checks = {'status': 'incomplete', 'scene_id': scene['id'],
+              'geometry_sha256': geometry_hash(maps.geometry_report()), 'samples': [],
+              'scope': 'Actual before/mid/after rendered map pixels and sourced geography/readability evidence; not historical certification'}
+    # Preserve all labels for very short clips where sample indices coincide.
+    sample_indices = {}
+    for label, index in [('before', 0), ('mid', count//2), ('after', count-1)]:
+        sample_indices.setdefault(index, []).append(label)
+    map_qa_path = layout_path.with_name(layout_path.stem + '.map-qa.json') if layout_path else target.with_suffix('.map-qa.json')
+    def write_map_qa(status, error=None):
+        checks['status'] = status
+        if error is not None:
+            checks['error'] = str(error)
+        map_qa_path.parent.mkdir(parents=True, exist_ok=True)
+        map_qa_path.write_text(json.dumps(checks, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     with target.with_suffix('.encode.log').open('w') as errors:
         process = subprocess.Popen(command,stdin=subprocess.PIPE,stderr=errors)
         try:
@@ -158,18 +209,29 @@ def render_clip(target, scene, local_start, count, compositor, maps, draw_art, t
                 art = draw_art(scene['id'],t,duration,theme)
                 if not isinstance(art, Image.Image) or art.mode != 'RGBA' or art.size != (1080,1920):
                     raise ValueError('draw_art must return a native1080x1920 RGBA frame')
-                picture = compositor.compose(scene,t,duration,art,maps.render(scene['id'],t,duration))
+                map_layer = maps.render(scene['id'],t,duration)
+                picture = compositor.compose(scene,t,duration,art,map_layer)
+                evidence = compositor.last_report['map_evidence']
+                if frame in sample_indices:
+                    checks['samples'].append({'checkpoints': sample_indices[frame], 'frame_index': frame,
+                                              'local_time_sec': t, 'map_evidence': evidence,
+                                              'background_readability': compositor.last_report['map_background_readability']})
                 process.stdin.write(picture.tobytes())
                 if frame == inspect_index and layout_path:
                     layout_path.parent.mkdir(parents=True,exist_ok=True)
                     layout_path.write_text(json.dumps(compositor.last_report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                    picture.save(layout_path.with_name(layout_path.stem+'.frame.png'))
+                    save_map_png(map_layer, layout_path.with_name(layout_path.stem+'.map.png'))
                 if frame and frame%120 == 0:print(f'{scene["id"]}: {frame}/{count}',flush=True)
             process.stdin.close()
             if process.wait():raise RuntimeError(f'FFmpeg encode failed; see {target.with_suffix(".encode.log")}')
-        except BaseException:
+        except BaseException as exc:
             process.kill();process.wait()
+            write_map_qa('failed', exc)
             raise
     temp.replace(target)
+    write_map_qa('passed')
+    return checks
 
 
 def main():
@@ -206,7 +268,8 @@ def main():
         qa=base/'qa/series-layout';qa.mkdir(parents=True,exist_ok=True)
         result.update(profile_id=frames.style['profile_id'],profile_sha256=frames.profile_sha256,
                       theme_id=theme.get('theme_id'),source_audio_sha256=audio_before,
-                      source_fingerprint=fingerprint,provider=project.get('art_provider','art/scene_provider.py'))
+                      source_fingerprint=fingerprint,provider=project.get('art_provider','art/scene_provider.py'),
+                      map_geometry_sha256=fingerprint['series_map_geometry_sha256'],map_qa=[])
         (qa/'map-geometry.json').write_text(json.dumps(maps.geometry_report(),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         by_id={s['id']:i for i,s in enumerate(scenes)}
         def index(value):
@@ -224,10 +287,11 @@ def main():
                 raise ValueError('Preview needs a positive integer-frame duration entirely within the scene')
             if args.silent_preview and not any(s in args.output.stem.lower() for s in ('silent','无声')):
                 raise ValueError('A silent preview filename must explicitly contain silent or 无声')
-            render_clip(args.output,scene,args.preview_start,count,frames,maps,draw,theme,
+            map_checks = render_clip(args.output,scene,args.preview_start,count,frames,maps,draw,theme,
                         audio=None if args.silent_preview else audio,
                         global_audio_start=scene['start_frame']/fps+args.preview_start,
                         fps=fps,layout_path=qa/f'{scene["id"]}.json')
+            result['map_qa'].append(map_qa_summary(map_checks, qa/f'{scene["id"]}.map-qa.json'))
             expected_count=count
             result.update(status='preview_rendered',scene_id=scene['id'],local_start_sec=args.preview_start,
                           source_audio_excerpt_start_sec=scene['start_frame']/fps+args.preview_start,
@@ -244,9 +308,27 @@ def main():
                     if record.get('source_fingerprint')==fingerprint and record.get('clip_sha256')==sha(target):
                         streams=[s for s in probe(target)['streams'] if s.get('codec_type')=='video']
                         valid=len(streams)==1 and int(streams[0].get('nb_frames',0))==count and (streams[0]['width'],streams[0]['height'])==(1080,1920)
+                        map_qa_path = qa/f'{scene["id"]}.map-qa.json'
+                        if valid and map_qa_path.is_file():
+                            map_checks = obj(map_qa_path)
+                            valid = map_checks.get('status') == 'passed' and map_checks.get('geometry_sha256') == fingerprint['series_map_geometry_sha256'] and bool(map_checks.get('samples'))
+                            if valid:
+                                try:
+                                    for sample in map_checks['samples']:
+                                        validate_map_evidence(sample.get('map_evidence'), scene_id=scene['id'], t=sample.get('local_time_sec'), duration=count/fps)
+                                        background_check = sample.get('background_readability', {})
+                                        if (background_check.get('status') != 'passed' or background_check.get('passed') is not True
+                                                or background_check.get('engine_sha256') != sample['map_evidence'].get('engine_sha256')
+                                                or background_check.get('map_image_sha256') != sample['map_evidence'].get('image_sha256')):
+                                            raise ValueError('Cached clip lacks valid actual-art map readability evidence')
+                                except (ValueError, OSError, KeyError, TypeError):
+                                    valid = False
+                        else:
+                            valid = False
                 if not valid:
-                    render_clip(target,scene,0.,count,frames,maps,draw,theme,fps=fps,layout_path=qa/f'{scene["id"]}.json')
+                    map_checks = render_clip(target,scene,0.,count,frames,maps,draw,theme,fps=fps,layout_path=qa/f'{scene["id"]}.json')
                     cache.write_text(json.dumps({'source_fingerprint':fingerprint,'clip_sha256':sha(target)},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                result['map_qa'].append(map_qa_summary(map_checks, qa/f'{scene["id"]}.map-qa.json'))
                 print(f'finished {scene["id"]}',flush=True)
             if len(selected)!=len(scenes):
                 result.update(status='segments_rendered',complete_film=False,selected_scenes=[scenes[i]['id'] for i in selected],parts=str(parts))

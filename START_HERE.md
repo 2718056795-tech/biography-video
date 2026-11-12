@@ -1,8 +1,8 @@
-# 系列母版 V2.0：交给其他AI的入口
+# 人物生平动画包 V2.1：交给其他AI的入口
 
 先完整解压目录，再让助手读取`SKILL.md`。不要只把“像杜甫”一句话或一张截图交给助手重新猜布局。
 
-本包固定视频/封面的排版与字库；每个人物另做主题配色、背景、建筑、器物、光源与符合史料的内容。三图先看：
+本包的布局 profile 仍为 `biography-paper-cut-series-2.0`；V2.1 升级地图内容、可读性与验收，不改变像素坐标、字体、字号或时间轴。本包固定视频/封面的排版与字库；每个人物另做主题配色、背景、建筑、器物、光源与符合史料的内容。三图先看：
 
 - [相同版位、不同人物主题与背景](assets/series/series-comparison.png)
 - [视频逐像素坐标导览](assets/series/video-layout-guide.png)
@@ -10,10 +10,10 @@
 
 ## 复用规则
 
-1. `assets/series/series_style.json`是唯一坐标母版，`series_manifest.json`锁定程序/字库；先运行`python scripts/verify_series_bundle.py`。
+1. `assets/series/series_style.json`是唯一坐标母版，`series_manifest.json`锁定程序/字库；先运行`python scripts/verify_series_bundle.py`，再用 `python scripts/series_basemap.py` 核对离线底图、来源与许可哈希。
 2. 新人物用`init_series_project.py`新建工作目录，明确给出本人物主题JSON；事实、引文与行程重新核查，艺术简报按12幕填写，不能复制杜甫背景或只改名。
 3. 只在项目的美术provider实现无字、无地图的1080×1920实际动画。标题、页码、诗词、解读、地图和封面字层均交给包内固定程序，不改其坐标。
-4. 先检查单帧/短动画和版位记录，再输出完整视频与1200×1500封面；源音轨完整保留。
+4. 地图使用随包有来源的海岸与主要河流；内陆不强行绘海岸，不添加虚构地形。先检查实际合成底色上的地图可读性、单帧/短动画和版位记录，再输出完整视频与1200×1500封面；源音轨完整保留。
 5. 渲染结束后还要跑媒体/封面/双文件验收。布局参数通过不等于史料、动作、阅读、真人听审或设备发布预览全部通过。
 
 ## 新建人物
@@ -39,7 +39,11 @@ python scripts/render_series_video.py --project assets/series/examples/dufu-proj
 
 ## 一致性的实际证据
 
-当前字库与通用合成器已对杜甫V4做15个原生画面逐像素相等测试，地图另做108个时点相等测试；报告在`references/series-frame-final-check.json`与`series-map-check.json`。真实2秒管线测试不冒充整条新120秒成片。示意图中的李白/苏轼只作配色与环境设计参考，不是已考据完成的新人物视频。
+**HISTORICAL V2.0 evidence（历史 V2.0 证据）：** `references/series-frame-final-check.json` 的15个画面和 `references/series-map-check.json` 的108个地图时点只证明旧版基准。V2.1 增加真实地理要素和可读性处理，地图像素已变，不能沿用旧报告声称新地图逐像素相等。
+
+当前升级检查见 [map-upgrade-check.json](references/map-upgrade-check.json)，范围、实际样片与未执行项以报告为准；短片不冒充整条新120秒成片。示意图中的李白/苏轼只作配色与环境设计参考，不是已考据完成的新人物视频。
+
+随包底图是概化的现代地理参照，不是唐代河道、古代疆界或考证古道；狭窄地区可需补充更详细的有来源数据。完整说明见 [地图接口](references/series-map-api.md) 与 [V2.1 升级说明](references/map-upgrade-v2.1.md)。
 
 ## 解压
 

@@ -20,12 +20,13 @@ def check(root):
                 errors.append(f'{relative}: 顶层须为JSON对象')
                 return {}
             return value
-        except (OSError, ValueError) as exc:
+        except (OSError, ValueError, TypeError) as exc:
             errors.append(f'{relative}: {exc}')
             return {}
     project = load('project.json')
-    board = load('data/storyboard.json')
-    route = load('data/life_route.json')
+    board = project if 'scenes' in project else load(project.get('storyboard', 'data/storyboard.json'))
+    route = load(project.get('route', 'data/life_route.json'))
+    map_preflight = {'status': 'not_run', 'scope': 'Technical map input/readability checks; not historical validation'}
     def records(value, context):
         if not isinstance(value, list):
             errors.append(f'{context}: 须为数组')
@@ -55,6 +56,10 @@ def check(root):
             require(cover.get('long_short_ratio') == '5:4' and cover.get('width_height_ratio') == '4:5', '“5:4竖屏”指长短边5:4，实际宽高4:5，不能颠倒')
     map_config = project.get('map', {})
     require(isinstance(map_config, dict) and map_config.get('show_title') is False, '默认地图应去掉字面“一生足迹”标题，使用地点标签')
+    if isinstance(map_config, dict):
+        require(map_config.get('required') is not False and map_config.get('enabled') is not False,
+                '系列地图为每帧必需项，不能禁用或设为可选')
+        require(map_config.get('readability_checks') not in (False, 'disabled', 'off'), '地图可读性检查不能禁用')
     sources = {}
     try:
         with (root / 'references/source_ledger.csv').open(newline='', encoding='utf-8-sig') as handle:
@@ -81,6 +86,7 @@ def check(root):
     series_declared = 'series_profile_id' in project or 'style_profile_id' in project
     series_backgrounds = []
     if series_declared:
+        theme = None
         try:
             master_path = Path(__file__).resolve().parents[1] / 'assets/series/series_style.json'
             master = json.loads(master_path.read_text(encoding='utf-8'))
@@ -156,8 +162,31 @@ def check(root):
                     require(background.get('scene_id') == f'S{index+1:02d}', '美术场景须按S01—S12关联')
                     for key in ['setting', 'buildings', 'props', 'light', 'source_basis']:
                         require(identifier(background.get(key)), f'{background.get("scene_id")}: 美术{key}缺失')
+            # Reuse the production map engine so missing geography, unsourced
+            # overrides, failed labels/contrast and unsupported views fail here.
+            from series_map import SeriesMap, ensure_map_evidence
+            coast_value = project.get('coastline_geojson', route.get('coastline', {}).get('file'))
+            coast_path = root/coast_value if coast_value else None
+            basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
+            basemap_path = root/basemap_value if basemap_value else None
+            maps = SeriesMap(route, master, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
+            samples = []
+            for scene in scenes:
+                duration = (scene['end_frame']-scene['start_frame'])/master['video']['fps']
+                for t in (0., duration/2, max(0., duration-1/master['video']['fps'])):
+                    evidence_record = ensure_map_evidence(maps.render(scene['id'], t, duration),
+                                                          scene_id=scene['id'], t=t, duration=duration)
+                    samples.append({'scene_id': scene['id'], 'time_sec': t,
+                                    'image_sha256': evidence_record.get('image_sha256'),
+                                    'readability_passed': evidence_record.get('readability', {}).get('passed') is True})
+            map_geometry = maps.geometry_report()
+            map_preflight.update(status='passed', samples=samples,
+                                 basemap={key:value for key,value in map_geometry.get('basemap', {}).items() if key != 'geometry'},
+                                 readability=map_geometry.get('readability'),
+                                 geometry_sha256=hashlib.sha256(json.dumps(map_geometry, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest())
         except (OSError, ValueError, KeyError, TypeError) as exc:
             errors.append(f'系列计划配置不可用: {exc}')
+            map_preflight.update(status='failed', error=str(exc))
     for background in series_backgrounds:
         evidence(background.get('source_ids'), f'美术场景{background.get("scene_id")}')
     scene_ids, previous_end, previous_visits = set(), 0, []
@@ -249,7 +278,8 @@ def check(root):
     if audio_path.is_file() and audio.get('sha256'):
         require(hashlib.sha256(audio_path.read_bytes()).hexdigest() == audio['sha256'], '锁定配乐文件已变化')
     return {'status': 'planning_preflight_passed' if not errors else 'planning_preflight_failed',
-            'errors': errors, 'scope': '仅检查计划结构、证据记录声明与输入音频哈希；不证明史实真实、素材已渲染或动画成立。',
+            'errors': errors, 'scope': '检查计划结构、证据记录声明、输入音频哈希及主题纸色上的地图来源/几何/可读性；不证明史实真实或人物动画成立，实际美术背景对比度由渲染合成器验证。',
+            'map_preflight': map_preflight,
             'rendered_video_checks': 'not_run', 'historical_truth_check': 'not_automated',
             'manual_audio_and_device_preview': 'not_run'}
 

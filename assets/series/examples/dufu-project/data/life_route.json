@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0-example",
+  "schema_version": "2.1-example",
   "nodes": [
     {
       "id": "gong",
@@ -654,7 +654,9 @@
       38.5
     ]
   },
-  "coastline": {
+  "evidence_note": "杜甫既有核查记录的格式转换；未新增网络或纸本核查，约位和读源边界保留在nodes及参考史料中。",
+  "basemap_policy": "bundled_default",
+  "legacy_coastline_reference": {
     "file": "../../../dufu-reference/素材/一生足迹/CHN.geo.json",
     "filter_bounds": [
       117.3,
@@ -662,8 +664,8 @@
       27,
       38.5
     ],
-    "source_kind": "参考记录中经筛选的东部海岸局部；不是古代疆域",
-    "source_url": "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/CHN.geo.json"
-  },
-  "evidence_note": "杜甫既有核查记录的格式转换；未新增网络或纸本核查，约位和读源边界保留在nodes及参考史料中。"
+    "source_kind": "旧版经筛选的东部海岸局部，仅存档来源；2.1渲染采用包内海岸与河流，不表示古代疆域",
+    "source_url": "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/CHN.geo.json",
+    "reference_only": true
+  }
 }

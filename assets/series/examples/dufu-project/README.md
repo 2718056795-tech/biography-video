@@ -12,4 +12,6 @@ python scripts/render_series_video.py --project assets/series/examples/dufu-proj
 
 路径相对本项目或由provider向上定位Skill，包内无需联网、系统字库或账户密钥。证据为原杜甫记录的继承，来源边界与约位精度没有因转换而升级。
 
-[实际已渲染的2秒有声样例](qa/smoke_preview_2s.mp4) · [当前字库/版式记录检查](qa/normalized_layout_check.json)。这是局部管线实跑，不代表重新渲染过完整120秒。
+[当前V2.1实际3秒有声样片](../map-upgrade-dufu-preview-3s.mp4) · [V2.1地图升级检查](../../../../references/map-upgrade-check.json)。当前示例默认使用随包海岸与河流；原海岸裁片配置仅作历史来源记录。
+
+[历史V2.0的2秒有声样例](qa/smoke_preview_2s.mp4) · [历史V2.0字库/版式检查](qa/normalized_layout_check.json)保留当时结果，不作为V2.1地图验收。这些局部管线实跑不代表重新渲染过完整120秒。

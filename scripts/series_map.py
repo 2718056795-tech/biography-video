@@ -8,16 +8,103 @@ routes, geographic view, region annotations, and palette come from the project.
 from __future__ import annotations
 
 from copy import deepcopy
+from collections import OrderedDict
 from functools import lru_cache
+import hashlib
 import json
 import math
 from pathlib import Path
 from typing import Mapping
 
-from PIL import Image, ImageColor, ImageDraw, ImageFont
+from PIL import Image, ImageColor, ImageDraw, ImageFont, PngImagePlugin
 
 SERIES_ASSETS = Path(__file__).resolve().parents[1] / 'assets' / 'series'
 STYLE_PATH = SERIES_ASSETS / 'series_style.json'
+POLICY_PATH = SERIES_ASSETS / 'map_policy.json'
+EVIDENCE_KEY = 'series_map_evidence'
+_RENDERERS = OrderedDict()
+_PIXEL_HASHES = OrderedDict()
+
+
+def _json_hash(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
+                                     ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+
+
+@lru_cache(maxsize=64)
+def _file_hash_at_stat(path, size, mtime_ns, ctime_ns):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def file_sha256(path):
+    """Hash static sources once per actual file revision, never once per frame."""
+    path = Path(path).resolve()
+    stat = path.stat()
+    return _file_hash_at_stat(str(path), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+
+
+def _remember(cache, key, value, maximum):
+    cache[key] = value
+    cache.move_to_end(key)
+    while len(cache) > maximum:
+        cache.popitem(last=False)
+
+
+def _luminance(rgb):
+    channels = [c / 255 for c in rgb]
+    return sum(k * (v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4)
+               for k, v in zip((.2126, .7152, .0722), channels))
+
+
+def _contrast(ink, paper, alpha=255):
+    composite = [round((a * alpha + b * (255 - alpha)) / 255)
+                 for a, b in zip(ink, paper)]
+    light, dark = sorted((_luminance(composite), _luminance(paper)), reverse=True)
+    return (light + .05) / (dark + .05)
+
+
+def _clip_segment(a, b, bounds):
+    """Liang–Barsky intersection, retaining crossing segments with no inside vertex."""
+    west, east, south, north = bounds
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    lo, hi = 0., 1.
+    for p, q in ((-dx, a[0]-west), (dx, east-a[0]),
+                 (-dy, a[1]-south), (dy, north-a[1])):
+        if p == 0:
+            if q < 0:
+                return None
+        else:
+            u = q / p
+            if p < 0:
+                lo = max(lo, u)
+            else:
+                hi = min(hi, u)
+            if lo > hi:
+                return None
+    first = (a[0]+lo*dx, a[1]+lo*dy)
+    last = (a[0]+hi*dx, a[1]+hi*dy)
+    return None if math.dist(first, last) < 1e-12 else (first, last)
+
+
+def _clip_runs(coords, bounds):
+    """Split at real exits, separate source parts and longitude discontinuities."""
+    run = []
+    for a, b in zip(coords, coords[1:]):
+        clipped = None if abs(b[0]-a[0]) > 180 else _clip_segment(a, b, bounds)
+        if clipped is None:
+            if len(run) > 1:
+                yield run
+            run = []
+            continue
+        first, last = clipped
+        if run and math.dist(run[-1], first) < 1e-9:
+            run.append(last)
+        else:
+            if len(run) > 1:
+                yield run
+            run = [first, last]
+    if len(run) > 1:
+        yield run
 
 
 def _object(value, name):
@@ -50,7 +137,7 @@ class SeriesMap:
     ``geometry_report()`` returns JSON-serializable coordinates and diagnostics.
     """
 
-    def __init__(self, route_data, style, theme, coastline_geojson=None):
+    def __init__(self, route_data, style, theme, coastline_geojson=None, basemap_geojson=None):
         canonical = _object(STYLE_PATH, 'series style')
         supplied = _object(style, 'style')
         supplied_map = supplied.get('map', supplied)
@@ -67,6 +154,7 @@ class SeriesMap:
                 (96, 150), (880, 430), 2, [20, 8, 860, 415]):
             raise ValueError('Authoritative series map geometry is incompatible')
         self._motion = deepcopy(canonical['motion'])
+        self.policy = _object(POLICY_PATH, 'map policy')
         for key in ('map_segment_delay', 'map_active_window_sec'):
             if key in supplied.get('motion', {}) and supplied['motion'][key] != self._motion[key]:
                 raise ValueError(f'Locked map timing changed: {key}')
@@ -88,6 +176,8 @@ class SeriesMap:
             self.colors[role] = _rgb(colors[role], role)
         self.colors['map_label_halo'] = _rgb(
             colors.get('map_label_halo', colors.get('label_halo', colors['paper'])), 'map_label_halo')
+        self.requested_colors = deepcopy(self.colors)
+        self._readability = self._adapt_colors(colors)
         self.nodes = {}
         for item in self.data.get('nodes', []):
             node = deepcopy(item)
@@ -147,17 +237,40 @@ class SeriesMap:
 
         projection = self.data.get('projection', {})
         bounds = projection.get('bounds', projection.get('bounds_west_east_south_north'))
+        automatic = bounds is None
         if bounds is None:
             lons = [n['lon'] for n in self.nodes.values()]
             lats = [n['lat'] for n in self.nodes.values()]
             if max(lons) - min(lons) > 180:
                 raise ValueError('Auto bounds crossing the antimeridian need separate regional views')
-            lon_pad = max(.5, (max(lons)-min(lons))*.12)
-            lat_pad = max(.5, (max(lats)-min(lats))*.12)
-            bounds = [max(-180,min(lons)-lon_pad), min(180,max(lons)+lon_pad),
-                      max(-85,min(lats)-lat_pad), min(85,max(lats)+lat_pad)]
+            viewport = self.policy['viewport']
+            fraction = viewport['route_padding_fraction']
+            lon_span = max(viewport['automatic_minimum_longitude_span_deg'],
+                           (max(lons)-min(lons))*(1+2*fraction))
+            lat_span = max(viewport['automatic_minimum_latitude_span_deg'],
+                           (max(lats)-min(lats))*(1+2*fraction))
+            lon_mid, lat_mid = (max(lons)+min(lons))/2, (max(lats)+min(lats))/2
+            bounds = self._bounded_view(lon_mid, lat_mid, lon_span, lat_span)
         if len(bounds) != 4 or not all(math.isfinite(v) for v in bounds):
             raise ValueError('bounds must be [west,east,south,north] finite numbers')
+        self._geo_lines, self._sources, self._ignored_geometries = [], [], []
+        self._custom_basemap = _object(basemap_geojson, 'basemap_geojson') if basemap_geojson is not None else None
+        self._custom_coast = _object(coastline_geojson, 'coastline_geojson') if coastline_geojson is not None else None
+        if self._custom_basemap is None:
+            try:
+                from series_basemap import load_default_basemap
+            except ImportError:
+                from .series_basemap import load_default_basemap
+            try:
+                default_geography = load_default_basemap()
+            except FileNotFoundError as exc:
+                raise ValueError('Bundled coast/river basemap is missing. Reinstall assets/series/geography '
+                                 'or supply a sourced basemap_geojson; routes alone cannot be rendered.') from exc
+            self._read_geography(default_geography, 'bundled Natural Earth')
+        else:
+            self._read_geography(self._custom_basemap, 'supplied basemap', basemap_geojson)
+        if self._custom_coast is not None:
+            self._read_geography(self._custom_coast, 'supplied coastline', coastline_geojson, default_layer='coast')
         self.bounds = tuple(map(float, bounds))
         west, east, south, north = self.bounds
         if not -180 <= west < east <= 180 or not -85 <= south < north <= 85:
@@ -166,21 +279,48 @@ class SeriesMap:
         self.lon0 = float(projection.get('central_meridian', (west+east)/2))
         if not math.isfinite(self.lat0) or not -85 <= self.lat0 <= 85 or not math.isfinite(self.lon0):
             raise ValueError('Invalid projection center')
-        self.x0, self.y0 = self._project(west,south)
-        x1, y1 = self._project(east,north)
-        left, top, right, bottom = self.style['plot_box']
-        self.scale = min((right-left)/(x1-self.x0), (bottom-top)/(y1-self.y0))
-        self.ox = (left+right-(x1-self.x0)*self.scale)/2
-        self.oy = (top+bottom-(y1-self.y0)*self.scale)/2
-        self.y1 = y1
+        attempts = self.policy['viewport']['empty_context_expansion_attempts'] if automatic else 0
+        self._viewport_expansions = 0
+        for attempt in range(attempts+1):
+            self._set_projection()
+            self._basemap_runs = self._visible_geography()
+            length = sum(math.dist(a, b) for item in self._basemap_runs
+                         for a, b in zip(item['points'], item['points'][1:]))
+            if length >= self.policy['basemap']['minimum_visible_length_px']:
+                break
+            if attempt < attempts:
+                west, east, south, north = self.bounds
+                factor = self.policy['viewport']['empty_context_expansion_factor']
+                self.bounds = tuple(self._bounded_view((west+east)/2, (south+north)/2,
+                                                       (east-west)*factor, (north-south)*factor))
+                self._viewport_expansions += 1
+        else:
+            raise ValueError('No usable sourced geographic context in map viewport '
+                             f'{list(self.bounds)}. Widen projection.bounds or supply a sourced '
+                             'higher-resolution coast/river LineString basemap; routes alone are not a map. '
+                             'Country polygons and fabricated coastal substitutes are not accepted.')
+        outside = [key for key, node in self.nodes.items() if not (
+            self.bounds[0] <= node['lon'] <= self.bounds[1] and
+            self.bounds[2] <= node['lat'] <= self.bounds[3])]
+        if outside:
+            raise ValueError(f'Map viewport excludes route nodes {outside}; widen projection.bounds')
+        self._automatic_view = automatic
         self.points = [self.pixel(self.nodes[key]['lon'], self.nodes[key]['lat']) for key in self.sequence]
         self.curves = [self._curve(i) for i in range(len(self.points)-1)]
         self._degenerate = [i for i,p in enumerate(self.curves) if math.dist(p[0],p[-1]) < .001]
-        self._coast_runs = []
-        self._coast_status = 'not supplied; no coastline drawn'
-        if coastline_geojson is not None:
-            self._read_coast(_object(coastline_geojson, 'coastline_geojson'), projection)
+        self._coast_runs = [r['points'] for r in self._basemap_runs if r['layer'] == 'coast']
+        self._coast_status = f'{len(self._coast_runs)} actual clipped coast runs; inland views may show rivers only'
         self._base_image = self._make_base()
+        self._native_basemap = self._base_image.resize(self.size, Image.Resampling.LANCZOS)
+        self._geometry = self._geometry_report()
+        self._geometry_sha256 = _json_hash(self._geometry)
+        self._render_spec = {'route_data': self.data, 'theme': self.theme,
+                             'basemap_geojson': self._custom_basemap,
+                             'coastline_geojson': self._custom_coast,
+                             'basemap_source_path': str(Path(basemap_geojson).resolve()) if isinstance(basemap_geojson,(str,Path)) else None,
+                             'coastline_source_path': str(Path(coastline_geojson).resolve()) if isinstance(coastline_geojson,(str,Path)) else None}
+        self._render_spec_sha256 = _json_hash(self._render_spec)
+        _remember(_RENDERERS, (self._geometry_sha256, self._render_spec_sha256), self, 12)
 
     def _derive_scenes(self):
         by_scene = {}
@@ -206,6 +346,150 @@ class SeriesMap:
                 raise ValueError('scene_order must follow visit chronology')
             result[sid] = {'start_index':previous, 'end_index':end}
             previous = end
+        return result
+
+    def _adapt_colors(self, theme_colors):
+        paper = self.colors['paper']
+        records = {}
+        for role, requirements in self.policy['readability'].items():
+            if not isinstance(requirements, list):
+                continue
+            requested = self.colors[role]
+            def passes(candidate):
+                return all(_contrast(candidate, paper, row['alpha']) >= row['minimum_contrast']
+                           for row in requirements)
+            effective = requested
+            target_name = 'requested'
+            if not passes(effective):
+                theme_ink = _rgb(theme_colors.get('ink', requested), 'ink')
+                extremes = sorted(((0,0,0), (255,255,255)),
+                                  key=lambda color: _contrast(color, paper), reverse=True)
+                for target_name, target in [('theme ink', theme_ink), ('contrast ink', extremes[0])]:
+                    found = False
+                    for step in range(1, 257):
+                        candidate = tuple(round(a+(b-a)*step/256) for a,b in zip(requested, target))
+                        if passes(candidate):
+                            effective, found = candidate, True
+                            break
+                    if found:
+                        break
+                else:
+                    raise ValueError(f'Map palette cannot meet {role} readability thresholds on paper {paper}')
+            self.colors[role] = effective
+            checks = [{'purpose': row['purpose'], 'alpha': row['alpha'],
+                       'minimum_contrast': row['minimum_contrast'],
+                       'requested_contrast': _contrast(requested, paper, row['alpha']),
+                       'effective_contrast': _contrast(effective, paper, row['alpha']),
+                       'passed': passes(effective)} for row in requirements]
+            records[role] = {'requested': list(requested), 'effective': list(effective),
+                             'adapted': effective != requested, 'toward': target_name, 'checks': checks}
+        return {'method': self.policy['readability']['method'], 'paper': list(paper),
+                'roles': records, 'passed': all(c['passed'] for r in records.values() for c in r['checks']),
+                'scope': 'map colors only, measured on theme paper; other theme colors unchanged'}
+
+    @staticmethod
+    def _bounded_view(lon, lat, lon_span, lat_span):
+        lon_span, lat_span = min(360., lon_span), min(170., lat_span)
+        west = max(-180., min(180.-lon_span, lon-lon_span/2))
+        south = max(-85., min(85.-lat_span, lat-lat_span/2))
+        return [west, west+lon_span, south, south+lat_span]
+
+    def _set_projection(self):
+        west, east, south, north = self.bounds
+        self.x0, self.y0 = self._project(west, south)
+        x1, self.y1 = self._project(east, north)
+        left, top, right, bottom = self.style['plot_box']
+        self.scale = min((right-left)/(x1-self.x0), (bottom-top)/(self.y1-self.y0))
+        self.ox = (left+right-(x1-self.x0)*self.scale)/2
+        self.oy = (top+bottom-(self.y1-self.y0)*self.scale)/2
+
+    def _read_geography(self, raw, label, source=None, default_layer=None):
+        features = raw.get('features', [raw])
+        collection = {'type': 'FeatureCollection', 'features': features}
+        fingerprint = _json_hash(collection)
+        if raw.get('sha256') and raw['sha256'] != fingerprint:
+            raise ValueError(f'{label}: geographic data fingerprint does not match its coordinates')
+        provenance = deepcopy(raw.get('provenance', {}))
+        source_files = []
+        # Only local runtime records are hashed here. Upstream files are documented
+        # with URLs/checksums in provenance and need not exist in an installed bundle.
+        for item in provenance.get('local_files', []):
+            if not isinstance(item, dict) or not item.get('path') or not item.get('sha256'):
+                raise ValueError(f'{label}: invalid local source file record')
+            path = Path(item['path']).resolve()
+            actual = file_sha256(path)
+            if actual != item['sha256']:
+                raise ValueError(f'{label}: local source checksum mismatch: {path}')
+            source_files.append({'path': str(path), 'sha256': actual})
+        if isinstance(source, (str, Path)):
+            path = Path(source).resolve()
+            source_files.append({'path': str(path), 'sha256': file_sha256(path)})
+        if label == 'bundled Natural Earth' and not provenance:
+            raise ValueError('Bundled basemap lacks source provenance; reinstall the complete series package')
+        has_lines = any(f.get('geometry', f).get('type') in ('LineString', 'MultiLineString') for f in features)
+        if label != 'bundled Natural Earth' and has_lines:
+            url = provenance.get('source_url', '')
+            if not isinstance(url, str) or not url.startswith(('https://', 'http://')) or not isinstance(provenance.get('license'), str) or not provenance['license'].strip():
+                raise ValueError(f'{label}: custom geographic lines require provenance.source_url '
+                                 '(http/https) and provenance.license; document the actual data source')
+        self._sources.append({'label': label, 'data_sha256': fingerprint,
+                              'source_files': source_files, 'provenance': provenance})
+        cfg = self.data.get('coastline', {}) if default_layer == 'coast' else {}
+        filter_bounds = cfg.get('filter_bounds', self.data.get('projection', {}).get('coast_filter_bounds'))
+        if filter_bounds is not None and (len(filter_bounds) != 4 or
+                not all(isinstance(v, (float, int)) and math.isfinite(v) for v in filter_bounds)):
+            raise ValueError('coast filter_bounds must contain four finite geographic numbers')
+        for index, feature in enumerate(features):
+            g = feature.get('geometry', feature)
+            typ = g.get('type')
+            if typ in ('Polygon', 'MultiPolygon'):
+                self._ignored_geometries.append({'source': label, 'feature': index, 'type': typ,
+                                                  'reason': 'country rings are not coastlines'})
+                continue
+            if typ not in ('LineString', 'MultiLineString'):
+                raise ValueError(f'{label}: unsupported geometry {typ}; provide actual coast/river lines')
+            props = feature.get('properties') or {}
+            layer = props.get('layer', props.get('kind', default_layer))
+            if layer not in ('coast', 'river'):
+                raise ValueError(f'{label}: feature {index} requires properties.layer coast or river')
+            parts = [g['coordinates']] if typ == 'LineString' else g['coordinates']
+            for part_index, coords in enumerate(parts):
+                if not isinstance(coords, list) or len(coords) < 2:
+                    continue
+                clean = []
+                for coord in coords:
+                    if (not isinstance(coord, (list, tuple)) or len(coord) < 2 or
+                            not all(isinstance(v, (int, float)) and math.isfinite(v) for v in coord[:2]) or
+                            not -180 <= coord[0] <= 180 or not -90 <= coord[1] <= 90):
+                        raise ValueError(f'{label}: invalid WGS84 coordinate in feature {index}')
+                    clean.append((float(coord[0]), float(coord[1])))
+                self._geo_lines.append({'layer': layer, 'coords': clean, 'name': props.get('name'),
+                                        'source_id': props.get('source_id', index), 'part': part_index,
+                                        'data_sha256': fingerprint,
+                                        'bbox': (min(x for x,y in clean), min(y for x,y in clean),
+                                                 max(x for x,y in clean), max(y for x,y in clean)),
+                                        'filter_bounds': filter_bounds if layer == 'coast' else None})
+
+    def _visible_geography(self):
+        result = []
+        for item in self._geo_lines:
+            bounds = self.bounds
+            coords = item['coords']
+            # Quick rejection keeps worldwide data inexpensive in regional views.
+            xmin, ymin, xmax, ymax = item['bbox']
+            if xmax < bounds[0] or xmin > bounds[1] or ymax < bounds[2] or ymin > bounds[3]:
+                continue
+            if item['filter_bounds'] is not None:
+                a,b,c,d = item['filter_bounds']
+                bounds = (max(bounds[0],a), min(bounds[1],b), max(bounds[2],c), min(bounds[3],d))
+                if bounds[0] >= bounds[1] or bounds[2] >= bounds[3]:
+                    continue
+            for run in _clip_runs(coords, bounds):
+                result.append({'layer': item['layer'], 'name': item['name'],
+                               'source_id': item['source_id'], 'part': item['part'],
+                               'data_sha256': item['data_sha256'],
+                               'geographic_points': run,
+                               'points': [self.pixel(lon, lat) for lon, lat in run]})
         return result
 
     def _project(self, lon, lat):
@@ -241,51 +525,12 @@ class SeriesMap:
                  (1-t)**3*a[1]+3*(1-t)**2*t*c1[1]+3*(1-t)*t*t*c2[1]+t**3*b[1])
                 for t in [j/90 for j in range(91)]]
 
-    def _read_coast(self,raw,projection):
-        cfg=self.data.get('coastline', {})
-        coast_filter=cfg.get('filter_bounds',projection.get('coast_filter_bounds'))
-        if coast_filter is not None and (len(coast_filter)!=4 or
-                not all(math.isfinite(v) for v in coast_filter)):
-            raise ValueError('coast filter_bounds must be [west,east,south,north]')
-        features=raw.get('features',[raw])
-        skipped_polygon=False
-        for feature in features:
-            g=feature.get('geometry',feature)
-            typ=g.get('type')
-            if typ in ('Polygon','MultiPolygon'):
-                if coast_filter is None:
-                    skipped_polygon=True
-                    continue  # country polygons are not automatically coastlines
-                polygons=g['coordinates'] if typ=='MultiPolygon' else [g['coordinates']]
-                rings=[p[0] for p in polygons]
-            elif typ in ('LineString','MultiLineString'):
-                rings=[g['coordinates']] if typ=='LineString' else g['coordinates']
-            else:
-                raise ValueError(f'Unsupported coastline geometry {typ}')
-            for ring in rings:
-                run=[]
-                for coord in ring:
-                    lon,lat=coord[:2]
-                    west,east,south,north=self.bounds
-                    valid=west<=lon<=east and south<=lat<=north
-                    if coast_filter is not None:
-                        a,b,c,e=coast_filter
-                        valid=valid and a<=lon<=b and c<=lat<=e
-                    if valid:
-                        run.append(self.pixel(lon,lat))
-                    else:
-                        if len(run)>1:self._coast_runs.append(run)
-                        run=[]
-                if len(run)>1:self._coast_runs.append(run)
-        self._coast_status = ('local supplied geographic lines; ' +
-            f'{len(self._coast_runs)} visible continuous runs; no fabricated substitute')
-        if skipped_polygon:self._coast_status += '; polygon skipped without explicit coastal filter'
-
     def _make_base(self):
         im=Image.new('RGBA',(self.width*self.ss,self.height*self.ss),(0,0,0,0))
         d=ImageDraw.Draw(im)
-        for run in self._coast_runs:
-            self._line(d,run,self.colors['map_coast']+(self.style['coast_alpha'],),self.style['coast_width'])
+        for item in self._basemap_runs:
+            style = self.policy['basemap'][item['layer']]
+            self._line(d,item['points'],self.colors['map_coast']+(style['alpha'],),style['width'])
         return im
 
     def _region_layout(self,plan):
@@ -319,7 +564,7 @@ class SeriesMap:
         d.text(tuple(round(v*self.ss) for v in layout['label_position']),plan['region_label'],
                font=self._font(26),fill=self.colors['map_accent']+(alpha,),anchor='lt')
 
-    def render(self,scene_id,t,duration):
+    def _render_pixels(self,scene_id,t,duration):
         if scene_id not in self.per_scene:
             raise KeyError(f'No map plan for scene {scene_id}')
         if not math.isfinite(t) or not math.isfinite(duration) or duration<=0:
@@ -376,7 +621,48 @@ class SeriesMap:
                     stroke_fill=self.colors['map_label_halo']+(155,),anchor='lt')
         return im.resize(self.size,Image.Resampling.LANCZOS)
 
+    def _basemap_report(self):
+        layers = {}
+        for layer in ('coast', 'river'):
+            runs = [item for item in self._basemap_runs if item['layer'] == layer]
+            layers[layer] = {'visible_segments': len(runs),
+                             'visible_edges': sum(len(r['points'])-1 for r in runs),
+                             'visible_length_px': sum(math.dist(a,b) for r in runs
+                                                      for a,b in zip(r['points'],r['points'][1:]))}
+        return {'status': 'sourced geographic context', 'layers': layers,
+                'visible_coast_segments': layers['coast']['visible_segments'],
+                'visible_river_segments': layers['river']['visible_segments'],
+                'visible_length_px': sum(item['visible_length_px'] for item in layers.values()),
+                'source_fingerprint': _json_hash(self._sources), 'sources': deepcopy(self._sources),
+                'geometry': deepcopy(self._basemap_runs),
+                'ignored_geometries': deepcopy(self._ignored_geometries),
+                'viewport_automatic': self._automatic_view,
+                'viewport_expansions': self._viewport_expansions,
+                'country_borders_drawn': False, 'coast_required_for_inland': False,
+                'data_scope': 'modern generalized geographic context, not reconstructed historical geography'}
+
     def geometry_report(self):
+        return deepcopy(self._geometry)
+
+    def render(self, scene_id, t, duration):
+        im = self._render_pixels(scene_id, t, duration)
+        digest = hashlib.sha256(im.tobytes()).hexdigest()
+        key = (self._geometry_sha256, self._render_spec_sha256, scene_id, float(t), float(duration))
+        _remember(_PIXEL_HASHES, key, digest, 256)
+        im.info[EVIDENCE_KEY] = {
+            'schema_version': '2.1', 'engine_sha256': file_sha256(__file__),
+            'engine_path': str(Path(__file__).resolve()), 'policy_sha256': file_sha256(POLICY_PATH),
+            'style_sha256': file_sha256(STYLE_PATH), 'geometry_sha256': self._geometry_sha256,
+            'scene_id': scene_id, 'time_sec': float(t), 'duration_sec': float(duration),
+            'image_sha256': digest, 'map_size': list(im.size), 'image_mode': 'RGBA',
+            'basemap': deepcopy({k:v for k,v in self._geometry['basemap'].items() if k != 'geometry'}),
+            'readability': deepcopy(self._readability),
+            'geometry': self._geometry, 'render_spec': self._render_spec,
+            'render_spec_sha256': self._render_spec_sha256,
+        }
+        return im
+
+    def _geometry_report(self):
         xmin=min(x for x,y in self.points);xmax=max(x for x,y in self.points)
         ymin=min(y for x,y in self.points);ymax=max(y for x,y in self.points)
         outside=[key for key,n in self.nodes.items() if not (
@@ -406,6 +692,204 @@ class SeriesMap:
             'coastline':{'status':self._coast_status,'visible_runs':len(self._coast_runs),
                          'source':deepcopy(self.data.get('coastline',{}))},
             'font_paths':{str(k):str(v) for k,v in self._font_paths.items()},
+            'static_files':[{'path':str(path),'sha256':file_sha256(path)}
+                            for path in [STYLE_PATH, POLICY_PATH, *self._font_paths.values()]],
             'theme_id':self.theme.get('theme_id'),'theme_colors':deepcopy(self.colors),
+            'requested_theme_colors':deepcopy(self.requested_colors),
+            'basemap':self._basemap_report(), 'readability':deepcopy(self._readability),
+            'policy':{'path':str(POLICY_PATH), 'sha256':file_sha256(POLICY_PATH), 'policy_id':self.policy['policy_id']},
             'precision_claim':'structural coordinates and supplied metadata only; not historical verification',
         }
+
+
+def _evidence_renderer(evidence):
+    key = evidence['geometry_sha256'], evidence['render_spec_sha256']
+    renderer = _RENDERERS.get(key)
+    if renderer is None:
+        spec = evidence['render_spec']
+        renderer = SeriesMap(spec['route_data'], STYLE_PATH, spec['theme'],
+                             coastline_geojson=spec.get('coastline_source_path') or spec.get('coastline_geojson'),
+                             basemap_geojson=spec.get('basemap_source_path') or spec.get('basemap_geojson'))
+        if renderer._geometry_sha256 != key[0] or renderer._render_spec_sha256 != key[1]:
+            raise ValueError('Map evidence geometry is not the official projection of its bound route and geographic sources')
+    return renderer
+
+
+def validate_map_evidence(evidence, scene_id=None, t=None, duration=None):
+    """Validate an audit record and current sources; pixels require ensure_map_evidence.
+
+    A renderer reconstructed from the bound inputs verifies geometry and all
+    summaries. Reconstructed renderers and static file hashes are cached.
+    """
+    if not isinstance(evidence, dict) or evidence.get('schema_version') != '2.1':
+        raise ValueError('Map requires SeriesMap 2.1 geographic evidence; render it with the current engine')
+    required = ('engine_sha256', 'policy_sha256', 'style_sha256', 'geometry_sha256',
+                'render_spec_sha256', 'scene_id', 'time_sec', 'duration_sec', 'image_sha256',
+                'map_size', 'image_mode', 'basemap', 'readability', 'geometry', 'render_spec')
+    if any(key not in evidence for key in required):
+        raise ValueError('Incomplete map evidence: expected source, geometry, readability, scene and pixel bindings')
+    for key, path in (('engine_sha256', __file__), ('policy_sha256', POLICY_PATH), ('style_sha256', STYLE_PATH)):
+        if evidence[key] != file_sha256(path):
+            raise ValueError(f'Stale map evidence: {key} differs from the current bundled file; regenerate map')
+    if evidence['map_size'] != [880, 430] or evidence['image_mode'] != 'RGBA':
+        raise ValueError('Map evidence does not match locked 880x430 RGBA geometry')
+    for key in ('time_sec', 'duration_sec'):
+        value = evidence[key]
+        if isinstance(value, bool) or not isinstance(value, (float, int)) or not math.isfinite(value):
+            raise ValueError(f'Map evidence {key} must be finite numeric time')
+    if evidence['duration_sec'] <= 0 or not isinstance(evidence['scene_id'], str):
+        raise ValueError('Map evidence requires a scene and positive duration')
+    for actual, expected, label in ((evidence['scene_id'], scene_id, 'scene'),
+                                    (evidence['time_sec'], t, 'time'),
+                                    (evidence['duration_sec'], duration, 'duration')):
+        if expected is not None and actual != expected:
+            raise ValueError(f'Map evidence {label} mismatch: expected {expected}, got {actual}')
+    try:
+        if _json_hash(evidence['geometry']) != evidence['geometry_sha256']:
+            raise ValueError('Map geometry fingerprint mismatch')
+        if _json_hash(evidence['render_spec']) != evidence['render_spec_sha256']:
+            raise ValueError('Map render input fingerprint mismatch')
+        geometry = evidence['geometry']
+        basemap = geometry['basemap']
+        if not isinstance(basemap, dict) or not isinstance(evidence['readability'], dict):
+            raise ValueError('Map evidence must contain measured geographic and readability records')
+        if evidence['basemap'] != {k:v for k,v in basemap.items() if k != 'geometry'}:
+            raise ValueError('Map basemap summary is not bound to geometry')
+        if evidence['readability'] != geometry['readability'] or geometry['readability']['passed'] is not True:
+            raise ValueError('Map readability evidence is absent or failed')
+        if (basemap['visible_length_px'] < _object(POLICY_PATH, 'map policy')['basemap']['minimum_visible_length_px']
+                or not basemap['geometry'] or not basemap['sources']):
+            raise ValueError('Map evidence contains no usable sourced geographic context')
+        if basemap['source_fingerprint'] != _json_hash(basemap['sources']):
+            raise ValueError('Map basemap source fingerprint mismatch')
+        for source in basemap['sources']:
+            if source['label'] == 'bundled Natural Earth':
+                try:
+                    from series_basemap import validate_default_basemap_fingerprint
+                except ImportError:
+                    from .series_basemap import validate_default_basemap_fingerprint
+                if not validate_default_basemap_fingerprint(source['data_sha256']):
+                    raise ValueError('Bundled basemap source changed; regenerate map')
+            for record in source['source_files']:
+                if file_sha256(record['path']) != record['sha256']:
+                    raise ValueError(f'Map source checksum mismatch: {record["path"]}')
+        for record in geometry['static_files']:
+            if file_sha256(record['path']) != record['sha256']:
+                raise ValueError(f'Map static file checksum mismatch: {record["path"]}')
+        renderer = _evidence_renderer(evidence)
+        if renderer._geometry != geometry:
+            # JSON turns tuples into lists; canonical equality is the portable comparison.
+            if _json_hash(renderer._geometry) != _json_hash(geometry):
+                raise ValueError('Map report differs from its official renderer')
+        if evidence['scene_id'] not in renderer.per_scene:
+            raise ValueError('Map evidence references an unknown scene')
+    except (KeyError, TypeError, FileNotFoundError) as exc:
+        raise ValueError(f'Invalid map geographic evidence: {exc}') from exc
+    return evidence
+
+
+def ensure_map_evidence(image, scene_id=None, t=None, duration=None):
+    """Bind actual pixels to the sourced renderer, geometry and exact scene time."""
+    if not isinstance(image, Image.Image) or image.mode != 'RGBA':
+        raise ValueError('Map must be the RGBA image returned by SeriesMap.render')
+    evidence = validate_map_evidence(image.info.get(EVIDENCE_KEY), scene_id, t, duration)
+    actual = hashlib.sha256(image.tobytes()).hexdigest()
+    if list(image.size) != evidence['map_size'] or actual != evidence['image_sha256']:
+        raise ValueError('Map pixels do not match their evidence; map was replaced, resized or edited')
+    key = (evidence['geometry_sha256'], evidence['render_spec_sha256'], evidence['scene_id'],
+           float(evidence['time_sec']), float(evidence['duration_sec']))
+    expected = _PIXEL_HASHES.get(key)
+    if expected is None:
+        renderer = _evidence_renderer(evidence)
+        official = renderer._render_pixels(evidence['scene_id'], evidence['time_sec'], evidence['duration_sec'])
+        expected = hashlib.sha256(official.tobytes()).hexdigest()
+        _remember(_PIXEL_HASHES, key, expected, 256)
+    if actual != expected:
+        raise ValueError('Map pixels differ from the official sourced renderer for this geometry and scene time')
+    return evidence
+
+
+def attach_map_evidence(image, evidence):
+    """Attach externally preserved evidence, then verify actual RGBA pixels."""
+    if isinstance(evidence, (str, Path)):
+        evidence = json.loads(Path(evidence).read_text(encoding='utf-8'))
+    image.info[EVIDENCE_KEY] = deepcopy(evidence)
+    ensure_map_evidence(image)
+    return image
+
+
+def save_map_png(image, path):
+    evidence = ensure_map_evidence(image)
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    metadata = PngImagePlugin.PngInfo()
+    text = json.dumps(evidence, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
+    metadata.add_itxt(EVIDENCE_KEY, text, zip=True)
+    image.save(path, pnginfo=metadata)
+    Path(str(path)+'.evidence.json').write_text(text+'\n', encoding='utf-8')
+    return path
+
+
+def load_map_png(path):
+    path = Path(path)
+    with Image.open(path) as source:
+        embedded = source.info.get(EVIDENCE_KEY)
+        image = source.convert('RGBA')
+    sidecar = Path(str(path)+'.evidence.json')
+    evidence = json.loads(embedded) if isinstance(embedded, str) else None
+    if sidecar.is_file():
+        separate = json.loads(sidecar.read_text(encoding='utf-8'))
+        if evidence is not None and evidence != separate:
+            raise ValueError('Embedded map evidence and sidecar differ')
+        evidence = separate
+    return attach_map_evidence(image, evidence)
+
+
+def validate_map_background(map_image, background_image):
+    """Measure native geographic/route/text stroke cores on the actual art crop.
+
+    Returns a report with passed/status. The caller must reject a failed report.
+    The crop is the opaque, already composited 880x430 art under the map.
+    Edge antialias pixels are excluded; map dimensions and placement stay fixed.
+    """
+    import numpy as np
+    evidence = ensure_map_evidence(map_image)
+    if not isinstance(background_image, Image.Image) or background_image.size != map_image.size:
+        raise ValueError('Actual map background must be the composited 880x430 art crop')
+    if background_image.mode == 'RGBA' and background_image.getextrema()[3] != (255,255):
+        raise ValueError('Actual map background must be composited to opaque paper before readability checks')
+    background = background_image.convert('RGB')
+    bg = np.asarray(background, dtype=np.float64)
+    fg = np.asarray(map_image, dtype=np.float64)
+    renderer = _evidence_renderer(evidence)
+    base = renderer._native_basemap
+    base_alpha = np.asarray(base, dtype=np.uint8)[...,3]
+    composite = (fg[...,:3]*fg[...,3:4]+bg*(255-fg[...,3:4]))/255
+    def luminance(rgb):
+        values = rgb/255
+        linear = np.where(values <= .04045, values/12.92, ((values+.055)/1.055)**2.4)
+        return linear @ np.array([.2126,.7152,.0722])
+    back_lum, comp_lum = luminance(bg), luminance(composite)
+    ratios = (np.maximum(back_lum,comp_lum)+.05)/(np.minimum(back_lum,comp_lum)+.05)
+    accent = np.array(renderer.colors['map_accent'])
+    accent_core = np.max(np.abs(fg[...,:3]-accent), axis=2) <= 8
+    masks = [('geographic_context', base_alpha >= 100, 1.20),
+             ('route', accent_core & (fg[...,3] >= 160), 1.8),
+             ('current_label', accent_core & (fg[...,3] >= 230), 3.0)]
+    checks = []
+    for label, mask, minimum in masks:
+        samples = ratios[mask]
+        count = int(samples.size)
+        fraction = float(np.mean(samples >= minimum)) if count else None
+        passed = (count > 0 and fraction >= .9) if label == 'geographic_context' else (not count or fraction >= .9)
+        checks.append({'purpose': label, 'sample_pixels': count, 'minimum_contrast': minimum,
+                       'required_passing_fraction': .9, 'passing_fraction': fraction,
+                       'measured_contrast_p10': float(np.percentile(samples,10)) if count else None,
+                       'passed': bool(passed)})
+    passed = all(c['passed'] for c in checks)
+    return {'schema_version': '2.1', 'status': 'passed' if passed else 'failed', 'passed': passed,
+            'method': 'WCAG native stroke-core pixel contrast over actual composited art crop',
+            'background_sha256': hashlib.sha256(background.tobytes()).hexdigest(),
+            'background_size': list(background.size), 'background_mode': 'RGB',
+            'map_image_sha256': evidence['image_sha256'], 'engine_sha256': evidence['engine_sha256'],
+            'geometry_sha256': evidence['geometry_sha256'], 'checks': checks}

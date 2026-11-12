@@ -1,0 +1,75 @@
+{
+  "schema_version": "2.1",
+  "policy_id": "biography-geographic-context-2.1",
+  "layout_profile_id": "biography-paper-cut-series-2.0",
+  "basemap": {
+    "coast": {
+      "width": 1.15,
+      "alpha": 155
+    },
+    "river": {
+      "width": 0.9,
+      "alpha": 140
+    },
+    "minimum_visible_length_px": 24,
+    "allowed_geometry_types": [
+      "LineString",
+      "MultiLineString"
+    ],
+    "country_polygons_are_coasts": false,
+    "clipping": "segment intersection with geographic viewport; split at exits and antimeridian discontinuities"
+  },
+  "viewport": {
+    "automatic_minimum_longitude_span_deg": 8,
+    "automatic_minimum_latitude_span_deg": 5,
+    "route_padding_fraction": 0.18,
+    "empty_context_expansion_factor": 1.5,
+    "empty_context_expansion_attempts": 2,
+    "explicit_bounds_expand": false
+  },
+  "readability": {
+    "method": "WCAG relative luminance contrast after source-over alpha compositing on theme paper",
+    "map_coast": [
+      {
+        "purpose": "coast",
+        "alpha": 155,
+        "minimum_contrast": 1.5
+      },
+      {
+        "purpose": "river",
+        "alpha": 140,
+        "minimum_contrast": 1.5
+      }
+    ],
+    "map_ink": [
+      {
+        "purpose": "visited_node",
+        "alpha": 65,
+        "minimum_contrast": 1.3
+      }
+    ],
+    "map_accent": [
+      {
+        "purpose": "old_route_minimum",
+        "alpha": 70,
+        "minimum_contrast": 1.4
+      },
+      {
+        "purpose": "completed_route",
+        "alpha": 165,
+        "minimum_contrast": 2.5
+      },
+      {
+        "purpose": "current_label",
+        "alpha": 245,
+        "minimum_contrast": 4.5
+      },
+      {
+        "purpose": "region",
+        "alpha": 130,
+        "minimum_contrast": 1.8
+      }
+    ],
+    "adaptation": "blend map colors toward contrasting theme ink, then black or white if required; preserve other theme roles"
+  }
+}

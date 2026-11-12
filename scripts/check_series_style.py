@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """Check renderer layout records against the locked series profile and variable theme.
 
-Checks geometry/font records, not image-pixel similarity or historical/aesthetic
-truth. Per-person palette and background motifs are intentionally variable.
+Checks geometry/font records and sourced map evidence. Optional actual frame/map
+images verify recorded pixel hashes; these checks do not establish historical truth.
 """
 import argparse
+import hashlib
 import json
 import math
 from pathlib import Path
+import re
+from PIL import Image
 from series_cover import DEFAULT_PROFILE, read_theme, sha256_file
+from series_map import ensure_map_evidence, validate_map_evidence
 
 
-def check_layout(report, profile, theme, profile_path):
+def check_layout(report, profile, theme, profile_path, frame_image=None, map_image=None):
     errors = []
     def require(condition, message):
         if not condition:
@@ -152,6 +156,70 @@ def check_layout(report, profile, theme, profile_path):
         map_record = mapping(report.get('map'))
         for key, value in profile['map'].items():
             require(map_record.get(key) == value, f'map.{key}偏离母版')
+        require(report.get('map_present') is True, '每帧必须存在有来源且可读的地图；map_present须为true')
+        evidence = report.get('map_evidence')
+        try:
+            validate_map_evidence(evidence, scene_id=report.get('scene_id'),
+                                  t=report.get('time_sec'), duration=report.get('duration_sec'))
+        except (ValueError, TypeError, KeyError, OSError) as exc:
+            errors.append(f'地图证据无效: {exc}')
+        background_check = mapping(report.get('map_background_readability'))
+        require(background_check.get('status') == 'passed' and background_check.get('passed') is True,
+                '缺少通过的实际美术背景地图可读性记录')
+        for field in ('engine_sha256', 'geometry_sha256'):
+            require(background_check.get(field) == mapping(evidence).get(field), f'实际背景可读性{field}与地图证据不一致')
+        require(background_check.get('map_image_sha256') == mapping(evidence).get('image_sha256'),
+                '实际背景可读性未绑定实际地图像素')
+        require(background_check.get('background_size') == [profile['map']['width'], profile['map']['height']]
+                and background_check.get('background_mode') == 'RGB', '实际地图背景尺寸/模式无效')
+        require(isinstance(background_check.get('background_sha256'), str)
+                and re.fullmatch(r'[0-9a-f]{64}', background_check['background_sha256']) is not None,
+                '缺少实际地图背景像素SHA256')
+        background_metrics = background_check.get('checks')
+        require(isinstance(background_metrics, list), '缺少实际背景的可读性测量')
+        background_metrics = background_metrics if isinstance(background_metrics, list) else []
+        policy_checks = {'geographic_context': 1.20, 'route': 1.8, 'current_label': 3.0}
+        require(len(background_metrics) == len(policy_checks), '实际背景可读性测量项不完整')
+        require({mapping(metric).get('purpose') for metric in background_metrics} == set(policy_checks), '实际背景可读性测量角色缺失或重复')
+        for metric in background_metrics:
+            metric = mapping(metric)
+            purpose = metric.get('purpose')
+            require(purpose in policy_checks and metric.get('minimum_contrast') == policy_checks.get(purpose)
+                    and metric.get('required_passing_fraction') == .9 and metric.get('passed') is True,
+                    '实际背景可读性测量阈值或结果无效')
+            count = metric.get('sample_pixels')
+            fraction = metric.get('passing_fraction')
+            require(type(count) is int and count >= (1 if purpose == 'geographic_context' else 0), '实际背景可读性像素样本无效')
+            if isinstance(count, int) and count > 0:
+                require(type(fraction) in (int, float) and math.isfinite(fraction) and .9 <= fraction <= 1,
+                        '实际背景中足够对比度像素不足90%')
+        for field in ('frame_sha256', 'composited_map_sha256'):
+            require(isinstance(report.get(field), str) and re.fullmatch(r'[0-9a-f]{64}', report[field]) is not None,
+                    f'{field}: 缺少实际画面像素SHA256')
+        require(report.get('frame_mode') == 'RGB', 'frame_mode须为实际输出RGB')
+        if frame_image is not None:
+            if isinstance(frame_image, Image.Image) and frame_image.size == (spec_canvas['width'], spec_canvas['height']):
+                actual_frame = frame_image.convert('RGB')
+                require(hashlib.sha256(actual_frame.tobytes()).hexdigest() == report.get('frame_sha256'), '实际frame像素SHA256与报告不符')
+                x, y, w, h = (profile['map'][key] for key in ('x', 'y', 'width', 'height'))
+                require(hashlib.sha256(actual_frame.crop((x, y, x+w, y+h)).tobytes()).hexdigest() == report.get('composited_map_sha256'),
+                        '实际合成地图区域像素SHA256与报告不符')
+            else:
+                errors.append('实际frame图片尺寸与母版不符')
+        if map_image is not None:
+            try:
+                if not isinstance(map_image, Image.Image):
+                    raise ValueError('map_image须为Pillow图片')
+                actual_map = map_image.copy()
+                if not isinstance(actual_map.info.get('series_map_evidence'), dict):
+                    actual_map.info['series_map_evidence'] = evidence
+                verified = ensure_map_evidence(actual_map, scene_id=report.get('scene_id'),
+                                              t=report.get('time_sec'), duration=report.get('duration_sec'))
+                require(json.dumps(verified, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
+                        == json.dumps(evidence, sort_keys=True, separators=(',', ':'), ensure_ascii=False),
+                        '实际map图片证据与frame报告不符')
+            except (ValueError, TypeError, KeyError, OSError) as exc:
+                errors.append(f'实际地图像素或证据无效: {exc}')
         stage = mapping(report.get('stage'))
         name = stage.get('profile_name')
         locked_stage = profile['stage_profiles'].get(name) if isinstance(name, str) else None
@@ -163,7 +231,9 @@ def check_layout(report, profile, theme, profile_path):
             require(report['motion'] == profile['motion'], '动画/文字时钟配置偏离母版')
     return {'technical_status': 'passed' if not errors else 'failed', 'errors': errors,
             'checked_kind': kind, 'profile_id': profile.get('profile_id'),
-            'scope': 'Layout/font/theme-role records checked against the supplied locked profile. Per-person palette and art pixels are not compared to Du Fu. This does not independently certify image pixels, historical truth, title wording, semantic motifs or aesthetic quality.'}
+            'actual_frame_pixels_verified': kind == 'frame' and frame_image is not None and not errors,
+            'actual_map_pixels_verified': kind == 'frame' and map_image is not None and not errors,
+            'scope': 'Layout/font/theme-role, sourced map evidence and recorded contrast over actual art checked against the locked profile. Actual frame/map pixels checked only when supplied. This does not certify historical truth, title wording, semantic motifs or aesthetic quality.'}
 
 
 def main():
@@ -171,15 +241,23 @@ def main():
     parser.add_argument('--report', type=Path, required=True, help='series_cover.py或series_frame.py生成的布局记录JSON')
     parser.add_argument('--profile', type=Path, default=DEFAULT_PROFILE)
     parser.add_argument('--theme', type=Path, required=True)
+    parser.add_argument('--frame', type=Path, help='可选：实际无损合成frame图片，核对RGB像素SHA256')
+    parser.add_argument('--map', dest='map_path', type=Path, help='可选：实际RGBA地图图片，核对证据和像素SHA256')
+    parser.add_argument('--require-pixels', action='store_true', help='frame报告必须同时提供--frame及--map；仅报告不能验证实际像素')
     parser.add_argument('--output', type=Path, required=True, help='QA结果JSON，不能覆盖输入')
     args = parser.parse_args()
-    for source in [args.report, args.profile, args.theme]:
+    for source in [args.report, args.profile, args.theme, *([args.frame] if args.frame else []), *([args.map_path] if args.map_path else [])]:
         if args.output.resolve() == source.resolve() or (args.output.exists() and source.exists() and args.output.samefile(source)):
             parser.error('QA输出不得覆盖输入')
     try:
         profile = json.loads(args.profile.read_text(encoding='utf-8'))
         theme = read_theme(args.theme, profile)
-        result = check_layout(json.loads(args.report.read_text(encoding='utf-8')), profile, theme, args.profile)
+        report = json.loads(args.report.read_text(encoding='utf-8'))
+        if args.require_pixels and report.get('kind') == 'frame' and (args.frame is None or args.map_path is None):
+            raise ValueError('--require-pixels requires both --frame and --map for frame reports')
+        frame_image = Image.open(args.frame) if args.frame else None
+        map_image = Image.open(args.map_path) if args.map_path else None
+        result = check_layout(report, profile, theme, args.profile, frame_image=frame_image, map_image=map_image)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         result = {'technical_status': 'failed', 'errors': [str(exc)], 'scope': 'Layout-record check failed; no visual or historical certification.'}
     args.output.parent.mkdir(parents=True, exist_ok=True)

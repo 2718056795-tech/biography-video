@@ -1,19 +1,20 @@
-# 人物生平动画 Skill · V2.0
+# 人物生平动画 Skill · V2.1
 
 为历史人物、文学家、科学家、艺术家等制作中文生平动画：逐人核查资料，把重要人生节点写成章节，制作真实动作、累计行程地图、屏幕解读和独立封面。
 
 本 Skill 服务于同一视频合集。**标题、地图、说明、评价和封面的版位保持一致；人物配色、背景、建筑、器物和动作根据时代与经历重新设计。** 每个新人物都要重新研究，本仓库没有预先收集所有人物的史料。
 
-从 [START_HERE.md](START_HERE.md) 开始，再读取 [SKILL.md](SKILL.md)。唯一版式依据为 [series_style.json](assets/series/series_style.json)。
+从 [START_HERE.md](START_HERE.md) 开始，再读取 [SKILL.md](SKILL.md)。唯一版式依据为 [series_style.json](assets/series/series_style.json)。**V2.1 是地图内容与验收升级；布局 profile 仍为 `biography-paper-cut-series-2.0`，坐标、字体、字号和时序保持原值。**
 
 ## 安装与调用
 
-制作环境需要 Python 3、Pillow、NumPy、SciPy 和可在命令行调用的 FFmpeg/ffprobe；重建旧案例的 SVG 素材另需 Inkscape。四款固定字体和原配乐已经随仓库提供。
+制作环境需要 Python 3、Pillow、NumPy、SciPy 和可在命令行调用的 FFmpeg/ffprobe；重建旧案例的 SVG 素材另需 Inkscape。四款固定字体、原配乐和离线地理底图已经随仓库提供。
 
 ```bash
 git clone https://github.com/2718056795-tech/biography-video.git historical-biography-video
 cd historical-biography-video
 python scripts/verify_series_bundle.py
+python scripts/series_basemap.py
 ```
 
 若使用独立 Python 环境，可在该环境安装 Python 依赖：
@@ -40,12 +41,14 @@ python -m pip install Pillow numpy scipy
 | 视频 | 9:16 竖屏、1080×1920、30 fps、120 秒、12 个固定章节槽；默认无旁白。 |
 | 章节内容 | 各章独立标题、年代地点、事件说明 `event_summary` 和原创评价 `assessment`。引文可选；无引文时使用简短说明。 |
 | 排版 | 固定字体、字号、坐标、行距、章节时序及入退场规则，使用随包合成器；超长内容按母版规则精简。 |
-| 地图 | 透明累计行程，固定在 (96,150)，尺寸 880×430；城市标签可显示，不写“一生足迹”标题，不另加侧栏或图例。 |
+| 地图 | 透明累计行程与有来源的地理参照，固定在 (96,150)，尺寸 880×430；城市标签可显示，不写“一生足迹”标题，不另加侧栏或图例。 |
 | 配乐 | 沿用随包固定音轨；完整片从原曲 0 秒起连续使用并保留 AAC 音频数据，不裁曲、循环、改速、调音量或淡出。 |
 | 动画 | 每章有人物或物件的实际动作，保持粗块面、低饱和、纸切剪影和克制纸纹。 |
 | 封面 | 必交独立 1200×1500 PNG，固定姓名、片名和钩子句的位置与字号。用户所称“5:4竖屏”按长短边理解，实际宽高为 4:5。 |
 
 改变画幅、时长、章节数等全局规格，需要用户明确要求并建立对应模板版本。本说明延续当前母版，不变更现有视频和封面规则。
+
+地图默认从随包 Natural Earth 数据裁取真实海岸和主要河流，并根据当前画面底色保证路线与标签可读。内陆视窗可没有海岸，不应为凑轮廓移入海岸或生成虚构地形；狭窄区域若缺少可用要素，应补充有来源的更详细本地数据。底图是概化的现代地理参照，不是唐代河道、古代疆界或已考证古道。数据来源、输入方式与失败处理见 [地图接口](references/series-map-api.md) 和 [V2.1 升级说明](references/map-upgrade-v2.1.md)。
 
 ### 固定什么，重新设计什么
 
@@ -136,10 +139,12 @@ python scripts/init_series_project.py --name 苏轼 --title 人间有味 --theme
 
 ## 验证范围与参考素材
 
-仓库已有报告记录了杜甫 V4 基准的15个原生画面逐像素一致性检查、108个地图时点检查，以及2秒有声视频管线验证。报告位于 [references/](references/)；上述检查范围和测试对象以各报告为准。
+**HISTORICAL V2.0 evidence（历史 V2.0 证据）：** [15 个原生画面报告](references/series-frame-final-check.json)、[108 个地图时点报告](references/series-map-check.json)及旧 2 秒有声管线报告仅记录当时的杜甫 V4/V2.0 基准。V2.1 地理底图与可读性处理会改变地图像素，旧报告不能证明当前新地图逐像素相同或已经完成新版渲染。
+
+当前地图升级的实际检查以 [map-upgrade-check.json](references/map-upgrade-check.json) 为准；各项结果、实际文件与哈希及未做的检查应按该报告逐项阅读。短样片和抽帧证明其对应区间与画面，不证明重新渲染了完整 120 秒。
 
 本使用说明的补充不代表重新执行了视频渲染，也不代表苏轼、牛顿或其他新人物已经完成。程序完整性检查、文档检查、实际渲染、真人听审和抖音设备预览应分别记录，做过哪项就说明哪项。
 
 `assets/dufu-reference/` 是杜甫的动作、分层画面与史料案例；新人物按当前系列合成器和自己的研究制作。李白、苏轼主题只作美术方向参考。
 
-字体来源及授权见 [COPYRIGHT.txt](assets/series/fonts/COPYRIGHT.txt) 和 [字体清单](assets/series/fonts_manifest.json)，固定音乐来源见 [fixed-bgm-provenance.json](assets/fixed-bgm-provenance.json)。复用素材时沿用各自的授权范围。
+地理数据来源与公有领域说明见 [V2.1 升级说明](references/map-upgrade-v2.1.md)。字体来源及授权见 [COPYRIGHT.txt](assets/series/fonts/COPYRIGHT.txt) 和 [字体清单](assets/series/fonts_manifest.json)，固定音乐来源见 [fixed-bgm-provenance.json](assets/fixed-bgm-provenance.json)。复用素材时沿用各自的授权范围。

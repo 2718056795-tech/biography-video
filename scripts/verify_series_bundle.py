@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the shipped series renderer, profile and font lock; no media or history certification."""
+"""Verify released renderers, layout, fonts and geographic data; not media/history certification."""
 from pathlib import Path
 import argparse
 import hashlib
@@ -20,7 +20,7 @@ def inspect(root=ROOT):
             errors.append({'file':relative,'error':'changed from released series master'})
     return {'technical_status':'passed' if not errors else 'failed','profile_id':manifest['profile_id'],
             'checked_files':len(manifest['locked_files']),'errors':errors,
-            'scope':'Released layout code, coordinates and font bytes only. Per-project colors, backgrounds, source research and animation art are intentionally variable.'}
+            'scope':'Released renderer code, layout coordinates, fonts, map policy and bundled geographic data. Per-project colors, backgrounds, research and animation art remain variable; this is not historical or media certification.'}
 
 
 def main():

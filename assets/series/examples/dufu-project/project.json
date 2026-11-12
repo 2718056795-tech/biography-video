@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "series_profile_id": "biography-paper-cut-series-2.0",
   "series_profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
   "name": "杜甫",
@@ -46,7 +46,10 @@
   },
   "map": {
     "show_title": false,
-    "layout": "locked_series_panel"
+    "layout": "locked_series_panel",
+    "required": true,
+    "basemap_policy": "bundled_default",
+    "readability_checks": "required"
   },
   "cover": {
     "required": true,

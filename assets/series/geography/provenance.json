@@ -1,0 +1,250 @@
+{
+  "canonical_data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
+  "conversion": {
+    "bbox": "Each feature retains its source shapefile [west,south,east,north] bounding box.",
+    "canonical_encoding": "UTF-8 json.dumps(collection, sort_keys=True, ensure_ascii=False, separators=(comma,colon), allow_nan=False); no trailing newline",
+    "compression": "gzip, compression level 9, mtime=0; deterministic gzip header OS byte normalized to 255",
+    "excluded_records": [
+      {
+        "featurecla": "Canal",
+        "reason": "canals are outside the natural coast/river basemap scope",
+        "record_index": 1068,
+        "source": "ne_10m_rivers_lake_centerlines"
+      },
+      {
+        "featurecla": "Canal",
+        "reason": "canals are outside the natural coast/river basemap scope",
+        "record_index": 1073,
+        "source": "ne_10m_rivers_lake_centerlines"
+      }
+    ],
+    "geometry": "Source feature and part order retained. Each single-part PolyLine becomes a LineString and each multipart PolyLine a MultiLineString. Every selected source coordinate is retained without rounding, simplification, smoothing, reprojection, merging, or interpolation.",
+    "properties_added": [
+      "layer",
+      "source",
+      "source_id"
+    ],
+    "properties_retained": [
+      "featurecla",
+      "scalerank",
+      "min_zoom",
+      "min_label",
+      "name",
+      "name_en",
+      "name_zh",
+      "name_alt",
+      "ne_id",
+      "wikidataid"
+    ],
+    "source_id_format": "<dataset stem>:<zero-based shapefile record index>",
+    "source_shape_type": "2D PolyLine (3)",
+    "tool": "pyshp",
+    "tool_version": "2.3.1"
+  },
+  "coordinate_order": [
+    "longitude",
+    "latitude"
+  ],
+  "crs": "EPSG:4326",
+  "feature_counts": {
+    "coast": 1428,
+    "river": 1471
+  },
+  "layers": [
+    {
+      "dataset": "ne_50m_coastline",
+      "dataset_version": "4.1.0",
+      "features": 1428,
+      "layer": "coast",
+      "scale": "1:50,000,000"
+    },
+    {
+      "dataset": "ne_10m_rivers_lake_centerlines",
+      "dataset_version": "5.0.0",
+      "features": 1471,
+      "included_feature_classes": [
+        "River",
+        "River (Intermittent)",
+        "Lake Centerline"
+      ],
+      "layer": "river",
+      "scale": "1:10,000,000"
+    }
+  ],
+  "license": {
+    "name": "Public domain",
+    "path": "LICENSE.md",
+    "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b",
+    "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+    "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/LICENSE.md"
+  },
+  "limitations": [
+    "Modern generalized physical geography, not a reconstruction of any historical coastline or river channel.",
+    "Small streams, tributaries, minor islands, and local channel detail are incomplete; even 1:10m rivers can be absent in a narrow city-scale view.",
+    "Lake Centerline features represent continuity through lakes, not lake shores; lakes are not rendered as polygons.",
+    "Only genuine source coast and river/lake-centerline lines are included. No administrative borders, relief, invented ridges, or connecting segments are added.",
+    "Coordinates use WGS84 longitude/latitude. Route views crossing the antimeridian require separate regional views under the map engine contract; polar rendering follows its supported latitude limits."
+  ],
+  "outputs": {
+    "data": {
+      "bytes": 3497617,
+      "path": "natural_earth_basemap.geojson.gz",
+      "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093",
+      "uncompressed_bytes": 13010228,
+      "uncompressed_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2"
+    },
+    "license": {
+      "bytes": 4636,
+      "path": "LICENSE.md",
+      "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
+    }
+  },
+  "provider": "Natural Earth",
+  "resolution_selection": {
+    "evaluated_not_bundled_sources": [
+      {
+        "bytes": 440568,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.shp",
+        "sha256": "219c1817db97faef76ef239111556cfc3288e377336fa26eb463f9d78514a801",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.shp"
+      },
+      {
+        "bytes": 3924,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.shx",
+        "sha256": "d693cdd017d8913604f7ae6a06581fb08f2bf30f58f884cb7e7e267926159136",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.shx"
+      },
+      {
+        "bytes": 3323764,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.dbf",
+        "sha256": "b47e458f77824ce698e3df7b9d28403ba99f9be680d0ede172a1f65f7dfc9a17",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.dbf"
+      },
+      {
+        "bytes": 145,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.prj",
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.prj"
+      },
+      {
+        "bytes": 5,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.cpg",
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.cpg"
+      },
+      {
+        "bytes": 6,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.VERSION.txt",
+        "sha256": "1cc3d76ac7c21a664e79848fd481e9791016451b244e7de5feeeb9bea5fd2184",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.VERSION.txt"
+      },
+      {
+        "bytes": 39528,
+        "path": "50m_physical/ne_50m_rivers_lake_centerlines.README.html",
+        "sha256": "40d7ad3db8e7eb4464cf7db7b976c0028bfbeedb4d272f9be3e915366ab9daab",
+        "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_rivers_lake_centerlines.README.html"
+      }
+    ],
+    "reason": "The evaluated 50m river dataset omits the Wei (渭河) near Xi’an. The complete 10m rivers/lake-centerline dataset is used worldwide, without mixing or deduplicating river geometry across scales."
+  },
+  "retrieved_utc": "2026-11-12T07:16:55Z",
+  "schema_version": 1,
+  "source_files": [
+    {
+      "bytes": 1046728,
+      "path": "50m_physical/ne_50m_coastline.shp",
+      "sha256": "797d675af9613f80b51ab6049fa32e589974d7a97c6497ca56772965f179ed26",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.shp"
+    },
+    {
+      "bytes": 11524,
+      "path": "50m_physical/ne_50m_coastline.shx",
+      "sha256": "0ff1792f2d16b58246d074215edd9d12fa280880ecaad61a91b9382fee854065",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.shx"
+    },
+    {
+      "bytes": 70101,
+      "path": "50m_physical/ne_50m_coastline.dbf",
+      "sha256": "f100fa5a99786c63ec9eb2cd430e389bc6235b8e26d2712d33f9bfd6cb6aadfc",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.dbf"
+    },
+    {
+      "bytes": 143,
+      "path": "50m_physical/ne_50m_coastline.prj",
+      "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.prj"
+    },
+    {
+      "bytes": 5,
+      "path": "50m_physical/ne_50m_coastline.cpg",
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.cpg"
+    },
+    {
+      "bytes": 6,
+      "path": "50m_physical/ne_50m_coastline.VERSION.txt",
+      "sha256": "3b10b6ad566eadbcacadb33c591f1ec629593d6adf47442e56e0f61996829ef7",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.VERSION.txt"
+    },
+    {
+      "bytes": 22728,
+      "path": "50m_physical/ne_50m_coastline.README.html",
+      "sha256": "86d37f4e329f3750a9d67ed2a7b9254c0c4742126ee5c3a1158a02b15d7759de",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/50m_physical/ne_50m_coastline.README.html"
+    },
+    {
+      "bytes": 4636,
+      "path": "LICENSE.md",
+      "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/LICENSE.md"
+    },
+    {
+      "bytes": 4208092,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.shp",
+      "sha256": "f9a1cf6d9f58c0a6f182a7f25771a03e0a48026253d4484aab782b2586354d78",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.shp"
+    },
+    {
+      "bytes": 11884,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.shx",
+      "sha256": "ab7b792de019d3a49ab1dd9960249c367cc94e43b8d5f577732892ec6107a3b2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.shx"
+    },
+    {
+      "bytes": 1991273,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.dbf",
+      "sha256": "68079fde5fde6167d0c7c4f03e498164badcc3b687a93c436278ade83882b564",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.dbf"
+    },
+    {
+      "bytes": 145,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.prj",
+      "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.prj"
+    },
+    {
+      "bytes": 5,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.cpg",
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.cpg"
+    },
+    {
+      "bytes": 6,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.VERSION.txt",
+      "sha256": "1cc3d76ac7c21a664e79848fd481e9791016451b244e7de5feeeb9bea5fd2184",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.VERSION.txt"
+    },
+    {
+      "bytes": 48596,
+      "path": "10m_physical/ne_10m_rivers_lake_centerlines.README.html",
+      "sha256": "611c5c993f7fa7495f4c78046df9d97db244533ccfd2f0f80746d27c97db9891",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/10m_physical/ne_10m_rivers_lake_centerlines.README.html"
+    }
+  ],
+  "title": "Natural Earth physical coastline and river basemap",
+  "upstream": {
+    "commit": "f1890d9f152c896d250a77557a5751a93d494776",
+    "release": "v5.1.2",
+    "repository": "https://github.com/nvkelso/natural-earth-vector"
+  }
+}

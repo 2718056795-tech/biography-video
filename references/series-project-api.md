@@ -1,6 +1,6 @@
 # 固定系列的新人物项目
 
-新人物使用系列脚手架，不能把旧版杜甫工程改姓名后直接出片。版位、捆绑字形、字号、1080×1920画布、30fps、120秒和12槽时间窗来自`assets/series/series_style.json`。主题色、背景、建筑、器物、光源和动作须为本人物重新设计，不因固定排版而固定成杜甫的茅屋与深绿色。
+本包 V2.1 保持布局 profile `biography-paper-cut-series-2.0` 不变，仅升级地图内容、可读性和验收。新人物使用系列脚手架，不能把旧版杜甫工程改姓名后直接出片。版位、捆绑字形、字号、1080×1920画布、30fps、120秒和12槽时间窗来自`assets/series/series_style.json`。主题色、背景、建筑、器物、光源和动作须为本人物重新设计，不因固定排版而固定成杜甫的茅屋与深绿色。
 
 ```bash
 python "<SKILL_ROOT>/scripts/init_series_project.py" --name 苏轼 --title 人间有味 --theme sushi --output "<NEW_PROJECT_DIR>"
@@ -17,6 +17,7 @@ python "<SKILL_ROOT>/scripts/check_project.py" "<NEW_PROJECT_DIR>" --report "<NE
 - `theme`为`style/theme.json`相对路径；实际拷贝所选人物主题。颜色可以变化，不能加入项目坐标、字体或字号覆盖。
 - `storyboard`和`route`分别为`data/storyboard.json`与`data/life_route.json`。每章填写`meta`、`period/place/event`、`title`、`event_summary`、`assessment`、来源与动作计划；有引文时填`quote_lines`与`source_label`，无引文时填简短`explanation`。两种情况都保留页底事件与原创解读。
 - `art_direction`是本人物的实际美术方向对象：`rationale`、1—3个`motifs`及12条`backgrounds`。每条关联`scene_id`，说明`setting,buildings,props,light,source_basis,source_ids`。没有建筑可明确写“无建筑”，不要留空，也不要为凑字段虚构建筑。校验字段存在不证明美术适合人物；不会仅因山水主题重复而自动判错。
+- 地理底图默认从随包 Natural Earth 离线数据读取，无需在新项目复制杜甫海岸。`basemap_geojson` 可在项目中指定自备地理线文件的相对路径（兼容路线 `basemap.file`）；来源、坐标和分类要求见 [地图接口](series-map-api.md)。`coastline_geojson` 兼容原海岸输入，不应再以国家多边形冒充海岸。底图是概化现代地理参照，人物足迹仍按本项目史料独立核查。
 - `art_provider`为`art/scene_provider.py`；`art_dependencies`显式登记美术依赖供恢复渲染指纹使用。默认`art/`整树也参与指纹，项目外依赖须显式列出。
 
 ## 真实动画提供者
@@ -32,6 +33,6 @@ def draw_art(scene_id, local_t, full_scene_duration, theme):
 
 ## 预检与边界
 
-系列预检核对固定画幅、时长、帧率、12个切点、各章类型与舞台profile枚举；禁止任意项目或逐幕版位覆盖。它还检查分章、事件与原创评价、证据记录、累计路线和美术方向缺项。若系列或字体锁定manifest存在，布局检查同时核对实际母版与字体哈希。
+系列预检核对固定画幅、时长、帧率、12个切点、各章类型与舞台profile枚举；禁止任意项目或逐幕版位覆盖。它还检查分章、事件与原创评价、证据记录、累计路线和美术方向缺项；地图构建同时要求有来源的可用地理要素及可读性证据，不能用无背景点线或透明空图通过。默认数据在狭窄地区缺少要素时，应补充详细本地数据或合理扩大视窗，不为内陆强加海岸。若系列或字体锁定manifest存在，布局检查同时核对实际母版与字体哈希。
 
 预检不认证史料真伪、文案质量或真实动画。完整视频仍须实际渲染、抽帧与连续动作检查、媒体验收和独立1200×1500封面制作，再经过双文件交付检查。

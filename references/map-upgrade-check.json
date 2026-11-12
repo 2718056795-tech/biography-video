@@ -1,0 +1,141 @@
+{
+  "release_version": "2.1",
+  "layout_profile_id": "biography-paper-cut-series-2.0",
+  "layout_style_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
+  "automated_tests": {
+    "tests_run": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true
+  },
+  "locked_bundle": {
+    "technical_status": "passed",
+    "profile_id": "biography-paper-cut-series-2.0",
+    "checked_files": 27,
+    "errors": [],
+    "scope": "Released renderer code, layout coordinates, fonts, map policy and bundled geographic data. Per-project colors, backgrounds, research and animation art remain variable; this is not historical or media certification."
+  },
+  "dufu_project_preflight": {
+    "status": "planning_preflight_passed",
+    "map_samples": 36,
+    "all_map_samples_passed": true
+  },
+  "actual_pixel_check": {
+    "technical_status": "passed",
+    "errors": [],
+    "checked_kind": "frame",
+    "profile_id": "biography-paper-cut-series-2.0",
+    "actual_frame_pixels_verified": true,
+    "actual_map_pixels_verified": true,
+    "scope": "Layout/font/theme-role, sourced map evidence and recorded contrast over actual art checked against the locked profile. Actual frame/map pixels checked only when supplied. This does not certify historical truth, title wording, semantic motifs or aesthetic quality."
+  },
+  "regional_geography_checks": [
+    {
+      "case": "内陆区域：西安—蓝田",
+      "visible_coast_segments": 0,
+      "visible_river_segments": 16,
+      "readability_passed": true,
+      "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a"
+    },
+    {
+      "case": "海岸区域：杭州—上海",
+      "visible_coast_segments": 6,
+      "visible_river_segments": 13,
+      "readability_passed": true,
+      "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a"
+    },
+    {
+      "case": "海外区域：伦敦—剑桥",
+      "visible_coast_segments": 12,
+      "visible_river_segments": 5,
+      "readability_passed": true,
+      "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a"
+    }
+  ],
+  "source_geometry_audit": {
+    "upstream": "Natural Earth v5.1.2",
+    "coast_scale": "1:50,000,000",
+    "river_scale": "1:10,000,000",
+    "verified_features": 2899,
+    "verified_original_vertices": 317993,
+    "source_archive_member_hashes_verified": 22,
+    "geometry_modified": false,
+    "provenance_file": "assets/series/geography/provenance.json"
+  },
+  "actual_video": {
+    "path": "assets/series/examples/map-upgrade-dufu-preview-3s.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_sec": 3,
+    "decoded_frames": 90,
+    "full_decode_passed": true,
+    "source_audio_unchanged": true,
+    "audio_method": "corresponding original AAC excerpt, stream copied",
+    "audio_excerpt_start_sec": 6.833333333333333,
+    "map_checkpoints": [
+      {
+        "time_sec": 0.0,
+        "readability_passed": true,
+        "actual_background_passed": true,
+        "map_image_sha256": "002cf524e7d355efb409fa9714fe45364aba5f1869b42b4df9ff54396b8da481"
+      },
+      {
+        "time_sec": 1.5,
+        "readability_passed": true,
+        "actual_background_passed": true,
+        "map_image_sha256": "939c633394d7629ec0caa8c7950f1947662d1b0893edc2bf5d4b677f46668470"
+      },
+      {
+        "time_sec": 2.966666666666667,
+        "readability_passed": true,
+        "actual_background_passed": true,
+        "map_image_sha256": "9b23fe7487ac6448b664a43758fd0b08d6cd2ad81bf750ba7175394a81861d69"
+      }
+    ]
+  },
+  "visual_review": {
+    "type": "model-assisted review of regional board and decoded2.5s frame",
+    "geographic_context_and_route_visible": true,
+    "no_human_audio_or_device_claim": true
+  },
+  "artifacts": {
+    "assets/series/examples/map-geography-comparison.png": {
+      "sha256": "47d8787061b4c1d93a361bdfdafcfaa415cd7838793d71f4bcdaba885c29a666",
+      "bytes": 156239
+    },
+    "assets/series/examples/map-geography-comparison.json": {
+      "sha256": "0faab371d689d223c120a49cab769d4d9349c94bb2de95ba64c79c06d6ed90d3",
+      "bytes": 14269
+    },
+    "assets/series/examples/map-upgrade-dufu-preview-3s.mp4": {
+      "sha256": "8819e4c203513b2fdbd156d8b07ce2ed788b6e855966145e96fece05d13fdd29",
+      "bytes": 328484
+    },
+    "assets/series/examples/dufu-v2.1-basemap-frame.png": {
+      "sha256": "999b9edbd6e97bdaee534014a0cc94868c00f6252d950430738deda056345dc1",
+      "bytes": 315714
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S02.frame.png": {
+      "sha256": "300983bd1a4ad9f8aafa5aa655ded25908c5c91ba96cdb298841731de2ff4bc5",
+      "bytes": 209646
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S02.map.png": {
+      "sha256": "0c01da87c4d92ad935be3ee008245c37b6de4a3ceb3702b67eb3bfd4fd795ece",
+      "bytes": 305598
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S02.json": {
+      "sha256": "4479e7c6dd14c2b1ce00a1c598975b1d0747511a2a3cc7ba3574e5c352c27a2b",
+      "bytes": 1423910
+    }
+  },
+  "historical_v2_0_reports": "15 frame and108 map exact-pixel reports apply to V2.0 only, not current new map pixels",
+  "not_executed": [
+    "new full120-second render",
+    "human full listening review",
+    "Douyin device publish preview"
+  ],
+  "scope": "Map/data integrity, actual pixels, short encoding and documented limits; not new-person biographical research or ancient physical geography certification"
+}

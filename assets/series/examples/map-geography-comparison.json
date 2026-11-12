@@ -1,0 +1,492 @@
+{
+  "scope": "功能与真实地理数据演示，非新人物史料或生平视频",
+  "image_sha256": "47d8787061b4c1d93a361bdfdafcfaa415cd7838793d71f4bcdaba885c29a666",
+  "cases": [
+    {
+      "case": "内陆区域：西安—蓝田",
+      "theme": "dufu",
+      "route": {
+        "nodes": [
+          {
+            "id": "0",
+            "label": "西安",
+            "lon": 108.93,
+            "lat": 34.26,
+            "precision": "城市约位；仅功能测试"
+          },
+          {
+            "id": "1",
+            "label": "蓝田",
+            "lon": 109.32,
+            "lat": 34.15,
+            "precision": "城市约位；仅功能测试"
+          }
+        ],
+        "sequence": [
+          "0",
+          "1"
+        ],
+        "per_scene": {
+          "demo": {
+            "start_index": 0,
+            "end_index": 1
+          }
+        }
+      },
+      "bounds": [
+        105.125,
+        113.125,
+        31.705,
+        36.705
+      ],
+      "visible_coast_segments": 0,
+      "visible_river_segments": 16,
+      "geographic_source_fingerprint": "10afd11b244cc37a856764fb2bbed06551e4e85ba6792065824af1aa9379fc12",
+      "readability": {
+        "method": "WCAG relative luminance contrast after source-over alpha compositing on theme paper",
+        "paper": [
+          220,
+          210,
+          188
+        ],
+        "roles": {
+          "map_coast": {
+            "requested": [
+              86,
+              117,
+              102
+            ],
+            "effective": [
+              86,
+              117,
+              102
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "coast",
+                "alpha": 155,
+                "minimum_contrast": 1.5,
+                "requested_contrast": 1.995482259842823,
+                "effective_contrast": 1.995482259842823,
+                "passed": true
+              },
+              {
+                "purpose": "river",
+                "alpha": 140,
+                "minimum_contrast": 1.5,
+                "requested_contrast": 1.848771261712266,
+                "effective_contrast": 1.848771261712266,
+                "passed": true
+              }
+            ]
+          },
+          "map_ink": {
+            "requested": [
+              69,
+              83,
+              71
+            ],
+            "effective": [
+              69,
+              83,
+              71
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "visited_node",
+                "alpha": 65,
+                "minimum_contrast": 1.3,
+                "requested_contrast": 1.4199652393476434,
+                "effective_contrast": 1.4199652393476434,
+                "passed": true
+              }
+            ]
+          },
+          "map_accent": {
+            "requested": [
+              138,
+              89,
+              62
+            ],
+            "effective": [
+              114,
+              79,
+              57
+            ],
+            "adapted": true,
+            "toward": "theme ink",
+            "checks": [
+              {
+                "purpose": "old_route_minimum",
+                "alpha": 70,
+                "minimum_contrast": 1.4,
+                "requested_contrast": 1.3818108113196506,
+                "effective_contrast": 1.4386299990018976,
+                "passed": true
+              },
+              {
+                "purpose": "completed_route",
+                "alpha": 165,
+                "minimum_contrast": 2.5,
+                "requested_contrast": 2.273823018920906,
+                "effective_contrast": 2.568873534695211,
+                "passed": true
+              },
+              {
+                "purpose": "current_label",
+                "alpha": 245,
+                "minimum_contrast": 4.5,
+                "requested_contrast": 3.6668744023199973,
+                "effective_contrast": 4.500622342059883,
+                "passed": true
+              },
+              {
+                "purpose": "region",
+                "alpha": 130,
+                "minimum_contrast": 1.8,
+                "requested_contrast": 1.885165179396247,
+                "effective_contrast": 2.0490705149378403,
+                "passed": true
+              }
+            ]
+          }
+        },
+        "passed": true,
+        "scope": "map colors only, measured on theme paper; other theme colors unchanged"
+      },
+      "map_rgba_sha256": "7b142a0e9695e5016f0c2d3f9e26d134538ec7ef11c512040e114aaa0d8548a3",
+      "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
+      "geometry_sha256": "a799f43cddbe039614ac51f9e711d0b169706d96b1ec8be5d02c9b250b7e3cfa",
+      "local_time_sec": 5.5,
+      "duration_sec": 8
+    },
+    {
+      "case": "海岸区域：杭州—上海",
+      "theme": "libai",
+      "route": {
+        "nodes": [
+          {
+            "id": "0",
+            "label": "杭州",
+            "lon": 120.16,
+            "lat": 30.25,
+            "precision": "城市约位；仅功能测试"
+          },
+          {
+            "id": "1",
+            "label": "上海",
+            "lon": 121.47,
+            "lat": 31.23,
+            "precision": "城市约位；仅功能测试"
+          }
+        ],
+        "sequence": [
+          "0",
+          "1"
+        ],
+        "per_scene": {
+          "demo": {
+            "start_index": 0,
+            "end_index": 1
+          }
+        }
+      },
+      "bounds": [
+        116.815,
+        124.815,
+        28.240000000000002,
+        33.24
+      ],
+      "visible_coast_segments": 6,
+      "visible_river_segments": 13,
+      "geographic_source_fingerprint": "10afd11b244cc37a856764fb2bbed06551e4e85ba6792065824af1aa9379fc12",
+      "readability": {
+        "method": "WCAG relative luminance contrast after source-over alpha compositing on theme paper",
+        "paper": [
+          19,
+          42,
+          54
+        ],
+        "roles": {
+          "map_coast": {
+            "requested": [
+              115,
+              146,
+              146
+            ],
+            "effective": [
+              115,
+              146,
+              146
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "coast",
+                "alpha": 155,
+                "minimum_contrast": 1.5,
+                "requested_contrast": 2.5219419673982757,
+                "effective_contrast": 2.5219419673982757,
+                "passed": true
+              },
+              {
+                "purpose": "river",
+                "alpha": 140,
+                "minimum_contrast": 1.5,
+                "requested_contrast": 2.311566565380094,
+                "effective_contrast": 2.311566565380094,
+                "passed": true
+              }
+            ]
+          },
+          "map_ink": {
+            "requested": [
+              166,
+              186,
+              181
+            ],
+            "effective": [
+              166,
+              186,
+              181
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "visited_node",
+                "alpha": 65,
+                "minimum_contrast": 1.3,
+                "requested_contrast": 1.7143587540941811,
+                "effective_contrast": 1.7143587540941811,
+                "passed": true
+              }
+            ]
+          },
+          "map_accent": {
+            "requested": [
+              208,
+              176,
+              109
+            ],
+            "effective": [
+              208,
+              176,
+              109
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "old_route_minimum",
+                "alpha": 70,
+                "minimum_contrast": 1.4,
+                "requested_contrast": 1.7507042722852053,
+                "effective_contrast": 1.7507042722852053,
+                "passed": true
+              },
+              {
+                "purpose": "completed_route",
+                "alpha": 165,
+                "minimum_contrast": 2.5,
+                "requested_contrast": 3.8383377853643537,
+                "effective_contrast": 3.8383377853643537,
+                "passed": true
+              },
+              {
+                "purpose": "current_label",
+                "alpha": 245,
+                "minimum_contrast": 4.5,
+                "requested_contrast": 6.742213252276301,
+                "effective_contrast": 6.742213252276301,
+                "passed": true
+              },
+              {
+                "purpose": "region",
+                "alpha": 130,
+                "minimum_contrast": 1.8,
+                "requested_contrast": 2.8900595943857312,
+                "effective_contrast": 2.8900595943857312,
+                "passed": true
+              }
+            ]
+          }
+        },
+        "passed": true,
+        "scope": "map colors only, measured on theme paper; other theme colors unchanged"
+      },
+      "map_rgba_sha256": "1462614fd4486c52c525751e7963b2e7cb18208098cf7adf8d631ce00f745b03",
+      "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
+      "geometry_sha256": "3668a1b0c8ffe971713cd18c5c5f2fc32b6737b1c04ee54bbc3b7e615b349365",
+      "local_time_sec": 5.5,
+      "duration_sec": 8
+    },
+    {
+      "case": "海外区域：伦敦—剑桥",
+      "theme": "sushi",
+      "route": {
+        "nodes": [
+          {
+            "id": "0",
+            "label": "伦敦",
+            "lon": -0.12,
+            "lat": 51.5,
+            "precision": "城市约位；仅功能测试"
+          },
+          {
+            "id": "1",
+            "label": "剑桥",
+            "lon": 0.12,
+            "lat": 52.2,
+            "precision": "城市约位；仅功能测试"
+          }
+        ],
+        "sequence": [
+          "0",
+          "1"
+        ],
+        "per_scene": {
+          "demo": {
+            "start_index": 0,
+            "end_index": 1
+          }
+        }
+      },
+      "bounds": [
+        -4.0,
+        4.0,
+        49.35,
+        54.35
+      ],
+      "visible_coast_segments": 12,
+      "visible_river_segments": 5,
+      "geographic_source_fingerprint": "10afd11b244cc37a856764fb2bbed06551e4e85ba6792065824af1aa9379fc12",
+      "readability": {
+        "method": "WCAG relative luminance contrast after source-over alpha compositing on theme paper",
+        "paper": [
+          223,
+          208,
+          194
+        ],
+        "roles": {
+          "map_coast": {
+            "requested": [
+              141,
+              142,
+              123
+            ],
+            "effective": [
+              141,
+              142,
+              123
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "coast",
+                "alpha": 155,
+                "minimum_contrast": 1.5,
+                "requested_contrast": 1.579525417131701,
+                "effective_contrast": 1.579525417131701,
+                "passed": true
+              },
+              {
+                "purpose": "river",
+                "alpha": 140,
+                "minimum_contrast": 1.5,
+                "requested_contrast": 1.504098125299982,
+                "effective_contrast": 1.504098125299982,
+                "passed": true
+              }
+            ]
+          },
+          "map_ink": {
+            "requested": [
+              102,
+              83,
+              71
+            ],
+            "effective": [
+              102,
+              83,
+              71
+            ],
+            "adapted": false,
+            "toward": "requested",
+            "checks": [
+              {
+                "purpose": "visited_node",
+                "alpha": 65,
+                "minimum_contrast": 1.3,
+                "requested_contrast": 1.396647323282201,
+                "effective_contrast": 1.396647323282201,
+                "passed": true
+              }
+            ]
+          },
+          "map_accent": {
+            "requested": [
+              159,
+              84,
+              60
+            ],
+            "effective": [
+              125,
+              73,
+              55
+            ],
+            "adapted": true,
+            "toward": "theme ink",
+            "checks": [
+              {
+                "purpose": "old_route_minimum",
+                "alpha": 70,
+                "minimum_contrast": 1.4,
+                "requested_contrast": 1.3750418534223794,
+                "effective_contrast": 1.4440955069219243,
+                "passed": true
+              },
+              {
+                "purpose": "completed_route",
+                "alpha": 165,
+                "minimum_contrast": 2.5,
+                "requested_contrast": 2.21640479730845,
+                "effective_contrast": 2.5672341094561313,
+                "passed": true
+              },
+              {
+                "purpose": "current_label",
+                "alpha": 245,
+                "minimum_contrast": 4.5,
+                "requested_contrast": 3.448905449824421,
+                "effective_contrast": 4.513281383074219,
+                "passed": true
+              },
+              {
+                "purpose": "region",
+                "alpha": 130,
+                "minimum_contrast": 1.8,
+                "requested_contrast": 1.8484564648116568,
+                "effective_contrast": 2.0632246163433154,
+                "passed": true
+              }
+            ]
+          }
+        },
+        "passed": true,
+        "scope": "map colors only, measured on theme paper; other theme colors unchanged"
+      },
+      "map_rgba_sha256": "4207344d92ca8d70ae53f7101ce87fd71319e2344750ed11b59b88c7b3195e29",
+      "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
+      "geometry_sha256": "d1c1fade0769309a6bd412e90e1dea52a586079c7b0e131cfbaa1f5012516ed6",
+      "local_time_sec": 5.5,
+      "duration_sec": 8
+    }
+  ]
+}

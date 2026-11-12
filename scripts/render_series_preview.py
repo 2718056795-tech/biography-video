@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from PIL import Image
 from series_frame import SeriesFrame
+from series_map import SeriesMap, ensure_map_evidence, load_map_png, save_map_png
+from render_series_video import map_source_paths
 
 
 def read_object(path):
@@ -24,7 +26,8 @@ def main():
     parser.add_argument('--time', type=float, default=3.5, help='local scene seconds')
     parser.add_argument('--duration', type=float, help='override only for component preview; otherwise use scene frame window')
     parser.add_argument('--art', required=True, type=Path, help='text-free native1080x1920 artwork RGBA frame')
-    parser.add_argument('--map', dest='map_path', type=Path, help='already projected880x430 RGBA layer')
+    parser.add_argument('--map', dest='map_path', type=Path, help='official880x430 RGBA PNG with embedded/sidecar evidence; omitted: render project route automatically')
+    parser.add_argument('--map-output', type=Path, help='optional save of the actual map PNG and hash-bound .evidence.json for pixel QA')
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--report', required=True, type=Path)
     parser.add_argument('--style', type=Path, help='normally omitted; package series_style.json is the canonical contract')
@@ -75,18 +78,46 @@ def main():
     source_paths.append(args.art.resolve())
     if args.map_path:
         source_paths.append(args.map_path.resolve())
+        source_paths.append(Path(str(args.map_path) + '.evidence.json').resolve())
     renderer = SeriesFrame(style_path=args.style, theme=theme, person=person, scene_count=len(scenes))
+    route_path = project_path.parent / project.get('route', 'data/life_route.json')
+    route = read_object(route_path)
+    source_paths.append(route_path.resolve())
+    coast_value = project.get('coastline_geojson', route.get('coastline', {}).get('file'))
+    coast_path = project_path.parent / coast_value if coast_value else None
+    basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
+    basemap_path = project_path.parent / basemap_value if basemap_value else None
+    maps = SeriesMap(route, renderer.style, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
+    if coast_path:
+        source_paths.append(coast_path.resolve())
+    if basemap_path:
+        source_paths.append(basemap_path.resolve())
+    # Source basemap files are inputs too, even when selected by the engine default.
+    source_paths.extend(path.resolve() for path in map_source_paths(maps.geometry_report()))
     source_paths.extend([renderer.style_path, *renderer.font_paths.values()])
-    for dest in (args.output, args.report):
+    destinations = [args.output, args.report]
+    if args.map_output:
+        destinations.extend([args.map_output, Path(str(args.map_output) + '.evidence.json')])
+    for dest in destinations:
         if any(dest.resolve() == source.resolve() or (dest.exists() and source.exists() and dest.samefile(source)) for source in source_paths):
             parser.error('Output/report cannot overwrite project, theme, artwork, style or font inputs')
-    if args.output.resolve() == args.report.resolve() or (args.output.exists() and args.report.exists() and args.output.samefile(args.report)):
-        parser.error('Output image and JSON report need distinct paths')
+    for i, dest in enumerate(destinations):
+        if any(dest.resolve() == other.resolve() or (dest.exists() and other.exists() and dest.samefile(other)) for other in destinations[:i]):
+            parser.error('Output image, map, evidence and JSON report need distinct paths')
     art = Image.open(args.art).convert('RGBA')
-    map_layer = Image.open(args.map_path).convert('RGBA') if args.map_path else None
+    official_map = maps.render(scene['id'], args.time, duration)
+    if args.map_path and not Path(str(args.map_path) + '.evidence.json').is_file():
+        parser.error('External --map requires its hash-bound <map.png>.evidence.json sidecar; use save_map_png or --map-output')
+    map_layer = load_map_png(args.map_path) if args.map_path else official_map
+    if args.map_path:
+        evidence = ensure_map_evidence(map_layer, scene_id=scene['id'], t=args.time, duration=duration)
+        if evidence.get('geometry_sha256') != official_map.info['series_map_evidence'].get('geometry_sha256'):
+            parser.error('External map evidence does not match the current project route, sources, style and theme')
     image = renderer.compose(scene, args.time, duration, art, map_layer)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     image.save(args.output)
+    if args.map_output:
+        save_map_png(map_layer, args.map_output)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(renderer.last_report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'output': str(args.output.resolve()), 'report': str(args.report.resolve()),
