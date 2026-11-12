@@ -1,22 +1,14 @@
 # 人物生平动画 Skill · V2.0
 
-供人物视频合集复用的 Agent Skill。固定视频、地图、文字与封面的版式，每位人物重新考据史料，并设计专属配色、环境、建筑、道具和动作。
+为历史人物、文学家、科学家、艺术家等制作中文生平动画：逐人核查资料，把重要人生节点写成章节，制作真实动作、累计行程地图、屏幕解读和独立封面。
 
-**从 [START_HERE.md](START_HERE.md) 开始，再读取 [SKILL.md](SKILL.md)。**
+本 Skill 服务于同一视频合集。**标题、地图、说明、评价和封面的版位保持一致；人物配色、背景、建筑、器物和动作根据时代与经历重新设计。** 每个新人物都要重新研究，本仓库没有预先收集所有人物的史料。
 
-## 已固定的系列规格
+从 [START_HERE.md](START_HERE.md) 开始，再读取 [SKILL.md](SKILL.md)。唯一版式依据为 [series_style.json](assets/series/series_style.json)。
 
-- 视频：9:16，1080×1920，30 fps，120 秒，固定 12 章；默认无旁白，使用随包原配乐。
-- 字体和位置：随包四款字库；标题、年代地点、诗词、出处、说明、评价均由代码按固定坐标合成。
-- 地图：透明累计行程，固定在 (96,150)，大小 880×430；不显示“一生足迹”标题。
-- 动画：每章需要人物或物件的实际动作，粗块面、纸切剪影、克制纸纹；背景根据人物和事件重新绘制。
-- 封面：独立 1200×1500 PNG。用户所称“5:4竖屏”按长短边理解，实际宽高为 4:5；字位、字号固定。
+## 安装与调用
 
-固定的是合集排版与视觉语法。**人物的颜色、背景与道具应当变化，不必都画山水。**
-
-[人物配色与背景对照](assets/series/series-comparison.png) · [视频坐标图](assets/series/video-layout-guide.png) · [封面坐标图](assets/series/cover-layout-guide.png)
-
-## 获取和安装
+制作环境需要 Python 3、Pillow、NumPy、SciPy 和可在命令行调用的 FFmpeg/ffprobe；重建旧案例的 SVG 素材另需 Inkscape。四款固定字体和原配乐已经随仓库提供。
 
 ```bash
 git clone https://github.com/2718056795-tech/biography-video.git historical-biography-video
@@ -24,29 +16,130 @@ cd historical-biography-video
 python scripts/verify_series_bundle.py
 ```
 
-克隆目录使用 `historical-biography-video`，与 Skill 名称一致。安装到助手支持的 skills 目录，保留全部子目录和素材；详见 [INSTALL.md](INSTALL.md)。也可让助手直接读取本仓库的 `SKILL.md`。调用示例：
+若使用独立 Python 环境，可在该环境安装 Python 依赖：
 
-> 使用 $historical-biography-video 做一集苏轼。沿用固定版式和配乐，重新考据史料，设计适合他的配色、背景与动作。
+```bash
+python -m pip install Pillow numpy scipy
+```
 
-制作环境需要 Python 3、Pillow、NumPy、SciPy 和 FFmpeg/ffprobe；重建 SVG 素材另需 Inkscape。字体和固定音轨已经随仓库提供。不要用相似系统字体替换固定字库。
+校验脚本只检查固定程序、坐标与字体的完整性；通过校验不代表新人物已经完成研究或视频渲染。
 
-## 程序入口
+- **支持 Agent Skills 的助手：** 将完整的 `historical-biography-video/` 放入该助手配置的 skills 目录，重新加载后使用 `$historical-biography-video` 调用。目录名与 `SKILL.md` 中的名称保持一致，具体安装位置见 [INSTALL.md](INSTALL.md)。
+- **直接读取文件：** 让助手先完整读取本仓库的 `START_HERE.md` 和 `SKILL.md`，再按对应接口制作。保留全部子目录和素材，不能只复制一份提示词。
 
-| 用途 | 文件 |
+基本调用：
+
+> 使用 $historical-biography-video 做一集【人物姓名】，片名暂定【短片名】。沿用本系列默认规格和固定版式，逐人核查史料，按人物时代与经历设计配色、背景和实际动作，交付完整视频、独立封面及来源与验收报告。
+
+`agents/openai.yaml` 提供助手界面的显示名称、简介和默认调用提示；具体执行规则以 `SKILL.md` 及其引用的固定母版为准。用户新的明确要求优先。
+
+## 默认规格与系列一致性
+
+| 项目 | 所有人物共用的规则 |
 | --- | --- |
-| 新建人物项目 | [scripts/init_series_project.py](scripts/init_series_project.py) |
-| 视频排版与地图 | [scripts/series_frame.py](scripts/series_frame.py)、[scripts/series_map.py](scripts/series_map.py) |
-| 实际视频渲染 | [scripts/render_series_video.py](scripts/render_series_video.py) |
-| 独立封面排字 | [scripts/series_cover.py](scripts/series_cover.py) |
-| 固定程序与字库校验 | [scripts/verify_series_bundle.py](scripts/verify_series_bundle.py) |
-| 媒体、封面与交付验收 | [scripts/verify_media.py](scripts/verify_media.py)、[scripts/verify_cover.py](scripts/verify_cover.py)、[scripts/check_delivery.py](scripts/check_delivery.py) |
+| 视频 | 9:16 竖屏、1080×1920、30 fps、120 秒、12 个固定章节槽；默认无旁白。 |
+| 章节内容 | 各章独立标题、年代地点、事件说明 `event_summary` 和原创评价 `assessment`。引文可选；无引文时使用简短说明。 |
+| 排版 | 固定字体、字号、坐标、行距、章节时序及入退场规则，使用随包合成器；超长内容按母版规则精简。 |
+| 地图 | 透明累计行程，固定在 (96,150)，尺寸 880×430；城市标签可显示，不写“一生足迹”标题，不另加侧栏或图例。 |
+| 配乐 | 沿用随包固定音轨；完整片从原曲 0 秒起连续使用并保留 AAC 音频数据，不裁曲、循环、改速、调音量或淡出。 |
+| 动画 | 每章有人物或物件的实际动作，保持粗块面、低饱和、纸切剪影和克制纸纹。 |
+| 封面 | 必交独立 1200×1500 PNG，固定姓名、片名和钩子句的位置与字号。用户所称“5:4竖屏”按长短边理解，实际宽高为 4:5。 |
 
-主合成器接收每位人物独立制作的无字动画画面，统一叠加标题、地图和说明。完整接口和 2 秒实际动画示例见 [START_HERE.md](START_HERE.md)。
+改变画幅、时长、章节数等全局规格，需要用户明确要求并建立对应模板版本。本说明延续当前母版，不变更现有视频和封面规则。
 
-## 验证与素材说明
+### 固定什么，重新设计什么
 
-当前系列合成器以杜甫 V4 为基准，通过 15 个原生画面的逐像素一致性检查和 108 个地图时点检查，并完成了 2 秒有声视频管线验证。报告在 [references/](references/)；这些结果不代表所有新人物已经完成史料核查或整片制作。
+- **固定：** 文字与地图位置、字库、章节时间窗、封面字位、材质处理和克制的运动速度。每章都保留事实说明与原创解读，科学家题材也适用。
+- **重新设计：** 章节标题、史料、可选引文、真实行程、人物形象、主题色、背景、建筑、器物、光源和具体动作。科学家可以使用有依据的工坊、实验装置与手稿，艺术家可以使用其时代的工作室、材料与创作过程。
+- **李白案例的边界：** 深蓝、月白、旧金或暖橙，以及江舟、月夜、城楼，是李白单集的美术取材。新人物按自己的时代与经历选色、选景；引用诗词也不是所有人物的必需项。
 
-`assets/dufu-reference/` 保留杜甫的动作、分层画面与史料案例；新人物使用系列合成器，不直接沿用旧工程排版。李白、苏轼示例是美术方向参考。
+先看 [人物配色与背景对照](assets/series/series-comparison.png)、[视频坐标图](assets/series/video-layout-guide.png) 和 [封面坐标图](assets/series/cover-layout-guide.png)。李白、苏轼主题示例用于说明美术方向，不代表已经完成对应的新人物视频。
 
-四款 Noto 字体的授权和来源见 [字体版权文件](assets/series/fonts/COPYRIGHT.txt) 与 [字体清单](assets/series/fonts_manifest.json)。固定音乐的来源记录见 [fixed-bgm-provenance.json](assets/fixed-bgm-provenance.json)；本仓库的提供不扩展第三方素材原有授权范围。
+## 史料核查与制作顺序
+
+1. **明确人物与主题。** 确定本集要解释的人生问题，核查年代、地点、事件、作品与关键论断。优先使用可查阅的一手材料、学术机构、博物馆或可靠研究，记录实际阅读状态与出处；存疑内容写明“约”“有异说”等。
+2. **建立 12 章分镜。** 每章填写标题、年代地点、事件说明、原创评价、可选引文及出处、主动作、环境动作和地图访问节点。原文引述与原创评价分开，科学成果不能改写成虚构名言。
+3. **写人物美术简报。** 选择专属色板和 1—3 个有依据的重复意象，逐章说明环境、建筑、道具、光源及其与事件的关系。美术选择作为设计说明，不冒充可考证的实物复原。
+4. **画行程并制作动作。** 地图只记录本人有依据的访问，作品提到的地点或他人去向不自动成为本人足迹。回访复用坐标，同地多章保持地图状态；每章制作可见的局部动作，镜头推移、字幕淡入和路线增长不能代替角色动画。
+5. **合成与验收。** 完成素材后调用固定合成器，输出真实视频和独立封面；检查解码、规格、音轨、字体、地图、文字可读性与连续动作，并记录已完成和未完成的检查。
+
+助手应按已有信息推进研究和可逆制作。用户明确要求先看样片时，先交付真实的 3—8 秒动画样片；常规完整制作按工作流持续完成。
+
+### 项目入口
+
+在 Skill 根目录运行，例如创建苏轼项目：
+
+```bash
+python scripts/init_series_project.py --name 苏轼 --title 人间有味 --theme sushi --output ../projects/sushi
+```
+
+初始化要求目标目录为空，会创建项目、12 章空分镜、来源台账、路线文件和动画接口。事实、文案与动作需要继续完成；空计划预检失败是预期行为。
+
+包内主题名只有 `dufu`、`libai`、`sushi`，且属于美术候选。其他人物先按 [美术方向](references/series-art-direction.md) 编写本人物主题 JSON，再将该文件路径传给 `--theme`；主题的 `person` 必须对应 `--name`。不要把不存在的主题名当成可直接调用的预设。
+
+| 用途 | 程序与接口 |
+| --- | --- |
+| 新建项目与填写数据 | [init_series_project.py](scripts/init_series_project.py) · [项目接口](references/series-project-api.md) |
+| 固定版式与累计地图 | [series_frame.py](scripts/series_frame.py)、[series_map.py](scripts/series_map.py) · [帧接口](references/series-renderer-api.md) · [地图接口](references/series-map-api.md) |
+| 单帧预览与实际视频渲染 | [render_series_preview.py](scripts/render_series_preview.py)、[render_series_video.py](scripts/render_series_video.py) · [视频接口](references/series-video-api.md) |
+| 独立封面 | [series_cover.py](scripts/series_cover.py) · [封面接口](references/series-cover-api.md) |
+| 项目和样式检查 | [check_project.py](scripts/check_project.py)、[check_series_style.py](scripts/check_series_style.py) |
+| 媒体、封面与交付检查 | [verify_media.py](scripts/verify_media.py)、[verify_cover.py](scripts/verify_cover.py)、[check_delivery.py](scripts/check_delivery.py) |
+
+动画画面由每个人物自己的无字动画提供者实现，文字、地图和固定封面字层交给系列程序合成。初始化脚手架不会自动生成画面或完成整片。完整工作流见 [workflow.md](references/workflow.md)。
+
+## 完整调用示例
+
+以下两段是可交给助手的制作指令，尚未据此制作或验证新视频；片名和配色均为候选方案。
+
+### 示例一：苏轼 · 文学人物
+
+```text
+使用 $historical-biography-video 制作宋代文学家苏轼的生平动画，片名暂定《人间有味》。
+
+沿用1080×1920、30fps、120秒、12章、无旁白和原配乐。标题、年代地点、可选引文、说明、评价、地图与封面字位全部沿用固定母版。
+
+先核查生平、任职与迁谪节点，建立来源台账，并写出12章的标题和分镜。每章同时填写事件说明、原创评价、真实动作与地图访问节点；引用作品时核对原文、出处及相关年代，作品中的地名不能直接算作本人到访。
+
+以暖赭、竹青和纸白作为配色候选，在保证文字可读性的前提下确定本人物主题。书斋、州城、田畴、渡口等背景按具体事件选择；建筑、服饰和器物符合时代依据。可用写字、翻页、耕作或撑舟等与章节相符的实际动作，保留粗块面和轻微纸纹。不要直接复用杜甫的茅屋，也不要每章都画山水或饮酒。
+
+可从包内sushi主题开始审视和调整美术方向；主题示例不代替人物研究。通过项目预检后完成真实动画，交付完整MP4、独立1200×1500 PNG封面、工程、来源台账与验收报告。明确哪些检查已经完成，哪些尚未验证。
+```
+
+### 示例二：牛顿 · 科学人物
+
+```text
+使用 $historical-biography-video 制作科学家牛顿的生平动画，片名暂定《追问万物》。
+
+沿用1080×1920、30fps、120秒、12章、无旁白和原配乐。字体、标题位置、地图框、说明与评价位置、封面字位与同系列文学人物保持一致。
+
+从可靠机构资料、可查阅的著作与研究核对人生节点、研究活动及成果时间，建立来源台账，再组织12章标题与分镜。区分可证实的事件、存在争议的叙事和后世传说；“苹果故事”不能直接写成已证实的一次顿悟。每章保留事件说明与原创评价，没有可靠引文就使用说明文字，不强加诗词或虚构名言。
+
+以炭灰、旧铜和暖纸色作为配色候选，依人物生平选用有依据的书房、工坊、校园或机构空间。手稿、光学器具和其他道具按实际年代与事件设计，不能使用现代实验室形象。可制作翻阅手稿、书写、操作器具等实际动作；若表现分光实验，核查装置与光路，示意画面明确按示意处理。保留相同的纸切剪影和粗糙材质，不套用李白的江舟城楼。
+
+地图只显示本人可考行程；同地研究多年不画假迁移，不能把成果影响到的国家画成本人到访。自行编写符合接口的牛顿主题JSON，再用该文件路径初始化项目，仓库没有内置newton主题。
+
+完成真实动画与独立构图封面，交付完整MP4、1200×1500 PNG封面、工程、来源台账与验收报告。未执行的渲染、听审或设备预览要如实标明。
+```
+
+## 完整制作的交付文件
+
+| 文件或目录 | 内容与要求 |
+| --- | --- |
+| `output/video.mp4` | 实际编码的完整视频，默认 H.264 + AAC；核对原生分辨率、帧率、时长与固定音轨。 |
+| `output/cover.png` | 实际生成的独立 1200×1500 PNG，按封面母版排字，单独提供下载链接。 |
+| `project.json`、`data/`、`style/`、`art/` | 项目配置、12章分镜、真实行程、本人物主题、美术简报与可恢复的动画工程。 |
+| `references/source_ledger.csv` | 人物史料与关键论断、引文、地点的来源记录，保留阅读状态和争议说明。 |
+| `qa/` | 本次实际运行生成的项目、版式、媒体、封面及交付检查报告，关联当前输出文件与哈希。 |
+
+上表文件名是建议名称，项目目录结构按脚手架和接口执行。样片应在文件名与说明中注明秒数，不能冒充完整成片。完整交付分别给视频和封面的真实下载链接。
+
+## 验证范围与参考素材
+
+仓库已有报告记录了杜甫 V4 基准的15个原生画面逐像素一致性检查、108个地图时点检查，以及2秒有声视频管线验证。报告位于 [references/](references/)；上述检查范围和测试对象以各报告为准。
+
+本使用说明的补充不代表重新执行了视频渲染，也不代表苏轼、牛顿或其他新人物已经完成。程序完整性检查、文档检查、实际渲染、真人听审和抖音设备预览应分别记录，做过哪项就说明哪项。
+
+`assets/dufu-reference/` 是杜甫的动作、分层画面与史料案例；新人物按当前系列合成器和自己的研究制作。李白、苏轼主题只作美术方向参考。
+
+字体来源及授权见 [COPYRIGHT.txt](assets/series/fonts/COPYRIGHT.txt) 和 [字体清单](assets/series/fonts_manifest.json)，固定音乐来源见 [fixed-bgm-provenance.json](assets/fixed-bgm-provenance.json)。复用素材时沿用各自的授权范围。
