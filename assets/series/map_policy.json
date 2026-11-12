@@ -1,7 +1,7 @@
 {
-  "schema_version": "2.1",
-  "policy_id": "biography-geographic-context-2.1",
-  "layout_profile_id": "biography-paper-cut-series-2.0",
+  "schema_version": "2.2",
+  "policy_id": "biography-geographic-context-2.2",
+  "layout_profile_id": "biography-paper-cut-series-2.2",
   "basemap": {
     "coast": {
       "width": 1.15,
@@ -51,12 +51,12 @@
     "map_accent": [
       {
         "purpose": "old_route_minimum",
-        "alpha": 70,
-        "minimum_contrast": 1.4
+        "alpha": 210,
+        "minimum_contrast": 2.5
       },
       {
         "purpose": "completed_route",
-        "alpha": 165,
+        "alpha": 210,
         "minimum_contrast": 2.5
       },
       {
@@ -71,5 +71,44 @@
       }
     ],
     "adaptation": "blend map colors toward contrasting theme ink, then black or white if required; preserve other theme roles"
+  },
+  "route_stroke": {
+    "width": 2.1,
+    "alpha": 210,
+    "halo_width": 4.5,
+    "halo_alpha": 64,
+    "all_segments_same": true,
+    "aging": false,
+    "preview_uses_same_stroke": true
+  },
+  "labels": {
+    "persistence": "unique node IDs through all completed arrivals; no future names",
+    "layout": "once for all itinerary nodes, routes and region annotations",
+    "font_size": 28,
+    "font_bold": true,
+    "color_role": "map_accent",
+    "alpha": 245,
+    "stroke_px": 2,
+    "halo_alpha": 245,
+    "panel_margin_px": 4,
+    "label_gap_px": 3,
+    "node_clearance_px": 9,
+    "region_clearance_px": 3,
+    "route_clearance_px": 2,
+    "leader_width": 1,
+    "leader_alpha": 180,
+    "candidate_gaps_px": [
+      13,
+      24,
+      40,
+      56,
+      80,
+      104
+    ],
+    "candidate_angle_step_deg": 30,
+    "search_budget": 100000,
+    "overview": "full route preview; no arrived nodes or place labels",
+    "route_overlap_fallback": "prefer zero route intersections; if fitting requires overlap, labels paint last with paper halo",
+    "failure": "raise; widen viewport, shorten supplied labels or split regional views; never shrink or drop labels"
   }
 }

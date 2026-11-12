@@ -1,36 +1,21 @@
 {
   "skill_name": "historical-biography-video",
-  "version": "2.1",
-  "profile_id": "biography-paper-cut-series-2.0",
-  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
-  "immutable_files_verified": 27,
-  "map_upgrade_report": "references/map-upgrade-check.json",
-  "automated_tests_passed": 40,
-  "new_actual_short_video": {
-    "seconds": 3,
-    "frames": 90,
-    "full_decode_passed": true
-  },
+  "version": "2.2",
+  "profile_id": "biography-paper-cut-series-2.2",
+  "profile_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
+  "immutable_files_verified": 28,
+  "current_report": "references/map-labels-check.json",
+  "automated_tests_passed": 57,
+  "actual_map_checkpoints": 64,
+  "native_frame_state_checks": 3600,
+  "label_retention_chapters": 12,
+  "visited_labels_in_dufu_example": 15,
+  "current_short_video_seconds": 6,
+  "current_short_video_frames": 180,
   "new_full120_video_rendered": false,
-  "historical_v2_0_regression": {
-    "frame_exact_cases": 15,
-    "map_exact_cases": 108,
-    "scope": "HistoricalV2.0 only; current basemap pixels intentionally differ"
-  },
-  "variable_per_person": [
-    "palette",
-    "backgrounds/buildings/props",
-    "research/text/real visits"
-  ],
-  "fixed_series_elements": [
-    "layout pixels",
-    "fonts",
-    "map panel",
-    "timing",
-    "cover typography",
-    "stage presets"
-  ],
-  "geography": "sourced modern generalized coast and rivers bundled offline",
+  "fixed_geometry_fonts_and_timing_unchanged": true,
+  "geography": "unchanged sourced modern generalized coast/rivers fromV2.1",
+  "historical_2_1_commit": "bad0f061e6fdf87ab64a930ed0a8c85b8627aa60",
   "local_markdown_links": "passed",
   "python_and_json_syntax": "passed"
 }

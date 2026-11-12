@@ -80,6 +80,11 @@ def main():
         source_paths.append(args.map_path.resolve())
         source_paths.append(Path(str(args.map_path) + '.evidence.json').resolve())
     renderer = SeriesFrame(style_path=args.style, theme=theme, person=person, scene_count=len(scenes))
+    for key in ('series_profile_id', 'style_profile_id'):
+        if key in project and project[key] != renderer.style['profile_id']:
+            parser.error(f'project.{key} differs from the current series contract')
+    if project.get('series_profile_sha256', renderer.profile_sha256) != renderer.profile_sha256:
+        parser.error('project.series_profile_sha256 differs from the current series contract')
     route_path = project_path.parent / project.get('route', 'data/life_route.json')
     route = read_object(route_path)
     source_paths.append(route_path.resolve())
@@ -111,7 +116,9 @@ def main():
     map_layer = load_map_png(args.map_path) if args.map_path else official_map
     if args.map_path:
         evidence = ensure_map_evidence(map_layer, scene_id=scene['id'], t=args.time, duration=duration)
-        if evidence.get('geometry_sha256') != official_map.info['series_map_evidence'].get('geometry_sha256'):
+        official_evidence = official_map.info['series_map_evidence']
+        if any(evidence.get(key) != official_evidence.get(key) for key in
+               ('geometry_sha256', 'label_layout_sha256', 'visible_label_ids', 'image_sha256')):
             parser.error('External map evidence does not match the current project route, sources, style and theme')
     image = renderer.compose(scene, args.time, duration, art, map_layer)
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -59,7 +59,7 @@ def main():
         per_scene[sid].update(region_node_ids=['yueyang','tanzhou'],region_label='湖湘（范围）')
     per_scene[scenes[-1]['id']]['region_only']=True
     for scene in scenes:scene['visible_visit_ids']=[v['id'] for v in visits[:per_scene[scene['id']]['end_index']+1]]
-    route={'schema_version':'2.1-example','nodes':nodes,'sequence':old_route['sequence'],'visits':visits,
+    route={'schema_version':style['schema_version']+'-example','nodes':nodes,'sequence':old_route['sequence'],'visits':visits,
            'segments':[{'from_visit':a['id'],'to_visit':b['id'],'schematic':True,'source_ids':b['source_ids']} for a,b in zip(visits,visits[1:]) if a['node_id']!=b['node_id']],
            'per_scene':per_scene,'scene_order':[s['id'] for s in scenes],'projection':old_route['projection'],
            'basemap_policy':'bundled_default',
@@ -75,7 +75,7 @@ def main():
                             'props':prop,'light':'本幕既有低饱和纸色与平面明暗',
                             'source_basis':'杜甫已核查阶段与文学语境的风格化演绎，不是具体现场复原','source_ids':scene['source_ids']})
     audio=ROOT/'assets/fixed-bgm.m4a'
-    project={'schema_version':'2.1','series_profile_id':style['profile_id'],'series_profile_sha256':hashlib.sha256(style_path.read_bytes()).hexdigest(),
+    project={'schema_version':style['schema_version'],'series_profile_id':style['profile_id'],'series_profile_sha256':hashlib.sha256(style_path.read_bytes()).hexdigest(),
              'name':'杜甫','person':{'name':'杜甫','film_title':'此心在人间','birth_death':'712—770','opening_meta':'一生风雨，心系人间'},
              'orientation':'portrait','width':1080,'height':1920,'duration_sec':120,'fps':30,'total_frames':3600,'cut_frames':slots,
              'theme':relative(ROOT/'assets/series/themes/dufu.json',out),'art_provider':'art/scene_provider.py',
@@ -87,7 +87,7 @@ def main():
              'art_direction':{'rationale':'此例复现杜甫已有民生关怀、草堂风雨与晚年漂泊的题材。其他人物必须新建方案，不能改名照搬。',
                               'motifs':['草堂与风雨','纸页与家书','晚年舟行'],'backgrounds':backgrounds},
              'example_scope':'Reference normalization, not newly researched historical work; this provider is Du Fu-only.'}
-    write(out/'project.json',project);write(out/'data/storyboard.json',{'schema_version':'2.1','scenes':scenes});write(out/'data/life_route.json',route)
+    write(out/'project.json',project);write(out/'data/storyboard.json',{'schema_version':style['schema_version'],'series_profile_id':style['profile_id'],'scenes':scenes});write(out/'data/life_route.json',route)
     provider=Path(__file__).with_name('dufu_art_provider_example.py')
     (out/'art').mkdir(parents=True,exist_ok=True);shutil.copy2(provider,out/'art/scene_provider.py')
     write(out/'art/reference_root.json',{'skill_root_relative':relative(ROOT,out/'art')})

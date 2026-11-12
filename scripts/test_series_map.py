@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 import series_map as maps
 from series_map import SeriesMap, ensure_map_evidence, validate_map_background
@@ -155,6 +155,133 @@ class GeographicMapTests(unittest.TestCase):
         self.assertTrue(validate_map_background(image,paper)['passed'])
         same_ink = Image.new('RGB',image.size,self.inland.colors['map_coast'])
         self.assertFalse(validate_map_background(image,same_ink)['passed'])
+
+
+class PersistentLabelTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = SeriesMap(ASSETS/'examples/dufu-project/data/life_route.json',
+                                 maps.STYLE_PATH, ASSETS/'themes/dufu.json')
+
+    def test_arrivals_persist_across_chapters_without_future_names(self):
+        renderer = self.renderer
+        expected = [('S02',0,['gong']), ('S02',3.5,['gong','wuyue']),
+                    ('S02',8,['gong','wuyue','qilu']),
+                    ('S03',0,['gong','wuyue','qilu']),
+                    ('S03',8,['gong','wuyue','qilu','changan'])]
+        for scene, time, names in expected:
+            with self.subTest(scene=scene,time=time):
+                image = renderer.render(scene,time,9)
+                evidence = ensure_map_evidence(image,scene,time,9)
+                self.assertEqual(evidence['visible_label_ids'],names)
+                self.assertEqual(evidence['frame_state']['visible_label_ids'],names)
+        self.assertEqual(renderer.frame_state('S01',5,7)['visible_label_ids'],[])
+
+    def test_revisits_do_not_duplicate_labels_and_region_only_keeps_past(self):
+        renderer = self.renderer
+        before = renderer.frame_state('S04',9,10)['visible_label_ids']
+        after = renderer.frame_state('S05',9,10)['visible_label_ids']
+        self.assertEqual(before,after)  # Revisit Chang'an.
+        final = renderer.frame_state('S12',4,8)
+        self.assertTrue(final['region_only'])
+        self.assertEqual(final['visible_label_ids'],list(dict.fromkeys(renderer.sequence)))
+        self.assertEqual(len(final['visible_label_ids']),15)
+        self.assertTrue(ensure_map_evidence(renderer.render('S12',4,8))['frame_state']['region_only'])
+
+    def test_layout_is_static_with_fixed_font_and_true_geographic_nodes(self):
+        renderer = self.renderer
+        original = renderer.geometry_report()['label_layouts']
+        fingerprint = renderer._label_layout_sha256
+        with patch.object(renderer,'_layout_labels',side_effect=AssertionError('layout must be computed once')):
+            for scene,time in [('S02',0),('S02',8),('S03',8),('S12',4)]:
+                image = renderer.render(scene,time,9)
+                self.assertEqual(image.info[maps.EVIDENCE_KEY]['label_layout_sha256'],fingerprint)
+                self.assertEqual(image.info[maps.EVIDENCE_KEY]['geometry']['label_layouts'],original)
+        for key, layout in original.items():
+            self.assertEqual(layout['node_pixel'],list(renderer.pixel(renderer.nodes[key]['lon'],renderer.nodes[key]['lat'])))
+            self.assertEqual((layout['font_size'],layout['font_bold'],layout['alpha']),(28,True,245))
+
+    def test_dense_dufu_labels_avoid_each_other_regions_and_all_future_routes(self):
+        renderer = self.renderer
+        report = renderer.geometry_report()
+        layouts = list(report['label_layouts'].values())
+        self.assertEqual(len(layouts),15)
+        self.assertEqual(report['label_layout_audit']['route_intersections'],0)
+        self.assertEqual(report['label_layout_audit']['all_route_edges_considered'],1440)
+        def overlap(a,b,gap=0):
+            return a[0]<b[2]+gap and a[2]>b[0]-gap and a[1]<b[3]+gap and a[3]>b[1]-gap
+        for i, layout in enumerate(layouts):
+            box = layout['bounds']
+            self.assertTrue(4<=box[0]<box[2]<=876 and 4<=box[1]<box[3]<=426)
+            for other in layouts[i+1:]:
+                self.assertFalse(overlap(box,other['bounds'],3))
+            for region in report['label_layout_audit']['reserved_region_boxes']:
+                self.assertFalse(overlap(box,region,3))
+            for path in renderer.curves:
+                for a,b in zip(path,path[1:]):
+                    self.assertIsNone(maps._clip_segment(a,b,(box[0]-2,box[2]+2,box[1]-2,box[3]+2)))
+
+    def test_old_completed_growing_and_overview_routes_use_one_stroke(self):
+        renderer = self.renderer
+        policy = renderer.geometry_report()['route_stroke_policy']
+        self.assertEqual(policy,{'width':2.1,'alpha':210,'halo_width':4.5,'halo_alpha':64,
+                                 'all_segments_same':True,'aging':False,'preview_uses_same_stroke':True})
+        self.assertEqual(renderer.style['old_line_width'],renderer.style['new_line_width'])
+        for scene,time in [('S06',1.2),('S06',8),('S01',0)]:
+            with patch.object(renderer,'_line',wraps=renderer._line) as lines:
+                renderer.render(scene,time,9)
+            route_calls = [call.args for call in lines.call_args_list if call.args[3]==2.1]
+            halo_calls = [call.args for call in lines.call_args_list if call.args[3]==4.5]
+            expected_count = len(renderer.frame_state(scene,time,9)['route_segment_states'])
+            self.assertEqual(len(route_calls),expected_count)
+            self.assertEqual(len(halo_calls),expected_count)
+            self.assertTrue(all(args[2]==renderer.colors['map_accent']+(210,) for args in route_calls))
+            self.assertTrue(all(args[2]==renderer.colors['map_halo']+(64,) for args in halo_calls))
+
+    def test_label_paint_is_above_routes_with_fixed_paper_halo(self):
+        renderer = self.renderer
+        events, text_calls = [], []
+        original_line, original_text = renderer._line, ImageDraw.ImageDraw.text
+        def line(*args,**kwargs):
+            events.append('line')
+            return original_line(*args,**kwargs)
+        def text(draw,*args,**kwargs):
+            events.append('text'); text_calls.append(kwargs)
+            return original_text(draw,*args,**kwargs)
+        # Region-free S06 contains old and currently growing legs. Every glyph
+        # is painted after both route strokes and leader lines, protecting text
+        # even if the bounded layout must use a route-intersection fallback.
+        with patch.object(renderer,'_line',side_effect=line), patch.object(ImageDraw.ImageDraw,'text',new=text):
+            renderer.render('S06',8,9)
+        first_text = events.index('text')
+        self.assertTrue(all(event=='text' for event in events[first_text:]))
+        self.assertTrue(all(call['stroke_fill']==renderer.colors['map_label_halo']+(245,) for call in text_calls))
+        self.assertTrue(all(call['stroke_width']==4 for call in text_calls))
+
+    def test_impossible_label_fit_is_an_actionable_refusal(self):
+        data = route()
+        data['nodes'][0]['label']='超出地图容量的地名'*40
+        with self.assertRaisesRegex(ValueError,'will not hide labels, shrink text, or move geographic nodes'):
+            SeriesMap(data,maps.STYLE_PATH,ASSETS/'themes/dufu.json')
+
+    def test_label_outline_uses_paper_even_if_custom_halo_was_requested(self):
+        theme = json.loads((ASSETS/'themes/dufu.json').read_text())
+        theme['colors']['map_label_halo']='#ff0000'
+        renderer = SeriesMap(route(),maps.STYLE_PATH,theme)
+        self.assertEqual(renderer.colors['map_label_halo'],renderer.colors['paper'])
+        self.assertEqual(renderer.geometry_report()['readability']['label_halo']['requested'],[255,0,0])
+        self.assertEqual(theme['colors']['map_label_halo'],'#ff0000')
+
+    def test_forged_visible_labels_and_stroke_policy_are_rejected(self):
+        renderer = self.renderer
+        for key,value in [('visible_label_ids',['gong','wuyue']),
+                          ('label_layout_sha256','0'*64),
+                          ('route_stroke_policy',{'width':1.3,'alpha':70})]:
+            image = renderer.render('S02',0,9)
+            image.info[maps.EVIDENCE_KEY] = deepcopy(image.info[maps.EVIDENCE_KEY])
+            image.info[maps.EVIDENCE_KEY][key] = value
+            with self.assertRaises(ValueError,msg=key):
+                ensure_map_evidence(image)
 
 
 if __name__ == '__main__':

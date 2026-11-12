@@ -26,7 +26,7 @@ def demo_map(theme,key,duration):
  else:
   # Coordinates demonstrate the map engine and have no researched association
   # with either subject. These are explicitly labelled examples in the sheet.
-  route={'schema_version':'2.1','geography_scope':'unresearched demonstration coordinates, not this person\'s itinerary',
+  route={'schema_version':style['schema_version'],'geography_scope':'unresearched demonstration coordinates, not this person\'s itinerary',
          'nodes':[{'id':f'demo{i}','label':label,'lon':lon,'lat':lat,'precision':'region_approx',
                    'source_read_status':'unresearched demonstration'}
                   for i,(label,lon,lat) in enumerate([('示例甲',106,30),('示例乙',111,34),('示例丙',115,30),('示例丁',120,35)])],

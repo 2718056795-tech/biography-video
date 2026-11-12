@@ -177,7 +177,15 @@ class SeriesMap:
         self.colors['map_label_halo'] = _rgb(
             colors.get('map_label_halo', colors.get('label_halo', colors['paper'])), 'map_label_halo')
         self.requested_colors = deepcopy(self.colors)
+        # A narrow paper outline protects the same fixed labels over every leg.
+        # Keep the requested value in evidence, while the effective map outline
+        # always matches the actual theme paper. Other theme roles stay intact.
+        self.colors['map_label_halo'] = self.colors['paper']
         self._readability = self._adapt_colors(colors)
+        self._readability['label_halo'] = {
+            'requested': list(self.requested_colors['map_label_halo']),
+            'effective': list(self.colors['map_label_halo']), 'paper_matched': True,
+            'alpha': self.style['label_halo_alpha'], 'stroke_px': self.style['label_stroke_px']}
         self.nodes = {}
         for item in self.data.get('nodes', []):
             node = deepcopy(item)
@@ -308,6 +316,8 @@ class SeriesMap:
         self.points = [self.pixel(self.nodes[key]['lon'], self.nodes[key]['lat']) for key in self.sequence]
         self.curves = [self._curve(i) for i in range(len(self.points)-1)]
         self._degenerate = [i for i,p in enumerate(self.curves) if math.dist(p[0],p[-1]) < .001]
+        self._label_layouts = self._layout_labels()
+        self._label_layout_sha256 = _json_hash(self._label_layouts)
         self._coast_runs = [r['points'] for r in self._basemap_runs if r['layer'] == 'coast']
         self._coast_status = f'{len(self._coast_runs)} actual clipped coast runs; inland views may show rivers only'
         self._base_image = self._make_base()
@@ -564,62 +574,248 @@ class SeriesMap:
         d.text(tuple(round(v*self.ss) for v in layout['label_position']),plan['region_label'],
                font=self._font(26),fill=self.colors['map_accent']+(alpha,),anchor='lt')
 
-    def _render_pixels(self,scene_id,t,duration):
+    def _layout_labels(self):
+        """One immutable layout for every arrival, future route and region annotation."""
+        renderer = self
+        cfg = self.policy['labels']
+        max_search_states = cfg['search_budget']
+        unique_ids = list(dict.fromkeys(renderer.sequence))
+        first_index = {key: renderer.sequence.index(key) for key in unique_ids}
+        font_size = renderer.style['label_size']
+        bold = renderer.style['label_bold']
+        stroke = renderer.style['label_stroke_px']
+        ss = renderer.ss
+        font = renderer._font(font_size, bold)
+        node_points = {key: renderer.pixel(node['lon'], node['lat'])
+                       for key, node in renderer.nodes.items()}
+        margin, label_gap, node_radius = cfg['panel_margin_px'], cfg['label_gap_px'], cfg['node_clearance_px']
+        gaps = cfg['candidate_gaps_px']
+        reserved = sorted(set(tuple(renderer._region_layout(plan)[field])
+                              for plan in renderer.per_scene.values()
+                              if plan.get('region_node_ids')
+                              for field in ('circle_bounds', 'label_bounds')))
+        route_edges = [(a, b) for curve in renderer.curves
+                       for a, b in zip(curve, curve[1:]) if a != b]
+
+        def overlaps(a, b, padding=label_gap):
+            return (a[0] < b[2]+padding and a[2] > b[0]-padding
+                    and a[1] < b[3]+padding and a[3] > b[1]-padding)
+
+        def fail(details):
+            raise ValueError(f'Cannot fit every visited place label at the locked {font_size}px '
+                             f'font in the {renderer.width}x{renderer.height} map panel. '
+                             'Use shorter unambiguous labels or separate regional itinerary views; '
+                             'the engine will not hide labels, shrink text, or move geographic nodes. '
+                             + details)
+
+        candidates = {}
+        for key in unique_ids:
+            label = renderer.nodes[key]['label']
+            x, y = node_points[key]
+            bb = tuple(v/ss for v in font.getbbox(label, anchor='lt', stroke_width=stroke*ss))
+            width, height = bb[2]-bb[0], bb[3]-bb[1]
+            if width > renderer.width-2*margin or height > renderer.height-2*margin:
+                fail(f'Label {key!r} ({label!r}) exceeds the bounded paint area.')
+            seen = set()
+            options = []
+            for gap in gaps:
+                for degrees in range(0, 360, cfg['candidate_angle_step_deg']):
+                    angle = math.radians(degrees)
+                    cx = x+math.cos(angle)*(width/2+gap)
+                    cy = y+math.sin(angle)*(height/2+gap)
+                    # Snap the text origin to the exact supersampled paint grid, then
+                    # derive bounds from it: reported rectangles match drawn pixels.
+                    tx = round((cx-width/2-bb[0])*ss)/ss
+                    ty = round((cy-height/2-bb[1])*ss)/ss
+                    bounds = (tx+bb[0], ty+bb[1], tx+bb[2], ty+bb[3])
+                    if bounds in seen:
+                        continue
+                    seen.add(bounds)
+                    if (bounds[0] < margin or bounds[1] < margin
+                            or bounds[2] > renderer.width-margin
+                            or bounds[3] > renderer.height-margin):
+                        continue
+                    if any(overlaps(bounds, obstacle) for obstacle in reserved):
+                        continue
+                    if any(overlaps(bounds, (nx-node_radius, ny-node_radius,
+                                             nx+node_radius, ny+node_radius), 0)
+                           for nx, ny in node_points.values()):
+                        continue
+                    nearest = (max(bounds[0], min(bounds[2], x)),
+                               max(bounds[1], min(bounds[3], y)))
+                    distance = math.dist((x, y), nearest)
+                    expanded = (bounds[0]-2, bounds[2]+2, bounds[1]-2, bounds[3]+2)
+                    intersections = sum(_clip_segment(a, b, expanded) is not None
+                                        for a, b in route_edges)
+                    options.append({'position': [tx, ty], 'bounds': list(bounds),
+                                    'nearest': nearest, 'distance': distance,
+                                    'route_intersections': intersections})
+            candidates[key] = sorted(options, key=lambda item: (item['route_intersections'],
+                                                                item['distance'], item['bounds']))
+            if not candidates[key]:
+                fail(f'No collision-free candidate for node {key!r} ({label!r}).')
+
+        attempts = []
+        def solve(allow_route_intersections):
+            placed = {}
+            states = 0
+            def search(remaining):
+                nonlocal states
+                states += 1
+                if states > max_search_states:
+                    return False
+                if not remaining:
+                    return True
+                choices = []
+                for key in remaining:
+                    valid = [candidate for candidate in candidates[key]
+                             if (allow_route_intersections or candidate['route_intersections'] == 0)
+                             and all(not overlaps(candidate['bounds'], old['bounds'])
+                                     for old in placed.values())]
+                    if not valid:
+                        return False
+                    choices.append((len(valid), first_index[key], key, valid))
+                _, _, key, valid = min(choices)
+                for candidate in valid:
+                    placed[key] = candidate
+                    if search([item for item in remaining if item != key]):
+                        return True
+                    if states > max_search_states:
+                        break
+                placed.pop(key, None)
+                return False
+            success = search(unique_ids)
+            attempts.append({'allow_route_intersections': allow_route_intersections,
+                             'search_states': states, 'success': success})
+            return placed if success else None
+
+        # First guarantee no text intersects any past OR FUTURE itinerary edge.
+        # If that is geometrically infeasible within the bounded candidate set,
+        # accept the fewest/shortest edge intersections per candidate; caller paints
+        # labels last with the locked paper halo to retain their readability.
+        chosen = solve(False)
+        if chosen is None:
+            chosen = solve(True)
+        if chosen is None:
+            fail(f'All bounded candidates exhausted (search limit {max_search_states}).')
+        layouts = {}
+        for key in unique_ids:
+            candidate = chosen[key]
+            x, y = node_points[key]
+            near_x, near_y = candidate['nearest']
+            length = candidate['distance']
+            leader = []
+            if length > 18:
+                dx, dy = (near_x-x)/length, (near_y-y)/length
+                leader = [[x+dx*node_radius, y+dy*node_radius],
+                          [near_x-dx*2, near_y-dy*2]]
+            layouts[key] = {'node_id': key, 'label': renderer.nodes[key]['label'],
+                            'first_sequence_index': first_index[key],
+                            'position': candidate['position'], 'bounds': candidate['bounds'],
+                            'font_size': font_size, 'font_bold': bold, 'stroke_px': stroke,
+                            'anchor': 'lt', 'node_pixel': [x, y],
+                            'color_role': cfg['color_role'], 'alpha': cfg['alpha'],
+                            'halo_alpha': cfg['halo_alpha'],
+                            'leader': {'points':leader, 'width':cfg['leader_width'], 'alpha':cfg['leader_alpha']},
+                            'leader_distance_px': length,
+                            'route_intersections': candidate['route_intersections']}
+        self._label_layout_audit = {'method': 'whole-route deterministic candidates with MRV backtracking',
+                         'font_size': font_size, 'panel_margin_px': margin,
+                         'label_gap_px': label_gap, 'node_clearance_px': node_radius,
+                         'candidate_counts': {key: len(candidates[key]) for key in unique_ids},
+                         'attempts': attempts,
+                         'reserved_region_boxes': [list(box) for box in reserved],
+                         'all_route_edges_considered': len(route_edges),
+                         'route_intersections': sum(item['route_intersections'] for item in layouts.values())}
+
+        return layouts
+
+    def frame_state(self, scene_id, t, duration):
+        """Chronological arrivals and route growth, independent of label placement."""
         if scene_id not in self.per_scene:
             raise KeyError(f'No map plan for scene {scene_id}')
-        if not math.isfinite(t) or not math.isfinite(duration) or duration<=0:
+        if not math.isfinite(t) or not math.isfinite(duration) or duration <= 0:
             raise ValueError('t must be finite; duration must be finite and positive')
-        plan=self.per_scene[scene_id];start,end=plan['start_index'],plan['end_index']
-        im=self._base_image.copy();d=ImageDraw.Draw(im)
-        ink=self.colors['map_ink'];accent=self.colors['map_accent']
-        for i,key in enumerate(self.sequence):
-            self._circle(d,*self.points[i],self.style['node_radius'],ink+(30 if i>end else 65,))
-        current=start
-        moving=[j for j in range(start,end) if j not in self._degenerate]
-        active_window=min(self._motion['map_active_window_sec'],max(1.,duration*.6))
-        slot=active_window/max(1,len(moving))
-        for j,path in enumerate(self.curves):
-            if j>=end:break
+        plan = self.per_scene[scene_id]
+        start, end = plan['start_index'], plan['end_index']
+        overview = bool(plan.get('overview', False))
+        current = start
+        moving = [j for j in range(start, end) if j not in self._degenerate]
+        active_window = min(self._motion['map_active_window_sec'], max(1., duration*.6))
+        slot = active_window/max(1, len(moving))
+        segments = []
+        for j, path in enumerate(self.curves):
+            if not overview and j >= end:
+                break
             if j in self._degenerate:
-                if j>=start and current>=j:current=j+1
+                if j >= start and current >= j:
+                    current = j+1
                 continue
-            if j<start:
-                progress=1.;age=end-j
-                alpha=max(self.style['old_line_alpha_min'],135-age*4)
-                self._line(d,path,accent+(alpha,),self.style['old_line_width'])
+            if overview or j < start:
+                progress = 1.
             else:
-                order=moving.index(j)
-                progress=_ease((t-self._motion['map_segment_delay']-order*slot)/(slot*.85))
-                if progress>0:
-                    n=max(2,min(len(path),round(1+progress*(len(path)-1))))
-                    alpha=210 if progress<1 else 165
-                    self._line(d,path[:n],self.colors['map_halo']+(64,),self.style['new_line_halo_width'])
-                    self._line(d,path[:n],accent+(alpha,),self.style['new_line_width'])
-                    self._circle(d,*path[n-1],self.style['growing_tip_radius'],accent+(220,))
-            if progress>=.99:current=j+1
-        if end==start:current=end
-        region=bool(plan.get('region_node_ids')) and current==end
-        if plan.get('overview',False):
-            for path in self.curves:self._line(d,path,accent+(32,),.85)
-        elif region and (plan.get('region_only',end==start)):
-            self._region(d,plan)
-        else:
-            x,y=self.points[current]
-            self._circle(d,x,y,self.style['current_ring_radius'],outline=accent+(110,),width=1)
-            self._circle(d,x,y,self.style['current_point_radius'],accent+(self.style['current_alpha'],))
-            if region:self._region(d,plan)
-            else:
-                name=self.nodes[self.sequence[current]]['label']
-                tx=x+13;ty=y-22
-                width=self._font(self.style['label_size']).getlength(name)/self.ss
-                if tx+width>self.width-6:tx=x-width-12
-                ty=max(4,min(self.height-54,ty))
-                d.text((round(tx*self.ss),round(ty*self.ss)),name,
-                    font=self._font(self.style['label_size'],self.style['label_bold']),
-                    fill=accent+(self.style['current_alpha'],),
-                    stroke_width=self.style['label_stroke_px']*self.ss,
-                    stroke_fill=self.colors['map_label_halo']+(155,),anchor='lt')
-        return im.resize(self.size,Image.Resampling.LANCZOS)
+                order = moving.index(j)
+                progress = _ease((t-self._motion['map_segment_delay']-order*slot)/(slot*.85))
+            if progress > 0:
+                count = max(2, min(len(path), round(1+progress*(len(path)-1))))
+                segments.append({'index': j, 'progress': progress, 'points_count': count})
+            if not overview and progress >= .99:
+                current = j+1
+        if end == start:
+            current = end
+        visible = [] if overview else list(dict.fromkeys(self.sequence[:current+1]))
+        region = not overview and bool(plan.get('region_node_ids')) and current == end
+        return {'current_index': None if overview else current,
+                'visible_label_ids': visible, 'overview_preview': overview,
+                'arrival_status': 'overview_preview' if overview else 'cumulative_arrivals',
+                'region_active': region,
+                'region_only': region and bool(plan.get('region_only', end == start)),
+                'route_segment_states': segments}
+
+    def _render_pixels(self, scene_id, t, duration):
+        state = self.frame_state(scene_id, t, duration)
+        plan = self.per_scene[scene_id]
+        im = self._base_image.copy()
+        d = ImageDraw.Draw(im)
+        ink, accent = self.colors['map_ink'], self.colors['map_accent']
+        visible = set(state['visible_label_ids'])
+        for key in dict.fromkeys(self.sequence):
+            point = self.pixel(self.nodes[key]['lon'], self.nodes[key]['lat'])
+            self._circle(d, *point, self.style['node_radius'], ink+(65 if key in visible else 30,))
+        stroke = self.policy['route_stroke']
+        paths = [self.curves[row['index']][:row['points_count']]
+                 for row in state['route_segment_states']]
+        # All halos precede all foreground strokes, so a later halo cannot erase
+        # an earlier leg at a crossing. Historical and growing legs use one ink.
+        for path in paths:
+            self._line(d, path, self.colors['map_halo']+(stroke['halo_alpha'],), stroke['halo_width'])
+        for path in paths:
+            self._line(d, path, accent+(stroke['alpha'],), stroke['width'])
+        for row in state['route_segment_states']:
+            if row['progress'] < 1:
+                tip = self.curves[row['index']][row['points_count']-1]
+                self._circle(d, *tip, self.style['growing_tip_radius'], accent+(stroke['alpha'],))
+        if not state['overview_preview']:
+            if state['region_active']:
+                self._region(d, plan)
+            if not state['region_only']:
+                x,y = self.points[state['current_index']]
+                self._circle(d,x,y,self.style['current_ring_radius'],outline=accent+(110,),width=1)
+                self._circle(d,x,y,self.style['current_point_radius'],accent+(self.style['current_alpha'],))
+        # Leaders precede every label. The final paper-colored outline protects
+        # glyphs even when a dense itinerary requires a route-crossing fallback.
+        labels = [self._label_layouts[key] for key in state['visible_label_ids']]
+        for layout in labels:
+            leader = layout['leader']
+            if leader['points']:
+                self._line(d, leader['points'], accent+(leader['alpha'],), leader['width'])
+        for layout in labels:
+            d.text(tuple(round(v*self.ss) for v in layout['position']), layout['label'],
+                   font=self._font(self.style['label_size'], self.style['label_bold']),
+                   fill=accent+(self.style['current_alpha'],),
+                   stroke_width=self.style['label_stroke_px']*self.ss,
+                   stroke_fill=self.colors['map_label_halo']+(self.style['label_halo_alpha'],), anchor='lt')
+        return im.resize(self.size, Image.Resampling.LANCZOS)
 
     def _basemap_report(self):
         layers = {}
@@ -650,7 +846,7 @@ class SeriesMap:
         key = (self._geometry_sha256, self._render_spec_sha256, scene_id, float(t), float(duration))
         _remember(_PIXEL_HASHES, key, digest, 256)
         im.info[EVIDENCE_KEY] = {
-            'schema_version': '2.1', 'engine_sha256': file_sha256(__file__),
+            'schema_version': '2.2', 'engine_sha256': file_sha256(__file__),
             'engine_path': str(Path(__file__).resolve()), 'policy_sha256': file_sha256(POLICY_PATH),
             'style_sha256': file_sha256(STYLE_PATH), 'geometry_sha256': self._geometry_sha256,
             'scene_id': scene_id, 'time_sec': float(t), 'duration_sec': float(duration),
@@ -659,6 +855,10 @@ class SeriesMap:
             'readability': deepcopy(self._readability),
             'geometry': self._geometry, 'render_spec': self._render_spec,
             'render_spec_sha256': self._render_spec_sha256,
+            'visible_label_ids': self.frame_state(scene_id, t, duration)['visible_label_ids'],
+            'frame_state': self.frame_state(scene_id, t, duration),
+            'label_layout_sha256': self._label_layout_sha256,
+            'route_stroke_policy': deepcopy(self.policy['route_stroke']),
         }
         return im
 
@@ -685,6 +885,11 @@ class SeriesMap:
                                      self.position[1]+self.pixel(n['lon'],n['lat'])[1]]}
                      for key,n in self.nodes.items()],
             'sequence':list(self.sequence),'visits':deepcopy(self.visit_report),
+            'label_layouts':deepcopy(self._label_layouts),
+            'label_layout_sha256':self._label_layout_sha256,
+            'label_layout_audit':deepcopy(self._label_layout_audit),
+            'route_stroke_policy':deepcopy(self.policy['route_stroke']),
+            'label_visibility_policy':deepcopy(self.policy['labels']),
             'per_scene':deepcopy(self.per_scene),'curve_samples_per_segment':91,
             'region_annotations':{sid:self._region_layout(plan) for sid,plan in self.per_scene.items()
                                   if plan.get('region_node_ids')},
@@ -721,11 +926,12 @@ def validate_map_evidence(evidence, scene_id=None, t=None, duration=None):
     A renderer reconstructed from the bound inputs verifies geometry and all
     summaries. Reconstructed renderers and static file hashes are cached.
     """
-    if not isinstance(evidence, dict) or evidence.get('schema_version') != '2.1':
-        raise ValueError('Map requires SeriesMap 2.1 geographic evidence; render it with the current engine')
+    if not isinstance(evidence, dict) or evidence.get('schema_version') != '2.2':
+        raise ValueError('Map requires SeriesMap 2.2 geographic evidence; render it with the current engine')
     required = ('engine_sha256', 'policy_sha256', 'style_sha256', 'geometry_sha256',
                 'render_spec_sha256', 'scene_id', 'time_sec', 'duration_sec', 'image_sha256',
-                'map_size', 'image_mode', 'basemap', 'readability', 'geometry', 'render_spec')
+                'map_size', 'image_mode', 'basemap', 'readability', 'geometry', 'render_spec',
+                'visible_label_ids', 'frame_state', 'label_layout_sha256', 'route_stroke_policy')
     if any(key not in evidence for key in required):
         raise ValueError('Incomplete map evidence: expected source, geometry, readability, scene and pixel bindings')
     for key, path in (('engine_sha256', __file__), ('policy_sha256', POLICY_PATH), ('style_sha256', STYLE_PATH)):
@@ -783,6 +989,13 @@ def validate_map_evidence(evidence, scene_id=None, t=None, duration=None):
                 raise ValueError('Map report differs from its official renderer')
         if evidence['scene_id'] not in renderer.per_scene:
             raise ValueError('Map evidence references an unknown scene')
+        official_state = renderer.frame_state(evidence['scene_id'], evidence['time_sec'], evidence['duration_sec'])
+        if evidence['frame_state'] != official_state or evidence['visible_label_ids'] != official_state['visible_label_ids']:
+            raise ValueError('Map visible labels or arrival state differ from the official route chronology')
+        if evidence['label_layout_sha256'] != renderer._label_layout_sha256:
+            raise ValueError('Map static label layout fingerprint differs from the official renderer')
+        if evidence['route_stroke_policy'] != renderer.policy['route_stroke']:
+            raise ValueError('Map route stroke policy differs from the uniform official stroke')
     except (KeyError, TypeError, FileNotFoundError) as exc:
         raise ValueError(f'Invalid map geographic evidence: {exc}') from exc
     return evidence
@@ -887,7 +1100,7 @@ def validate_map_background(map_image, background_image):
                        'measured_contrast_p10': float(np.percentile(samples,10)) if count else None,
                        'passed': bool(passed)})
     passed = all(c['passed'] for c in checks)
-    return {'schema_version': '2.1', 'status': 'passed' if passed else 'failed', 'passed': passed,
+    return {'schema_version': '2.2', 'status': 'passed' if passed else 'failed', 'passed': passed,
             'method': 'WCAG native stroke-core pixel contrast over actual composited art crop',
             'background_sha256': hashlib.sha256(background.tobytes()).hexdigest(),
             'background_size': list(background.size), 'background_mode': 'RGB',

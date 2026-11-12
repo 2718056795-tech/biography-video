@@ -37,6 +37,21 @@ def smooth(value: float) -> float:
     return value * value * (3 - 2 * value)
 
 
+def map_presentation_summary(evidence):
+    """Expose the verified arrival state and its fixed project-wide layout.
+
+    Callers verify the official evidence first. This compact record is copied
+    into frame and clip QA so visible labels and route styling can be reviewed
+    without treating a textual claim as proof of the rendered pixels.
+    """
+    geometry = evidence['geometry']
+    visible = evidence['visible_label_ids']
+    return {'visible_label_ids': deepcopy(visible),
+            'label_layout_sha256': evidence['label_layout_sha256'],
+            'visible_layouts': {key: deepcopy(geometry['label_layouts'][key]) for key in visible},
+            'route_stroke_policy': deepcopy(geometry['route_stroke_policy'])}
+
+
 class SeriesFrame:
     """Use one frozen coordinate contract with per-person theme/content data.
 
@@ -56,6 +71,8 @@ class SeriesFrame:
         self.theme_tokens = deepcopy(theme)
         if not isinstance(theme, dict):
             raise ValueError('A per-person theme mapping is required')
+        if theme.get('profile_id', self.style['profile_id']) != self.style['profile_id']:
+            raise ValueError('theme.profile_id differs from the current series contract')
         self.colors = deepcopy(theme.get('colors', theme.get('palette', theme)))
         if not isinstance(self.colors, dict):
             raise ValueError('theme.colors must be a color-role object')
@@ -329,6 +346,7 @@ class SeriesFrame:
         picture = canvas.convert('RGB')
         panel = picture.crop((map_spec['x'], map_spec['y'], map_spec['x'] + map_spec['width'], map_spec['y'] + map_spec['height']))
         self.last_report = {
+            'schema_version': self.style['schema_version'],
             'profile_id': self.style['profile_id'], 'kind': 'frame',
             'canvas': {'width': self.width, 'height': self.height},
             'profile_sha256': self.profile_sha256, 'theme_tokens': deepcopy(self.colors),
@@ -336,6 +354,7 @@ class SeriesFrame:
             'fonts': self._font_report(), 'elements': deepcopy(prepared['elements']),
             'map': deepcopy(map_spec),
             'map_present': True, 'map_evidence': deepcopy(map_evidence),
+            'map_labels': map_presentation_summary(map_evidence),
             'map_background_readability': background_readability,
             'frame_mode': 'RGB', 'frame_sha256': hashlib.sha256(picture.tobytes()).hexdigest(),
             'composited_map_sha256': hashlib.sha256(panel.tobytes()).hexdigest(),

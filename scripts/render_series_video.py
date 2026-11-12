@@ -20,7 +20,7 @@ import sys
 import time
 
 from PIL import Image
-from series_frame import DEFAULT_STYLE, SeriesFrame
+from series_frame import DEFAULT_STYLE, SeriesFrame, map_presentation_summary
 from series_map import SeriesMap, ensure_map_evidence, save_map_png, validate_map_evidence
 
 
@@ -56,12 +56,45 @@ def map_source_paths(value):
 def map_qa_summary(checks, path):
     return {'status': checks['status'], 'scene_id': checks['scene_id'],
             'geometry_sha256': checks['geometry_sha256'], 'report': str(path),
+            'label_persistence': checks['label_persistence'],
             'samples': [{'checkpoints': sample['checkpoints'], 'frame_index': sample['frame_index'],
                          'local_time_sec': sample['local_time_sec'],
                          'map_image_sha256': sample['map_evidence']['image_sha256'],
+                         'map_labels': sample['map_labels'],
                          'readability_passed': sample['map_evidence']['readability']['passed'],
                          'background_readability': sample.get('background_readability')}
                         for sample in checks['samples']]}
+
+
+def map_checkpoints(maps, scene_id, duration, local_start, count, fps):
+    """Sample rendered frames surrounding every arrival in this clip.
+
+    Arrival clocks come from the same engine state used to draw the map. A
+    fixed label-layout hash binds every sample to the entire project route.
+    """
+    indices = {}
+    for label, index in [('before', 0), ('mid', count//2), ('after', count-1)]:
+        indices.setdefault(index, []).append(label)
+    previous = None
+    transitions = []
+    for frame in range(count):
+        state = maps.frame_state(scene_id, local_start+frame/fps, duration)
+        visible = state['visible_label_ids']
+        if previous is not None:
+            if not set(previous).issubset(visible):
+                raise ValueError('An arrived map label disappeared during the clip')
+            arrived = [key for key in visible if key not in previous]
+            if arrived:
+                names = ','.join(arrived)
+                indices.setdefault(frame-1, []).append('before_arrival:' + names)
+                indices.setdefault(frame, []).append('after_arrival:' + names)
+                transitions.append({'frame_index': frame, 'local_time_sec': local_start+frame/fps,
+                                    'arrived_label_ids': arrived,
+                                    'before_visible_label_ids': previous,
+                                    'after_visible_label_ids': visible})
+        previous = visible
+    return indices, {'status': 'passed', 'checked_native_frames': count,
+                     'arrival_transitions': transitions}
 
 
 def probe(path, count=False):
@@ -86,6 +119,8 @@ def load_project(path):
     for key in ('series_profile_id', 'style_profile_id'):
         if key in project and project[key] != style['profile_id']:
             raise ValueError(f'project.{key} differs from the series contract')
+    if project.get('series_profile_sha256', sha(DEFAULT_STYLE)) != sha(DEFAULT_STYLE):
+        raise ValueError('project.series_profile_sha256 differs from the series contract')
     board_path = base / project.get('storyboard', 'data/storyboard.json')
     board = project if 'scenes' in project else obj(board_path)
     scenes = board.get('scenes')
@@ -190,10 +225,10 @@ def render_clip(target, scene, local_start, count, compositor, maps, draw_art, t
     checks = {'status': 'incomplete', 'scene_id': scene['id'],
               'geometry_sha256': geometry_hash(maps.geometry_report()), 'samples': [],
               'scope': 'Actual before/mid/after rendered map pixels and sourced geography/readability evidence; not historical certification'}
-    # Preserve all labels for very short clips where sample indices coincide.
-    sample_indices = {}
-    for label, index in [('before', 0), ('mid', count//2), ('after', count-1)]:
-        sample_indices.setdefault(index, []).append(label)
+    # Retain coincident checkpoints for short clips and sample both sides of
+    # arrivals, which a simple before/mid/after sample can otherwise miss.
+    sample_indices, checks['label_persistence'] = map_checkpoints(
+        maps, scene['id'], duration, local_start, count, fps)
     map_qa_path = layout_path.with_name(layout_path.stem + '.map-qa.json') if layout_path else target.with_suffix('.map-qa.json')
     def write_map_qa(status, error=None):
         checks['status'] = status
@@ -215,6 +250,7 @@ def render_clip(target, scene, local_start, count, compositor, maps, draw_art, t
                 if frame in sample_indices:
                     checks['samples'].append({'checkpoints': sample_indices[frame], 'frame_index': frame,
                                               'local_time_sec': t, 'map_evidence': evidence,
+                                              'map_labels': map_presentation_summary(evidence),
                                               'background_readability': compositor.last_report['map_background_readability']})
                 process.stdin.write(picture.tobytes())
                 if frame == inspect_index and layout_path:
@@ -314,8 +350,16 @@ def main():
                             valid = map_checks.get('status') == 'passed' and map_checks.get('geometry_sha256') == fingerprint['series_map_geometry_sha256'] and bool(map_checks.get('samples'))
                             if valid:
                                 try:
+                                    expected_indices, expected_persistence = map_checkpoints(maps, scene['id'], count/fps, 0., count, fps)
+                                    if (map_checks.get('label_persistence') != expected_persistence
+                                            or {sample.get('frame_index') for sample in map_checks['samples']} != set(expected_indices)):
+                                        raise ValueError('Cached clip lacks map arrival checkpoints')
                                     for sample in map_checks['samples']:
                                         validate_map_evidence(sample.get('map_evidence'), scene_id=scene['id'], t=sample.get('local_time_sec'), duration=count/fps)
+                                        if (sample.get('map_labels') != map_presentation_summary(sample['map_evidence'])
+                                                or sample.get('checkpoints') != expected_indices[sample['frame_index']]
+                                                or sample.get('local_time_sec') != sample['frame_index']/fps):
+                                            raise ValueError('Cached clip map label state differs from its official frame')
                                         background_check = sample.get('background_readability', {})
                                         if (background_check.get('status') != 'passed' or background_check.get('passed') is not True
                                                 or background_check.get('engine_sha256') != sample['map_evidence'].get('engine_sha256')

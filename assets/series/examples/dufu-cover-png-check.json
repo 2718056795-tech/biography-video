@@ -1,7 +1,7 @@
 {
   "technical_status": "passed",
   "inputs": {
-    "cover": "/workspace/series_skill_v2/historical-biography-video/assets/series/examples/dufu-cover-locked.png"
+    "cover": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/examples/dufu-cover-locked.png"
   },
   "expected": {
     "width": 1200,

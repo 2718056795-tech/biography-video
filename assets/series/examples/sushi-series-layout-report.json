@@ -1,11 +1,12 @@
 {
-  "profile_id": "biography-paper-cut-series-2.0",
+  "schema_version": "2.2",
+  "profile_id": "biography-paper-cut-series-2.2",
   "kind": "frame",
   "canvas": {
     "width": 1080,
     "height": 1920
   },
-  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "profile_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
   "theme_tokens": {
     "paper": "#DFD0C2",
     "light": "#F4E9DD",
@@ -61,27 +62,27 @@
     ],
     "evidence_note": "美术候选，未预先核查苏轼全部资料；具体地点、服饰、器物与事件需新建史料记录。",
     "theme_id": "sushi-series-v2",
-    "profile_id": "biography-paper-cut-series-2.0"
+    "profile_id": "biography-paper-cut-series-2.2"
   },
   "fonts": {
     "serif_regular": {
       "path": "fonts/series-serif-regular.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
       "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121"
     },
     "serif_bold": {
       "path": "fonts/series-serif-bold.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
       "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
     },
     "sans_regular": {
       "path": "fonts/series-sans-regular.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
       "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
     },
     "sans_bold": {
       "path": "fonts/series-sans-bold.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
       "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
     }
   },
@@ -273,28 +274,31 @@
     "label_stroke_px": 2,
     "coast_width": 1.1,
     "coast_alpha": 94,
-    "old_line_width": 1.3,
-    "old_line_alpha_min": 70,
+    "old_line_width": 2.1,
+    "old_line_alpha_min": 210,
     "new_line_width": 2.1,
     "new_line_halo_width": 4.5,
     "node_radius": 1.9,
     "current_ring_radius": 8.5,
     "current_point_radius": 4.2,
     "growing_tip_radius": 2.7,
-    "current_alpha": 245
+    "current_alpha": 245,
+    "route_alpha": 210,
+    "route_halo_alpha": 64,
+    "label_halo_alpha": 245
   },
   "map_present": true,
   "map_evidence": {
-    "schema_version": "2.1",
-    "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
-    "engine_path": "/workspace/map_upgrade_v2_1/historical-biography-video/scripts/series_map.py",
-    "policy_sha256": "0cedcb811b15addc20dcc9e2d9a20d7bbfb4d35cd20c5a869a67477035f4161f",
-    "style_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
-    "geometry_sha256": "fff49b0cd1297060ccd5db3f53bf9be14a27d1c778e41899bbdd6792e5d65ee8",
+    "schema_version": "2.2",
+    "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
+    "engine_path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_map.py",
+    "policy_sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+    "style_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
+    "geometry_sha256": "8fcf7150672f93ccc88ec8f2dff42350c591b097d6471772b57f9e271858d592",
     "scene_id": "S09",
     "time_sec": 3.5,
     "duration_sec": 14.366666666666667,
-    "image_sha256": "0d347fb211258491671533c73c3bf97f4d019fdb7f11cb333692a9d737b4b82b",
+    "image_sha256": "e3164489a22b95afb8a5c1d545a76abc27e6013f5be8170d58c2b1bd035baa20",
     "map_size": [
       880,
       430
@@ -317,26 +321,26 @@
       "visible_coast_segments": 6,
       "visible_river_segments": 56,
       "visible_length_px": 6049.590166111592,
-      "source_fingerprint": "10afd11b244cc37a856764fb2bbed06551e4e85ba6792065824af1aa9379fc12",
+      "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
       "sources": [
         {
           "label": "bundled Natural Earth",
           "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
           "source_files": [
             {
-              "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
               "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
             },
             {
-              "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/provenance.json",
+              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
               "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
             },
             {
-              "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/LICENSE.md",
+              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
               "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
             },
             {
-              "path": "/workspace/map_upgrade_v2_1/historical-biography-video/scripts/series_basemap.py",
+              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
               "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
             }
           ],
@@ -591,19 +595,19 @@
             },
             "local_files": [
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                 "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
               },
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/provenance.json",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
                 "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
               },
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/LICENSE.md",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
                 "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
               },
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/scripts/series_basemap.py",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
                 "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
               }
             ]
@@ -697,18 +701,18 @@
           "checks": [
             {
               "purpose": "old_route_minimum",
-              "alpha": 70,
-              "minimum_contrast": 1.4,
-              "requested_contrast": 1.3750418534223794,
-              "effective_contrast": 1.4440955069219243,
+              "alpha": 210,
+              "minimum_contrast": 2.5,
+              "requested_contrast": 2.8453569214942807,
+              "effective_contrast": 3.5058861461714486,
               "passed": true
             },
             {
               "purpose": "completed_route",
-              "alpha": 165,
+              "alpha": 210,
               "minimum_contrast": 2.5,
-              "requested_contrast": 2.21640479730845,
-              "effective_contrast": 2.5672341094561313,
+              "requested_contrast": 2.8453569214942807,
+              "effective_contrast": 3.5058861461714486,
               "passed": true
             },
             {
@@ -731,7 +735,22 @@
         }
       },
       "passed": true,
-      "scope": "map colors only, measured on theme paper; other theme colors unchanged"
+      "scope": "map colors only, measured on theme paper; other theme colors unchanged",
+      "label_halo": {
+        "requested": [
+          223,
+          208,
+          194
+        ],
+        "effective": [
+          223,
+          208,
+          194
+        ],
+        "paper_matched": true,
+        "alpha": 245,
+        "stroke_px": 2
+      }
     },
     "geometry": {
       "panel": {
@@ -770,15 +789,18 @@
         "label_stroke_px": 2,
         "coast_width": 1.1,
         "coast_alpha": 94,
-        "old_line_width": 1.3,
-        "old_line_alpha_min": 70,
+        "old_line_width": 2.1,
+        "old_line_alpha_min": 210,
         "new_line_width": 2.1,
         "new_line_halo_width": 4.5,
         "node_radius": 1.9,
         "current_ring_radius": 8.5,
         "current_point_radius": 4.2,
         "growing_tip_radius": 2.7,
-        "current_alpha": 245
+        "current_alpha": 245,
+        "route_alpha": 210,
+        "route_halo_alpha": 64,
+        "label_halo_alpha": 245
       },
       "motion": {
         "map_segment_delay": 0.45,
@@ -881,6 +903,203 @@
         "demo3"
       ],
       "visits": [],
+      "label_layouts": {
+        "demo0": {
+          "node_id": "demo0",
+          "label": "示例甲",
+          "first_sequence_index": 0,
+          "position": [
+            161.0,
+            320.0
+          ],
+          "bounds": [
+            159.0,
+            318.0,
+            247.0,
+            349.0
+          ],
+          "font_size": 28,
+          "font_bold": true,
+          "stroke_px": 2,
+          "anchor": "lt",
+          "node_pixel": [
+            231.64172626647354,
+            308.82608695652175
+          ],
+          "color_role": "map_accent",
+          "alpha": 245,
+          "halo_alpha": 245,
+          "leader": {
+            "points": [],
+            "width": 1,
+            "alpha": 180
+          },
+          "leader_distance_px": 9.173913043478251,
+          "route_intersections": 0
+        },
+        "demo1": {
+          "node_id": "demo1",
+          "label": "示例乙",
+          "first_sequence_index": 1,
+          "position": [
+            310.0,
+            129.0
+          ],
+          "bounds": [
+            308.0,
+            127.0,
+            396.0,
+            158.0
+          ],
+          "font_size": 28,
+          "font_bold": true,
+          "stroke_px": 2,
+          "anchor": "lt",
+          "node_pixel": [
+            380.46906464756387,
+            167.26086956521738
+          ],
+          "color_role": "map_accent",
+          "alpha": 245,
+          "halo_alpha": 245,
+          "leader": {
+            "points": [],
+            "width": 1,
+            "alpha": 180
+          },
+          "leader_distance_px": 9.260869565217376,
+          "route_intersections": 0
+        },
+        "demo2": {
+          "node_id": "demo2",
+          "label": "示例丙",
+          "first_sequence_index": 2,
+          "position": [
+            429.0,
+            320.0
+          ],
+          "bounds": [
+            427.0,
+            318.0,
+            515.0,
+            349.0
+          ],
+          "font_size": 28,
+          "font_bold": true,
+          "stroke_px": 2,
+          "anchor": "lt",
+          "node_pixel": [
+            499.53093535243613,
+            308.82608695652175
+          ],
+          "color_role": "map_accent",
+          "alpha": 245,
+          "halo_alpha": 245,
+          "leader": {
+            "points": [],
+            "width": 1,
+            "alpha": 180
+          },
+          "leader_distance_px": 9.173913043478251,
+          "route_intersections": 0
+        },
+        "demo3": {
+          "node_id": "demo3",
+          "label": "示例丁",
+          "first_sequence_index": 3,
+          "position": [
+            578.0,
+            93.5
+          ],
+          "bounds": [
+            576.0,
+            91.5,
+            664.0,
+            122.5
+          ],
+          "font_size": 28,
+          "font_bold": true,
+          "stroke_px": 2,
+          "anchor": "lt",
+          "node_pixel": [
+            648.3582737335264,
+            131.8695652173913
+          ],
+          "color_role": "map_accent",
+          "alpha": 245,
+          "halo_alpha": 245,
+          "leader": {
+            "points": [],
+            "width": 1,
+            "alpha": 180
+          },
+          "leader_distance_px": 9.369565217391312,
+          "route_intersections": 0
+        }
+      },
+      "label_layout_sha256": "c09d524f014049c4159f7eec7a7381577c979cb59389590775ef8f9375be171b",
+      "label_layout_audit": {
+        "method": "whole-route deterministic candidates with MRV backtracking",
+        "font_size": 28,
+        "panel_margin_px": 4,
+        "label_gap_px": 3,
+        "node_clearance_px": 9,
+        "candidate_counts": {
+          "demo0": 65,
+          "demo1": 68,
+          "demo2": 65,
+          "demo3": 67
+        },
+        "attempts": [
+          {
+            "allow_route_intersections": false,
+            "search_states": 5,
+            "success": true
+          }
+        ],
+        "reserved_region_boxes": [],
+        "all_route_edges_considered": 270,
+        "route_intersections": 0
+      },
+      "route_stroke_policy": {
+        "width": 2.1,
+        "alpha": 210,
+        "halo_width": 4.5,
+        "halo_alpha": 64,
+        "all_segments_same": true,
+        "aging": false,
+        "preview_uses_same_stroke": true
+      },
+      "label_visibility_policy": {
+        "persistence": "unique node IDs through all completed arrivals; no future names",
+        "layout": "once for all itinerary nodes, routes and region annotations",
+        "font_size": 28,
+        "font_bold": true,
+        "color_role": "map_accent",
+        "alpha": 245,
+        "stroke_px": 2,
+        "halo_alpha": 245,
+        "panel_margin_px": 4,
+        "label_gap_px": 3,
+        "node_clearance_px": 9,
+        "region_clearance_px": 3,
+        "route_clearance_px": 2,
+        "leader_width": 1,
+        "leader_alpha": 180,
+        "candidate_gaps_px": [
+          13,
+          24,
+          40,
+          56,
+          80,
+          104
+        ],
+        "candidate_angle_step_deg": 30,
+        "search_budget": 100000,
+        "overview": "full route preview; no arrived nodes or place labels",
+        "route_overlap_fallback": "prefer zero route intersections; if fitting requires overlap, labels paint last with paper halo",
+        "failure": "raise; widen viewport, shorten supplied labels or split regional views; never shrink or drop labels"
+      },
       "per_scene": {
         "S09": {
           "start_index": 0,
@@ -897,24 +1116,24 @@
         "source": {}
       },
       "font_paths": {
-        "False": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
-        "True": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
+        "False": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+        "True": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
       },
       "static_files": [
         {
-          "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/series_style.json",
-          "sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0"
+          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/series_style.json",
+          "sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327"
         },
         {
-          "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/map_policy.json",
-          "sha256": "0cedcb811b15addc20dcc9e2d9a20d7bbfb4d35cd20c5a869a67477035f4161f"
+          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
+          "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3"
         },
         {
-          "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
           "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
         },
         {
-          "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
           "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
         }
       ],
@@ -1000,26 +1219,26 @@
         "visible_coast_segments": 6,
         "visible_river_segments": 56,
         "visible_length_px": 6049.590166111592,
-        "source_fingerprint": "10afd11b244cc37a856764fb2bbed06551e4e85ba6792065824af1aa9379fc12",
+        "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
         "sources": [
           {
             "label": "bundled Natural Earth",
             "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
             "source_files": [
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                 "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
               },
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/provenance.json",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
                 "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
               },
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/LICENSE.md",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
                 "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
               },
               {
-                "path": "/workspace/map_upgrade_v2_1/historical-biography-video/scripts/series_basemap.py",
+                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
                 "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
               }
             ],
@@ -1274,19 +1493,19 @@
               },
               "local_files": [
                 {
-                  "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                   "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/provenance.json",
+                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
                   "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/geography/LICENSE.md",
+                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
                   "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_1/historical-biography-video/scripts/series_basemap.py",
+                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
                   "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
                 }
               ]
@@ -53368,18 +53587,18 @@
             "checks": [
               {
                 "purpose": "old_route_minimum",
-                "alpha": 70,
-                "minimum_contrast": 1.4,
-                "requested_contrast": 1.3750418534223794,
-                "effective_contrast": 1.4440955069219243,
+                "alpha": 210,
+                "minimum_contrast": 2.5,
+                "requested_contrast": 2.8453569214942807,
+                "effective_contrast": 3.5058861461714486,
                 "passed": true
               },
               {
                 "purpose": "completed_route",
-                "alpha": 165,
+                "alpha": 210,
                 "minimum_contrast": 2.5,
-                "requested_contrast": 2.21640479730845,
-                "effective_contrast": 2.5672341094561313,
+                "requested_contrast": 2.8453569214942807,
+                "effective_contrast": 3.5058861461714486,
                 "passed": true
               },
               {
@@ -53402,18 +53621,33 @@
           }
         },
         "passed": true,
-        "scope": "map colors only, measured on theme paper; other theme colors unchanged"
+        "scope": "map colors only, measured on theme paper; other theme colors unchanged",
+        "label_halo": {
+          "requested": [
+            223,
+            208,
+            194
+          ],
+          "effective": [
+            223,
+            208,
+            194
+          ],
+          "paper_matched": true,
+          "alpha": 245,
+          "stroke_px": 2
+        }
       },
       "policy": {
-        "path": "/workspace/map_upgrade_v2_1/historical-biography-video/assets/series/map_policy.json",
-        "sha256": "0cedcb811b15addc20dcc9e2d9a20d7bbfb4d35cd20c5a869a67477035f4161f",
-        "policy_id": "biography-geographic-context-2.1"
+        "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
+        "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+        "policy_id": "biography-geographic-context-2.2"
       },
       "precision_claim": "structural coordinates and supplied metadata only; not historical verification"
     },
     "render_spec": {
       "route_data": {
-        "schema_version": "2.1",
+        "schema_version": "2.2",
         "geography_scope": "unresearched demonstration coordinates, not this person's itinerary",
         "nodes": [
           {
@@ -53505,17 +53739,138 @@
         ],
         "evidence_note": "美术候选，未预先核查苏轼全部资料；具体地点、服饰、器物与事件需新建史料记录。",
         "theme_id": "sushi-series-v2",
-        "profile_id": "biography-paper-cut-series-2.0"
+        "profile_id": "biography-paper-cut-series-2.2"
       },
       "basemap_geojson": null,
       "coastline_geojson": null,
       "basemap_source_path": null,
       "coastline_source_path": null
     },
-    "render_spec_sha256": "455f3ba242dfa437da61680048460e484b42f5ba4f678fbb9980802e1d97a083"
+    "render_spec_sha256": "31799033ca4ee8a0272fabb5d0f8ca9730d26e01dac78eb8d1ed20e51cb3b692",
+    "visible_label_ids": [
+      "demo0",
+      "demo1"
+    ],
+    "frame_state": {
+      "current_index": 1,
+      "visible_label_ids": [
+        "demo0",
+        "demo1"
+      ],
+      "overview_preview": false,
+      "arrival_status": "cumulative_arrivals",
+      "region_active": false,
+      "region_only": false,
+      "route_segment_states": [
+        {
+          "index": 0,
+          "progress": 1.0,
+          "points_count": 91
+        },
+        {
+          "index": 1,
+          "progress": 0.876865881056147,
+          "points_count": 80
+        }
+      ]
+    },
+    "label_layout_sha256": "c09d524f014049c4159f7eec7a7381577c979cb59389590775ef8f9375be171b",
+    "route_stroke_policy": {
+      "width": 2.1,
+      "alpha": 210,
+      "halo_width": 4.5,
+      "halo_alpha": 64,
+      "all_segments_same": true,
+      "aging": false,
+      "preview_uses_same_stroke": true
+    }
+  },
+  "map_labels": {
+    "visible_label_ids": [
+      "demo0",
+      "demo1"
+    ],
+    "label_layout_sha256": "c09d524f014049c4159f7eec7a7381577c979cb59389590775ef8f9375be171b",
+    "visible_layouts": {
+      "demo0": {
+        "node_id": "demo0",
+        "label": "示例甲",
+        "first_sequence_index": 0,
+        "position": [
+          161.0,
+          320.0
+        ],
+        "bounds": [
+          159.0,
+          318.0,
+          247.0,
+          349.0
+        ],
+        "font_size": 28,
+        "font_bold": true,
+        "stroke_px": 2,
+        "anchor": "lt",
+        "node_pixel": [
+          231.64172626647354,
+          308.82608695652175
+        ],
+        "color_role": "map_accent",
+        "alpha": 245,
+        "halo_alpha": 245,
+        "leader": {
+          "points": [],
+          "width": 1,
+          "alpha": 180
+        },
+        "leader_distance_px": 9.173913043478251,
+        "route_intersections": 0
+      },
+      "demo1": {
+        "node_id": "demo1",
+        "label": "示例乙",
+        "first_sequence_index": 1,
+        "position": [
+          310.0,
+          129.0
+        ],
+        "bounds": [
+          308.0,
+          127.0,
+          396.0,
+          158.0
+        ],
+        "font_size": 28,
+        "font_bold": true,
+        "stroke_px": 2,
+        "anchor": "lt",
+        "node_pixel": [
+          380.46906464756387,
+          167.26086956521738
+        ],
+        "color_role": "map_accent",
+        "alpha": 245,
+        "halo_alpha": 245,
+        "leader": {
+          "points": [],
+          "width": 1,
+          "alpha": 180
+        },
+        "leader_distance_px": 9.260869565217376,
+        "route_intersections": 0
+      }
+    },
+    "route_stroke_policy": {
+      "width": 2.1,
+      "alpha": 210,
+      "halo_width": 4.5,
+      "halo_alpha": 64,
+      "all_segments_same": true,
+      "aging": false,
+      "preview_uses_same_stroke": true
+    }
   },
   "map_background_readability": {
-    "schema_version": "2.1",
+    "schema_version": "2.2",
     "status": "passed",
     "passed": true,
     "method": "WCAG native stroke-core pixel contrast over actual composited art crop",
@@ -53525,42 +53880,42 @@
       430
     ],
     "background_mode": "RGB",
-    "map_image_sha256": "0d347fb211258491671533c73c3bf97f4d019fdb7f11cb333692a9d737b4b82b",
-    "engine_sha256": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
-    "geometry_sha256": "fff49b0cd1297060ccd5db3f53bf9be14a27d1c778e41899bbdd6792e5d65ee8",
+    "map_image_sha256": "e3164489a22b95afb8a5c1d545a76abc27e6013f5be8170d58c2b1bd035baa20",
+    "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
+    "geometry_sha256": "8fcf7150672f93ccc88ec8f2dff42350c591b097d6471772b57f9e271858d592",
     "checks": [
       {
         "purpose": "geographic_context",
         "sample_pixels": 3830,
         "minimum_contrast": 1.2,
         "required_passing_fraction": 0.9,
-        "passing_fraction": 0.9989556135770234,
-        "measured_contrast_p10": 1.3601978001967983,
+        "passing_fraction": 0.9848563968668407,
+        "measured_contrast_p10": 1.3514505235022725,
         "passed": true
       },
       {
         "purpose": "route",
-        "sample_pixels": 1183,
+        "sample_pixels": 1812,
         "minimum_contrast": 1.8,
         "required_passing_fraction": 0.9,
         "passing_fraction": 1.0,
-        "measured_contrast_p10": 2.645510577347729,
+        "measured_contrast_p10": 3.3057485036987972,
         "passed": true
       },
       {
         "purpose": "current_label",
-        "sample_pixels": 696,
+        "sample_pixels": 1252,
         "minimum_contrast": 3.0,
         "required_passing_fraction": 0.9,
         "passing_fraction": 1.0,
-        "measured_contrast_p10": 4.27717266122111,
+        "measured_contrast_p10": 4.140288392574908,
         "passed": true
       }
     ]
   },
   "frame_mode": "RGB",
-  "frame_sha256": "3624bb401dd51f2fac738280ccc97d8655570a1d1c69978d7ee485664cbef350",
-  "composited_map_sha256": "1a18f16d5442764f4c754c74b2f015c08b88ad55ea1ef8d0a3566ef8799e899f",
+  "frame_sha256": "dbe1ba8a46756d9a163ae5dcd2c1f48ee3ce83792ce9a18919a9a18876cc1b3b",
+  "composited_map_sha256": "4e836a345e98b38ff28c9604210b0608e223ff379b23222023f84d0223348053",
   "stage": {
     "profile_name": "open_air",
     "scale": 0.83,

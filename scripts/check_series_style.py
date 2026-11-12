@@ -13,6 +13,7 @@ import re
 from PIL import Image
 from series_cover import DEFAULT_PROFILE, read_theme, sha256_file
 from series_map import ensure_map_evidence, validate_map_evidence
+from series_frame import map_presentation_summary
 
 
 def check_layout(report, profile, theme, profile_path, frame_image=None, map_image=None):
@@ -152,6 +153,7 @@ def check_layout(report, profile, theme, profile_path, frame_image=None, map_ima
         require(art.get('reserved_top') == c['art_reserved_top'] and art.get('top_overwritten') is True, '封面保留区没有按母版覆盖清空')
         require(art.get('retained_bounds') == [0, c['art_reserved_top'], c['width'], c['height']], '封面下部无字美术保留范围改变')
     elif kind == 'frame':
+        require(report.get('schema_version') == profile.get('schema_version'), 'frame报告schema_version与当前母版不一致')
         require(any(role.startswith('standard.') or role.startswith('bookend.') for role in present_roles), '缺少standard/bookend正文版位')
         map_record = mapping(report.get('map'))
         for key, value in profile['map'].items():
@@ -161,6 +163,8 @@ def check_layout(report, profile, theme, profile_path, frame_image=None, map_ima
         try:
             validate_map_evidence(evidence, scene_id=report.get('scene_id'),
                                   t=report.get('time_sec'), duration=report.get('duration_sec'))
+            require(report.get('map_labels') == map_presentation_summary(evidence),
+                    '地图可见地名、固定位置或路线样式摘要与实际到达状态证据不一致')
         except (ValueError, TypeError, KeyError, OSError) as exc:
             errors.append(f'地图证据无效: {exc}')
         background_check = mapping(report.get('map_background_readability'))

@@ -1,8 +1,8 @@
 # 完整视频入口：固定版式与人物美术分离
 
-`scripts/render_series_video.py`是实际MP4渲染入口。它逐帧调用本人物的美术provider，使用`SeriesMap`绘累计足迹，再由`SeriesFrame`合成固定坐标的标题、诗句、事件与评价。新人物只更换研究数据、主题和美术provider，不另写界面合成器。
+`scripts/render_series_video.py`是实际MP4渲染入口。它逐帧调用本人物的美术provider，使用`SeriesMap`绘累计足迹与持续显示的已到访地名，再由`SeriesFrame`合成固定坐标的标题、诗句、事件与评价。新人物只更换研究数据、主题和美术provider，不另写界面合成器。
 
-本包版本为 V2.1，布局 profile 仍为 `biography-paper-cut-series-2.0`，地图内容与可读性升级会产生新地图像素。本版固定为母版的12槽、1080×1920、30fps、120秒和既定切帧。项目主动改变尺寸、时长、切点或槽类型会报错。需要另一个全局系列版式时，应明确建立新母版版本，不能让某一集自行漂移。
+本包版本为 V2.2，profile 为 `biography-paper-cut-series-2.2`，记录用户明确要求的累计地名与统一路线笔画；标题/页脚/地图面板坐标、字体、字号、封面几何与时序保持不变。本版固定为母版的12槽、1080×1920、30fps、120秒和既定切帧。项目主动改变尺寸、时长、切点或槽类型会报错。需要另一个全局系列版式时，应明确建立新母版版本，不能让某一集自行漂移。
 
 ## 项目配置
 
@@ -78,7 +78,7 @@ python "<SKILL_ROOT>/scripts/render_series_video.py" \
 
 渲染报告包含真实输出哈希、ffprobe实际解码视频帧数、源音频哈希未变、地图几何报告和 `qa/series-layout/<SCENE>.json` 逐幕排版记录。顶层另有 `map_geometry_sha256`、`source_fingerprint` 及含摘要/报告路径的 `map_qa`；地图来源文件、引擎、几何与可读性证据参加恢复渲染指纹，旧无底图片段不能据原缓存冒充新版地图。
 
-`qa/series-layout/<SCENE>.map-qa.json` 保存该幕实际渲染窗口首/中/末帧的 `before/mid/after` 地图检查；单帧窗口可共享一个采样。每个采样还记录 `background_readability`（对应帧报告的 `map_background_readability`），绑定实际艺术区域、地图哈希与对比度结果；不通过时中止渲染。选定检查时刻另保存 `<SCENE>.frame.png`、`<SCENE>.map.png` 与 `<SCENE>.map.png.evidence.json`，可与同目录布局记录运行实际像素核对。排版报告取该幕3.5秒/中点附近；短样片仅记录片段中真实调用的时刻。它记录参数与实际地图证据，不能替代实际编码后的视觉检查。章前、章中、抵达后仍须检查海岸/河流、累计线和当前点标签，以及手机大小下的可读性。
+`qa/series-layout/<SCENE>.map-qa.json` 保存该幕实际渲染窗口首/中/末帧的 `before/mid/after` 地图检查，并对窗口内每次抵达保存前一帧 `before_arrival:<节点ID>` 与抵达帧 `after_arrival:<节点ID>`；单帧或重合时刻可共享一个采样。报告的 `label_persistence` 记录逐原生帧检查与抵达转换，采样的 `map_labels` 绑定当前可见ID、项目标签布局指纹、可见布局与统一路线样式。每个采样还记录 `background_readability`（对应帧报告的 `map_background_readability`），绑定实际艺术区域、地图哈希与对比度结果；不通过时中止渲染。选定检查时刻另保存 `<SCENE>.frame.png`、`<SCENE>.map.png` 与 `<SCENE>.map.png.evidence.json`，可与同目录布局记录运行实际像素核对。排版报告取该幕3.5秒/中点附近；短样片仅记录片段中真实调用的时刻。它记录参数与实际地图证据，不能替代实际编码后的视觉检查。章前、章中、每次抵达前后与跨章仍须检查：未来地名不提前显示，已到访地名不消失，回访不重复，地名字位不跳动，路线统一笔画而当前点圆环清楚；同时查看海岸/河流及手机大小下的可读性。
 
 ## 渲染后仍须验收与封面
 
@@ -98,6 +98,8 @@ python "<SKILL_ROOT>/scripts/check_delivery.py" \
 
 `assets/series/examples/dufu-project/`已填好真实杜甫参考的数据转换、路线、主题路径和专用provider，可直接执行上述2秒命令。provider只调用旧工程的`Scene.art()`取原生角色/环境，不使用旧的UI、地图或字幕；固定字库与地图由新系列模块负责。它读取已准备图层，不重写Skill的SVG/PNG缓存，不需要系统中文字体。
 
-此provider明确拒绝其他人物和与原美术不匹配的主题；不能将其改名当另一人的成片。新人物从`init_series_project.py`生成空稿，再实现自己有依据的画面与动作。V2.1 例子使用随包默认地理底图，旧中国海岸来源仅保留为 `legacy_coastline_reference`，其 `reference_only` 状态不表示正在参与本版绘图。例子的来源台账继承原B/Q核查记录，并保留现代约位、约年与未能打开来源等边界，没有因格式转换声称做了新研究。
+此provider明确拒绝其他人物和与原美术不匹配的主题；不能将其改名当另一人的成片。新人物从`init_series_project.py`生成空稿，再实现自己有依据的画面与动作。当前例子使用随包默认地理底图与V2.2累计地名规则，旧中国海岸来源仅保留为 `legacy_coastline_reference`，其 `reference_only` 状态不表示正在参与本版绘图。例子的来源台账继承原B/Q核查记录，并保留现代约位、约年与未能打开来源等边界，没有因格式转换声称做了新研究。
 
 若需要在Skill中重建该例子的规范化数据，可运行`export_dufu_reference_project.py --output <NEW_DIR>`；它只转换已有杜甫资料，不生成另一个人物，也不会自动把新研究标为完成。
+
+本版实际6秒预览、地名/路线检查与未执行项见 [map-labels-check.json](map-labels-check.json)；旧V2.1报告和3秒样片仅是历史证据。固定版本链接见 [V2.2说明](map-labels-v2.2.md)。当前6秒样片不证明重新渲染120秒整片。

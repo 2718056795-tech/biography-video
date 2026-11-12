@@ -92,6 +92,8 @@ def check(root):
             master = json.loads(master_path.read_text(encoding='utf-8'))
             declared = project.get('series_profile_id', project.get('style_profile_id'))
             require(declared == master['profile_id'], '系列profile ID与固定母版不一致')
+            require(project.get('schema_version') == master['schema_version'], '系列项目schema_version与当前母版不一致')
+            require(board.get('schema_version') == master['schema_version'], '系列分镜schema_version与当前母版不一致')
             if 'series_profile_id' in project and 'style_profile_id' in project:
                 require(project['series_profile_id'] == project['style_profile_id'], '两种profile ID字段互相冲突')
             master_hash = hashlib.sha256(master_path.read_bytes()).hexdigest()
@@ -140,6 +142,7 @@ def check(root):
             require(identifier(theme_value), '系列theme须为明确的人物主题JSON相对路径')
             if identifier(theme_value):
                 theme = load(theme_value)
+                require(theme.get('profile_id', master['profile_id']) == master['profile_id'], '主题profile_id与当前系列母版不一致')
                 require(theme.get('person') == project.get('name'), '主题人物与本期人物不符，不得默认套用杜甫')
                 colors = theme.get('colors', {})
                 require(isinstance(colors, dict), '主题colors须为对象')
@@ -165,22 +168,42 @@ def check(root):
             # Reuse the production map engine so missing geography, unsourced
             # overrides, failed labels/contrast and unsupported views fail here.
             from series_map import SeriesMap, ensure_map_evidence
+            from render_series_video import map_checkpoints
             coast_value = project.get('coastline_geojson', route.get('coastline', {}).get('file'))
             coast_path = root/coast_value if coast_value else None
             basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
             basemap_path = root/basemap_value if basemap_value else None
             maps = SeriesMap(route, master, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
-            samples = []
+            samples, chapter_persistence = [], []
+            previous_labels = []
             for scene in scenes:
-                duration = (scene['end_frame']-scene['start_frame'])/master['video']['fps']
-                for t in (0., duration/2, max(0., duration-1/master['video']['fps'])):
+                fps = master['video']['fps']
+                count = scene['end_frame']-scene['start_frame']
+                duration = count/fps
+                checkpoints, persistence = map_checkpoints(maps, scene['id'], duration, 0., count, fps)
+                first_labels = maps.frame_state(scene['id'], 0., duration)['visible_label_ids']
+                if not set(previous_labels).issubset(first_labels):
+                    raise ValueError(f'{scene["id"]}: 已到达地名未在下一章节保留')
+                chapter_persistence.append({'scene_id': scene['id'], 'status': 'passed',
+                                            'retained_from_previous_chapter': previous_labels,
+                                            'start_visible_label_ids': first_labels,
+                                            **persistence})
+                for frame, labels in sorted(checkpoints.items()):
+                    t = frame/fps
                     evidence_record = ensure_map_evidence(maps.render(scene['id'], t, duration),
                                                           scene_id=scene['id'], t=t, duration=duration)
                     samples.append({'scene_id': scene['id'], 'time_sec': t,
+                                    'checkpoints': labels,
+                                    'visible_label_ids': evidence_record['visible_label_ids'],
+                                    'label_layout_sha256': evidence_record['label_layout_sha256'],
                                     'image_sha256': evidence_record.get('image_sha256'),
                                     'readability_passed': evidence_record.get('readability', {}).get('passed') is True})
+                previous_labels = maps.frame_state(scene['id'], (count-1)/fps, duration)['visible_label_ids']
             map_geometry = maps.geometry_report()
             map_preflight.update(status='passed', samples=samples,
+                                 label_layouts=map_geometry['label_layouts'],
+                                 route_stroke_policy=map_geometry['route_stroke_policy'],
+                                 label_persistence=chapter_persistence,
                                  basemap={key:value for key,value in map_geometry.get('basemap', {}).items() if key != 'geometry'},
                                  readability=map_geometry.get('readability'),
                                  geometry_sha256=hashlib.sha256(json.dumps(map_geometry, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest())

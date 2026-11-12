@@ -1,0 +1,336 @@
+{
+  "release_version": "2.2",
+  "profile_id": "biography-paper-cut-series-2.2",
+  "style_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
+  "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
+  "automated_tests": {
+    "tests_run": 57,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true
+  },
+  "locked_bundle": {
+    "technical_status": "passed",
+    "profile_id": "biography-paper-cut-series-2.2",
+    "checked_files": 28,
+    "errors": [],
+    "scope": "Released renderer code, layout coordinates, fonts, map policy and bundled geographic data. Per-project colors, backgrounds, research and animation art remain variable; this is not historical or media certification."
+  },
+  "label_retention": {
+    "actual_map_checkpoints": 64,
+    "native_frame_states_scanned": 3600,
+    "arrival_transitions_checked": 14,
+    "chapter_retention_checks": 12,
+    "all_passed": true,
+    "comparison_stage_counts": [
+      3,
+      4,
+      8,
+      15
+    ],
+    "label_layout_stable_across_stages": true
+  },
+  "actual_dufu_label_layout_audit": {
+    "method": "whole-route deterministic candidates with MRV backtracking",
+    "font_size": 28,
+    "panel_margin_px": 4,
+    "label_gap_px": 3,
+    "node_clearance_px": 9,
+    "candidate_counts": {
+      "gong": 55,
+      "wuyue": 35,
+      "qilu": 54,
+      "changan": 38,
+      "fengxian": 40,
+      "fengxiang": 43,
+      "huazhou": 41,
+      "luoyang": 48,
+      "qinzhou": 50,
+      "tonggu": 50,
+      "chengdu": 64,
+      "kuizhou": 49,
+      "jiangling": 30,
+      "yueyang": 17,
+      "tanzhou": 9
+    },
+    "attempts": [
+      {
+        "allow_route_intersections": false,
+        "search_states": 16,
+        "success": true
+      }
+    ],
+    "reserved_region_boxes": [
+      [
+        393.0106110891101,
+        303.9441687979539,
+        488.77531697146304,
+        399.70887468030685
+      ],
+      [
+        497.77531697146304,
+        347.8265217391304,
+        653.7753169714631,
+        372.8265217391304
+      ]
+    ],
+    "all_route_edges_considered": 1440,
+    "route_intersections": 0
+  },
+  "uniform_route_stroke_policy": {
+    "width": 2.1,
+    "alpha": 210,
+    "halo_width": 4.5,
+    "halo_alpha": 64,
+    "all_segments_same": true,
+    "aging": false,
+    "preview_uses_same_stroke": true
+  },
+  "text_priority": "route-aware stable placement, leaders to unmoved locations, labels paint last with paper outline",
+  "unchanged_fields": [
+    "video",
+    "header",
+    "standard",
+    "bookend",
+    "footer",
+    "motion",
+    "stage_profiles",
+    "cover",
+    "fonts"
+  ],
+  "actual_pixel_check": {
+    "technical_status": "passed",
+    "errors": [],
+    "checked_kind": "frame",
+    "profile_id": "biography-paper-cut-series-2.2",
+    "actual_frame_pixels_verified": true,
+    "actual_map_pixels_verified": true,
+    "scope": "Layout/font/theme-role, sourced map evidence and recorded contrast over actual art checked against the locked profile. Actual frame/map pixels checked only when supplied. This does not certify historical truth, title wording, semantic motifs or aesthetic quality."
+  },
+  "migration_checks": {
+    "dry_run_read_only": true,
+    "apply_passed": true,
+    "repeat_apply_passed": true,
+    "external_shared_theme_unchanged": true,
+    "route_unchanged": true,
+    "researched_person_art_audio_preserved": true,
+    "new_profile_id": "biography-paper-cut-series-2.2",
+    "backup_files": 2
+  },
+  "actual_video": {
+    "path": "assets/series/examples/map-labels-dufu-preview-6s.mp4",
+    "scene_id": "S07",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "seconds": 6,
+    "decoded_frames": 180,
+    "full_decode_passed": true,
+    "source_audio_unchanged": true,
+    "audio_method": "corresponding original AAC excerpt, stream copied",
+    "audio_excerpt_start_sec": 56.0,
+    "samples": [
+      {
+        "time_sec": 0.0,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang"
+        ],
+        "map_sha256": "c6902cd6d27b90978e44f39c3b49c67c9a864483127ec57f77f709d1f38aeab2",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 1.9,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang"
+        ],
+        "map_sha256": "21d33eb81850719b01b577d9aff580ab8812a83664021321cce34e8fae2970f0",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 1.9333333333333333,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou"
+        ],
+        "map_sha256": "a2ee910c74da5c6daeaf36934487dec4088d9630e7bbe5cee8efc3d3a96be682",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 3.0,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou"
+        ],
+        "map_sha256": "12a6d323d3c85f91473a070bf8951c557a841889caa34d2f9f68ac61c6c6ee1e",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 3.7333333333333334,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou"
+        ],
+        "map_sha256": "5cd1484b77c0fc4dbf8d67a802abb583a9d5c70ecfccb407988127efadbd8770",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 3.7666666666666666,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou",
+          "tonggu"
+        ],
+        "map_sha256": "b96824563c2c1a07a6b497c2b8bd5866ccdbb292a704f4b65e0c9d3fb45e14f2",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 5.566666666666666,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou",
+          "tonggu"
+        ],
+        "map_sha256": "7bc0eaca171ac55452b83a1db20608538b6adab12196a5c4188f27f9ca905d7f",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 5.6,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou",
+          "tonggu",
+          "chengdu"
+        ],
+        "map_sha256": "424e391ac0c95405073471e61d57ab4b0abb6989231acf8740d7f3c15f451d3e",
+        "actual_background_passed": true
+      },
+      {
+        "time_sec": 5.966666666666667,
+        "visible_label_ids": [
+          "gong",
+          "wuyue",
+          "qilu",
+          "changan",
+          "fengxian",
+          "fengxiang",
+          "huazhou",
+          "luoyang",
+          "qinzhou",
+          "tonggu",
+          "chengdu"
+        ],
+        "map_sha256": "424e391ac0c95405073471e61d57ab4b0abb6989231acf8740d7f3c15f451d3e",
+        "actual_background_passed": true
+      }
+    ]
+  },
+  "full_qa_archive": {
+    "path": "assets/series/examples/dufu-project/qa/series-layout/S07.map-qa.json.gz",
+    "compressed_bytes": 2119075,
+    "uncompressed_bytes": 14984928,
+    "uncompressed_sha256": "0427773c2deec1ddd4ca3cafa04dca8224c6ffdd954981427676ea71b6cf5ba1"
+  },
+  "visual_review": {
+    "type": "model-assisted comparisonboard and decoded5.9s frame review",
+    "visited_labels_readable_and_not_lost": true,
+    "native_frame_placement_preserved": true
+  },
+  "artifacts": {
+    "assets/series/examples/map-persistent-labels-comparison.png": {
+      "sha256": "4f7623aea8557345c31bb4d764797aae986aa1447e1282e8e9a8f53e7abcb47a",
+      "bytes": 536645
+    },
+    "assets/series/examples/map-persistent-labels-comparison.json": {
+      "sha256": "a51529ccb1a2522ddf7dd55aa41bf14006d2625f8809ae88afd4e3a9cbb3a844",
+      "bytes": 17018
+    },
+    "assets/series/examples/map-labels-dufu-preview-6s.mp4": {
+      "sha256": "f2d6617878f5785949c169256a3f0cf6a6f4b3704c504047e326e2b1a74c8828",
+      "bytes": 517285
+    },
+    "assets/series/examples/dufu-v2.2-labels-frame.png": {
+      "sha256": "176da535e61f7fb01f2c4f9b03bc6ed31d747c91026aace6f1bbf2d05fba07f7",
+      "bytes": 321060
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S07.frame.png": {
+      "sha256": "b82c9b8b00b53cf609d01946fa0ffd1ddcf9c24bf195992e82c52c98470c8b9d",
+      "bytes": 223790
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S07.map.png": {
+      "sha256": "a5bd09b1a193577cad66e44e572a99d8e608201c7794e36eb9eb862f0dff5729",
+      "bytes": 364706
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S07.json": {
+      "sha256": "40721f8708ecb6d7ccabf0331bab47aa04454a3102dc9c0dc571785c1f9e4427",
+      "bytes": 1450967
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S07.map-qa.json.gz": {
+      "sha256": "8fbc5310002d00aaeddeeed8cbeb5fc02abe5b891813dc37b8dc8076ded23e73",
+      "bytes": 2119075
+    }
+  },
+  "historical_2_1": "https://github.com/2718056795-tech/biography-video/tree/bad0f061e6fdf87ab64a930ed0a8c85b8627aa60",
+  "not_executed": [
+    "new full120-second video render",
+    "human full soundtrack listening",
+    "Douyin device publish preview"
+  ],
+  "scope": "Actual map state/labels, styles, pixels and6-second render; geographic base remains modern generalized reference, not historical river or ancient road reconstruction"
+}

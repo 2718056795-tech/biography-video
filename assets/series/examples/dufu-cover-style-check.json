@@ -2,6 +2,8 @@
   "technical_status": "passed",
   "errors": [],
   "checked_kind": "cover",
-  "profile_id": "biography-paper-cut-series-2.0",
-  "scope": "Layout/font/theme-role records checked against the supplied locked profile. Per-person palette and art pixels are not compared to Du Fu. This does not independently certify image pixels, historical truth, title wording, semantic motifs or aesthetic quality."
+  "profile_id": "biography-paper-cut-series-2.2",
+  "actual_frame_pixels_verified": false,
+  "actual_map_pixels_verified": false,
+  "scope": "Layout/font/theme-role, sourced map evidence and recorded contrast over actual art checked against the locked profile. Actual frame/map pixels checked only when supplied. This does not certify historical truth, title wording, semantic motifs or aesthetic quality."
 }

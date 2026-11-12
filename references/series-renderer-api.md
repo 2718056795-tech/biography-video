@@ -1,6 +1,8 @@
 # 固定版式合成器
 
-本包 V2.1 的布局 profile 仍为 `biography-paper-cut-series-2.0`；坐标、字体、字号和时序保持不变。`scripts/series_frame.py`直接读取`assets/series/series_style.json`中的像素坐标和字号。新人物替换内容、主题颜色及有生平依据的背景/道具；不重写排版函数，不在场景数据中传入自定坐标和字号。
+本包 V2.2 的 profile 为 `biography-paper-cut-series-2.2`，记录累计地名与统一路线样式；标题/页脚/地图面板坐标、字体、字号、封面几何与时序保持不变。`scripts/series_frame.py`直接读取`assets/series/series_style.json`中的像素坐标和字号。新人物替换内容、主题颜色及有生平依据的背景/道具；不重写排版函数，不在场景数据中传入自定坐标和字号。
+
+地图证据schema为2.2；地名布局和抵达状态由 `SeriesMap` 计算，已到访地名跨幕保留，未到访不提前标名；不用人物美术provider自行画标签或路线。各阶段路线采用同一2.1px、alpha210及光晕，当前点由圆环区分，详情见 [地图接口](series-map-api.md)。
 
 此合成器接收已经动画化的原生艺术帧。它负责统一舞台、地图层、标题、诗句、事件和评价，不会自动研究史料，也不把一张静态图片伪装成动画。
 
@@ -69,10 +71,12 @@ python "<SKILL_ROOT>/scripts/check_series_style.py" \
   --output "<PROJECT_DIR>/qa/S02_style_check.json"
 ```
 
+帧报告的 `map_labels` 包含 `visible_label_ids`、`label_layout_sha256`、`visible_layouts`（从项目级布局按当前可见ID抽取）及 `route_stroke_policy`；样式检查器逐项与官方地图证据一致性核对，不能只提供一份自行填写的地名清单。
+
 实际图片核对会绑定 RGB 合成图、地图原始像素和合成后地图区域的哈希。只核对 JSON 记录时 `actual_frame_pixels_verified:false` 和 `actual_map_pixels_verified:false`；报告记录通过不能冒充当前 PNG 已接受像素检查。
 
 ## 不可随人物改动
 
-位置、字号、字体、入场/出场时长、地图880×430承载区与五个舞台缩放组合来自同一契约。`title_x`、`layout_overrides`、`stage_scale`等场景覆盖参数直接报错。字体从包内固定OTF读取，缺失时失败，不静默换系统字体。报告逐项记录`profile_id/profile_sha256`、字体路径与哈希、主题角色、实际文字边界、地图位置和舞台组合，另含 `map_present:true`、`map_evidence`、`map_background_readability`、`frame_mode:RGB`、`frame_sha256` 与 `composited_map_sha256`，供版式及实际图片检查器核对。地图证据涉及地理来源、可见要素与可读性，不认证人物史料或古代河道。
+位置、字号、字体、入场/出场时长、地图880×430承载区与五个舞台缩放组合来自同一契约。封面几何未变，当前封面记录仍须绑定2.2 profile/hash。`title_x`、`layout_overrides`、`stage_scale`等场景覆盖参数直接报错。字体从包内固定OTF读取，缺失时失败，不静默换系统字体。报告逐项记录`profile_id/profile_sha256`、字体路径与哈希、主题角色、实际文字边界、地图位置和舞台组合，另含 `map_present:true`、`map_evidence`、`map_labels`、`map_background_readability`、`frame_mode:RGB`、`frame_sha256` 与 `composited_map_sha256`，供版式及实际图片检查器核对。地图证据涉及地理来源、可见要素、当前已到访标签、固定标签布局指纹与路线样式，并保留实际背景可读性；不认证人物史料或古代河道。
 
 文学原文太长时选择有依据的完整短节选、合理断行或精简串联；人物姓名和片名太长时使用有依据的通行名称或更短片名，不能擅自缩字挤出另一套视觉风格。

@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.2",
   "scenes": [
     {
       "id": "S01",
@@ -817,5 +817,6 @@
         "v16"
       ]
     }
-  ]
+  ],
+  "series_profile_id": "biography-paper-cut-series-2.2"
 }

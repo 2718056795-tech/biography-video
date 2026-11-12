@@ -1,7 +1,7 @@
 {
-  "schema_version": "2.1",
-  "series_profile_id": "biography-paper-cut-series-2.0",
-  "series_profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "schema_version": "2.2",
+  "series_profile_id": "biography-paper-cut-series-2.2",
+  "series_profile_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
   "name": "杜甫",
   "person": {
     "name": "杜甫",

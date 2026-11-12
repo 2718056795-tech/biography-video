@@ -1,8 +1,8 @@
 {
   "schema_version": "2.0",
-  "profile_id": "biography-paper-cut-series-2.0",
+  "profile_id": "biography-paper-cut-series-2.2",
   "kind": "cover",
-  "profile_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "profile_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
   "canvas": {
     "width": 1200,
     "height": 1500
@@ -27,7 +27,7 @@
     "map_coast": "#567566",
     "map_label_halo": "#DCD2BC"
   },
-  "theme_sha256": "551071b8274f564a1b8c00c2587a1c3167b661ff40c7d026179320ff04fc5d9c",
+  "theme_sha256": "8395974a71f83f46362ee6fdd8869ef5123e708e18e583cab224ad394c92cf5b",
   "fonts": {
     "serif_bold": {
       "path": "fonts/series-serif-bold.otf",
@@ -98,7 +98,7 @@
     }
   ],
   "art": {
-    "path": "/workspace/series_skill_v2/historical-biography-video/assets/series/examples/dufu-cover-art.png",
+    "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/examples/dufu-cover-art.png",
     "sha256": "b148f1feaf9e52c4434997faf578499b8e9e6b3a76d5a3aaac033275b50d6c75",
     "source_size": [
       1200,
@@ -115,7 +115,7 @@
     "text_free_input_visual_check": "required; not certified by OCR"
   },
   "output": {
-    "path": "/workspace/series_skill_v2/historical-biography-video/assets/series/examples/dufu-cover-locked.png",
+    "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/examples/dufu-cover-locked.png",
     "sha256": "84216a4c227f010d8637b0280b5a528037a843e900a613f4ea06b30b3b11e2f2"
   },
   "scope": "Deterministic geometry and font compositor. Does not certify historical truth, artwork motifs, AI-text absence in lower art, title wording or aesthetic quality."

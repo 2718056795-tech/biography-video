@@ -43,6 +43,8 @@ def main():
             parser.error('主题缺少必需HEX颜色角色')
         style_path = SKILL_ROOT/'assets/series/series_style.json'
         style = json.loads(style_path.read_text(encoding='utf-8'))
+        if theme.get('profile_id', style['profile_id']) != style['profile_id']:
+            parser.error('主题profile_id与当前系列母版不一致')
         template = json.loads((SKILL_ROOT/'assets/templates/project.json').read_text(encoding='utf-8'))
     except (OSError, ValueError) as exc:
         parser.error(str(exc))
@@ -68,7 +70,7 @@ def main():
                        'quote_lines': [], 'source_label': '', 'source_ids': [],
                        'local_action': '', 'environment_action': '', 'action_sample_frames': [], 'visible_visit_ids': []})
         backgrounds.append({'scene_id': sid, 'setting': '', 'buildings': '', 'props': '', 'light': '', 'source_basis': '', 'source_ids': []})
-    template.update({'schema_version': '2.1', 'series_profile_id': style['profile_id'],
+    template.update({'schema_version': style['schema_version'], 'series_profile_id': style['profile_id'],
                      'series_profile_sha256': hashlib.sha256(style_path.read_bytes()).hexdigest(),
                      'name': args.name.strip(), 'orientation': 'portrait',
                      'width': video['width'], 'height': video['height'], 'fps': video['fps'],
@@ -82,8 +84,10 @@ def main():
                      'art_direction': {'rationale': '', 'motifs': [], 'backgrounds': backgrounds},
                      'audio': {'path': audio_target.relative_to(target).as_posix(), 'sha256': hashlib.sha256(audio_target.read_bytes()).hexdigest(), 'policy': 'preserve_exact_audio_payload'}})
     write_json(target/'project.json', template)
-    write_json(target/'data/storyboard.json', {'schema_version': '2.1', 'series_profile_id': style['profile_id'], 'scenes': scenes})
-    shutil.copy2(SKILL_ROOT/'assets/templates/life_route.json', target/'data/life_route.json')
+    write_json(target/'data/storyboard.json', {'schema_version': style['schema_version'], 'series_profile_id': style['profile_id'], 'scenes': scenes})
+    route = json.loads((SKILL_ROOT/'assets/templates/life_route.json').read_text(encoding='utf-8'))
+    route['schema_version'] = style['schema_version']
+    write_json(target/'data/life_route.json', route)
     with (target/'references/source_ledger.csv').open('w', newline='', encoding='utf-8') as handle:
         csv.writer(handle).writerow(['id','status','citation','url_or_path','claim','verification_note'])
     (target/'art/scene_provider.py').write_text('''"""Implement new-person, text-free animated art; this draft cannot render."""\n\ndef draw_art(scene_id, local_t, full_scene_duration, theme):\n    """Return a native 1080x1920 RGBA Pillow image with real local animation."""\n    raise NotImplementedError("Implement researched person-specific animated artwork; do not substitute stills or reuse Du Fu scenes.")\n''', encoding='utf-8')

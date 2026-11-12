@@ -1,7 +1,7 @@
 {
-  "profile_id": "biography-paper-cut-series-2.0",
-  "version": "2.1",
-  "style_sha256": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+  "profile_id": "biography-paper-cut-series-2.2",
+  "version": "2.2",
+  "style_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
   "locked_files": {
     "assets/series/fonts/series-sans-bold.otf": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b",
     "assets/series/fonts/series-sans-regular.otf": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f",
@@ -11,22 +11,23 @@
     "assets/series/geography/LICENSE.md": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b",
     "assets/series/geography/natural_earth_basemap.geojson.gz": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093",
     "assets/series/geography/provenance.json": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9",
-    "assets/series/map_policy.json": "0cedcb811b15addc20dcc9e2d9a20d7bbfb4d35cd20c5a869a67477035f4161f",
-    "assets/series/series_style.json": "43deba6023e50ff117e5b74ceccbc8d4bb4f5b08e1e4aa9f0982465bd9b5e6f0",
+    "assets/series/map_policy.json": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+    "assets/series/series_style.json": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
     "scripts/check_delivery.py": "fef9d2a90752c7c4960897132138a917377982add3af054289c95f1887e4de5e",
-    "scripts/check_project.py": "0096ec1614f603af1679da6cdea6dff69c7b98b0273ece92d201ae72e08cd67d",
-    "scripts/check_series_style.py": "0fc51d6eff0f3cf1c19e5714606f5a696b19e3e245a51d4300eeb174338b4793",
+    "scripts/check_project.py": "3a1f045e4625bb8d2687ea884e60c8199851453604f98e39028a478b8867bcfe",
+    "scripts/check_series_style.py": "c511b26e1e36e80562fc76a97b9e1f5baf3b3a0bbb348787a2b967810a5132db",
     "scripts/dufu_art_provider_example.py": "8c2ade4eb835826bdf464ed123589140300ef991c14bae496d332e4da716b419",
-    "scripts/export_dufu_reference_project.py": "1c23ff741bf13babefda8f5d7e1e3a376a24175d2620699ca1e07764cd197bf7",
+    "scripts/export_dufu_reference_project.py": "9f51d2d36db11ef520696dd1a41732010308be15424f9f1afda82b052306bdc8",
     "scripts/init_project.py": "9a82bcd75a5fa8153921752373213d68b50cafed7c377d2bd12b68b23dda50c2",
-    "scripts/init_series_project.py": "1b220a0b79a0154f939ed311d21d1c5b8d62b14928abe84ff82b4da325fa8f94",
-    "scripts/render_series_comparison.py": "ec6d58beecd57737f37f22d401c8347eaab299e04bf36a508f358e63b481ed6c",
-    "scripts/render_series_preview.py": "5de7a5242f4572ea8ef77e36686f13541ae0ea0da54f75d13e763c08e1f112d6",
-    "scripts/render_series_video.py": "1d6be82766c910b01fcc2e1cdbd6cba94fa462fda340ca7cbb6c5b72c63bf110",
+    "scripts/init_series_project.py": "be0f0892c65be0a125425e26403d23f47b4e41dba127406b0918ed19c8f08771",
+    "scripts/migrate_series_project.py": "66fb2e422ca09620cf9284d668770152717930372a803cd5fff34b225799afb1",
+    "scripts/render_series_comparison.py": "1ef0a091699c043469f4724203a5bf2a8d149ecfac964264b27b6039b2868aa4",
+    "scripts/render_series_preview.py": "f7c0a596a36696fea76a8ba13faf039799404f9a160e1bbd6ead89dfb34b96da",
+    "scripts/render_series_video.py": "241a11f4658e7b6ab1a7fa5c0bbb37eac2916ad129539eb4eee4604081cace5f",
     "scripts/series_basemap.py": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622",
     "scripts/series_cover.py": "550a8a6c9c9b726f57a83133318119c7b3fdf8f86231cb97ced472ab72f0eddb",
-    "scripts/series_frame.py": "9468d2042783d84d5e3a092f711963bfb4ea397b0f1acf9240a03308d56b2846",
-    "scripts/series_map.py": "a53a76d06227b121bb5561f2aa5dd97da7296f9265a2375674dd2ee34d585b8a",
+    "scripts/series_frame.py": "9ffec420998e75a1bc85b06b8db6e9a8e3614167ea5816fb5e03695788fbee1e",
+    "scripts/series_map.py": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
     "scripts/verify_cover.py": "b64d6971fab41ec9b344a2e357bd9653b2367c7ffd727107066a2e8bde7db41a",
     "scripts/verify_media.py": "b231f659d29c48569e0b1f51a37eaef258313f7eb87250e305eddd7e57f79f26",
     "scripts/verify_series_bundle.py": "db917da83a004c43fad39435d756d06d4094de0378d49f30c1e0d35df4feb407"
@@ -40,5 +41,5 @@
     "city visits and projection bounds",
     "text-free animated art within declared stage profiles"
   ],
-  "release_note": "Map engine/geographic context upgraded; fixed V2.0 layout coordinates, fonts and timing preserved."
+  "release_note": "Persistent visited labels, deterministic route-aware label layout and uniform itinerary strokes; title/map-panel/footer/font/timing/cover geometry preserved."
 }

@@ -8,6 +8,7 @@ from __future__ import annotations
 from copy import deepcopy
 import hashlib
 import json
+import math
 from pathlib import Path
 import shutil
 import subprocess
@@ -30,6 +31,11 @@ def read_json(path):
     return json.loads(path.read_text(encoding='utf-8'))
 
 
+def canonical_hash(value):
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                     separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+
+
 class RequiredMapIntegrationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -37,7 +43,8 @@ class RequiredMapIntegrationTests(unittest.TestCase):
         cls.project = read_json(base / 'project.json')
         cls.profile = read_json(DEFAULT_STYLE)
         cls.theme = read_json(base / cls.project['theme'])
-        cls.scene = read_json(base / 'data/storyboard.json')['scenes'][1]
+        cls.scenes = read_json(base / 'data/storyboard.json')['scenes']
+        cls.scene = cls.scenes[1]
         cls.duration = (cls.scene['end_frame'] - cls.scene['start_frame']) / 30
         route = read_json(base / 'data/life_route.json')
         coast_value = cls.project.get('coastline_geojson', route.get('coastline', {}).get('file'))
@@ -127,6 +134,161 @@ class RequiredMapIntegrationTests(unittest.TestCase):
         self.assertEqual(report['map_evidence'], self.map_layer.info['series_map_evidence'])
         result = self.check(report, frame_image=frame, map_image=self.map_layer)
         self.assertEqual(result['technical_status'], 'passed', result)
+
+    def test_arrived_names_persist_at_next_arrival_and_following_chapter(self):
+        # S02 reaches 吴越 then 齐鲁. Check the rendered state on both sides of
+        # the second arrival and again when S03 continues toward 长安.
+        following = self.scenes[2]
+        following_duration = (following['end_frame'] - following['start_frame']) / 30
+        checkpoints = [
+            (self.scene, 0., self.duration, ['gong']),
+            (self.scene, 3.5, self.duration, ['gong', 'wuyue']),
+            (self.scene, self.duration - 1/30, self.duration, ['gong', 'wuyue', 'qilu']),
+            (following, 0., following_duration, ['gong', 'wuyue', 'qilu']),
+            (following, following_duration - 1/30, following_duration,
+             ['gong', 'wuyue', 'qilu', 'changan']),
+        ]
+        fixed_layouts = self.maps.geometry_report()['label_layouts']
+        layout_hash = canonical_hash(fixed_layouts)
+        for scene, t, duration, expected_ids in checkpoints:
+            with self.subTest(scene_id=scene['id'], time=t):
+                layer = self.maps.render(scene['id'], t, duration)
+                self.frames.compose(scene, t, duration, self.art, layer)
+                report = self.frames.last_report
+                evidence = report['map_evidence']
+                self.assertEqual(evidence['visible_label_ids'], expected_ids)
+                self.assertEqual(evidence['label_layout_sha256'], layout_hash)
+                self.assertEqual(evidence['geometry']['label_layouts'], fixed_layouts)
+                self.assertEqual(report['map_labels']['visible_label_ids'], expected_ids)
+                self.assertEqual(report['map_labels']['visible_layouts'],
+                                 {node_id: fixed_layouts[node_id] for node_id in expected_ids})
+                self.assertEqual(self.check(report)['technical_status'], 'passed')
+
+    def test_overview_hides_future_names_and_final_region_retains_all_arrived_names(self):
+        opening, ending = self.scenes[0], self.scenes[-1]
+        for scene in (opening, ending):
+            duration = (scene['end_frame'] - scene['start_frame']) / 30
+            evidence = self.maps.render(scene['id'], 0., duration).info['series_map_evidence']
+            with self.subTest(scene_id=scene['id']):
+                expected = [] if scene is opening else list(dict.fromkeys(self.maps.sequence))
+                self.assertEqual(evidence['visible_label_ids'], expected)
+                self.assertEqual(len(evidence['visible_label_ids']), len(set(evidence['visible_label_ids'])))
+
+    def test_label_pixels_persist_and_future_name_pixels_wait_for_arrival(self):
+        before = self.maps.render(self.scene['id'], 3.5, self.duration)
+        after = self.maps.render(self.scene['id'], self.duration - 1/30, self.duration)
+        following = self.scenes[2]
+        next_duration = (following['end_frame'] - following['start_frame']) / 30
+        next_chapter = self.maps.render(following['id'], 0., next_duration)
+        layouts = self.maps.geometry_report()['label_layouts']
+
+        def opaque_label_pixels(image, node_id):
+            bounds = layouts[node_id]['bounds']
+            box = tuple(math.floor(v) if index < 2 else math.ceil(v)
+                        for index, v in enumerate(bounds))
+            # Label/halo ink is 245 alpha; route, leaders and basemap are lower.
+            return bytes(value >= 230 for value in image.crop(box).getchannel('A').tobytes())
+
+        for node_id in ('gong', 'wuyue'):
+            with self.subTest(node_id=node_id):
+                visible = opaque_label_pixels(before, node_id)
+                self.assertGreater(sum(visible), 100)
+                self.assertEqual(visible, opaque_label_pixels(after, node_id))
+                self.assertEqual(visible, opaque_label_pixels(next_chapter, node_id))
+        self.assertEqual(sum(opaque_label_pixels(before, 'qilu')), 0)
+        arrived = opaque_label_pixels(after, 'qilu')
+        self.assertGreater(sum(arrived), 100)
+        self.assertEqual(arrived, opaque_label_pixels(next_chapter, 'qilu'))
+
+    def test_whole_route_label_layout_has_no_overlaps_or_off_panel_names(self):
+        geometry = self.maps.geometry_report()
+        layouts = geometry['label_layouts']
+        self.assertEqual(set(layouts), set(self.maps.sequence))
+        self.assertEqual(len(layouts), 15)
+        rebuilt = SeriesMap(deepcopy(self.maps.data), self.profile, self.theme)
+        self.assertEqual(rebuilt.geometry_report()['label_layouts'], layouts)
+        boxes = []
+        for node_id, layout in layouts.items():
+            with self.subTest(node_id=node_id):
+                left, top, right, bottom = layout['bounds']
+                self.assertTrue(0 <= left < right <= 880 and 0 <= top < bottom <= 430)
+                self.assertEqual(layout['route_intersections'], 0)
+                self.assertEqual(layout['font_size'], 28)
+                self.assertIs(layout['font_bold'], True)
+                self.assertEqual(layout['color_role'], 'map_accent')
+                self.assertEqual(layout['alpha'], 245)
+                for other_id, (ol, ot, oright, ob) in boxes:
+                    self.assertFalse(left < oright and right > ol and top < ob and bottom > ot,
+                                     f'{node_id} overlaps {other_id}')
+                boxes.append((node_id, layout['bounds']))
+        route_style = geometry['route_stroke_policy']
+        self.assertEqual({key: route_style[key] for key in
+                          ('width', 'alpha', 'halo_width', 'halo_alpha', 'all_segments_same')},
+                         {'width': 2.1, 'alpha': 210, 'halo_width': 4.5,
+                          'halo_alpha': 64, 'all_segments_same': True})
+
+    def test_visible_label_claim_cannot_be_forged(self):
+        for claimed_ids in ([], ['gong'], ['gong', 'wuyue', 'qilu'], ['gong', 'gong', 'wuyue']):
+            with self.subTest(claimed_ids=claimed_ids):
+                forged = self.map_layer.copy()
+                forged.info = deepcopy(self.map_layer.info)
+                evidence = forged.info['series_map_evidence']
+                evidence['visible_label_ids'] = claimed_ids
+                # Matching duplicated summaries must not turn an invented
+                # future arrival into valid evidence.
+                evidence['frame_state']['visible_label_ids'] = claimed_ids
+                if claimed_ids:
+                    evidence['frame_state']['current_index'] = self.maps.sequence.index(claimed_ids[-1])
+                with self.assertRaises(ValueError):
+                    self.compose(forged)
+                _, report = self.report()
+                report['map_evidence'] = evidence
+                self.assert_failed(self.check(report))
+
+    def test_label_layout_hash_cannot_be_forged(self):
+        forged = self.map_layer.copy()
+        forged.info = deepcopy(self.map_layer.info)
+        forged.info['series_map_evidence']['label_layout_sha256'] = '0' * 64
+        with self.assertRaises(ValueError):
+            self.compose(forged)
+        _, report = self.report()
+        report['map_evidence']['label_layout_sha256'] = '0' * 64
+        self.assert_failed(self.check(report))
+
+    def test_rehashed_label_positions_and_route_style_cannot_be_forged(self):
+        for field in ('label_layouts', 'route_stroke_policy'):
+            with self.subTest(field=field):
+                forged = self.map_layer.copy()
+                forged.info = deepcopy(self.map_layer.info)
+                evidence = forged.info['series_map_evidence']
+                if field == 'label_layouts':
+                    evidence['geometry'][field]['gong']['position'][0] += 1
+                    evidence['label_layout_sha256'] = canonical_hash(evidence['geometry'][field])
+                else:
+                    evidence['geometry'][field]['alpha'] = 165
+                evidence['geometry_sha256'] = canonical_hash(evidence['geometry'])
+                with self.assertRaises(ValueError):
+                    self.compose(forged)
+                _, report = self.report()
+                report['map_evidence'] = evidence
+                self.assert_failed(self.check(report))
+
+    def test_frame_label_summary_is_required_and_bound_to_verified_evidence(self):
+        _, original = self.report()
+        for field in (None, 'visible_label_ids', 'label_layout_sha256', 'visible_layouts', 'route_stroke_policy'):
+            with self.subTest(field=field):
+                report = deepcopy(original)
+                if field is None:
+                    report.pop('map_labels')
+                elif field == 'visible_label_ids':
+                    report['map_labels'][field] = ['gong', 'wuyue', 'qilu']
+                elif field == 'label_layout_sha256':
+                    report['map_labels'][field] = '0' * 64
+                elif field == 'visible_layouts':
+                    report['map_labels'][field]['gong']['position'][0] += 1
+                else:
+                    report['map_labels'][field]['alpha'] = 165
+                self.assert_failed(self.check(report))
 
     def test_missing_or_false_map_flag_fails_style_check(self):
         _, report = self.report()
