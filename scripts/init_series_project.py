@@ -65,6 +65,7 @@ def main():
         sid = f'S{index:02d}'
         scenes.append({'id': sid, 'index': index, 'kind': 'opening' if index == 1 else 'ending' if index == len(cuts)-1 else 'chapter',
                        'stage_profile': 'open_air', 'start_frame': start, 'end_frame': end,
+                       'location_intro_sec': 0 if index == 1 else style['standard']['meta']['start'],
                        'title': '', 'meta': '', 'period': '', 'place': '', 'event': '',
                        'event_summary': '', 'assessment': '', 'explanation': '',
                        'quote_lines': [], 'source_label': '', 'source_ids': [],
@@ -87,6 +88,12 @@ def main():
     write_json(target/'data/storyboard.json', {'schema_version': style['schema_version'], 'series_profile_id': style['profile_id'], 'scenes': scenes})
     route = json.loads((SKILL_ROOT/'assets/templates/life_route.json').read_text(encoding='utf-8'))
     route['schema_version'] = style['schema_version']
+    route['scene_order'] = [scene['id'] for scene in scenes]
+    route['per_scene'] = {
+        scene['id']: {'start_index': 0, 'end_index': 0, 'no_new_movement': True,
+                      'location_intro_sec': scene['location_intro_sec']}
+        for scene in scenes
+    }
     write_json(target/'data/life_route.json', route)
     with (target/'references/source_ledger.csv').open('w', newline='', encoding='utf-8') as handle:
         csv.writer(handle).writerow(['id','status','citation','url_or_path','claim','verification_note'])

@@ -39,6 +39,7 @@ def main():
         scene=dict(row);meta=scene['meta'];parts=meta.split('｜',1)
         scene.update(index=i+1,kind='opening' if i==0 else 'ending' if i==11 else 'chapter',
                      stage_profile=style['dufu_stage_profiles'][i],start_frame=slots[i],end_frame=slots[i+1],
+                     location_intro_sec=0 if i==0 else style['standard']['meta']['start'],
                      period=parts[0],place=parts[-1],event=scene.get('explanation') or scene.get('event_summary'),
                      source_ids=scene['claim_ids'],local_action='沿用本包杜甫参考的关节/物件实际动作，见工程与动作记录',
                      environment_action='沿用对应杜甫场景的实际风雨、舟桨或卷轴机制',
@@ -50,15 +51,19 @@ def main():
         nodes.append(node)
     visits=[]
     for index,node_id in enumerate(old_route['sequence']):
-        target=next((s for s in scenes if old_route['scenes'][s['id']]['end_index']>=index),scenes[-1])
+        target=next((s for s in scenes[1:] if old_route['scenes'][s['id']]['end_index']>=index),scenes[-1])
+        provenance=scenes[0] if index==0 else target
         visits.append({'id':f'v{index:02d}','node_id':node_id,'scene_id':target['id'],
-                       'period':target['period'],'source_ids':target['source_ids']})
+                       'period':provenance['period'],'source_ids':provenance['source_ids']})
     per_scene={key:dict(value) for key,value in old_route['scenes'].items()}
-    per_scene[scenes[0]['id']]['overview']=True
+    for scene in scenes:
+        per_scene[scene['id']].pop('overview',None)
+        per_scene[scene['id']]['location_intro_sec']=scene['location_intro_sec']
+    per_scene[scenes[0]['id']].update(start_index=0,end_index=0,no_new_movement=True,route_caption='序章底图')
     for sid in (scenes[-2]['id'],scenes[-1]['id']):
         per_scene[sid].update(region_node_ids=['yueyang','tanzhou'],region_label='湖湘（范围）')
     per_scene[scenes[-1]['id']]['region_only']=True
-    for scene in scenes:scene['visible_visit_ids']=[v['id'] for v in visits[:per_scene[scene['id']]['end_index']+1]]
+    for scene in scenes:scene['visible_visit_ids']=[] if scene['kind']=='opening' else [v['id'] for v in visits[:per_scene[scene['id']]['end_index']+1]]
     route={'schema_version':style['schema_version']+'-example','nodes':nodes,'sequence':old_route['sequence'],'visits':visits,
            'segments':[{'from_visit':a['id'],'to_visit':b['id'],'schematic':True,'source_ids':b['source_ids']} for a,b in zip(visits,visits[1:]) if a['node_id']!=b['node_id']],
            'per_scene':per_scene,'scene_order':[s['id'] for s in scenes],'projection':old_route['projection'],

@@ -1,0 +1,231 @@
+{
+  "release_version": "2.2.1",
+  "profile_id": "biography-paper-cut-series-2.2",
+  "style_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
+  "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+  "automated_tests": {
+    "tests_run": 75,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true
+  },
+  "locked_bundle": {
+    "technical_status": "passed",
+    "profile_id": "biography-paper-cut-series-2.2",
+    "checked_files": 28,
+    "errors": [],
+    "scope": "Released renderer code, layout coordinates, fonts, map policy and bundled geographic data. Per-project colors, backgrounds, research and animation art remain variable; this is not historical or media certification."
+  },
+  "opening_check": {
+    "native_map_frames": 205,
+    "all_exactly_geographic_basemap": true,
+    "visible_places": [],
+    "itinerary_segments": [],
+    "markers_leaders_halos_tips_absent": true,
+    "legacy_overview_cannot_enable_preview": true
+  },
+  "introduction_phases": [
+    {
+      "title": "开场：只有地理底图",
+      "scene_id": "S01",
+      "local_time_sec": 2.0,
+      "duration_sec": 6.833333333333333,
+      "base_only_pixels": true,
+      "frame_state": {
+        "current_index": null,
+        "visible_label_ids": [],
+        "visible_marker_ids": [],
+        "overview_preview": false,
+        "arrival_status": "basemap_only",
+        "is_opening": true,
+        "base_only": true,
+        "location_intro_sec": 0.0,
+        "route_growth_start_sec": 0.45,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": []
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "52a5617fab8c53893b229c9fa634d335c266e9dfa93dc55924246aaa73e6263f"
+    },
+    {
+      "title": "地点介绍前：仍只有底图",
+      "scene_id": "S02",
+      "local_time_sec": 0.2,
+      "duration_sec": 9.033333333333333,
+      "base_only_pixels": true,
+      "frame_state": {
+        "current_index": null,
+        "visible_label_ids": [],
+        "visible_marker_ids": [],
+        "overview_preview": false,
+        "arrival_status": "awaiting_location_introduction",
+        "is_opening": false,
+        "base_only": true,
+        "location_intro_sec": 0.3,
+        "route_growth_start_sec": 0.75,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": []
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "52a5617fab8c53893b229c9fa634d335c266e9dfa93dc55924246aaa73e6263f"
+    },
+    {
+      "title": "开始介绍：出现起点地名",
+      "scene_id": "S02",
+      "local_time_sec": 0.3,
+      "duration_sec": 9.033333333333333,
+      "base_only_pixels": false,
+      "frame_state": {
+        "current_index": 0,
+        "visible_label_ids": [
+          "gong"
+        ],
+        "visible_marker_ids": [
+          "gong"
+        ],
+        "overview_preview": false,
+        "arrival_status": "cumulative_arrivals",
+        "is_opening": false,
+        "base_only": false,
+        "location_intro_sec": 0.3,
+        "route_growth_start_sec": 0.75,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": []
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "83d9e5d74bec67dee2db608c42889f53a45d81dfed2d847de6d817f5f415a2c5"
+    },
+    {
+      "title": "介绍进行中：路线逐段生长",
+      "scene_id": "S02",
+      "local_time_sec": 2.0,
+      "duration_sec": 9.033333333333333,
+      "base_only_pixels": false,
+      "frame_state": {
+        "current_index": 0,
+        "visible_label_ids": [
+          "gong"
+        ],
+        "visible_marker_ids": [
+          "gong"
+        ],
+        "overview_preview": false,
+        "arrival_status": "cumulative_arrivals",
+        "is_opening": false,
+        "base_only": false,
+        "location_intro_sec": 0.3,
+        "route_growth_start_sec": 0.75,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": [
+          {
+            "index": 0,
+            "progress": 0.5638235382763157,
+            "points_count": 52
+          }
+        ]
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "e80dabf7fb431995efda81d4a7d21e4988a1b5941d94995f289bd0b1c8239fcc"
+    }
+  ],
+  "timing_policy": {
+    "default_location_intro_sec": 0.3,
+    "itinerary_growth_delay_sec": 0.45,
+    "default_first_growth_after_sec": 0.75,
+    "previous_introduced_history_retained": true
+  },
+  "project_preflight": {
+    "status": "planning_preflight_passed",
+    "actual_map_pixel_checkpoints": 109,
+    "chapter_retention_checks": 12
+  },
+  "actual_pixel_check": {
+    "technical_status": "passed",
+    "errors": [],
+    "checked_kind": "frame",
+    "profile_id": "biography-paper-cut-series-2.2",
+    "actual_frame_pixels_verified": true,
+    "actual_map_pixels_verified": true,
+    "scope": "Layout/font/theme-role, sourced map evidence and recorded contrast over actual art checked against the locked profile. Actual frame/map pixels checked only when supplied. This does not certify historical truth, title wording, semantic motifs or aesthetic quality."
+  },
+  "preserved": {
+    "entire_style_file_unchanged": true,
+    "profile_and_schema_unchanged": true,
+    "route_nodes_coordinates_sequence_and_projection_unchanged": true,
+    "visit_dates_periods_sources_unchanged": true,
+    "origin_display_scene_shifted_only": "S01 toS02"
+  },
+  "actual_video": {
+    "path": "assets/series/examples/map-opening-dufu-preview-3s.mp4",
+    "scene_id": "S01",
+    "seconds": 3,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "decoded_frames": 90,
+    "full_decode_passed": true,
+    "audio_method": "corresponding original AAC excerpt, stream copied",
+    "source_audio_unchanged": true,
+    "sample_times_sec": [
+      0.0,
+      0.43333333333333335,
+      0.4666666666666667,
+      1.5,
+      2.966666666666667
+    ],
+    "all_sample_maps_identical_basemap": true
+  },
+  "visual_review": "model-assisted review of phaseboard and decoded2s frame; onlygeography inopening maparea",
+  "full_qa_archive": {
+    "path": "assets/series/examples/dufu-project/qa/series-layout/S01.map-qa.json.gz",
+    "compressed_bytes": 1174484,
+    "uncompressed_bytes": 8281035,
+    "uncompressed_sha256": "d29ff3da43414f7d1a74422be04975d40ca58f3fc8a343c2a69ebe60513f3a5a"
+  },
+  "artifacts": {
+    "assets/series/examples/map-opening-comparison.png": {
+      "sha256": "91608ac24ca2d69a6c08fa0f3b7ae59e60f1173e32a9e5d82f56b433bdb59419",
+      "bytes": 355583
+    },
+    "assets/series/examples/map-opening-comparison.json": {
+      "sha256": "7988cd180c1b32c7dd5b692e1af5a0d6c23c3cecded490ac6bf7b7a75384b18a",
+      "bytes": 3757
+    },
+    "assets/series/examples/map-opening-dufu-preview-3s.mp4": {
+      "sha256": "3e936bf35be39fd0c3b44cd62ae14654782239f161bfea70b2e338f3f9799cb5",
+      "bytes": 327333
+    },
+    "assets/series/examples/dufu-v2.2.1-opening-frame.png": {
+      "sha256": "97261c20ead072238e1864471ff46d36df3b5e2e36821c1b39a639cc34a6a584",
+      "bytes": 276975
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S01.frame.png": {
+      "sha256": "ad8013a4ad58fd6305ff3b20d770f39b68f991c4e3233d101466be350fb01b95",
+      "bytes": 184546
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S01.map.png": {
+      "sha256": "46d3a4a84f83b6c0fded9d49d7c57321dfdf17ca5e57c6ae1005f424722861f8",
+      "bytes": 288434
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S01.json": {
+      "sha256": "eeb163ad235327e88da961301807cf34828ed2a5b5e4b7383812d5437198c77e",
+      "bytes": 1444716
+    },
+    "assets/series/examples/dufu-project/qa/series-layout/S01.map-qa.json.gz": {
+      "sha256": "87e91f3fa14c5fe742b1034eb9c3a2c894bf3fd2736446bb42f1b02203793516",
+      "bytes": 1174484
+    }
+  },
+  "historical_2_2_commit": "8ee5191f70a7333b1d42b676d5d7c092f56612e1",
+  "not_executed": [
+    "new full120-second video render",
+    "human full soundtrack listening",
+    "Douyin device publish preview"
+  ],
+  "scope": "Map display scheduling and actual3-second opening; basemap remains modern generalized geography, independent biographical sources unchanged"
+}

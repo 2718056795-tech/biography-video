@@ -1,5 +1,7 @@
 # V2.1 地图升级与证据边界
 
+本页记录V2.1地理升级。**当前开场以 [V2.2.1说明](map-opening-v2.2.1.md) 为准：开篇全程仅底图，地点引入前不画新地点/行程，旧overview不恢复预览。** 底图来源与现代地理含义继续适用，本页旧报告/图片/短片仅作历史证据。
+
 V2.1 在固定880×430地图面板内加入有来源的海岸和主要河流、地图对比度适配及实际像素证据。布局 profile 仍为 `biography-paper-cut-series-2.0`；地图位置(96,150)、其他文字坐标、字体/字号、12槽时间轴、舞台、封面和原配乐规则保持不变。地图内容改变意味着新地图像素与V2.0不同，不能再把旧逐像素相等报告当作当前地图验收。
 
 ## 地理数据与历史含义
@@ -18,7 +20,7 @@ V2.1 在固定880×430地图面板内加入有来源的海岸和主要河流、�
 
 ## 绘图与可读性
 
-地点、路线、海岸和河流共用一个投影、裁切范围和等比缩放。默认视窗从全部人物节点建立，提供最小区域跨度及有限的自动扩大；显式视窗不静默改写。累计访问、停留、回访、序章总览与晚年范围注记仍由人物自己的路线数据控制。
+地点、路线、海岸和河流共用一个投影、裁切范围和等比缩放。默认视窗从全部人物节点建立，提供最小区域跨度及有限的自动扩大；显式视窗不静默改写。累计访问、停留、回访与晚年范围注记由人物自己的路线数据控制；开篇和地点引入门槛采用当前V2.2.1规则，不使用全路线总览。
 
 地图按主题纸底合成后的对比度适配有效地图颜色，并保留请求色、有效色及测量记录。浅底、深底均应实际查看最终画面：旧线、当前增长段、当前点和地名必须可辨，河流与路线应可区分。合成器还会测量实际艺术区域背景上的原生笔画核心对比度，报告 `map_background_readability` 绑定背景与地图哈希；失败阻止继续。计算结果不代替手机大小的视觉检查，不认证人物动作、史实或听审。
 
@@ -28,7 +30,7 @@ V2.1 在固定880×430地图面板内加入有来源的海岸和主要河流、�
 
 单帧命令默认从项目路线生成官方地图，可用 `--map-output` 保存地图以核对实际文件。`check_series_style.py --frame <合成PNG> --map <地图PNG> --require-pixels` 强制核对当前RGB画面、RGBA地图和合成后地图区哈希；只校验记录时明确 `actual_frame_pixels_verified:false` 和 `actual_map_pixels_verified:false`。完整调用见 [帧接口](series-renderer-api.md) 和 [视频接口](series-video-api.md)。
 
-实际升级结果以 [map-upgrade-check.json](map-upgrade-check.json) 为准。当前杜甫实际短片解码帧为 [dufu-v2.1-basemap-frame.png](../assets/series/examples/dufu-v2.1-basemap-frame.png)；`dufu-v4-native-reproduction.png` 保留为历史V2.0参考，不作为当前新底图样图。对照图为 [map-geography-comparison.png](../assets/series/examples/map-geography-comparison.png)，真实短视频为 [map-upgrade-dufu-preview-3s.mp4](../assets/series/examples/map-upgrade-dufu-preview-3s.mp4)；执行范围、生成结果、哈希与待检查项按该报告阅读。对照场景或海外区域是地图适用性验证，不意味着已经研究或制作对应的新人物生平。
+V2.1历史升级结果见 [map-upgrade-check.json](map-upgrade-check.json)，不认证当前补丁行为。V2.1杜甫短片解码帧为 [dufu-v2.1-basemap-frame.png](../assets/series/examples/dufu-v2.1-basemap-frame.png)；`dufu-v4-native-reproduction.png` 保留为历史V2.0参考，不作为当前新底图样图。对照图为 [map-geography-comparison.png](../assets/series/examples/map-geography-comparison.png)，真实短视频为 [map-upgrade-dufu-preview-3s.mp4](../assets/series/examples/map-upgrade-dufu-preview-3s.mp4)；执行范围、生成结果、哈希与待检查项按该报告阅读。对照场景或海外区域是地图适用性验证，不意味着已经研究或制作对应的新人物生平。
 
 ## 旧报告保留什么意义
 

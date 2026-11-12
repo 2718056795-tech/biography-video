@@ -78,11 +78,24 @@
     "halo_width": 4.5,
     "halo_alpha": 64,
     "all_segments_same": true,
-    "aging": false,
-    "preview_uses_same_stroke": true
+    "aging": false
+  },
+  "chronology": {
+    "opening_scene": "first route.scene_order ID, otherwise first per_scene insertion-order ID",
+    "opening_range": "must hold origin index 0..0; move journey visits into the following scene",
+    "opening_content": "sourced geographic basemap only at every time; no itinerary lines, halos, growing tips, place markers, place labels, leaders or region annotations",
+    "location_intro_field": "per_scene.<id>.location_intro_sec",
+    "location_intro_default": "canonical series_style.standard.meta.start (0.3 seconds)",
+    "location_intro_validation": "finite, at least canonical metadata start in nonopening scenes, and before actual scene duration; storyboard cue must match when supplied; planned visits must arrive by the last native frame",
+    "first_location_scene": "basemap only before location_intro_sec; reveal origin marker and name at the cue",
+    "route_growth": "delay by canonical map_segment_delay after location_intro_sec; draw only completed past segments plus partial current-scene segments",
+    "history": "retain all previously introduced place markers, labels and completed routes in later scenes",
+    "unintroduced_places": "no markers, names or leaders; reveal each new arrival only when its segment is at least 99 percent complete",
+    "legacy_overview": "ignored for visibility and route progress; cannot enable an itinerary preview",
+    "scene_ranges": "each following start_index must equal the preceding scene end_index; never skip or replay visits"
   },
   "labels": {
-    "persistence": "unique node IDs through all completed arrivals; no future names",
+    "persistence": "unique node IDs through all introduced arrivals; no future names or markers",
     "layout": "once for all itinerary nodes, routes and region annotations",
     "font_size": 28,
     "font_bold": true,
@@ -107,7 +120,7 @@
     ],
     "candidate_angle_step_deg": 30,
     "search_budget": 100000,
-    "overview": "full route preview; no arrived nodes or place labels",
+    "opening": "no place labels or leaders; geographic basemap only",
     "route_overlap_fallback": "prefer zero route intersections; if fitting requires overlap, labels paint last with paper halo",
     "failure": "raise; widen viewport, shorten supplied labels or split regional views; never shrink or drop labels"
   }

@@ -12,7 +12,9 @@ python scripts/render_series_video.py --project assets/series/examples/dufu-proj
 
 路径相对本项目或由provider向上定位Skill，包内无需联网、系统字库或账户密钥。证据为原杜甫记录的继承，来源边界与约位精度没有因转换而升级。
 
-[当前V2.2实际6秒有声样片](../map-labels-dufu-preview-6s.mp4) · [V2.2地名常驻检查](../../../../references/map-labels-check.json)。当前示例使用随包海岸与河流，已到地名常驻、行程线等粗，原海岸裁片配置仅作历史来源记录。
+[当前V2.2.1实际3秒开场样片](../map-opening-dufu-preview-3s.mp4) · [当前开场与介绍时序检查](../../../../references/map-opening-check.json)。开场只显示地理底图，介绍地点后才显示对应地名、标记与行程；已介绍内容继续常驻，行程线等粗。
+
+[历史V2.2地名常驻检查](https://github.com/2718056795-tech/biography-video/blob/8ee5191f70a7333b1d42b676d5d7c092f56612e1/references/map-labels-check.json)对应旧提交，不能把旧版序章全程预览规则用于当前制作。
 
 [历史V2.1底图检查](https://github.com/2718056795-tech/biography-video/blob/bad0f061e6fdf87ab64a930ed0a8c85b8627aa60/references/map-upgrade-check.json)对应旧提交，不能用其中旧引擎或样图哈希校验本版本重生成的文件。
 

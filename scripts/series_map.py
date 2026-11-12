@@ -154,6 +154,7 @@ class SeriesMap:
                 (96, 150), (880, 430), 2, [20, 8, 860, 415]):
             raise ValueError('Authoritative series map geometry is incompatible')
         self._motion = deepcopy(canonical['motion'])
+        self._default_location_intro_sec = canonical['standard']['meta']['start']
         self.policy = _object(POLICY_PATH, 'map policy')
         for key in ('map_segment_delay', 'map_active_window_sec'):
             if key in supplied.get('motion', {}) and supplied['motion'][key] != self._motion[key]:
@@ -233,7 +234,21 @@ class SeriesMap:
             self.per_scene = self._derive_scenes()
         else:
             raise ValueError('Explicit sequence requires per_scene index ranges')
+        self.scene_order = self.data.get('scene_order', list(self.per_scene))
+        if (not isinstance(self.scene_order, list) or not self.scene_order
+                or any(not isinstance(sid, str) or not sid for sid in self.scene_order)
+                or len(set(self.scene_order)) != len(self.scene_order)
+                or set(self.scene_order) != set(self.per_scene)):
+            raise ValueError('scene_order must include each per_scene ID exactly once')
+        self.scene_order = list(self.scene_order)
+        # JSON evidence is canonicalized with sorted object keys. Bind the
+        # resolved insertion order explicitly so a replay cannot reorder scenes.
+        self.data['scene_order'] = list(self.scene_order)
+        self.opening_scene_id = self.scene_order[0]
+        self.first_location_scene_id = self.scene_order[1] if len(self.scene_order) > 1 else None
         for sid, plan in self.per_scene.items():
+            if not isinstance(plan, dict):
+                raise ValueError(f'{sid}: map plan must be an object')
             a, b = plan.get('start_index'), plan.get('end_index')
             if type(a) is not int or type(b) is not int or not 0 <= a <= b < len(self.sequence):
                 raise ValueError(f'{sid}: invalid start_index/end_index')
@@ -242,6 +257,24 @@ class SeriesMap:
                 raise ValueError(f'{sid}: unknown region node ID')
             if region and not plan.get('region_label'):
                 raise ValueError(f'{sid}: region_node_ids requires a region_label')
+            intro = plan.get('location_intro_sec', self._default_location_intro_sec)
+            if (isinstance(intro, bool) or not isinstance(intro, (int, float))
+                    or not math.isfinite(intro) or intro < 0):
+                raise ValueError(f'{sid}: location_intro_sec must be finite and nonnegative')
+            if sid != self.opening_scene_id and intro < self._default_location_intro_sec:
+                raise ValueError(f'{sid}: location_intro_sec must be at least '
+                                 f'{self._default_location_intro_sec}s, when location metadata starts')
+        opening = self.per_scene[self.opening_scene_id]
+        if (opening['start_index'], opening['end_index']) != (0, 0):
+            raise ValueError(f'{self.opening_scene_id}: opening map must hold origin index 0..0; '
+                             'move its journey visits into the following scene so no nodes are skipped')
+        previous = 0
+        for sid in self.scene_order[1:]:
+            plan = self.per_scene[sid]
+            if plan['start_index'] != previous:
+                raise ValueError(f'{sid}: start_index must equal the previous scene end_index '
+                                 f'({previous}); do not skip or replay journey visits')
+            previous = plan['end_index']
 
         projection = self.data.get('projection', {})
         bounds = projection.get('bounds', projection.get('bounds_west_east_south_north'))
@@ -357,6 +390,41 @@ class SeriesMap:
             result[sid] = {'start_index':previous, 'end_index':end}
             previous = end
         return result
+
+    def validate_scene_timings(self, scenes, fps):
+        """Check storyboard cues without changing the evidence-bound route inputs."""
+        if (isinstance(fps, bool) or not isinstance(fps, (int, float))
+                or not math.isfinite(fps) or fps <= 0):
+            raise ValueError('Storyboard fps must be finite and positive')
+        if not isinstance(scenes, list) or any(not isinstance(scene, dict) for scene in scenes):
+            raise ValueError('Storyboard scenes must be a list of scene objects')
+        if [scene.get('id') for scene in scenes] != self.scene_order:
+            raise ValueError('Storyboard scene order must match the map scene_order exactly')
+        for index, scene in enumerate(scenes):
+            sid = scene['id']
+            if (scene.get('kind') == 'opening') != (index == 0):
+                raise ValueError(f'{sid}: only the first storyboard scene must be kind opening')
+            start, end = scene.get('start_frame'), scene.get('end_frame')
+            if type(start) is not int or type(end) is not int or not 0 <= start < end:
+                raise ValueError(f'{sid}: storyboard requires a positive integer frame window')
+            duration = (end-start)/fps
+            intro = self._location_intro_sec(sid)
+            if 'location_intro_sec' in scene:
+                cue = scene['location_intro_sec']
+                if (isinstance(cue, bool) or not isinstance(cue, (int, float))
+                        or not math.isfinite(cue) or cue != intro):
+                    raise ValueError(f'{sid}: storyboard location_intro_sec must match the map cue ({intro})')
+            self.frame_state(sid, 0., duration)
+            if index:
+                final = self.frame_state(sid, (end-start-1)/fps, duration)
+                if final['current_index'] != self.per_scene[sid]['end_index']:
+                    raise ValueError(f'{sid}: journey must reach end_index before the last native frame; '
+                                     'introduce the location earlier or move visits into a later scene')
+        return self
+
+    def _location_intro_sec(self, scene_id):
+        return (0. if scene_id == self.opening_scene_id else
+                float(self.per_scene[scene_id].get('location_intro_sec', self._default_location_intro_sec)))
 
     def _adapt_colors(self, theme_colors):
         paper = self.colors['paper']
@@ -738,36 +806,52 @@ class SeriesMap:
             raise ValueError('t must be finite; duration must be finite and positive')
         plan = self.per_scene[scene_id]
         start, end = plan['start_index'], plan['end_index']
-        overview = bool(plan.get('overview', False))
+        opening = scene_id == self.opening_scene_id
+        intro = self._location_intro_sec(scene_id)
+        if not opening and intro >= duration:
+            raise ValueError(f'{scene_id}: location_intro_sec must be before the scene duration')
+        growth_start = intro+self._motion['map_segment_delay']
+        if opening:
+            return {'current_index': None, 'visible_label_ids': [], 'visible_marker_ids': [],
+                    'overview_preview': False, 'arrival_status': 'basemap_only',
+                    'is_opening': True, 'base_only': True,
+                    'location_intro_sec': intro, 'route_growth_start_sec': growth_start,
+                    'region_active': False, 'region_only': False, 'route_segment_states': []}
+        introduced = t >= intro
         current = start
         moving = [j for j in range(start, end) if j not in self._degenerate]
         active_window = min(self._motion['map_active_window_sec'], max(1., duration*.6))
         slot = active_window/max(1, len(moving))
         segments = []
         for j, path in enumerate(self.curves):
-            if not overview and j >= end:
+            if j >= end:
                 break
             if j in self._degenerate:
-                if j >= start and current >= j:
+                if j >= start and current >= j and introduced:
                     current = j+1
                 continue
-            if overview or j < start:
+            if j < start:
                 progress = 1.
             else:
                 order = moving.index(j)
-                progress = _ease((t-self._motion['map_segment_delay']-order*slot)/(slot*.85))
+                progress = _ease((t-growth_start-order*slot)/(slot*.85))
             if progress > 0:
                 count = max(2, min(len(path), round(1+progress*(len(path)-1))))
                 segments.append({'index': j, 'progress': progress, 'points_count': count})
-            if not overview and progress >= .99:
+            if j >= start and progress >= .99:
                 current = j+1
         if end == start:
             current = end
-        visible = [] if overview else list(dict.fromkeys(self.sequence[:current+1]))
-        region = not overview and bool(plan.get('region_node_ids')) and current == end
-        return {'current_index': None if overview else current,
-                'visible_label_ids': visible, 'overview_preview': overview,
-                'arrival_status': 'overview_preview' if overview else 'cumulative_arrivals',
+        if scene_id == self.first_location_scene_id and not introduced:
+            current = None
+        visible = [] if current is None else list(dict.fromkeys(self.sequence[:current+1]))
+        region = introduced and bool(plan.get('region_node_ids')) and current == end
+        base_only = not visible and not segments and not region
+        return {'current_index': current,
+                'visible_label_ids': visible, 'visible_marker_ids': list(visible), 'overview_preview': False,
+                'arrival_status': 'awaiting_location_introduction' if base_only else 'cumulative_arrivals',
+                'is_opening': False, 'base_only': base_only,
+                'location_intro_sec': intro, 'route_growth_start_sec': growth_start,
                 'region_active': region,
                 'region_only': region and bool(plan.get('region_only', end == start)),
                 'route_segment_states': segments}
@@ -775,13 +859,14 @@ class SeriesMap:
     def _render_pixels(self, scene_id, t, duration):
         state = self.frame_state(scene_id, t, duration)
         plan = self.per_scene[scene_id]
+        if state['base_only']:
+            return self._native_basemap.copy()
         im = self._base_image.copy()
         d = ImageDraw.Draw(im)
         ink, accent = self.colors['map_ink'], self.colors['map_accent']
-        visible = set(state['visible_label_ids'])
-        for key in dict.fromkeys(self.sequence):
+        for key in state['visible_marker_ids']:
             point = self.pixel(self.nodes[key]['lon'], self.nodes[key]['lat'])
-            self._circle(d, *point, self.style['node_radius'], ink+(65 if key in visible else 30,))
+            self._circle(d, *point, self.style['node_radius'], ink+(65,))
         stroke = self.policy['route_stroke']
         paths = [self.curves[row['index']][:row['points_count']]
                  for row in state['route_segment_states']]
@@ -795,13 +880,12 @@ class SeriesMap:
             if row['progress'] < 1:
                 tip = self.curves[row['index']][row['points_count']-1]
                 self._circle(d, *tip, self.style['growing_tip_radius'], accent+(stroke['alpha'],))
-        if not state['overview_preview']:
-            if state['region_active']:
-                self._region(d, plan)
-            if not state['region_only']:
-                x,y = self.points[state['current_index']]
-                self._circle(d,x,y,self.style['current_ring_radius'],outline=accent+(110,),width=1)
-                self._circle(d,x,y,self.style['current_point_radius'],accent+(self.style['current_alpha'],))
+        if state['region_active']:
+            self._region(d, plan)
+        if state['current_index'] is not None and not state['region_only']:
+            x,y = self.points[state['current_index']]
+            self._circle(d,x,y,self.style['current_ring_radius'],outline=accent+(110,),width=1)
+            self._circle(d,x,y,self.style['current_point_radius'],accent+(self.style['current_alpha'],))
         # Leaders precede every label. The final paper-colored outline protects
         # glyphs even when a dense itinerary requires a route-crossing fallback.
         labels = [self._label_layouts[key] for key in state['visible_label_ids']]
@@ -890,7 +974,10 @@ class SeriesMap:
             'label_layout_audit':deepcopy(self._label_layout_audit),
             'route_stroke_policy':deepcopy(self.policy['route_stroke']),
             'label_visibility_policy':deepcopy(self.policy['labels']),
-            'per_scene':deepcopy(self.per_scene),'curve_samples_per_segment':91,
+            'per_scene':deepcopy(self.per_scene),'scene_order':list(self.scene_order),
+            'opening_scene_id':self.opening_scene_id,
+            'location_introduction_policy':deepcopy(self.policy['chronology']),
+            'curve_samples_per_segment':91,
             'region_annotations':{sid:self._region_layout(plan) for sid,plan in self.per_scene.items()
                                   if plan.get('region_node_ids')},
             'same_place_segments_suppressed':list(self._degenerate),'nodes_outside_view':outside,

@@ -59,9 +59,8 @@
         30,
         90
       ],
-      "visible_visit_ids": [
-        "v00"
-      ]
+      "visible_visit_ids": [],
+      "location_intro_sec": 0
     },
     {
       "id": "S02",
@@ -124,7 +123,8 @@
         "v00",
         "v01",
         "v02"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S03",
@@ -186,7 +186,8 @@
         "v01",
         "v02",
         "v03"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S04",
@@ -249,7 +250,8 @@
         "v02",
         "v03",
         "v04"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S05",
@@ -313,7 +315,8 @@
         "v03",
         "v04",
         "v05"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S06",
@@ -378,7 +381,8 @@
         "v07",
         "v08",
         "v09"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S07",
@@ -443,7 +447,8 @@
         "v10",
         "v11",
         "v12"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S08",
@@ -514,7 +519,8 @@
         "v10",
         "v11",
         "v12"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S09",
@@ -585,7 +591,8 @@
         "v10",
         "v11",
         "v12"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S10",
@@ -660,7 +667,8 @@
         "v11",
         "v12",
         "v13"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S11",
@@ -735,7 +743,8 @@
         "v14",
         "v15",
         "v16"
-      ]
+      ],
+      "location_intro_sec": 0.3
     },
     {
       "id": "S12",
@@ -815,7 +824,8 @@
         "v14",
         "v15",
         "v16"
-      ]
+      ],
+      "location_intro_sec": 0.3
     }
   ],
   "series_profile_id": "biography-paper-cut-series-2.2"

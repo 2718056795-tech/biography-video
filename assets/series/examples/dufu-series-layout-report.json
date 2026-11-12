@@ -75,22 +75,22 @@
   "fonts": {
     "serif_regular": {
       "path": "fonts/series-serif-regular.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
       "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121"
     },
     "serif_bold": {
       "path": "fonts/series-serif-bold.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
       "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
     },
     "sans_regular": {
       "path": "fonts/series-sans-regular.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
       "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
     },
     "sans_bold": {
       "path": "fonts/series-sans-bold.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
       "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
     }
   },
@@ -340,15 +340,15 @@
   "map_present": true,
   "map_evidence": {
     "schema_version": "2.2",
-    "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
-    "engine_path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_map.py",
-    "policy_sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+    "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+    "engine_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_map.py",
+    "policy_sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8",
     "style_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
-    "geometry_sha256": "80a9614622608a5a7f4acf5a5b719729de8c9dbc0b653ef8624646afdecb04b3",
+    "geometry_sha256": "5e42b543611c4c3b75ebd9a970f3c1358807392aca651ebee988012aac8fcf96",
     "scene_id": "S09",
     "time_sec": 3.5,
     "duration_sec": 14.366666666666667,
-    "image_sha256": "424e391ac0c95405073471e61d57ab4b0abb6989231acf8740d7f3c15f451d3e",
+    "image_sha256": "42029f3203635c9f65746091a7ab3ab4c17b08bfe2430237fc6676ac40add5d2",
     "map_size": [
       880,
       430
@@ -371,26 +371,26 @@
       "visible_coast_segments": 6,
       "visible_river_segments": 56,
       "visible_length_px": 6049.590166111592,
-      "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
+      "source_fingerprint": "8e02f15a65e586baefcf0566bc081dbdc8ec9f2af1b063a7b40572789f325ad4",
       "sources": [
         {
           "label": "bundled Natural Earth",
           "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
           "source_files": [
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
               "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
               "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
               "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
               "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
             }
           ],
@@ -645,19 +645,19 @@
             },
             "local_files": [
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                 "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
                 "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
                 "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
                 "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
               }
             ]
@@ -1785,11 +1785,10 @@
         "halo_width": 4.5,
         "halo_alpha": 64,
         "all_segments_same": true,
-        "aging": false,
-        "preview_uses_same_stroke": true
+        "aging": false
       },
       "label_visibility_policy": {
-        "persistence": "unique node IDs through all completed arrivals; no future names",
+        "persistence": "unique node IDs through all introduced arrivals; no future names or markers",
         "layout": "once for all itinerary nodes, routes and region annotations",
         "font_size": 28,
         "font_bold": true,
@@ -1814,7 +1813,7 @@
         ],
         "candidate_angle_step_deg": 30,
         "search_budget": 100000,
-        "overview": "full route preview; no arrived nodes or place labels",
+        "opening": "no place labels or leaders; geographic basemap only",
         "route_overlap_fallback": "prefer zero route intersections; if fitting requires overlap, labels paint last with paper halo",
         "failure": "raise; widen viewport, shorten supplied labels or split regional views; never shrink or drop labels"
       },
@@ -1822,63 +1821,72 @@
         "S01": {
           "start_index": 0,
           "end_index": 0,
-          "route_caption": "序章总览",
+          "route_caption": "序章底图",
           "no_new_movement": true,
-          "overview": true
+          "location_intro_sec": 0
         },
         "S02": {
           "start_index": 0,
           "end_index": 2,
           "route_caption": "吴越—齐鲁漫游",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S03": {
           "start_index": 2,
           "end_index": 3,
           "route_caption": "齐鲁—长安",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S04": {
           "start_index": 3,
           "end_index": 4,
           "route_caption": "长安—奉先",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S05": {
           "start_index": 4,
           "end_index": 5,
           "route_caption": "再至长安",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S06": {
           "start_index": 5,
           "end_index": 9,
           "route_caption": "凤翔—华州—洛阳",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S07": {
           "start_index": 9,
           "end_index": 12,
           "route_caption": "秦州—同谷—成都",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S08": {
           "start_index": 12,
           "end_index": 12,
           "route_caption": "停留成都",
-          "no_new_movement": true
+          "no_new_movement": true,
+          "location_intro_sec": 0.3
         },
         "S09": {
           "start_index": 12,
           "end_index": 12,
           "route_caption": "停留成都",
-          "no_new_movement": true
+          "no_new_movement": true,
+          "location_intro_sec": 0.3
         },
         "S10": {
           "start_index": 12,
           "end_index": 13,
           "route_caption": "成都—夔州",
-          "no_new_movement": false
+          "no_new_movement": false,
+          "location_intro_sec": 0.3
         },
         "S11": {
           "start_index": 13,
@@ -1889,7 +1897,8 @@
             "yueyang",
             "tanzhou"
           ],
-          "region_label": "湖湘（范围）"
+          "region_label": "湖湘（范围）",
+          "location_intro_sec": 0.3
         },
         "S12": {
           "start_index": 16,
@@ -1901,8 +1910,38 @@
             "tanzhou"
           ],
           "region_label": "湖湘（范围）",
-          "region_only": true
+          "region_only": true,
+          "location_intro_sec": 0.3
         }
+      },
+      "scene_order": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "opening_scene_id": "S01",
+      "location_introduction_policy": {
+        "opening_scene": "first route.scene_order ID, otherwise first per_scene insertion-order ID",
+        "opening_range": "must hold origin index 0..0; move journey visits into the following scene",
+        "opening_content": "sourced geographic basemap only at every time; no itinerary lines, halos, growing tips, place markers, place labels, leaders or region annotations",
+        "location_intro_field": "per_scene.<id>.location_intro_sec",
+        "location_intro_default": "canonical series_style.standard.meta.start (0.3 seconds)",
+        "location_intro_validation": "finite, at least canonical metadata start in nonopening scenes, and before actual scene duration; storyboard cue must match when supplied; planned visits must arrive by the last native frame",
+        "first_location_scene": "basemap only before location_intro_sec; reveal origin marker and name at the cue",
+        "route_growth": "delay by canonical map_segment_delay after location_intro_sec; draw only completed past segments plus partial current-scene segments",
+        "history": "retain all previously introduced place markers, labels and completed routes in later scenes",
+        "unintroduced_places": "no markers, names or leaders; reveal each new arrival only when its segment is at least 99 percent complete",
+        "legacy_overview": "ignored for visibility and route progress; cannot enable an itinerary preview",
+        "scene_ranges": "each following start_index must equal the preceding scene end_index; never skip or replay visits"
       },
       "curve_samples_per_segment": 91,
       "region_annotations": {
@@ -1965,24 +2004,24 @@
         "source": {}
       },
       "font_paths": {
-        "False": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
-        "True": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
+        "False": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+        "True": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
       },
       "static_files": [
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/series_style.json",
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/series_style.json",
           "sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327"
         },
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
-          "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3"
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/map_policy.json",
+          "sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8"
         },
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
           "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
         },
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
           "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
         }
       ],
@@ -2068,26 +2107,26 @@
         "visible_coast_segments": 6,
         "visible_river_segments": 56,
         "visible_length_px": 6049.590166111592,
-        "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
+        "source_fingerprint": "8e02f15a65e586baefcf0566bc081dbdc8ec9f2af1b063a7b40572789f325ad4",
         "sources": [
           {
             "label": "bundled Natural Earth",
             "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
             "source_files": [
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                 "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
                 "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
                 "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
                 "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
               }
             ],
@@ -2342,19 +2381,19 @@
               },
               "local_files": [
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                   "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
                   "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
                   "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
                   "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
                 }
               ]
@@ -54488,8 +54527,8 @@
         }
       },
       "policy": {
-        "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
-        "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+        "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/map_policy.json",
+        "sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8",
         "policy_id": "biography-geographic-context-2.2"
       },
       "precision_claim": "structural coordinates and supplied metadata only; not historical verification"
@@ -54717,7 +54756,7 @@
           {
             "id": "v00",
             "node_id": "gong",
-            "scene_id": "S01",
+            "scene_id": "S02",
             "period": "杜甫",
             "source_ids": [
               "Q07",
@@ -55043,63 +55082,72 @@
           "S01": {
             "start_index": 0,
             "end_index": 0,
-            "route_caption": "序章总览",
+            "route_caption": "序章底图",
             "no_new_movement": true,
-            "overview": true
+            "location_intro_sec": 0
           },
           "S02": {
             "start_index": 0,
             "end_index": 2,
             "route_caption": "吴越—齐鲁漫游",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S03": {
             "start_index": 2,
             "end_index": 3,
             "route_caption": "齐鲁—长安",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S04": {
             "start_index": 3,
             "end_index": 4,
             "route_caption": "长安—奉先",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S05": {
             "start_index": 4,
             "end_index": 5,
             "route_caption": "再至长安",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S06": {
             "start_index": 5,
             "end_index": 9,
             "route_caption": "凤翔—华州—洛阳",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S07": {
             "start_index": 9,
             "end_index": 12,
             "route_caption": "秦州—同谷—成都",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S08": {
             "start_index": 12,
             "end_index": 12,
             "route_caption": "停留成都",
-            "no_new_movement": true
+            "no_new_movement": true,
+            "location_intro_sec": 0.3
           },
           "S09": {
             "start_index": 12,
             "end_index": 12,
             "route_caption": "停留成都",
-            "no_new_movement": true
+            "no_new_movement": true,
+            "location_intro_sec": 0.3
           },
           "S10": {
             "start_index": 12,
             "end_index": 13,
             "route_caption": "成都—夔州",
-            "no_new_movement": false
+            "no_new_movement": false,
+            "location_intro_sec": 0.3
           },
           "S11": {
             "start_index": 13,
@@ -55110,7 +55158,8 @@
               "yueyang",
               "tanzhou"
             ],
-            "region_label": "湖湘（范围）"
+            "region_label": "湖湘（范围）",
+            "location_intro_sec": 0.3
           },
           "S12": {
             "start_index": 16,
@@ -55122,7 +55171,8 @@
               "tanzhou"
             ],
             "region_label": "湖湘（范围）",
-            "region_only": true
+            "region_only": true,
+            "location_intro_sec": 0.3
           }
         },
         "scene_order": [
@@ -55216,7 +55266,7 @@
       "basemap_source_path": null,
       "coastline_source_path": null
     },
-    "render_spec_sha256": "cfd6a8c0f0ce73d416cece9f3b63b5e7d67af4b654f85f474a700b9ccd815b00",
+    "render_spec_sha256": "00c1c9bc67a6256640ede4c69c649dd6e3430273f08838f334be812d2481282e",
     "visible_label_ids": [
       "gong",
       "wuyue",
@@ -55245,8 +55295,25 @@
         "tonggu",
         "chengdu"
       ],
+      "visible_marker_ids": [
+        "gong",
+        "wuyue",
+        "qilu",
+        "changan",
+        "fengxian",
+        "fengxiang",
+        "huazhou",
+        "luoyang",
+        "qinzhou",
+        "tonggu",
+        "chengdu"
+      ],
       "overview_preview": false,
       "arrival_status": "cumulative_arrivals",
+      "is_opening": false,
+      "base_only": false,
+      "location_intro_sec": 0.3,
+      "route_growth_start_sec": 0.75,
       "region_active": false,
       "region_only": false,
       "route_segment_states": [
@@ -55319,8 +55386,7 @@
       "halo_width": 4.5,
       "halo_alpha": 64,
       "all_segments_same": true,
-      "aging": false,
-      "preview_uses_same_stroke": true
+      "aging": false
     }
   },
   "map_labels": {
@@ -55763,8 +55829,7 @@
       "halo_width": 4.5,
       "halo_alpha": 64,
       "all_segments_same": true,
-      "aging": false,
-      "preview_uses_same_stroke": true
+      "aging": false
     }
   },
   "map_background_readability": {
@@ -55778,16 +55843,16 @@
       430
     ],
     "background_mode": "RGB",
-    "map_image_sha256": "424e391ac0c95405073471e61d57ab4b0abb6989231acf8740d7f3c15f451d3e",
-    "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
-    "geometry_sha256": "80a9614622608a5a7f4acf5a5b719729de8c9dbc0b653ef8624646afdecb04b3",
+    "map_image_sha256": "42029f3203635c9f65746091a7ab3ab4c17b08bfe2430237fc6676ac40add5d2",
+    "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+    "geometry_sha256": "5e42b543611c4c3b75ebd9a970f3c1358807392aca651ebee988012aac8fcf96",
     "checks": [
       {
         "purpose": "geographic_context",
         "sample_pixels": 3830,
         "minimum_contrast": 1.2,
         "required_passing_fraction": 0.9,
-        "passing_fraction": 0.9673629242819843,
+        "passing_fraction": 0.968929503916449,
         "measured_contrast_p10": 1.5265645032499735,
         "passed": true
       },
@@ -55812,8 +55877,8 @@
     ]
   },
   "frame_mode": "RGB",
-  "frame_sha256": "8e46937c65fe0c4304710b1ab83ef3da7d78c6e7457e2ef53fbdd4cf0212d492",
-  "composited_map_sha256": "4f2d658cac798305a46c8777ed552239eb67973862d1387d3497f8b1d2bd2a92",
+  "frame_sha256": "046961f5631756c5ba0e3c9db0c0bced59d06681540025cbeb1adbf71dce1ec2",
+  "composited_map_sha256": "82c36a76dbc3dd6c8a390d63d85a5c6fdc01c83bb2e1494d3348602f23846c54",
   "stage": {
     "profile_name": "room_high",
     "scale": 0.6,

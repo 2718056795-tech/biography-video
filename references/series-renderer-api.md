@@ -1,8 +1,8 @@
 # 固定版式合成器
 
-本包 V2.2 的 profile 为 `biography-paper-cut-series-2.2`，记录累计地名与统一路线样式；标题/页脚/地图面板坐标、字体、字号、封面几何与时序保持不变。`scripts/series_frame.py`直接读取`assets/series/series_style.json`中的像素坐标和字号。新人物替换内容、主题颜色及有生平依据的背景/道具；不重写排版函数，不在场景数据中传入自定坐标和字号。
+本包 V2.2.1 保持 profile `biography-paper-cut-series-2.2`、证据schema2.2与母版JSON/hash不变，已有2.2项目无需格式迁移，旧显示计划仍须预检；标题/页脚/地图面板坐标、字体、字号、封面几何与时序保持不变。`scripts/series_frame.py`直接读取`assets/series/series_style.json`中的像素坐标和字号。新人物替换内容、主题颜色及有生平依据的背景/道具；不重写排版函数，不在场景数据中传入自定坐标和字号。
 
-地图证据schema为2.2；地名布局和抵达状态由 `SeriesMap` 计算，已到访地名跨幕保留，未到访不提前标名；不用人物美术provider自行画标签或路线。各阶段路线采用同一2.1px、alpha210及光晕，当前点由圆环区分，详情见 [地图接口](series-map-api.md)。
+地图证据schema为2.2；开篇全程与首个地点引入前仅显示地理底图，无城市点、地名、路线、光晕、增长尖端或引线。旧 `overview=true` 不能预览行程；地点引入和延迟后才显示新地点与路线，后续引入前保留已有历史。地名布局和抵达状态由 `SeriesMap` 计算，已到访地名跨幕保留，未到访不提前标名；不用人物美术provider自行画标签或路线。各阶段路线采用同一2.1px、alpha210及光晕，当前点由圆环区分，详情见 [地图接口](series-map-api.md)。
 
 此合成器接收已经动画化的原生艺术帧。它负责统一舞台、地图层、标题、诗句、事件和评价，不会自动研究史料，也不把一张静态图片伪装成动画。
 
@@ -36,6 +36,7 @@ report = renderer.last_report
 
 - `id`：如`S02`。`index`为从1起的章节序号；若省略，可从`S02`解析为2。
 - `kind`：`opening`、`chapter`、`ending`。省略时按首/末章节推导。
+- `location_intro_sec`：可选的分镜叙事地点引入时刻；若提供，必须匹配路线 `per_scene.<id>.location_intro_sec` 的有效值。默认非开篇0.3秒，路线增长再延迟0.45秒；不改变固定文字时序。
 - `stage_profile`：只能选`room_high`、`gate_high`、`travel_wide`、`cottage_low`、`open_air`之一，依据这一幕建筑与人物高度选择，不能把所有人物套成山水。
 - `title`、`meta`：对应章节题与简短年代/地点。开篇/收束仍保留这些数据，画面元信息使用人物的`opening_meta`/`birth_death`；可用`bookend_meta`明确替换文字内容。
 - `quote_lines`：0—2行已核对的原文；`source_label`为完整作品出处。无引文时`explanation`应为1—2行简短串联；开篇/终章串联限制1行。
@@ -70,6 +71,8 @@ python "<SKILL_ROOT>/scripts/check_series_style.py" \
   --map "<PROJECT_DIR>/qa/S02_map.png" --require-pixels \
   --output "<PROJECT_DIR>/qa/S02_style_check.json"
 ```
+
+开篇/引入前图层仍是官方非空地理底图，`map_present:true`；不能用透明空图代替。`map_evidence.frame_state` 绑定 `base_only`、引入/增长时刻、可见城市点及行程状态。
 
 帧报告的 `map_labels` 包含 `visible_label_ids`、`label_layout_sha256`、`visible_layouts`（从项目级布局按当前可见ID抽取）及 `route_stroke_policy`；样式检查器逐项与官方地图证据一致性核对，不能只提供一份自行填写的地名清单。
 

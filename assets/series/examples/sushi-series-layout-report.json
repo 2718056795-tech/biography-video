@@ -67,22 +67,22 @@
   "fonts": {
     "serif_regular": {
       "path": "fonts/series-serif-regular.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-serif-regular.otf",
       "sha256": "987e44dc8613b51dd9f64f5e791bb968b80d0c1d490ce5a6376cc99fd2892121"
     },
     "serif_bold": {
       "path": "fonts/series-serif-bold.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-serif-bold.otf",
       "sha256": "f43a5c4e5fb4b46eab0e0ffd43f06c4b5a71bb376e00939586bb2addce8ddcac"
     },
     "sans_regular": {
       "path": "fonts/series-sans-regular.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
       "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
     },
     "sans_bold": {
       "path": "fonts/series-sans-bold.otf",
-      "resolved_path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "resolved_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
       "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
     }
   },
@@ -290,15 +290,15 @@
   "map_present": true,
   "map_evidence": {
     "schema_version": "2.2",
-    "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
-    "engine_path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_map.py",
-    "policy_sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+    "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+    "engine_path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_map.py",
+    "policy_sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8",
     "style_sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327",
-    "geometry_sha256": "8fcf7150672f93ccc88ec8f2dff42350c591b097d6471772b57f9e271858d592",
+    "geometry_sha256": "61dbe8835711fb34e368f69b5d97b606ffaca6dc8ce051f1f65204dd8ecabba4",
     "scene_id": "S09",
     "time_sec": 3.5,
     "duration_sec": 14.366666666666667,
-    "image_sha256": "e3164489a22b95afb8a5c1d545a76abc27e6013f5be8170d58c2b1bd035baa20",
+    "image_sha256": "ffdee7321a2f9137f3380489e8eee2d21cf4e6a56bebe89b727712f698eda155",
     "map_size": [
       880,
       430
@@ -321,26 +321,26 @@
       "visible_coast_segments": 6,
       "visible_river_segments": 56,
       "visible_length_px": 6049.590166111592,
-      "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
+      "source_fingerprint": "8e02f15a65e586baefcf0566bc081dbdc8ec9f2af1b063a7b40572789f325ad4",
       "sources": [
         {
           "label": "bundled Natural Earth",
           "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
           "source_files": [
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
               "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
               "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
               "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
               "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
             }
           ],
@@ -595,19 +595,19 @@
             },
             "local_files": [
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                 "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
                 "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
                 "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
                 "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
               }
             ]
@@ -1067,11 +1067,10 @@
         "halo_width": 4.5,
         "halo_alpha": 64,
         "all_segments_same": true,
-        "aging": false,
-        "preview_uses_same_stroke": true
+        "aging": false
       },
       "label_visibility_policy": {
-        "persistence": "unique node IDs through all completed arrivals; no future names",
+        "persistence": "unique node IDs through all introduced arrivals; no future names or markers",
         "layout": "once for all itinerary nodes, routes and region annotations",
         "font_size": 28,
         "font_bold": true,
@@ -1096,15 +1095,41 @@
         ],
         "candidate_angle_step_deg": 30,
         "search_budget": 100000,
-        "overview": "full route preview; no arrived nodes or place labels",
+        "opening": "no place labels or leaders; geographic basemap only",
         "route_overlap_fallback": "prefer zero route intersections; if fitting requires overlap, labels paint last with paper halo",
         "failure": "raise; widen viewport, shorten supplied labels or split regional views; never shrink or drop labels"
       },
       "per_scene": {
+        "S01": {
+          "start_index": 0,
+          "end_index": 0,
+          "no_new_movement": true,
+          "location_intro_sec": 0
+        },
         "S09": {
           "start_index": 0,
-          "end_index": 3
+          "end_index": 3,
+          "location_intro_sec": 0.3
         }
+      },
+      "scene_order": [
+        "S01",
+        "S09"
+      ],
+      "opening_scene_id": "S01",
+      "location_introduction_policy": {
+        "opening_scene": "first route.scene_order ID, otherwise first per_scene insertion-order ID",
+        "opening_range": "must hold origin index 0..0; move journey visits into the following scene",
+        "opening_content": "sourced geographic basemap only at every time; no itinerary lines, halos, growing tips, place markers, place labels, leaders or region annotations",
+        "location_intro_field": "per_scene.<id>.location_intro_sec",
+        "location_intro_default": "canonical series_style.standard.meta.start (0.3 seconds)",
+        "location_intro_validation": "finite, at least canonical metadata start in nonopening scenes, and before actual scene duration; storyboard cue must match when supplied; planned visits must arrive by the last native frame",
+        "first_location_scene": "basemap only before location_intro_sec; reveal origin marker and name at the cue",
+        "route_growth": "delay by canonical map_segment_delay after location_intro_sec; draw only completed past segments plus partial current-scene segments",
+        "history": "retain all previously introduced place markers, labels and completed routes in later scenes",
+        "unintroduced_places": "no markers, names or leaders; reveal each new arrival only when its segment is at least 99 percent complete",
+        "legacy_overview": "ignored for visibility and route progress; cannot enable an itinerary preview",
+        "scene_ranges": "each following start_index must equal the preceding scene end_index; never skip or replay visits"
       },
       "curve_samples_per_segment": 91,
       "region_annotations": {},
@@ -1116,24 +1141,24 @@
         "source": {}
       },
       "font_paths": {
-        "False": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
-        "True": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
+        "False": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+        "True": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
       },
       "static_files": [
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/series_style.json",
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/series_style.json",
           "sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327"
         },
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
-          "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3"
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/map_policy.json",
+          "sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8"
         },
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
           "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
         },
         {
-          "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+          "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
           "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
         }
       ],
@@ -1219,26 +1244,26 @@
         "visible_coast_segments": 6,
         "visible_river_segments": 56,
         "visible_length_px": 6049.590166111592,
-        "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
+        "source_fingerprint": "8e02f15a65e586baefcf0566bc081dbdc8ec9f2af1b063a7b40572789f325ad4",
         "sources": [
           {
             "label": "bundled Natural Earth",
             "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
             "source_files": [
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                 "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
                 "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
                 "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
               },
               {
-                "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+                "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
                 "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
               }
             ],
@@ -1493,19 +1518,19 @@
               },
               "local_files": [
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
                   "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
                   "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
                   "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
                 },
                 {
-                  "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+                  "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
                   "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
                 }
               ]
@@ -53639,8 +53664,8 @@
         }
       },
       "policy": {
-        "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
-        "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+        "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/map_policy.json",
+        "sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8",
         "policy_id": "biography-geographic-context-2.2"
       },
       "precision_claim": "structural coordinates and supplied metadata only; not historical verification"
@@ -53689,10 +53714,21 @@
           "demo2",
           "demo3"
         ],
+        "scene_order": [
+          "S01",
+          "S09"
+        ],
         "per_scene": {
+          "S01": {
+            "start_index": 0,
+            "end_index": 0,
+            "no_new_movement": true,
+            "location_intro_sec": 0
+          },
           "S09": {
             "start_index": 0,
-            "end_index": 3
+            "end_index": 3,
+            "location_intro_sec": 0.3
           }
         },
         "projection": {
@@ -53746,7 +53782,7 @@
       "basemap_source_path": null,
       "coastline_source_path": null
     },
-    "render_spec_sha256": "31799033ca4ee8a0272fabb5d0f8ca9730d26e01dac78eb8d1ed20e51cb3b692",
+    "render_spec_sha256": "fb628194728013a383a65d88b430b10606b4911882203b1837a30b078f6dbfe7",
     "visible_label_ids": [
       "demo0",
       "demo1"
@@ -53757,8 +53793,16 @@
         "demo0",
         "demo1"
       ],
+      "visible_marker_ids": [
+        "demo0",
+        "demo1"
+      ],
       "overview_preview": false,
       "arrival_status": "cumulative_arrivals",
+      "is_opening": false,
+      "base_only": false,
+      "location_intro_sec": 0.3,
+      "route_growth_start_sec": 0.75,
       "region_active": false,
       "region_only": false,
       "route_segment_states": [
@@ -53769,8 +53813,8 @@
         },
         {
           "index": 1,
-          "progress": 0.876865881056147,
-          "points_count": 80
+          "progress": 0.6309790352127012,
+          "points_count": 58
         }
       ]
     },
@@ -53781,8 +53825,7 @@
       "halo_width": 4.5,
       "halo_alpha": 64,
       "all_segments_same": true,
-      "aging": false,
-      "preview_uses_same_stroke": true
+      "aging": false
     }
   },
   "map_labels": {
@@ -53865,8 +53908,7 @@
       "halo_width": 4.5,
       "halo_alpha": 64,
       "all_segments_same": true,
-      "aging": false,
-      "preview_uses_same_stroke": true
+      "aging": false
     }
   },
   "map_background_readability": {
@@ -53880,9 +53922,9 @@
       430
     ],
     "background_mode": "RGB",
-    "map_image_sha256": "e3164489a22b95afb8a5c1d545a76abc27e6013f5be8170d58c2b1bd035baa20",
-    "engine_sha256": "62683cd3888ca1020f5868986bfb6e9ed8c1ec9f184bb7ef8020cecae9e81a39",
-    "geometry_sha256": "8fcf7150672f93ccc88ec8f2dff42350c591b097d6471772b57f9e271858d592",
+    "map_image_sha256": "ffdee7321a2f9137f3380489e8eee2d21cf4e6a56bebe89b727712f698eda155",
+    "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+    "geometry_sha256": "61dbe8835711fb34e368f69b5d97b606ffaca6dc8ce051f1f65204dd8ecabba4",
     "checks": [
       {
         "purpose": "geographic_context",
@@ -53895,16 +53937,16 @@
       },
       {
         "purpose": "route",
-        "sample_pixels": 1812,
+        "sample_pixels": 1741,
         "minimum_contrast": 1.8,
         "required_passing_fraction": 0.9,
         "passing_fraction": 1.0,
-        "measured_contrast_p10": 3.3057485036987972,
+        "measured_contrast_p10": 3.3650332680842068,
         "passed": true
       },
       {
         "purpose": "current_label",
-        "sample_pixels": 1252,
+        "sample_pixels": 1244,
         "minimum_contrast": 3.0,
         "required_passing_fraction": 0.9,
         "passing_fraction": 1.0,
@@ -53914,8 +53956,8 @@
     ]
   },
   "frame_mode": "RGB",
-  "frame_sha256": "dbe1ba8a46756d9a163ae5dcd2c1f48ee3ce83792ce9a18919a9a18876cc1b3b",
-  "composited_map_sha256": "4e836a345e98b38ff28c9604210b0608e223ff379b23222023f84d0223348053",
+  "frame_sha256": "71b86a71659375b57a6530753ddc5ebaa1383e2eeb14cb28bff7a33c8e514a49",
+  "composited_map_sha256": "42d30fae57c6a96e40ffbb40797509d4e998f9884567289ffff5e7fb982253d0",
   "stage": {
     "profile_name": "open_air",
     "scale": 0.83,

@@ -21,9 +21,9 @@ def route(points=((108.93,34.26),(109.32,34.15)), bounds=None):
     result = {'nodes':[{'id':str(i),'label':label,'lon':lon,'lat':lat}
                        for i,((lon,lat),label) in enumerate(zip(points,('长安','蓝田','再访')))],
               'sequence':[str(i) for i in range(len(points))],
-              'per_scene':{'travel':{'start_index':0,'end_index':len(points)-1},
-                           'stay':{'start_index':len(points)-1,'end_index':len(points)-1},
-                           'overview':{'start_index':0,'end_index':0,'overview':True}}}
+              'per_scene':{'opening':{'start_index':0,'end_index':0},
+                           'travel':{'start_index':0,'end_index':len(points)-1},
+                           'stay':{'start_index':len(points)-1,'end_index':len(points)-1}}}
     if bounds is not None:
         result['projection'] = {'bounds':bounds}
     return result
@@ -165,7 +165,7 @@ class PersistentLabelTests(unittest.TestCase):
 
     def test_arrivals_persist_across_chapters_without_future_names(self):
         renderer = self.renderer
-        expected = [('S02',0,['gong']), ('S02',3.5,['gong','wuyue']),
+        expected = [('S02',0,[]), ('S02',.3,['gong']), ('S02',3.5,['gong','wuyue']),
                     ('S02',8,['gong','wuyue','qilu']),
                     ('S03',0,['gong','wuyue','qilu']),
                     ('S03',8,['gong','wuyue','qilu','changan'])]
@@ -221,11 +221,11 @@ class PersistentLabelTests(unittest.TestCase):
                 for a,b in zip(path,path[1:]):
                     self.assertIsNone(maps._clip_segment(a,b,(box[0]-2,box[2]+2,box[1]-2,box[3]+2)))
 
-    def test_old_completed_growing_and_overview_routes_use_one_stroke(self):
+    def test_old_completed_and_growing_routes_use_one_stroke(self):
         renderer = self.renderer
         policy = renderer.geometry_report()['route_stroke_policy']
         self.assertEqual(policy,{'width':2.1,'alpha':210,'halo_width':4.5,'halo_alpha':64,
-                                 'all_segments_same':True,'aging':False,'preview_uses_same_stroke':True})
+                                 'all_segments_same':True,'aging':False})
         self.assertEqual(renderer.style['old_line_width'],renderer.style['new_line_width'])
         for scene,time in [('S06',1.2),('S06',8),('S01',0)]:
             with patch.object(renderer,'_line',wraps=renderer._line) as lines:
@@ -277,11 +277,185 @@ class PersistentLabelTests(unittest.TestCase):
         for key,value in [('visible_label_ids',['gong','wuyue']),
                           ('label_layout_sha256','0'*64),
                           ('route_stroke_policy',{'width':1.3,'alpha':70})]:
-            image = renderer.render('S02',0,9)
+            image = renderer.render('S02',.3,9)
             image.info[maps.EVIDENCE_KEY] = deepcopy(image.info[maps.EVIDENCE_KEY])
             image.info[maps.EVIDENCE_KEY][key] = value
             with self.assertRaises(ValueError,msg=key):
                 ensure_map_evidence(image)
+
+
+class OpeningChronologyTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = SeriesMap(ASSETS/'examples/dufu-project/data/life_route.json',
+                                 maps.STYLE_PATH, ASSETS/'themes/dufu.json')
+        cls.theme = ASSETS/'themes/dufu.json'
+
+    def test_every_opening_native_frame_is_exact_sourced_basemap(self):
+        renderer = self.renderer
+        duration, fps, count = 205/30, 30, 205
+        baseline = renderer._native_basemap.tobytes()
+        self.assertGreater(renderer.geometry_report()['basemap']['visible_length_px'],24)
+        with patch.object(renderer,'_line',side_effect=AssertionError('no opening itinerary lines')), \
+                patch.object(renderer,'_circle',side_effect=AssertionError('no opening place markers')), \
+                patch.object(ImageDraw.ImageDraw,'text',side_effect=AssertionError('no opening place names')):
+            for frame in range(count):
+                t = frame/fps
+                image = renderer.render('S01',t,duration)
+                state = ensure_map_evidence(image,'S01',t,duration)['frame_state']
+                self.assertTrue(state['is_opening'])
+                self.assertTrue(state['base_only'])
+                self.assertIsNone(state['current_index'])
+                self.assertEqual(state['route_segment_states'],[])
+                self.assertEqual(state['visible_label_ids'],[])
+                self.assertEqual(state['visible_marker_ids'],[])
+                self.assertFalse(state['region_active'])
+                self.assertFalse(state['overview_preview'])
+                self.assertEqual(image.tobytes(),baseline)
+
+    def test_opening_is_generic_ordered_and_legacy_flags_cannot_preview(self):
+        data = route(((108.93,34.26),(109.32,34.15),(110.2,34.4)))
+        opening = data['per_scene'].pop('opening')
+        data['per_scene']['prologue'] = {**opening,'overview':True}
+        data['per_scene']['travel'].update(end_index=1,overview=True)
+        data['per_scene']['stay'].update(start_index=1)
+        data['scene_order'] = ['prologue','travel','stay']
+        renderer = SeriesMap(data,maps.STYLE_PATH,self.theme)
+        for t in (0,.3,3,6,60):
+            self.assertEqual(renderer.render('prologue',t,6).tobytes(),renderer._native_basemap.tobytes())
+            state = renderer.frame_state('travel',t,6)
+            self.assertFalse(state['overview_preview'])
+            self.assertTrue(all(row['index']==0 for row in state['route_segment_states']))
+            self.assertNotIn('2',state['visible_label_ids'])
+            self.assertNotIn('2',state['visible_marker_ids'])
+
+    def test_first_location_and_route_wait_for_the_introduction_cue(self):
+        renderer = self.renderer
+        for t in (0,.299):
+            image = renderer.render('S02',t,9)
+            evidence = ensure_map_evidence(image)
+            self.assertEqual(image.tobytes(),renderer._native_basemap.tobytes())
+            self.assertEqual(evidence['visible_label_ids'],[])
+            self.assertEqual(evidence['frame_state']['visible_marker_ids'],[])
+        for t in (.3,.75):
+            state = renderer.frame_state('S02',t,9)
+            self.assertEqual(state['visible_label_ids'],['gong'])
+            self.assertEqual(state['visible_marker_ids'],['gong'])
+            self.assertEqual(state['route_segment_states'],[])
+            self.assertEqual(state['location_intro_sec'],.3)
+            self.assertEqual(state['route_growth_start_sec'],.75)
+        growing = renderer.frame_state('S02',.8,9)
+        self.assertEqual(growing['visible_label_ids'],['gong'])
+        self.assertEqual([row['index'] for row in growing['route_segment_states']],[0])
+        self.assertGreater(growing['route_segment_states'][0]['progress'],0)
+        self.assertLess(growing['route_segment_states'][0]['progress'],1)
+
+    def test_unintroduced_markers_are_absent_from_pixels_and_evidence(self):
+        renderer = self.renderer
+        with patch.object(renderer,'_circle',wraps=renderer._circle) as circles, \
+                patch.object(renderer,'_line',wraps=renderer._line) as lines:
+            image = renderer.render('S02',.3,9)
+        state = ensure_map_evidence(image)['frame_state']
+        self.assertEqual(state['visible_marker_ids'],['gong'])
+        origin = renderer.points[0]
+        self.assertEqual(len(circles.call_args_list),3)
+        self.assertTrue(all(call.args[1:3]==origin for call in circles.call_args_list))
+        self.assertTrue(all(call.args[3] not in (2.1,4.5) for call in lines.call_args_list))
+
+    def test_later_chapters_retain_history_and_never_draw_future_segments(self):
+        renderer = self.renderer
+        for sid in renderer.scene_order[1:]:
+            plan = renderer.per_scene[sid]
+            for t in (0,.299,.3,.75,1,3,8.99):
+                state = renderer.frame_state(sid,t,9)
+                self.assertTrue(all(row['index']<plan['end_index'] for row in state['route_segment_states']))
+                if sid != renderer.first_location_scene_id:
+                    prior = list(dict.fromkeys(renderer.sequence[:plan['start_index']+1]))
+                    self.assertEqual(state['visible_label_ids'][:len(prior)],prior)
+                    expected_past = [j for j in range(plan['start_index']) if j not in renderer._degenerate]
+                    past = state['route_segment_states'][:len(expected_past)]
+                    self.assertEqual([row['index'] for row in past],expected_past)
+                    self.assertTrue(all(row['progress']==1 for row in past))
+                self.assertEqual(state['visible_label_ids'],state['visible_marker_ids'])
+
+    def test_invalid_opening_ranges_and_skipped_initial_visits_are_actionable(self):
+        for first in ((0,1),(1,1)):
+            data = route()
+            data['per_scene']['opening'].update(start_index=first[0],end_index=first[1])
+            with self.assertRaisesRegex(ValueError,'opening map must hold origin.*move.*journey'):
+                SeriesMap(data,maps.STYLE_PATH,self.theme)
+        data = route()
+        data['per_scene']['travel']['start_index'] = 1
+        with self.assertRaisesRegex(ValueError,'previous scene end_index.*do not skip'):
+            SeriesMap(data,maps.STYLE_PATH,self.theme)
+        data = route(); data['scene_order'] = ['opening','travel']
+        with self.assertRaisesRegex(ValueError,'each per_scene ID exactly once'):
+            SeriesMap(data,maps.STYLE_PATH,self.theme)
+
+    def test_intro_timing_validation_binds_actual_storyboard_cues(self):
+        for value in (True,None,-1,.1,float('nan'),float('inf')):
+            data = route(); data['per_scene']['travel']['location_intro_sec'] = value
+            with self.assertRaisesRegex(ValueError,'location_intro_sec'):
+                SeriesMap(data,maps.STYLE_PATH,self.theme)
+        renderer = SeriesMap(route(),maps.STYLE_PATH,self.theme)
+        scenes = [{'id':sid,'kind':'opening' if i==0 else 'chapter',
+                   'start_frame':i*180,'end_frame':(i+1)*180,
+                   'location_intro_sec':0 if i==0 else .3}
+                  for i,sid in enumerate(renderer.scene_order)]
+        self.assertIs(renderer.validate_scene_timings(scenes,30),renderer)
+        bad = deepcopy(scenes); bad[1]['location_intro_sec'] = .4
+        with self.assertRaisesRegex(ValueError,'must match the map cue'):
+            renderer.validate_scene_timings(bad,30)
+        with self.assertRaisesRegex(ValueError,'match the map scene_order'):
+            renderer.validate_scene_timings(scenes[::-1],30)
+        bad = deepcopy(scenes); bad[0]['kind'] = 'chapter'
+        with self.assertRaisesRegex(ValueError,'kind opening'):
+            renderer.validate_scene_timings(bad,30)
+        with self.assertRaisesRegex(ValueError,'before the scene duration'):
+            renderer.frame_state('travel',0,.3)
+        data = route(); data['per_scene']['travel']['location_intro_sec'] = 5.9
+        late = SeriesMap(data,maps.STYLE_PATH,self.theme)
+        bad = deepcopy(scenes); bad[1]['location_intro_sec'] = 5.9
+        with self.assertRaisesRegex(ValueError,'journey must reach end_index before the last native frame'):
+            late.validate_scene_timings(bad,30)
+
+    def test_colocated_arrivals_remain_visible_in_following_chapter(self):
+        data = route(((108.93,34.26),(109.32,34.15),(109.32,34.15)))
+        data['nodes'].append({'id':'3','label':'洛阳','lon':112.44,'lat':34.67})
+        data['sequence'].append('3')
+        data['per_scene']['travel']['end_index'] = 2
+        data['per_scene']['stay'].update(start_index=2,end_index=3)
+        renderer = SeriesMap(data,maps.STYLE_PATH,self.theme)
+        self.assertEqual(renderer.frame_state('travel',5,6)['visible_label_ids'],['0','1','2'])
+        for t in (0,.299,.3):
+            state = renderer.frame_state('stay',t,6)
+            self.assertEqual(state['current_index'],2)
+            self.assertEqual(state['visible_label_ids'],['0','1','2'])
+            self.assertEqual(state['visible_marker_ids'],['0','1','2'])
+
+    def test_strict_evidence_replay_rejects_future_markers_and_forged_route_pixels(self):
+        renderer = self.renderer
+        image = renderer.render('S02',.3,9)
+        forged = deepcopy(image.info[maps.EVIDENCE_KEY])
+        forged['frame_state']['visible_marker_ids'].append('wuyue')
+        image.info[maps.EVIDENCE_KEY] = forged
+        with self.assertRaisesRegex(ValueError,'official route chronology'):
+            ensure_map_evidence(image)
+        image = renderer.render('S01',0,7)
+        forged = deepcopy(image.info[maps.EVIDENCE_KEY])
+        draw = ImageDraw.Draw(image)
+        draw.line(renderer.curves[0],fill=renderer.colors['map_accent']+(210,),width=2)
+        forged['image_sha256'] = hashlib.sha256(image.tobytes()).hexdigest()
+        image.info[maps.EVIDENCE_KEY] = forged
+        maps._PIXEL_HASHES.clear()
+        with self.assertRaisesRegex(ValueError,'official sourced renderer'):
+            ensure_map_evidence(image)
+        image = renderer.render('S01',6,7)
+        with tempfile.TemporaryDirectory() as directory:
+            path = maps.save_map_png(image,Path(directory)/'opening.png')
+            maps._RENDERERS.clear(); maps._PIXEL_HASHES.clear()
+            restored = maps.load_map_png(path)
+            self.assertEqual(restored.tobytes(),renderer._native_basemap.tobytes())
 
 
 if __name__ == '__main__':

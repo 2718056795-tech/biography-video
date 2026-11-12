@@ -22,6 +22,7 @@ def demo_map(theme,key,duration):
  if key=='dufu':
   project=BASE/'examples/dufu-project'
   route=json.loads((project/'data/life_route.json').read_text())
+  scenes=json.loads((project/'data/storyboard.json').read_text())['scenes']
   coast=project/route['coastline']['file'] if route.get('coastline',{}).get('file') else None
  else:
   # Coordinates demonstrate the map engine and have no researched association
@@ -31,10 +32,19 @@ def demo_map(theme,key,duration):
                    'source_read_status':'unresearched demonstration'}
                   for i,(label,lon,lat) in enumerate([('示例甲',106,30),('示例乙',111,34),('示例丙',115,30),('示例丁',120,35)])],
          'sequence':['demo0','demo1','demo2','demo3'],
-         'per_scene':{'S09':{'start_index':0,'end_index':3}},
+         'scene_order':['S01','S09'],
+         'per_scene':{'S01':{'start_index':0,'end_index':0,'no_new_movement':True,'location_intro_sec':0},
+                      'S09':{'start_index':0,'end_index':3,'location_intro_sec':style['standard']['meta']['start']}},
          'projection':{'bounds':[103,123,27,38.5]}}
+  opening_end=style['video']['cut_frames'][1]
+  scenes=[{'id':'S01','kind':'opening','start_frame':0,'end_frame':opening_end,'location_intro_sec':0},
+          {'id':'S09','kind':'chapter','start_frame':opening_end,
+           'end_frame':opening_end+round(duration*style['video']['fps']),
+           'location_intro_sec':style['standard']['meta']['start']}]
   coast=None
- return SeriesMap(route,style,theme,coastline_geojson=coast).render('S09',3.5,duration)
+ maps=SeriesMap(route,style,theme,coastline_geojson=coast)
+ maps.validate_scene_timings(scenes,style['video']['fps'])
+ return maps.render('S09',3.5,duration)
 
 def art_libai(c):
  im=Image.new('RGBA',(1080,1920),c['paper']);d=ImageDraw.Draw(im)

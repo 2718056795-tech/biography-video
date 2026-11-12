@@ -1,0 +1,114 @@
+{
+  "scope": "Actual DuFu map presentation phases, not a newfullbiographyfilm",
+  "opening_native_map_frames_checked": 205,
+  "opening_all_frames_exactly_basemap": true,
+  "image_sha256": "91608ac24ca2d69a6c08fa0f3b7ae59e60f1173e32a9e5d82f56b433bdb59419",
+  "phases": [
+    {
+      "title": "开场：只有地理底图",
+      "scene_id": "S01",
+      "local_time_sec": 2.0,
+      "duration_sec": 6.833333333333333,
+      "base_only_pixels": true,
+      "frame_state": {
+        "current_index": null,
+        "visible_label_ids": [],
+        "visible_marker_ids": [],
+        "overview_preview": false,
+        "arrival_status": "basemap_only",
+        "is_opening": true,
+        "base_only": true,
+        "location_intro_sec": 0.0,
+        "route_growth_start_sec": 0.45,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": []
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "52a5617fab8c53893b229c9fa634d335c266e9dfa93dc55924246aaa73e6263f"
+    },
+    {
+      "title": "地点介绍前：仍只有底图",
+      "scene_id": "S02",
+      "local_time_sec": 0.2,
+      "duration_sec": 9.033333333333333,
+      "base_only_pixels": true,
+      "frame_state": {
+        "current_index": null,
+        "visible_label_ids": [],
+        "visible_marker_ids": [],
+        "overview_preview": false,
+        "arrival_status": "awaiting_location_introduction",
+        "is_opening": false,
+        "base_only": true,
+        "location_intro_sec": 0.3,
+        "route_growth_start_sec": 0.75,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": []
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "52a5617fab8c53893b229c9fa634d335c266e9dfa93dc55924246aaa73e6263f"
+    },
+    {
+      "title": "开始介绍：出现起点地名",
+      "scene_id": "S02",
+      "local_time_sec": 0.3,
+      "duration_sec": 9.033333333333333,
+      "base_only_pixels": false,
+      "frame_state": {
+        "current_index": 0,
+        "visible_label_ids": [
+          "gong"
+        ],
+        "visible_marker_ids": [
+          "gong"
+        ],
+        "overview_preview": false,
+        "arrival_status": "cumulative_arrivals",
+        "is_opening": false,
+        "base_only": false,
+        "location_intro_sec": 0.3,
+        "route_growth_start_sec": 0.75,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": []
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "83d9e5d74bec67dee2db608c42889f53a45d81dfed2d847de6d817f5f415a2c5"
+    },
+    {
+      "title": "介绍进行中：路线逐段生长",
+      "scene_id": "S02",
+      "local_time_sec": 2.0,
+      "duration_sec": 9.033333333333333,
+      "base_only_pixels": false,
+      "frame_state": {
+        "current_index": 0,
+        "visible_label_ids": [
+          "gong"
+        ],
+        "visible_marker_ids": [
+          "gong"
+        ],
+        "overview_preview": false,
+        "arrival_status": "cumulative_arrivals",
+        "is_opening": false,
+        "base_only": false,
+        "location_intro_sec": 0.3,
+        "route_growth_start_sec": 0.75,
+        "region_active": false,
+        "region_only": false,
+        "route_segment_states": [
+          {
+            "index": 0,
+            "progress": 0.5638235382763157,
+            "points_count": 52
+          }
+        ]
+      },
+      "engine_sha256": "ef3aea60d904349eb2cb9a346f89a4b5dde3dbfdee5e02b39947ad6a618d89ec",
+      "map_sha256": "e80dabf7fb431995efda81d4a7d21e4988a1b5941d94995f289bd0b1c8239fcc"
+    }
+  ]
+}

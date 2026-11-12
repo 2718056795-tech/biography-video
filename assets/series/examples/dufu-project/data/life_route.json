@@ -220,7 +220,7 @@
     {
       "id": "v00",
       "node_id": "gong",
-      "scene_id": "S01",
+      "scene_id": "S02",
       "period": "杜甫",
       "source_ids": [
         "Q07",
@@ -546,63 +546,72 @@
     "S01": {
       "start_index": 0,
       "end_index": 0,
-      "route_caption": "序章总览",
+      "route_caption": "序章底图",
       "no_new_movement": true,
-      "overview": true
+      "location_intro_sec": 0
     },
     "S02": {
       "start_index": 0,
       "end_index": 2,
       "route_caption": "吴越—齐鲁漫游",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S03": {
       "start_index": 2,
       "end_index": 3,
       "route_caption": "齐鲁—长安",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S04": {
       "start_index": 3,
       "end_index": 4,
       "route_caption": "长安—奉先",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S05": {
       "start_index": 4,
       "end_index": 5,
       "route_caption": "再至长安",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S06": {
       "start_index": 5,
       "end_index": 9,
       "route_caption": "凤翔—华州—洛阳",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S07": {
       "start_index": 9,
       "end_index": 12,
       "route_caption": "秦州—同谷—成都",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S08": {
       "start_index": 12,
       "end_index": 12,
       "route_caption": "停留成都",
-      "no_new_movement": true
+      "no_new_movement": true,
+      "location_intro_sec": 0.3
     },
     "S09": {
       "start_index": 12,
       "end_index": 12,
       "route_caption": "停留成都",
-      "no_new_movement": true
+      "no_new_movement": true,
+      "location_intro_sec": 0.3
     },
     "S10": {
       "start_index": 12,
       "end_index": 13,
       "route_caption": "成都—夔州",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S11": {
       "start_index": 13,
@@ -613,7 +622,8 @@
         "yueyang",
         "tanzhou"
       ],
-      "region_label": "湖湘（范围）"
+      "region_label": "湖湘（范围）",
+      "location_intro_sec": 0.3
     },
     "S12": {
       "start_index": 16,
@@ -625,7 +635,8 @@
         "tanzhou"
       ],
       "region_label": "湖湘（范围）",
-      "region_only": true
+      "region_only": true,
+      "location_intro_sec": 0.3
     }
   },
   "scene_order": [

@@ -67,7 +67,7 @@ def map_qa_summary(checks, path):
 
 
 def map_checkpoints(maps, scene_id, duration, local_start, count, fps):
-    """Sample rendered frames surrounding every arrival in this clip.
+    """Sample rendered frames surrounding introductions, growth and arrivals.
 
     Arrival clocks come from the same engine state used to draw the map. A
     fixed label-layout hash binds every sample to the entire project route.
@@ -75,6 +75,15 @@ def map_checkpoints(maps, scene_id, duration, local_start, count, fps):
     indices = {}
     for label, index in [('before', 0), ('mid', count//2), ('after', count-1)]:
         indices.setdefault(index, []).append(label)
+    initial_state = maps.frame_state(scene_id, local_start, duration)
+    for label, key in [('location_intro', 'location_intro_sec'),
+                       ('route_growth', 'route_growth_start_sec')]:
+        threshold = initial_state.get(key)
+        if isinstance(threshold, (float, int)) and not isinstance(threshold, bool):
+            crossing = math.ceil((threshold-local_start)*fps-1e-9)
+            for index, side in ((crossing-1, 'before_'), (crossing, 'at_')):
+                if 0 <= index < count:
+                    indices.setdefault(index, []).append(side+label)
     previous = None
     transitions = []
     for frame in range(count):
@@ -94,6 +103,8 @@ def map_checkpoints(maps, scene_id, duration, local_start, count, fps):
                                     'after_visible_label_ids': visible})
         previous = visible
     return indices, {'status': 'passed', 'checked_native_frames': count,
+                     'location_intro_sec': initial_state.get('location_intro_sec'),
+                     'route_growth_start_sec': initial_state.get('route_growth_start_sec'),
                      'arrival_transitions': transitions}
 
 
@@ -165,6 +176,7 @@ def load_project(path):
     basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
     basemap_path = base/basemap_value if basemap_value else None
     map_renderer = SeriesMap(route, style, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
+    map_renderer.validate_scene_timings(normalized, expected['fps'])
     map_geometry = map_renderer.geometry_report()
     provider_path = base/project.get('art_provider', 'art/scene_provider.py')
     if not provider_path.is_file():

@@ -93,6 +93,7 @@ def main():
     basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
     basemap_path = project_path.parent / basemap_value if basemap_value else None
     maps = SeriesMap(route, renderer.style, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
+    maps.validate_scene_timings(scenes, fps)
     if coast_path:
         source_paths.append(coast_path.resolve())
     if basemap_path:

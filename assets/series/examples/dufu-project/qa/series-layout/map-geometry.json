@@ -981,11 +981,10 @@
     "halo_width": 4.5,
     "halo_alpha": 64,
     "all_segments_same": true,
-    "aging": false,
-    "preview_uses_same_stroke": true
+    "aging": false
   },
   "label_visibility_policy": {
-    "persistence": "unique node IDs through all completed arrivals; no future names",
+    "persistence": "unique node IDs through all introduced arrivals; no future names or markers",
     "layout": "once for all itinerary nodes, routes and region annotations",
     "font_size": 28,
     "font_bold": true,
@@ -1010,7 +1009,7 @@
     ],
     "candidate_angle_step_deg": 30,
     "search_budget": 100000,
-    "overview": "full route preview; no arrived nodes or place labels",
+    "opening": "no place labels or leaders; geographic basemap only",
     "route_overlap_fallback": "prefer zero route intersections; if fitting requires overlap, labels paint last with paper halo",
     "failure": "raise; widen viewport, shorten supplied labels or split regional views; never shrink or drop labels"
   },
@@ -1018,63 +1017,72 @@
     "S01": {
       "start_index": 0,
       "end_index": 0,
-      "route_caption": "序章总览",
+      "route_caption": "序章底图",
       "no_new_movement": true,
-      "overview": true
+      "location_intro_sec": 0
     },
     "S02": {
       "start_index": 0,
       "end_index": 2,
       "route_caption": "吴越—齐鲁漫游",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S03": {
       "start_index": 2,
       "end_index": 3,
       "route_caption": "齐鲁—长安",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S04": {
       "start_index": 3,
       "end_index": 4,
       "route_caption": "长安—奉先",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S05": {
       "start_index": 4,
       "end_index": 5,
       "route_caption": "再至长安",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S06": {
       "start_index": 5,
       "end_index": 9,
       "route_caption": "凤翔—华州—洛阳",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S07": {
       "start_index": 9,
       "end_index": 12,
       "route_caption": "秦州—同谷—成都",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S08": {
       "start_index": 12,
       "end_index": 12,
       "route_caption": "停留成都",
-      "no_new_movement": true
+      "no_new_movement": true,
+      "location_intro_sec": 0.3
     },
     "S09": {
       "start_index": 12,
       "end_index": 12,
       "route_caption": "停留成都",
-      "no_new_movement": true
+      "no_new_movement": true,
+      "location_intro_sec": 0.3
     },
     "S10": {
       "start_index": 12,
       "end_index": 13,
       "route_caption": "成都—夔州",
-      "no_new_movement": false
+      "no_new_movement": false,
+      "location_intro_sec": 0.3
     },
     "S11": {
       "start_index": 13,
@@ -1085,7 +1093,8 @@
         "yueyang",
         "tanzhou"
       ],
-      "region_label": "湖湘（范围）"
+      "region_label": "湖湘（范围）",
+      "location_intro_sec": 0.3
     },
     "S12": {
       "start_index": 16,
@@ -1097,8 +1106,38 @@
         "tanzhou"
       ],
       "region_label": "湖湘（范围）",
-      "region_only": true
+      "region_only": true,
+      "location_intro_sec": 0.3
     }
+  },
+  "scene_order": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "opening_scene_id": "S01",
+  "location_introduction_policy": {
+    "opening_scene": "first route.scene_order ID, otherwise first per_scene insertion-order ID",
+    "opening_range": "must hold origin index 0..0; move journey visits into the following scene",
+    "opening_content": "sourced geographic basemap only at every time; no itinerary lines, halos, growing tips, place markers, place labels, leaders or region annotations",
+    "location_intro_field": "per_scene.<id>.location_intro_sec",
+    "location_intro_default": "canonical series_style.standard.meta.start (0.3 seconds)",
+    "location_intro_validation": "finite, at least canonical metadata start in nonopening scenes, and before actual scene duration; storyboard cue must match when supplied; planned visits must arrive by the last native frame",
+    "first_location_scene": "basemap only before location_intro_sec; reveal origin marker and name at the cue",
+    "route_growth": "delay by canonical map_segment_delay after location_intro_sec; draw only completed past segments plus partial current-scene segments",
+    "history": "retain all previously introduced place markers, labels and completed routes in later scenes",
+    "unintroduced_places": "no markers, names or leaders; reveal each new arrival only when its segment is at least 99 percent complete",
+    "legacy_overview": "ignored for visibility and route progress; cannot enable an itinerary preview",
+    "scene_ranges": "each following start_index must equal the preceding scene end_index; never skip or replay visits"
   },
   "curve_samples_per_segment": 91,
   "region_annotations": {
@@ -1161,24 +1200,24 @@
     "source": {}
   },
   "font_paths": {
-    "False": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
-    "True": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
+    "False": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+    "True": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf"
   },
   "static_files": [
     {
-      "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/series_style.json",
+      "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/series_style.json",
       "sha256": "5b8c9cfbd50a3e249be24086d6e83a976f84f298d1a00f8bf75a2d3484566327"
     },
     {
-      "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
-      "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3"
+      "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/map_policy.json",
+      "sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8"
     },
     {
-      "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
+      "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-regular.otf",
       "sha256": "58b65fb2f46c8d259952ce789418b05a170a41e85d9e45c20768ab5369a5dc5f"
     },
     {
-      "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
+      "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/fonts/series-sans-bold.otf",
       "sha256": "15781dcb33599e812ef1f23f996f1b4d7371710e6623ddae3a2122f61177528b"
     }
   ],
@@ -1264,26 +1303,26 @@
     "visible_coast_segments": 6,
     "visible_river_segments": 56,
     "visible_length_px": 6049.590166111592,
-    "source_fingerprint": "ea50e8e416c8dcc8e49cfe6d90bff5f8536c9ffbb1d8581088af887a83eb4e2e",
+    "source_fingerprint": "8e02f15a65e586baefcf0566bc081dbdc8ec9f2af1b063a7b40572789f325ad4",
     "sources": [
       {
         "label": "bundled Natural Earth",
         "data_sha256": "4c97a1877ec4c4a59a9bd1fd7ac02dc034a2e49ddea918fd612d96fee55106b2",
         "source_files": [
           {
-            "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+            "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
             "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
           },
           {
-            "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+            "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
             "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
           },
           {
-            "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+            "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
             "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
           },
           {
-            "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+            "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
             "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
           }
         ],
@@ -1538,19 +1577,19 @@
           },
           "local_files": [
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/natural_earth_basemap.geojson.gz",
               "sha256": "302b52fddace63a144b0794a5cd2af1610e5624070d401448488668743eab093"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/provenance.json",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/provenance.json",
               "sha256": "bdd9ffd7e50b920fa0109ecf88f31d56f45947b20073adf804da0dcbc90fd6d9"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/geography/LICENSE.md",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/geography/LICENSE.md",
               "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b"
             },
             {
-              "path": "/workspace/map_upgrade_v2_2/historical-biography-video/scripts/series_basemap.py",
+              "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/scripts/series_basemap.py",
               "sha256": "c5996a509e613c2fc316f1e6e4b63a1071f6527e06c4bf3d089fe67ec1229622"
             }
           ]
@@ -53684,8 +53723,8 @@
     }
   },
   "policy": {
-    "path": "/workspace/map_upgrade_v2_2/historical-biography-video/assets/series/map_policy.json",
-    "sha256": "86b7b1c166d51fc42b751d47f790af42c358e90b047ae1c40480970b191047d3",
+    "path": "/workspace/map_upgrade_v2_2_1/historical-biography-video/assets/series/map_policy.json",
+    "sha256": "eb8505ddd7f2dda2ca9b1e3c0e10bf620a9d6114c42c18e387976535e42855b8",
     "policy_id": "biography-geographic-context-2.2"
   },
   "precision_claim": "structural coordinates and supplied metadata only; not historical verification"

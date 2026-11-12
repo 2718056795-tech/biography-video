@@ -174,6 +174,7 @@ def check(root):
             basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
             basemap_path = root/basemap_value if basemap_value else None
             maps = SeriesMap(route, master, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
+            maps.validate_scene_timings(scenes, master['video']['fps'])
             samples, chapter_persistence = [], []
             previous_labels = []
             for scene in scenes:
@@ -238,8 +239,10 @@ def check(root):
             require(valid_samples and len(set(samples)) >= 2, f'{sid}: 至少两个不同的幕内动作取样帧')
         evidence(scene.get('source_ids'), f'场景{sid}')
         visits = scene.get('visible_visit_ids', [])
-        valid_visits = isinstance(visits, list) and bool(visits) and all(identifier(vid) for vid in visits)
-        require(valid_visits, f'{sid}: 累计足迹须为非空访问ID数组')
+        opening = scene is scenes[0] and scene.get('kind') == 'opening'
+        valid_visits = (visits == [] if opening else
+                        isinstance(visits, list) and bool(visits) and all(identifier(vid) for vid in visits))
+        require(valid_visits, f'{sid}: 开篇足迹须为空数组' if opening else f'{sid}: 累计足迹须为非空访问ID数组')
         if valid_visits:
             require(visits[:len(previous_visits)] == previous_visits, f'{sid}: 旧足迹被删除或顺序改变')
             previous_visits = visits

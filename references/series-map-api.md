@@ -1,8 +1,8 @@
-# SeriesMap V2.2：累计地名与统一路线
+# SeriesMap V2.2.1：开篇仅底图，地点引入后显示行程
 
 `scripts/series_map.py`提供通用累积足迹层，默认使用随包、有来源的真实海岸与主要河流。每个人物提供自己的史实节点、访问顺序、分幕关系、地理视窗及主题；代码没有杜甫姓名、特定节点ID或固定中国视窗。底图仅为概化的现代地理参照，不代表唐代河道、古代疆界或已考证古道，也不替代史料、古今地名或坐标基准的核查。
 
-包版本 V2.2 的 profile 为 `biography-paper-cut-series-2.2`，记录用户要求的持续地名与统一路线笔画；标题/页脚/地图面板坐标、字形、字号、封面几何与时序保持原值。V2.1 的真实底图、来源、像素与实际背景可读性检查继续保留。
+包版本 V2.2.1 保持 profile `biography-paper-cut-series-2.2`、证据schema2.2及母版JSON/hash不变，已有2.2项目无需格式迁移，旧显示计划仍须预检。本补丁修正开篇与地点引入前的行程提前泄露；标题/页脚/地图面板坐标、字形、字号、封面几何与时序保持原值。V2.1 的真实底图、来源、像素与实际背景可读性检查继续保留。
 
 ## 调用
 
@@ -36,15 +36,15 @@ restored = load_map_png("map.png")           # 校验并恢复证据
   ],
   "sequence": ["home", "study", "home"],
   "per_scene": {
-    "intro": {"start_index": 0, "end_index": 0, "overview": true},
-    "depart": {"start_index": 0, "end_index": 1},
+    "intro": {"start_index": 0, "end_index": 0},
+    "depart": {"start_index": 0, "end_index": 1, "location_intro_sec": 0.3},
     "return": {"start_index": 1, "end_index": 2},
     "stay": {"start_index": 2, "end_index": 2}
   }
 }
 ```
 
-示例数字仅用于解释接口，不代表某个真实人物的行程。`start_index`、`end_index`均指访问序列的索引，包含端点。回访复用`node_id`及坐标，保留独立的访问次序；不能为了曲线分离而移动同一城市。
+示例数字仅用于解释接口，不代表某个真实人物的行程。`start_index`、`end_index`均指访问序列的索引，包含端点。开篇是 `scene_order` 中第一幕，未提供时取 `per_scene` 插入顺序的第一幕；开篇必须为0..0，后续每幕的 `start_index` 必须接续前幕 `end_index`，不能跳过或重演访问。回访复用`node_id`及坐标，保留独立的访问次序；不能为了曲线分离而移动同一城市。
 
 兼容已有工程的节点字段`longitude`/`latitude`及分幕字段`scenes`，但建议新项目使用`lon`/`lat`、`per_scene`。每个人物需重新建立节点，不能只替换杜甫的名字或字幕。
 
@@ -69,15 +69,21 @@ restored = load_map_png("map.png")           # 校验并恢复证据
 
 ## 累计地名与统一路线
 
-地名按访问序列与实际抵达状态显示：起点及已经抵达的节点保留地名，进入后续章节仍继续显示；增长段未抵达的新目的地不提前标名。回访按同一 `node_id` 复用一个标签，不因访问次数复制地名。同地多幕不增加装饰性迁移，也不移除此前已经到访的地名。顺序和抵达进度由路线/场景时间决定，不依赖渲染函数之前调用过哪些帧。
+地点引入后，地名按访问序列与实际抵达状态显示：起点及已经抵达的节点保留地名，进入后续章节仍继续显示；增长段未抵达的新目的地不提前标名。回访按同一 `node_id` 复用一个标签，不因访问次数复制地名。同地多幕不增加装饰性迁移，也不移除此前已经到访的地名。顺序和抵达进度由路线/场景时间决定，不依赖渲染函数之前调用过哪些帧。
 
 标签在项目地图初始化时按所有已知路线一次规划，之后各幕/各帧复用相同位置。规划完整路线仅用于避让，不提前显示未来地名。布局搜索优先让标签避开其他标签、已知整条路线、节点、范围注记及边缘；先尝试全路线零相交，密集条件下允许带惩罚的路线相交候选并记录交点数。文字最后绘在路线之上，以纸色描边保护字形；不能把算法尝试避让称为所有地名必然零相交。密集节点可把文字放在附近空处，用短引线连回真实坐标；移动的是标注位置，人物地点和路线端点不移动。不能用更小字号、手改节点坐标或每帧挪字解决拥挤。所有候选均无法容纳时明确报错，建议缩短但仍无歧义的地点标签、扩大视窗或拆成区域视图；不静默删除标签。
 
-历史、增长中与完成段主笔画均使用2.1原生px、alpha210，光晕统一宽4.5px、alpha64，不以不同粗细暗示先后；行程仍按时间增长，当前点圆环承担焦点提示。地理底图的海岸/河流保持较细线条，不能把路线统一规则误用于底图。细节与本次实际检查见 [V2.2 说明](map-labels-v2.2.md)。
+历史、增长中与完成段主笔画均使用2.1原生px、alpha210，光晕统一宽4.5px、alpha64，不以不同粗细暗示先后；行程仍按时间增长，当前点圆环承担焦点提示。地理底图的海岸/河流保持较细线条，不能把路线统一规则误用于底图。开篇与地点引入门槛见 [V2.2.1 说明](map-opening-v2.2.1.md)。
 
-## 序章与范围注记
+## 开篇、地点引入与范围注记
 
-`overview=true` 用于序章全路线预览，路线仍采用统一笔画，不高亮已抵达城市，也不显示地点标签；正常章节才按实际抵达状态累计标名。
+开篇任何时刻都返回纯地理底图：没有起点名、城市点、未来点、行程路线、路线光晕、增长尖端、引线或范围注记。旧 `overview=true` 在所有场景中均不参与可见性或行程进度计算，不能恢复完整路线预览；`overview_preview` 恒为 `false`。
+
+非开篇路线计划可选 `per_scene.<幕ID>.location_intro_sec`，表示本幕地点在叙事中引入的时刻，默认取母版 `standard.meta.start` 的0.3秒。值必须是有限数字，非开篇至少0.3秒且小于本幕实际时长；不能用负数、布尔值、NaN或早于元信息开始的值。分镜 scene 若也声明 `location_intro_sec`，必须与路线的有效值相同，不改固定字幕时序。
+
+第一幕实际地点章节在引入前与开篇一样只有底图；默认0.3秒起显示起点名和城市点。路线增长从地点引入后再延迟母版 `map_segment_delay=0.45` 秒，默认严格晚于0.75秒才出现增长段。目的地点与地名直到实际抵达才显示，不画淡色未来点。
+
+后续章节在本幕引入前保留已到访的地名、城市点和已完成历史线；不提前显示新的目的地或当前段。抵达后的标签持续、回访去重与全项目稳定布局保持不变。`validate_scene_timings(scenes,fps)` 检查分镜顺序、首幕 `kind=opening`、帧窗与引入值，并确认移动幕在末个原生帧已抵达 `end_index`；引入过晚导致本幕无法完成行程时明确失败，不把未完成行程跳成下一幕历史；视频、单帧和项目预检均在渲染前调用，Python直接接入时也应先调用。
 
 范围注记由数据声明，不能硬编码某个人物的晚年地名：
 
@@ -139,15 +145,15 @@ restored = load_map_png("map.png")           # 校验并恢复证据
 | `label_layouts` | 按节点ID记录文字、`position/bounds`、28px粗体/2px描边、首次访问索引、真实 `node_pixel`、短引线与 `route_intersections`。 |
 | `label_layout_sha256` | 整个项目标签布局的稳定指纹；不同场景/时刻复用。 |
 | `label_layout_audit` | 全路线候选搜索、候选数量、范围注记保留框、考虑的路线边数与相交总数。 |
-| `route_stroke_policy` | `width:2.1, alpha:210, halo_width:4.5, halo_alpha:64, all_segments_same:true, aging:false, preview_uses_same_stroke:true`。 |
+| `route_stroke_policy` | `width:2.1, alpha:210, halo_width:4.5, halo_alpha:64, all_segments_same:true, aging:false`。 |
 
-`frame_state(scene_id,t,duration)` 返回纯时间状态，包括 `visible_label_ids`、`current_index`、`overview_preview`、`region_active/region_only` 与 `route_segment_states`。可见标签按首次抵达顺序去重；增长段沿用原进度阈值 `progress>=0.99` 记为抵达。每次渲染证据的 `schema_version` 为 `2.2`，含相同 `visible_label_ids`、`frame_state`、`label_layout_sha256` 与 `route_stroke_policy`，必须和官方同时间状态一致。
+`frame_state(scene_id,t,duration)` 返回纯时间状态，包括 `visible_label_ids`、`visible_marker_ids`、`current_index`、`is_opening`、`base_only`、`location_intro_sec`、`route_growth_start_sec`、恒为false的 `overview_preview`、`region_active/region_only` 与 `route_segment_states`。开篇的 `arrival_status` 为 `basemap_only`；首个地点引入前为 `awaiting_location_introduction`；已引入或有此前历史时为 `cumulative_arrivals`。可见标签按首次抵达顺序去重；增长段沿用原进度阈值 `progress>=0.99` 记为抵达。每次渲染证据的 `schema_version` 为 `2.2`，含相同 `visible_label_ids`、`frame_state`、`label_layout_sha256` 与 `route_stroke_policy`，必须和官方同时间状态一致。
 
 每次 `render()` 的证据含源文件、引擎/政策/几何/像素哈希、实际场景ID与时间及官方重绘所需配置。`ensure_map_evidence()` 校验图层，`validate_map_evidence()` 校验记录；PNG保存/载入应使用 `save_map_png()` / `load_map_png()`，保留嵌入证据与 `<PNG>.evidence.json` 侧车文件；二者同时存在时必须相符。单帧命令显式使用外部 `--map` 时要求侧车文件存在。缺地图、无来源、无可读地理要素、伪造或过期证据、全透明图以及像素与证据不符均须失败，不能仅以尺寸880×430判合格。失败后应按错误补齐数据、恢复正确输入或重新绘制官方地图，不手写通过记录。
 
 使用实际地图PNG与合成RGB图运行 `check_series_style.py --frame <PNG> --map <PNG> --require-pixels`；完整参数见 [帧接口](series-renderer-api.md)。只核对记录的检查会明确 `actual_frame_pixels_verified:false` 和 `actual_map_pixels_verified:false`，不认证当前PNG。地图结构和像素检查仍不证明史料、古代地貌、真人听审或手机设备观感；须实际查看路线、当前点、标签和地理底图的手机大小可读性。视窗排除人物节点时构造会报错，须扩大视窗；`nodes_outside_view` 保留为报告核对字段。
 
-旧杜甫配置仍显式设置其节点、顺序、序章 `overview` 及晚年范围注记。**HISTORICAL V2.0 evidence（历史 V2.0 证据）** 中的108时点和15画面逐像素相等报告仅属于旧版；V2.1 地理底图与对比度处理会改变地图像素。V2.1 的 [map-upgrade-check.json](map-upgrade-check.json) 保留为历史地理升级证据；当前 V2.2 实际检查见 [map-labels-check.json](map-labels-check.json)，不能把6秒短样片称为重渲完整120秒。
+旧杜甫配置的节点、顺序及晚年范围注记继续保留；旧 `overview` 不再恢复开篇全路线。**HISTORICAL V2.0 evidence（历史 V2.0 证据）** 中的108时点和15画面逐像素相等报告仅属于旧版；V2.1 地理底图与对比度处理会改变地图像素。V2.1 的 [map-upgrade-check.json](map-upgrade-check.json) 保留为历史地理升级证据；V2.2 的 [map-labels-check.json](map-labels-check.json) 是历史标签/路线证据；当前 V2.2.1 检查见 [map-opening-check.json](map-opening-check.json)，不能把3秒开篇样片称为重渲完整120秒。
 
 ## 最小结构自测
 
@@ -176,7 +182,12 @@ m = SeriesMap(data, style, theme)
 assert m.size == (880, 430) and m.position == (96, 150)
 assert m.sequence == ["a", "b"]
 assert m.per_scene["stay"] == {"start_index": 1, "end_index": 1}
-assert m.frame_state("travel", 0, 8)["visible_label_ids"] == ["a"]
+assert m.frame_state("begin", 7.5, 8)["base_only"] is True
+assert m.frame_state("travel", 0, 8)["visible_label_ids"] == []
+assert m.render("begin", 1, 8).tobytes() == m.render("travel", 0, 8).tobytes()
+assert m.frame_state("travel", 0.3, 8)["visible_label_ids"] == ["a"]
+assert m.frame_state("travel", 0.75, 8)["route_segment_states"] == []
+assert m.frame_state("travel", 1, 8)["route_segment_states"]
 assert m.frame_state("travel", 7.5, 8)["visible_label_ids"] == ["a", "b"]
 assert m.frame_state("stay", 0, 8)["visible_label_ids"] == ["a", "b"]
 assert m.render("stay", 2, 8).tobytes() == m.render("stay", 6, 8).tobytes()
