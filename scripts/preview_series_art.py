@@ -12,13 +12,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--project', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True, help='new PNG path')
+    parser.add_argument('--backgrounds-only', action='store_true', help='show the actual scenery layers without characters')
     args = parser.parse_args()
     output = args.output.expanduser()
     if output.suffix.lower() != '.png' or output.exists():
         parser.error('Choose a new .png output path')
 
     project_path = args.project.expanduser().resolve()
-    _, scenes, theme, compositor, _, draw_art, _, _, _ = load_project(project_path)
+    project, scenes, theme, compositor, _, draw_art, _, _, _ = load_project(project_path)
+    if args.backgrounds_only and project.get('background_policy') != 'per_scene':
+        parser.error('Background-only previews require a project with separately rendered scenery')
     width, height = compositor.width, compositor.height
     fps = compositor.style['video']['fps']
     columns, gutter, label_height = 3, 8, 22
@@ -30,8 +33,12 @@ def main():
     labels = ImageDraw.Draw(sheet)
 
     for index, scene in enumerate(scenes):
-        duration = (scene['end_frame'] - scene['start_frame']) / fps
-        frame = draw_art(scene['id'], duration / 2, duration, theme)
+        count = scene['end_frame'] - scene['start_frame']
+        time_sec, duration = (count // 2) / fps, count / fps
+        if args.backgrounds_only:
+            frame = draw_art.background(scene['id'], time_sec, duration)
+        else:
+            frame = draw_art(scene['id'], time_sec, duration, theme)
         if not isinstance(frame, Image.Image) or frame.mode != 'RGBA' or frame.size != (width, height):
             raise ValueError(f"{scene['id']}: draw_art must return native {width}x{height} RGBA artwork")
         tile = frame.resize((tile_width, tile_height), Image.Resampling.LANCZOS)

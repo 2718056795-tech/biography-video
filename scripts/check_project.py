@@ -168,7 +168,11 @@ def check(root):
             # Reuse the production map engine so missing geography, unsourced
             # overrides, failed labels/contrast and unsupported views fail here.
             from series_map import SeriesMap, ensure_map_evidence
-            from render_series_video import map_checkpoints
+            from render_series_video import check_background_plan, map_checkpoints
+            try:
+                check_background_plan(project, scenes)
+            except ValueError as exc:
+                errors.append(str(exc))
             coast_value = project.get('coastline_geojson', route.get('coastline', {}).get('file'))
             coast_path = root/coast_value if coast_value else None
             basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))

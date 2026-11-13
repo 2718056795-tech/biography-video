@@ -16,20 +16,23 @@ python "<SKILL_ROOT>/scripts/check_project.py" "<NEW_PROJECT_DIR>" --report "<NE
 - `project.json`：`series_profile_id`与`series_profile_sha256`绑定包内母版；`person`含`name,film_title,birth_death,opening_meta`。人物姓名另在`name`镜像，须一致。未知年代可诚实写约年或范围，不能编造精确值。
 - `theme`为`style/theme.json`相对路径；实际拷贝所选人物主题。颜色可以变化，不能加入项目坐标、字体或字号覆盖。
 - `storyboard`和`route`分别为`data/storyboard.json`与`data/life_route.json`。每章填写`meta`、`period/place/event`、`title`、`event_summary`、`assessment`、来源与动作计划；有引文时填`quote_lines`与`source_label`，无引文时填简短`explanation`。两种情况都保留页底事件与原创解读。
-- `art_direction`是本人物的实际美术方向对象：`rationale`、1—3个`motifs`及12条`backgrounds`。每条关联`scene_id`，说明`setting,buildings,props,light,source_basis,source_ids`。没有建筑可明确写“无建筑”，不要留空，也不要为凑字段虚构建筑。校验字段存在不证明美术适合人物；不会仅因山水主题重复而自动判错。
+- `art_direction`记录本片的美术方向：`rationale`、1—3个`motifs`及12条按分镜排序的`backgrounds`。每条关联`scene_id`，说明`setting,buildings,props,light,source_basis,source_ids`。新项目同时填写`composition`，说明取景与空间层次。连续同一地点时，`setting`可相同，每幕仍须有自己的`composition`。没有建筑可写“无建筑”。
 - 地理底图默认从随包 Natural Earth 离线数据读取，无需在新项目复制杜甫海岸。`basemap_geojson` 可在项目中指定自备地理线文件的相对路径（兼容路线 `basemap.file`）；来源、坐标和分类要求见 [地图接口](series-map-api.md)。`coastline_geojson` 兼容原海岸输入，不应再以国家多边形冒充海岸。底图是概化现代地理参照，人物足迹仍按本项目史料独立核查。开篇全程仅底图，无城市点、地名或行程，旧 `overview=true` 也不能恢复预览。首个地点引入前同样只显示底图；后续引入前保留已有历史。路线 `per_scene.<id>.location_intro_sec` 默认0.3秒，非开篇值须有限、至少0.3秒且小于本幕时长；分镜若声明同名字段须与路线有效值匹配。路线增长再延迟0.45秒；未来城市点与地名均不提前显示。地名按节点ID去重、抵达后跨幕保留；全项目一次规划标签位置，短引线只移动标注而不移动真实坐标，详见 [V2.2.1说明](map-opening-v2.2.1.md)。
 - `art_provider`为`art/scene_provider.py`；`art_dependencies`显式登记美术依赖供恢复渲染指纹使用。默认`art/`整树也参与指纹，项目外依赖须显式列出。
 
 ## 真实动画提供者
 
 ```python
+def draw_background(scene_id, local_t, full_scene_duration, theme):
+    # 返回为该幕新设计的原生1080x1920 RGBA背景层。
+    ...
+
 def draw_art(scene_id, local_t, full_scene_duration, theme):
-    # 返回原生1080×1920 RGBA Pillow图像，包含实际人物/物件与环境动作。
-    # 不含最终文字，不把静图推移当成角色动画。
+    # 返回同尺寸RGBA前景层，透明区域留给背景，绘制真实人物/物件动作。
     ...
 ```
 
-初始化的实现只抛出`NotImplementedError`，明确阻止空稿渲染。完成逐幕素材和真实动作后再接入`render_series_video.py`。`theme`是完整原始主题对象，人物背景与符号由本期提供者决定，排版由固定系列合成器决定。
+脚手架启用`background_policy: per_scene`，成片渲染器用以上两个函数叠合背景与前景。片段或整片编码前按所选章节核对代表帧背景像素，拦截重复画面；近似套景用`preview_series_art.py --backgrounds-only`逐幕看。旧工程若没有`background_policy`，可继续使用返回完整画面的`draw_art()`；为新片沿用旧工程数据时，补齐构图并接入分层接口。
 
 ## 预检与边界
 

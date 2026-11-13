@@ -70,7 +70,7 @@ def main():
                        'event_summary': '', 'assessment': '', 'explanation': '',
                        'quote_lines': [], 'source_label': '', 'source_ids': [],
                        'local_action': '', 'environment_action': '', 'action_sample_frames': [], 'visible_visit_ids': []})
-        backgrounds.append({'scene_id': sid, 'setting': '', 'buildings': '', 'props': '', 'light': '', 'source_basis': '', 'source_ids': []})
+        backgrounds.append({'scene_id': sid, 'setting': '', 'composition': '', 'buildings': '', 'props': '', 'light': '', 'source_basis': '', 'source_ids': []})
     template.update({'schema_version': style['schema_version'], 'series_profile_id': style['profile_id'],
                      'series_profile_sha256': hashlib.sha256(style_path.read_bytes()).hexdigest(),
                      'name': args.name.strip(), 'orientation': 'portrait',
@@ -81,7 +81,7 @@ def main():
                      'map': {'show_title': False, 'layout': 'locked_series_panel', 'required': True,
                              'basemap_policy': 'bundled_default', 'readability_checks': 'required',
                              'note': '自动采用包内有来源的海岸与河流底图；补齐人物路线即可渲染，无需另选地理文件。'},
-                     'art_provider': 'art/scene_provider.py', 'art_dependencies': ['art'],
+                     'art_provider': 'art/scene_provider.py', 'art_dependencies': ['art'], 'background_policy': 'per_scene',
                      'art_direction': {'rationale': '', 'motifs': [], 'backgrounds': backgrounds},
                      'audio': {'path': audio_target.relative_to(target).as_posix(), 'sha256': hashlib.sha256(audio_target.read_bytes()).hexdigest(), 'policy': 'preserve_exact_audio_payload'}})
     write_json(target/'project.json', template)
@@ -97,7 +97,7 @@ def main():
     write_json(target/'data/life_route.json', route)
     with (target/'references/source_ledger.csv').open('w', newline='', encoding='utf-8') as handle:
         csv.writer(handle).writerow(['id','status','citation','url_or_path','claim','verification_note'])
-    (target/'art/scene_provider.py').write_text('''"""Implement new-person, text-free animated art; this draft cannot render."""\n\ndef draw_art(scene_id, local_t, full_scene_duration, theme):\n    """Return a native 1080x1920 RGBA Pillow image with real local animation."""\n    raise NotImplementedError("Implement researched person-specific animated artwork; do not substitute stills or reuse Du Fu scenes.")\n''', encoding='utf-8')
+    (target/'art/scene_provider.py').write_text('''"""Create original, text-free scene art for this video."""\n\ndef draw_background(scene_id, local_t, full_scene_duration, theme):\n    """Return this scene's independently designed 1080x1920 RGBA scenery."""\n    raise NotImplementedError("Design and render the background for each scene in this project.")\n\ndef draw_art(scene_id, local_t, full_scene_duration, theme):\n    """Return 1080x1920 RGBA animated foreground layers over the scenery."""\n    raise NotImplementedError("Implement the original animated foreground on a transparent canvas.")\n''', encoding='utf-8')
     print(json.dumps({'status': 'blank_series_scaffold_created', 'project': str(target), 'slots': len(scenes),
                       'next': '补齐研究、分章、事件/评价、人物主题美术方向、路线及真实动画provider；当前空计划应当预检失败。'}, ensure_ascii=False))
 
