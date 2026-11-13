@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 
 from check_series_style import check_layout
 from check_project import check as check_project
-from render_series_video import load_project, map_checkpoints, render_clip
+from render_series_video import check_background_frames, check_background_plan, load_project, map_checkpoints, render_clip
 from series_frame import DEFAULT_STYLE, SeriesFrame
 from series_map import SeriesMap, load_map_png, save_map_png
 
@@ -292,6 +292,42 @@ class RequiredMapIntegrationTests(unittest.TestCase):
                         self.assertEqual(route['per_scene'][scene['id']]['location_intro_sec'], expected)
                     if route.get('visits'):
                         self.assertEqual(route['visits'][0]['scene_id'], scenes[1]['id'])
+
+    def test_new_project_compares_backgrounds_independently_of_foreground(self):
+        base = ROOT / 'assets/series/examples/dufu-project'
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            project = deepcopy(self.project)
+            project.update(scenes=self.scenes, route=str(base / project['route']), theme=self.theme,
+                           background_policy='per_scene', art_provider='provider.py', art_dependencies=[])
+            project['audio']['path'] = str((base / project['audio']['path']).resolve())
+            rows = project['art_direction']['backgrounds']
+            for index, row in enumerate(rows):
+                row.update(setting='同一地点', composition=f'不同景别 {index}')
+            with self.assertRaisesRegex(ValueError, 'S02 and S01'):
+                duplicate_plan = deepcopy(project)
+                duplicate_plan['art_direction']['backgrounds'][1]['composition'] = rows[0]['composition'] + ' '
+                check_background_plan(duplicate_plan, self.scenes)
+            path = directory / 'project.json'
+            path.write_text(json.dumps(project), encoding='utf-8')
+            (directory / 'provider.py').write_text('''from PIL import Image
+
+def draw_background(scene_id, t, duration, theme):
+    tone = 5 if scene_id in ('S01', 'S02') else int(scene_id[1:]) + 5
+    return Image.new('RGBA', (1080, 1920), (tone, 10, 20, 255))
+
+def draw_art(scene_id, t, duration, theme):
+    foreground = Image.new('RGBA', (1080, 1920))
+    foreground.putpixel((0, 0), (int(scene_id[1:]), 0, 0, 255))
+    return foreground
+''', encoding='utf-8')
+            _, scenes, theme, _, _, draw, _, _, _ = load_project(path)
+            self.assertNotEqual(draw('S01', 1, 6, theme).getpixel((0, 0)),
+                                draw('S02', 1, 6, theme).getpixel((0, 0)))
+            self.assertEqual(draw('S01', 1, 6, theme).getpixel((1, 1)), (5, 10, 20, 255))
+            with self.assertRaisesRegex(ValueError, 'S02 and S01 render identical backgrounds'):
+                check_background_frames(scenes[:2], 30, draw, theme)
+            check_background_frames(scenes[1:], 30, draw, theme)
 
     def test_preflight_rejects_script_and_route_intro_timing_mismatch(self):
         base = ROOT / 'assets/series/examples/dufu-project'

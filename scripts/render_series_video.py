@@ -118,6 +118,46 @@ def same(a, b):
     return a.resolve() == b.resolve() or (a.exists() and b.exists() and a.samefile(b))
 
 
+def check_background_plan(project, scenes):
+    """Require each chapter to explain its own setting and visual composition."""
+    if 'background_policy' not in project:
+        return
+    if project['background_policy'] != 'per_scene':
+        raise ValueError('background_policy must be per_scene when specified')
+    direction = project.get('art_direction')
+    rows = direction.get('backgrounds') if isinstance(direction, dict) else None
+    if (not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows)
+            or [row.get('scene_id') for row in rows] != [scene['id'] for scene in scenes]):
+        raise ValueError('Plan a background for each scene in storyboard order')
+    used = {}
+    for row in rows:
+        scene_id = row['scene_id']
+        setting, composition = (row.get(key) for key in ('setting', 'composition'))
+        if any(not isinstance(value, str) or not value.strip() for value in (setting, composition)):
+            raise ValueError(f'{scene_id}: describe the background setting and composition')
+        design = tuple(' '.join(value.casefold().split()) for value in (setting, composition))
+        if design in used:
+            raise ValueError(f'{scene_id} and {used[design]} describe the same background design')
+        used[design] = scene_id
+
+
+def check_background_frames(scenes, fps, draw_art, theme):
+    """Catch identical backgrounds at each scene's representative native frame."""
+    used = {}
+    for scene in scenes:
+        count = scene['end_frame'] - scene['start_frame']
+        scene_id = scene['id']
+        time_sec, duration = (count // 2) / fps, count / fps
+        frame = draw_art.background(scene_id, time_sec, duration)
+        digest = hashlib.sha256(frame.convert('RGBa').tobytes()).digest()
+        if digest in used:
+            raise ValueError(f'{scene_id} and {used[digest]} render identical backgrounds; redesign the scene artwork')
+        used[digest] = scene_id
+        foreground = draw_art.foreground(scene_id, time_sec, duration, theme)
+        if foreground.getchannel('A').getextrema()[0] == 255:
+            raise ValueError(f'{scene_id}: the foreground covers the entire background at the review frame')
+
+
 def load_project(path):
     project, base = obj(path), path.parent
     style = obj(DEFAULT_STYLE)
@@ -157,6 +197,7 @@ def load_project(path):
         if 'meta' not in scene:
             scene['meta'] = '｜'.join(str(scene.get(k, '')).strip() for k in ('period', 'place')).strip('｜')
         normalized.append(scene)
+    check_background_plan(project, normalized)
     person = project.get('person') or {k:project.get(k, '') for k in ('name','film_title','birth_death','opening_meta')}
     theme_path = None
     theme = project.get('theme')
@@ -185,9 +226,34 @@ def load_project(path):
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
-    draw_art = getattr(module, 'draw_art', None)
-    if not callable(draw_art):
+    draw_foreground = getattr(module, 'draw_art', None)
+    if not callable(draw_foreground):
         raise ValueError('Art provider must define draw_art(scene_id,t,duration,theme)')
+    draw_art = draw_foreground
+    if project.get('background_policy') == 'per_scene':
+        provider_background = getattr(module, 'draw_background', None)
+        if not callable(provider_background):
+            raise ValueError('Art provider must define draw_background(scene_id,t,duration,theme)')
+
+        def draw_background(scene_id, t, duration):
+            frame = provider_background(scene_id, t, duration, theme)
+            if not isinstance(frame, Image.Image) or frame.mode != 'RGBA' or frame.size != (compositor.width, compositor.height):
+                raise ValueError(f'{scene_id}: draw_background must return a native {compositor.width}x{compositor.height} RGBA frame')
+            return frame
+
+        def foreground_frame(scene_id, t, duration, scene_theme):
+            foreground = draw_foreground(scene_id, t, duration, scene_theme)
+            if (not isinstance(foreground, Image.Image) or foreground.mode != 'RGBA'
+                    or foreground.size != (compositor.width, compositor.height)):
+                raise ValueError(f'{scene_id}: draw_art must return a matching RGBA foreground')
+            return foreground
+
+        def draw_art(scene_id, t, duration, scene_theme):
+            return Image.alpha_composite(draw_background(scene_id, t, duration),
+                                         foreground_frame(scene_id, t, duration, scene_theme))
+
+        draw_art.background = draw_background
+        draw_art.foreground = foreground_frame
     audio_spec = project.get('audio', {})
     audio = base/audio_spec.get('path', '')
     if not audio.is_file() or sha(audio) != audio_spec.get('sha256'):
@@ -347,6 +413,8 @@ def main():
         else:
             if args.silent_preview:raise ValueError('--silent-preview is only valid with --preview-scene')
             selected=list(range(len(scenes))) if args.scenes=='all' else sorted({index(value.strip()) for value in args.scenes.split(',')})
+            if project.get('background_policy') == 'per_scene':
+                check_background_frames([scenes[i] for i in selected], fps, draw, theme)
             parts=base/'output/.series-parts';parts.mkdir(parents=True,exist_ok=True)
             for i in selected:
                 scene=scenes[i];target=parts/f'part_{i+1:02d}.mp4';cache=target.with_suffix('.inputs.json')
