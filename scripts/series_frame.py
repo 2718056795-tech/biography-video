@@ -282,6 +282,11 @@ class SeriesFrame:
                 'kind': kind, 'index': index, 'stage': {'profile_name': profile_name, **deepcopy(stage)},
                 'actual_paper_rgb': list(paper_rgb)}
 
+    def text_layout(self, scene, duration):
+        """Return final-canvas text bounds and timing before artwork is drawn."""
+        layout = self._prepare(scene, duration, (0, 0, 0))
+        return [element for element in layout['elements'] if 'bbox' in element]
+
     def fit_stage(self, art_rgba, stage):
         scale, offset = stage['scale'], stage['offset_y']
         pad = max(0, math.ceil((self.width / scale - self.width) / 2) + 2)

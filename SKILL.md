@@ -25,6 +25,8 @@ description: 按本系列固定母版制作历史人物生平动画视频与1200
 
 全系列共享粗块面、低饱和、纸切剪影、固定材质处理与克制运动速度。杜甫可围绕草堂风雨、家书与民生；李白可围绕江舟、月夜与城楼；苏轼可围绕书案、竹杖和田园。它们是取材示例，不是每幕必装的道具清单。科学家等题材依确有来源的工坊、装置、手稿与工作环境设计，不强配山水和酒杯。
 
+先完成分镜文案，用 `scripts/preview_series_art.py --text-layout` 导出各幕实际字框。按成片坐标给文字留出低纹理、明暗稳定的区域，安排窗框、月亮、灯火、人物脸手和关键道具避开字框及入场位移范围。优先重排布景；确实需要托字时，在画面美术层局部加同色系柔和渐变，边缘渐隐，保持关键动作可见。
+
 ## 执行顺序
 
 1. **核对母版并建立新项目与来源台账。** 先运行`python scripts/verify_series_bundle.py`，核对固定程序、坐标和字库；再运行 `python scripts/series_basemap.py` 校验离线底图、来源和许可文件；文件有变动时恢复当前系列发布版，不用自行重排来补救。 用`scripts/init_series_project.py --name 人物 --title 片名 --theme 本人物主题JSON --output 新项目目录`建立副本，填写人物、作品、关键论断、年代、古今地点、证据ID、实际阅读状态与争议。引用按原文核对，原创文案单独标识；作品中的地名不自动等于本人到访，晚年死地不明不立精确死亡点。通用数据与旧杜甫数据格式不同，按脚手架及当前脚本接口填写。
@@ -32,7 +34,7 @@ description: 按本系列固定母版制作历史人物生平动画视频与1200
 3. **完成艺术简报和分层场景。** 按 `scene_id` 用 `draw_background()` 输出各幕独立制作的布景，用 `draw_art()` 输出透明底上的人物与前景动作。核对每幕在空间轮廓、取景或光影上确有差别；换字、改色、挪人物、推拉旧背景或把同一图另存为多个文件都应返工。字体和布局由主合成器提供；场景素材不能烘焙另一套标题、地图或页脚。纸纹固定在物体表面，不逐帧闪烁，不做光滑塑料、写实AI脸、复杂3D或无关炫光。
 4. **做出实际动画。** 每幕有主体或有因果的物件动作；脚落地换步、手腕接纸、笔尖留墨、船夫持桨等局部相对变化清楚，身体接触座面/地面连续。全图轻晃、视差、字幕淡入和路线增长不能代替角色动画。使用母版运动曲线与速度，动作发生在所选舞台预设内。
 5. **接累计行程与固定配乐。** 先遵守开篇仅底图和地点引入门槛；路线 `per_scene.<幕ID>.location_intro_sec` 默认取母版元信息开始时刻0.3秒，路线增长再从该门槛后延迟0.45秒。按真实访问顺序增长路线，旧线与已到访地名保留，当前点到达后用圆环强调；回访复用坐标和标签，同地多幕不画假迁移，未来地名不提前显示。历史、增长中和完成段使用同一笔画；不能以加粗新段代替当前点提示。使用地图引擎产生带来源与像素证据的图层，在实际艺术帧底色上检查河流、路线、当前点和地名；不能以透明空图或无证据外部PNG充数。完整片从原音轨起点连续使用并AAC流复制，不能自行裁曲、改速、循环、调音量或淡出。自动瞬态只标候选，未听审不能说精准卡点。
-6. **预检、合成、验证、做封面。** 运行项目预检与系列样式检查。整片编码前，用 `scripts/preview_series_art.py --backgrounds-only` 生成12幕实际背景缩略图，逐幕比对背景与分镜，并重做近似套景后再编码。使用`scripts/render_series_video.py`合成整片、`render_series_preview.py`合成单帧；精确参数见[项目接口](references/series-project-api.md)、[整片接口](references/series-video-api.md)、[帧接口](references/series-renderer-api.md)与[地图接口](references/series-map-api.md)。封面走[固定字层接口](references/series-cover-api.md)。再运行`verify_media.py`、`verify_cover.py`和`check_delivery.py`，核对报告与当前文件哈希。检查方法详见[验收](references/acceptance.md)。
+6. **预检、合成、验证、做封面。** 运行项目预检与系列样式检查。编码前用 `scripts/preview_series_art.py --backgrounds-only` 检查12幕有无近似套景，再用 `--with-text` 查看各幕两张实际合成帧。放到手机观看大小，检查小字和主体动作，遮挡或难读就调整美术并重新预览。使用`scripts/render_series_video.py`合成整片、`render_series_preview.py`合成单帧；精确参数见[项目接口](references/series-project-api.md)、[整片接口](references/series-video-api.md)、[帧接口](references/series-renderer-api.md)与[地图接口](references/series-map-api.md)。封面走[固定字层接口](references/series-cover-api.md)。再运行`verify_media.py`、`verify_cover.py`和`check_delivery.py`，核对报告与当前文件哈希。检查方法详见[验收](references/acceptance.md)。
 
 用户明确说先改几秒时，先交3—8秒真实动画样片，再根据反馈替换完整片；其他独立工作继续。没有该限制的常规制作持续完成，不为可逆步骤反复请求确认。样片允许截取原曲同一时段，无声必须标明。
 

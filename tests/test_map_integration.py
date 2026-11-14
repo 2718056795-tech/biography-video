@@ -76,6 +76,19 @@ class RequiredMapIntegrationTests(unittest.TestCase):
         with self.assertRaises((ValueError, TypeError)):
             self.compose(None)
 
+    def test_text_bounds_match_composited_frame_without_loading_art_inputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'project.json'
+            project = dict(self.project, scenes=self.scenes, theme=self.theme, route='missing.json',
+                           art_provider='missing.py', background_policy='per_scene', art_direction={})
+            path.write_text(json.dumps(project), encoding='utf-8')
+            scenes, frames = load_project(path, layout_only=True)
+            planned = frames.text_layout(scenes[1], self.duration)
+        _, report = self.report()
+        actual = [element for element in report['elements'] if 'bbox' in element]
+        self.assertEqual(planned, actual)
+        self.assertTrue(any(element['role'] == 'standard.title' for element in planned))
+
     def test_arbitrary_native_rgba_is_rejected(self):
         with self.assertRaises(ValueError):
             self.compose(Image.new('RGBA', self.map_layer.size, '#123456'))

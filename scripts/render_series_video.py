@@ -158,7 +158,7 @@ def check_background_frames(scenes, fps, draw_art, theme):
             raise ValueError(f'{scene_id}: the foreground covers the entire background at the review frame')
 
 
-def load_project(path):
+def load_project(path, *, layout_only=False):
     project, base = obj(path), path.parent
     style = obj(DEFAULT_STYLE)
     expected = style['video']
@@ -197,7 +197,8 @@ def load_project(path):
         if 'meta' not in scene:
             scene['meta'] = '｜'.join(str(scene.get(k, '')).strip() for k in ('period', 'place')).strip('｜')
         normalized.append(scene)
-    check_background_plan(project, normalized)
+    if not layout_only:
+        check_background_plan(project, normalized)
     person = project.get('person') or {k:project.get(k, '') for k in ('name','film_title','birth_death','opening_meta')}
     theme_path = None
     theme = project.get('theme')
@@ -207,13 +208,15 @@ def load_project(path):
     elif isinstance(theme, dict) and 'path' in theme and 'colors' not in theme:
         theme_path = base/theme['path']
         theme = obj(theme_path)
+    compositor = SeriesFrame(theme=theme, person=person, scene_count=len(scenes))
+    if theme.get('person') not in (None, person['name']):
+        raise ValueError('The per-person theme belongs to a different subject')
+    if layout_only:
+        return normalized, compositor
     route_path = base/project.get('route', 'data/life_route.json')
     route = obj(route_path)
     coast_value = project.get('coastline_geojson', route.get('coastline', {}).get('file'))
     coast_path = base/coast_value if coast_value else None
-    compositor = SeriesFrame(theme=theme, person=person, scene_count=len(scenes))
-    if theme.get('person') not in (None, person['name']):
-        raise ValueError('The per-person theme belongs to a different subject')
     basemap_value = project.get('basemap_geojson', route.get('basemap', {}).get('file'))
     basemap_path = base/basemap_value if basemap_value else None
     map_renderer = SeriesMap(route, style, theme, coastline_geojson=coast_path, basemap_geojson=basemap_path)
